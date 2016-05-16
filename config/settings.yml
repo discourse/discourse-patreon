@@ -1,0 +1,5 @@
+plugins:
+  patreon_client_id:
+    default: ''
+  patreon_client_secret:
+    default: ''
