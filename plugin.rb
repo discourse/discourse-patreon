@@ -16,6 +16,11 @@ class PatreonAuthenticator < ::Auth::OAuth2Authenticator
                       SiteSetting.patreon_client_id,
                       SiteSetting.patreon_client_secret
   end
+
+  def after_create_account(user, auth)
+    data = auth[:extra_data]
+    ::PluginStore.set('patreon', "user_#{user.id}", {patreon_id: data[:uid] })
+  end
 end
 
 after_initialize do
