@@ -1,6 +1,6 @@
 # name: discourse-patreon
-# about: Authenticate with discourse with patreon.com
-# version: 0.1
+# about: Authenticate with discourse with patreon.com, and sync patrons to a group
+# version: 0.2
 # author: Rafael dos Santos Silva <xfalcox@gmail.com>
 # url: https://github.com/xfalcox/discourse-patreon
 
@@ -79,6 +79,16 @@ after_initialize do
       end
     end
   end
+
+  module ::Patreon
+    class SyncPatronsToGroups < ::Jobs::Scheduled
+      every 3.hours
+
+      def execute(args)
+        Pledges.update_patrons! if SiteSetting.patreon_creator_access_token && SiteSetting.patreon_sync_patrons_to_group
+      end
+    end
+  end
 end
 
 class OmniAuth::Strategies::Patreon < OmniAuth::Strategies::OAuth2
@@ -89,6 +99,72 @@ auth_provider :title => 'with Patreon',
               :frame_width => 840,
               :frame_height => 570,
               :authenticator => PatreonAuthenticator.new('patreon', trusted: true)
+
+
+class Pledges
+
+  def self.update_patrons!
+    pledges = get_pledges
+    users = pledges_to_users pledges
+    group = get_group
+    sync_group!(group, users)
+  end
+
+  def self.get_pledges
+    pledges = []
+
+    conn = Faraday.new( url: 'https://api.patreon.com',
+                        headers: {'Authorization' => "Bearer #{SiteSetting.patreon_creator_access_token}"}
+    )
+
+    campaign_response = conn.get '/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges'
+    campaign_data = JSON.parse campaign_response.body
+
+    pledges_uris = campaign_data['data'].map do |campaign|
+      campaign['relationships']['pledges']['links']['first']
+    end
+
+    pledges_uris.each do |uri|
+      request = conn.get(uri.sub('https://api.patreon.com', ''))
+      pledge_data = JSON.parse request.body
+
+      if pledge_data['links']['next']
+        pledges_uris << pledges_data['links']['next']
+      end
+
+      pledge_data['included'].each do |entry|
+        if entry['type'] == 'user'
+          pledges << entry['attributes']['email']
+        end
+      end
+    end
+
+    pledges
+  end
+
+  def self.pledges_to_users(pledges)
+    mails = pledges.map do |email|
+      User.find_by_email email
+    end
+    mails.compact
+  end
+
+  def self.get_group
+    Group.find_by_name SiteSetting.patreon_sync_patrons_to_group
+  end
+
+  def self.sync_group!(group, users)
+    group.transaction do
+      (users - group.users).each do |user|
+        group.add user
+      end
+
+      (group.users - users).each do |user|
+        group.remove user
+      end
+    end
+  end
+end
 
 register_css <<CSS
 

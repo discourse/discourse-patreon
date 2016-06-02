@@ -3,3 +3,7 @@ plugins:
     default: ''
   patreon_client_secret:
     default: ''
+  patreon_creator_access_token:
+    default: ''
+  patreon_sync_patrons_to_group:
+    default: ''

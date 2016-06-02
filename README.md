@@ -24,6 +24,11 @@ Then go to [Clients & API Keys](https://www.patreon.com/platform/documentation/c
 
 Then you use the Client ID and Client Secret to configure the plugin.
 
+## Group Sync
+
+If you want to give your patrons a special treatment on your board, you can fill the `patreon creator access token` and `patreon sync patrons to group` so your patrons get automatic membership in a Discourse groups created by you.
+This can pave the way to grant category access, titles and custom css to please your patrons!
+
 ## About
 
 This is a work in progress! Feel free to use and ask questions here, or on [Meta](meta.discourse.org).
@@ -31,5 +36,6 @@ This is a work in progress! Feel free to use and ask questions here, or on [Meta
 ## TODO
 
 - Save more data that comes with the payload
-- Deep integration with pledges granting group membership on Discourse
+- Make multiple pledges values grant different groups
+- Listen to webhooks to triggers syncs
 
