@@ -1,16 +1,18 @@
 require 'patreon'
+require 'json'
 
 module ::Patreon
   class Pledges
+    PLUGIN_NAME = 'discourse-patreon'.freeze
+
     def self.update_patrons!
-      pledges = get_pledges
-      users = pledges_to_users pledges
-      group = get_group
-      sync_group!(group, users)
+      update_data
+      sync_groups
     end
 
-    def self.get_pledges
+    def self.update_data
       pledges = []
+      rewards = []
 
       conn = Faraday.new(url: 'https://api.patreon.com',
                          headers: { 'Authorization' => "Bearer #{SiteSetting.patreon_creator_access_token}" })
@@ -31,11 +33,16 @@ module ::Patreon
         end
 
         pledge_data['included'].each do |entry|
-          pledges << entry['attributes']['email'] if entry['type'] == 'user'
+          if entry['type'] == 'user'
+            pledges << entry
+          elsif entry['type'] == 'reward'
+            rewards << entry
+          end
         end
       end
 
-      pledges
+      ::PluginStore.set(PLUGIN_NAME, 'pledges', pledges.to_json)
+      ::PluginStore.set(PLUGIN_NAME, 'rewards', rewards.to_json)
     end
 
     def self.pledges_to_users(pledges)

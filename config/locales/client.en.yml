@@ -1,0 +1,29 @@
+en:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filter rules'
+      category: 'Category'
+      channel: 'Channel'
+      filter: 'Filter'
+      test_notification: 'Test Notification'
+      reset_settings: 'Reset All Settings'
+      edit: 'Edit'
+      delete: 'Delete'
+      save: 'Save'
+      choose:
+        filter: 'Choose a filter'
+        category: 'Choose a category'
+      error:
+        category: 'Please choose a category.'
+        channel: 'Please enter a channel to post to.'
+        filter: 'Please choose a filter.'
+      present:
+        mute: 'Muting'
+        follow: 'First post only'
+        watch: 'All posts and replies'
+      future:
+        mute: 'Mute notifications'
+        follow: 'Notify of first post'
+        watch: 'Notify of all posts and replies'

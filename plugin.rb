@@ -13,6 +13,8 @@ require 'auth/oauth2_authenticator'
 require 'omniauth-oauth2'
 require 'patreon'
 
+PLUGIN_NAME = 'discourse-patreon'.freeze
+
 class PatreonAuthenticator < ::Auth::OAuth2Authenticator
   def register_middleware(omniauth)
     omniauth.provider :patreon,
@@ -22,14 +24,30 @@ class PatreonAuthenticator < ::Auth::OAuth2Authenticator
 
   def after_create_account(user, auth)
     data = auth[:extra_data]
-    ::PluginStore.set('patreon', "user_#{user.id}", patreon_id: data[:uid])
+    ::PluginStore.set('patreon', "login_user_#{user.id}", patreon_id: data[:uid])
   end
 end
 
 after_initialize do
 
+  unless ::PluginStore.get(PLUGIN_NAME, "not_first_time")
+    ::PluginStore.set(PLUGIN_NAME, "not_first_time", true)
+    #::PluginStore.set(PLUGIN_NAME, "category_*", [{ category_id: '0', channel: "#general", filter: "follow" }])
+    # seed
+  end
+
+  module ::Patreon
+    class Engine < ::Rails::Engine
+      engine_name PLUGIN_NAME
+      isolate_namespace Patreon
+    end
+  end
+
+  load File.expand_path('../app/controllers/patreon_controller.rb', __FILE__)
   load File.expand_path('../app/jobs/scheduled/sync_patrons_to_groups.rb', __FILE__)
+  load File.expand_path('../app/jobs/scheduled/update_tokens.rb', __FILE__)
   load File.expand_path('../lib/pledges.rb', __FILE__)
+  load File.expand_path('../lib/tokens.rb', __FILE__)
 
   class ::OmniAuth::Strategies::Patreon
     option :name, 'patreon'
@@ -91,6 +109,13 @@ after_initialize do
       end
     end
   end
+
+  add_admin_route "patreon.title", "patreon"
+
+  Discourse::Application.routes.append do
+    get "/admin/plugins/patreon" => "admin/plugins#index"
+    get "/admin/plugins/patreon/list" => "patreon#list"
+  end
 end
 
 class OmniAuth::Strategies::Patreon < OmniAuth::Strategies::OAuth2
@@ -101,6 +126,7 @@ auth_provider :title => 'with Patreon',
               :frame_width => 840,
               :frame_height => 570,
               :authenticator => PatreonAuthenticator.new('patreon', trusted: true)
+
 
 
 register_css <<CSS
