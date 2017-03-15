@@ -7,12 +7,15 @@ module ::Patreon
 
     def self.update_patrons!
       update_data
-      sync_groups
     end
 
     def self.update_data
-      pledges = []
-      rewards = []
+      pledges = {}
+      rewards = {}
+      users = {}
+      campaign_rewards = []
+      reward_users = {}
+      pledges_uris = ''
 
       conn = Faraday.new(url: 'https://api.patreon.com',
                          headers: { 'Authorization' => "Bearer #{SiteSetting.patreon_creator_access_token}" })
@@ -20,52 +23,51 @@ module ::Patreon
       campaign_response = conn.get '/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges'
       campaign_data = JSON.parse campaign_response.body
 
-      pledges_uris = campaign_data['data'].map do |campaign|
-        campaign['relationships']['pledges']['links']['first']
+      campaign_data['data'].map do |campaign|
+        pledges_uris = campaign['relationships']['pledges']['links']['first']
+
+        campaign['relationships']['rewards']['data'].each do |entry|
+          campaign_rewards << entry['id']
+        end
+      end
+
+      campaign_data['included'].each do |entry|
+        rewards[entry['id']] = entry['attributes'] if entry['type'] == 'reward' && campaign_rewards.include?(entry['id'])
       end
 
       pledges_uris.each do |uri|
         request = conn.get(uri.sub('https://api.patreon.com', ''))
         pledge_data = JSON.parse request.body
 
-        if pledge_data['links']['next']
+        # get next page if necessary and add to the current loop
+        if pledge_data['links'] && pledge_data['links']['next']
           pledges_uris << pledges_data['links']['next']
         end
 
+        # get pledges info
+        pledge_data['data'].each do |entry|
+          if entry['type'] == 'pledge' && entry['attributes']['declined_since'].nil?
+            puts entry
+            (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << entry['relationships']['patron']['data']['id'] unless entry['relationships']['reward']['data'].nil?
+            pledges[entry['relationships']['patron']['data']['id']] = entry['attributes']['amount_cents']
+          end
+        end
+
+        # get user and rewards too
         pledge_data['included'].each do |entry|
           if entry['type'] == 'user'
-            pledges << entry
+            pledges[entry['id']] = { email: entry['attributes']['email'] }
           elsif entry['type'] == 'reward'
-            rewards << entry
+            rewards[entry['id']] = entry['attributes']
           end
         end
       end
 
-      ::PluginStore.set(PLUGIN_NAME, 'pledges', pledges.to_json)
-      ::PluginStore.set(PLUGIN_NAME, 'rewards', rewards.to_json)
+      ::PluginStore.set(PLUGIN_NAME, 'pledges', pledges)
+      ::PluginStore.set(PLUGIN_NAME, 'rewards', rewards)
+      ::PluginStore.set(PLUGIN_NAME, 'users', users)
+      ::PluginStore.set(PLUGIN_NAME, 'reward-users', reward_users)
     end
 
-    def self.pledges_to_users(pledges)
-      mails = pledges.map do |email|
-        User.find_by_email email
-      end
-      mails.compact
-    end
-
-    def self.get_group
-      Group.find_by_name SiteSetting.patreon_sync_patrons_to_group
-    end
-
-    def self.sync_group!(group, users)
-      group.transaction do
-        (users - group.users).each do |user|
-          group.add user
-        end
-
-        (group.users - users).each do |user|
-          group.remove user
-        end
-      end
-    end
   end
 end

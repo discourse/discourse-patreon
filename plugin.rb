@@ -30,6 +30,8 @@ end
 
 after_initialize do
 
+  require_dependency 'admin_constraint'
+
   unless ::PluginStore.get(PLUGIN_NAME, "not_first_time")
     ::PluginStore.set(PLUGIN_NAME, "not_first_time", true)
     #::PluginStore.set(PLUGIN_NAME, "category_*", [{ category_id: '0', channel: "#general", filter: "follow" }])
@@ -108,6 +110,16 @@ after_initialize do
         response.parsed
       end
     end
+  end
+
+  Patreon::Engine.routes.draw do
+    get "/list" => "patreon#list", constraints: AdminConstraint.new
+    post "/list" => "patreon#edit", constraints: AdminConstraint.new
+    delete "/list" => "patreon#delete", constraints: AdminConstraint.new
+  end
+
+  Discourse::Application.routes.prepend do
+    mount ::Patreon::Engine, at: "/patreon"
   end
 
   add_admin_route "patreon.title", "patreon"
