@@ -3,9 +3,9 @@ en:
     patreon:
       title: 'Patreon'
       header:
-        rules: 'Filter rules'
-      category: 'Category'
-      channel: 'Channel'
+        rules: 'Reward to Group rules'
+      group: 'Group'
+      rewards: 'Rewards'
       filter: 'Filter'
       test_notification: 'Test Notification'
       reset_settings: 'Reset All Settings'

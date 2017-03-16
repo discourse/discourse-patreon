@@ -1,15 +1,11 @@
-import FilterRule from 'discourse/plugins/discourse-patreon/discourse/models/filter-rule';
 import { ajax } from 'discourse/lib/ajax';
 
 export default Discourse.Route.extend({
   model() {
-    return ajax("/patreon/list.json")
-    .then(function(result) {
-      var final = result.slack;
 
-      return final.map(function(v) {
-        return FilterRule.create(v);
-      });
-    });
+    return Promise.all([ajax("/patreon/list.json"), ajax("/patreon/rewards.json"), ajax("/admin/groups.json")])
+                  .then(([filters_result, rewards_result, groups_result]) => {
+                    return {filters: filters_result, rewards: rewards_result, groups: groups_result};
+                  });
   }
 });

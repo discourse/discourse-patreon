@@ -3,30 +3,37 @@ import { ajax } from 'discourse/lib/ajax';
 import { popupAjaxError } from 'discourse/lib/ajax-error';
 
 export default Ember.Controller.extend({
-  categories: function() {
-    return [Discourse.Category.create({ name: 'All Categories', id: 0, slug: '*'})].concat(Discourse.Category.list());
+  
+  groups: function() {
+    return this.model.groups.filter((g) => g.automatic === false);
   }.property(),
 
-  filters: [
-    { id: 'watch', name: I18n.t('slack.future.watch'), icon:'exclamation-circle' },
-    { id: 'follow', name: I18n.t('slack.future.follow'), icon: 'circle'},
-    { id: 'mute', name: I18n.t('slack.future.mute'), icon: 'times-circle' }
-  ],
+  rewards_names: function() {
+    return _.map(this.model.rewards, (r) => r.title).filter((r) => r !== undefined);
+  }.property(),
 
-  editing: FilterRule.create({}),
+  filters: function() {
+    const model = this.get('model');
+
+    return _.map(model.filters, (v, k) => {
+      const rewards_names = v.map((r) => ` ${model.rewards[r].title} (${model.rewards[r].patron_count} patrons)`);
+      const group =_.find(model.groups, (g) => g.id === parseInt(k));
+
+      return {group: group.name, rewards: rewards_names};
+    });
+
+  }.property(),
+
+  editing: FilterRule.create(this.model),
 
   actions: {
-    edit(rule) {
-      this.set( 'editing', FilterRule.create(rule.getProperties('filter', 'category_id', 'channel')));
-    },
-
     save() {
       const rule = this.get('editing');
       const model = this.get('model');
 
-      ajax("/slack/list.json", {
+      ajax("/patreon/list.json", {
         method: 'POST',
-        data: rule.getProperties('filter', 'category_id', 'channel')
+        data: rule.getProperties('group_id', 'reward_list')
       }).then(() => {
         var obj = model.find((x) => ( x.get('category_id') === rule.get('category_id') && x.get('channel') === rule.get('channel') ));
         if (obj) {
@@ -47,20 +54,6 @@ export default Ember.Controller.extend({
         var obj = model.find((x) => ( x.get('category_id') === rule.get('category_id') && x.get('channel') === rule.get('channel') ));
         model.removeObject(obj);
       }).catch(popupAjaxError);
-    },
-
-    testNotification() {
-      this.set('testingNotification', true);
-
-      ajax("/slack/test.json", { method: 'POST' })
-        .catch(popupAjaxError)
-        .finally(() => {
-          this.set('testingNotification', false);
-        });
-    },
-
-    resetSettings() {
-      ajax("/slack/reset_settings.json", { method: 'POST' });
     }
   }
 });

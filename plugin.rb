@@ -113,6 +113,7 @@ after_initialize do
   end
 
   Patreon::Engine.routes.draw do
+    get "/rewards" => "patreon#rewards", constraints: AdminConstraint.new
     get "/list" => "patreon#list", constraints: AdminConstraint.new
     post "/list" => "patreon#edit", constraints: AdminConstraint.new
     delete "/list" => "patreon#delete", constraints: AdminConstraint.new

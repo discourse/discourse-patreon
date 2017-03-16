@@ -1,50 +1,35 @@
-<section id="slack">
-  <h1>{{i18n "slack.header.rules"}}</h1>
+<section id="patreon">
+  <h1>{{i18n "patreon.header.rules"}}</h1>
   <table>
     <tr>
-      <th>{{i18n "slack.category"}}</th>
-      <th>{{i18n "slack.channel"}}</th>
-      <th>{{i18n "slack.filter"}}</th>
+      <th>{{i18n "patreon.group"}}</th>
+      <th>{{i18n "patreon.rewards"}}</th>
       <th></th>
     </tr>
 
-    {{#each model as |rule|}}
+    {{#each filters as |rule|}}
       <tr class="">
-        <td>{{rule.category.name}}</td>
-        <td>{{rule.channel}}</td>
-        <td>{{rule.filter_name}}</td>
+        <td>{{rule.group}}</td>
+        <td>{{rule.rewards}}</td>
         <td>
           <div class="pull-right">
-            {{d-button action="edit" actionParam=rule icon="pencil" class="edit" title="slack.edit"}}
-            {{d-button action="delete" actionParam=rule icon="trash-o" class="delete btn-danger" title="slack.delete"}}
+            {{d-button action="delete" actionParam=rule icon="trash-o" class="delete btn-danger" title="patreon.delete"}}
           </div>
         </td>
       </tr>
     {{/each}}
 
     <tr class="new-filter">
-      <td>{{combo-box value=editing.category_id content=categories}}</td>
-      <td>{{text-field value=editing.channel placeholder='#channel, @user or Channel ID' class="channel"}}</td>
-      <td>{{combo-box content=filters value=editing.filter none='slack.choose.filter'}}</td>
+      <td>{{combo-box value=editing.group_id content=groups}}</td>
+      <td>{{list-setting settingValue=editing.reward_list choices=rewards_names placeholder='One or more rewards' class="rewards"}}</td>
       <td>
         <div class="pull-right">
-          {{d-button action="save" icon="save" class="save btn-primary" title="slack.save"}}
+          {{d-button action="save" icon="save" class="save btn-primary" title="patreon.save"}}
         </div>
       </td>
     </tr>
   </table>
 
   {{!-- TODO translate --}}
-  <p>To modify these settings from slack, set up a slash command using <a href="https://github.com/discourse/discourse-slack-official/blob/master/README.md">these instructions</a></p>
-
-  {{d-button action="testNotification"
-      icon="rocket"
-      class="test"
-      disabled=testingNotification
-      title="slack.test_notification"
-      label="slack.test_notification"}}
-
-  {{#d-button action="resetSettings" icon="trash" class="reset" title="slack.reset_settings"}}
-    {{i18n "slack.reset_settings"}}
-  {{/d-button}}
+  <p>You can choose a Discourse group to one or more Patreon reward tiers.</p>
 </section>
