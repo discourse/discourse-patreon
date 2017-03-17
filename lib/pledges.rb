@@ -32,7 +32,11 @@ module ::Patreon
       end
 
       campaign_data['included'].each do |entry|
-        rewards[entry['id']] = entry['attributes'] if entry['type'] == 'reward' && campaign_rewards.include?(entry['id'])
+        id = entry['id']
+        if entry['type'] == 'reward' && campaign_rewards.include?(id)
+          rewards[id] = entry['attributes']
+          rewards[id]['id'] = id
+        end
       end
 
       pledges_uris.each do |uri|
@@ -47,7 +51,6 @@ module ::Patreon
         # get pledges info
         pledge_data['data'].each do |entry|
           if entry['type'] == 'pledge' && entry['attributes']['declined_since'].nil?
-            puts entry
             (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << entry['relationships']['patron']['data']['id'] unless entry['relationships']['reward']['data'].nil?
             pledges[entry['relationships']['patron']['data']['id']] = entry['attributes']['amount_cents']
           end
@@ -57,8 +60,6 @@ module ::Patreon
         pledge_data['included'].each do |entry|
           if entry['type'] == 'user'
             pledges[entry['id']] = { email: entry['attributes']['email'] }
-          elsif entry['type'] == 'reward'
-            rewards[entry['id']] = entry['attributes']
           end
         end
       end
