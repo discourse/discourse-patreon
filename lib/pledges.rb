@@ -56,10 +56,11 @@ module ::Patreon
           end
         end
 
-        # get user and rewards too
+        # get user list too
         pledge_data['included'].each do |entry|
-          if entry['type'] == 'user'
-            pledges[entry['id']] = { email: entry['attributes']['email'] }
+          case entry['type']
+          when 'user'
+            users[entry['id']] = { email: entry['attributes']['email'] }
           end
         end
       end
