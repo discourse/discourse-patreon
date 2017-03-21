@@ -5,7 +5,7 @@ import { popupAjaxError } from 'discourse/lib/ajax-error';
 export default Ember.Controller.extend({
 
   prettyPrintReward: (reward) => {
-    return `$${reward.amount_cents} - ${reward.title}`;
+    return `$${reward.amount_cents/100} - ${reward.title}`;
   },
   
   rewardsNames: function() {
@@ -48,6 +48,26 @@ export default Ember.Controller.extend({
         var obj = model.find((x) => ( x.get('group_id') === rule.get('group_id')));
         model.removeObject(obj);
       }).catch(popupAjaxError);
+    },
+
+    updateData() {
+      this.set('updatingData', true);
+
+      ajax("/patreon/update_data.json", { method: 'POST' })
+        .catch(popupAjaxError)
+        .finally(() => {
+          this.set('updatingData', false);
+        });
+    },
+
+    syncGroups() {
+      this.set('syncingGroups', true);
+
+      ajax("/patreon/sync_groups.json", { method: 'POST' })
+        .catch(popupAjaxError)
+        .finally(() => {
+          this.set('syncingGroups', false);
+        });
     }
   }
 });

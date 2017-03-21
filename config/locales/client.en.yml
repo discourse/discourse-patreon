@@ -11,3 +11,5 @@ en:
       edit: 'Edit'
       delete: 'Delete'
       save: 'Save'
+      update_data: 'Download Patreon Data'
+      sync_groups: 'Sync Groups'

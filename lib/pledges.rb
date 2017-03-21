@@ -70,7 +70,7 @@ module ::Patreon
       ::PluginStore.set(PLUGIN_NAME, 'reward-users', reward_users)
     end
 
-    def sync_groups
+    def self.sync_groups
       filters = (PluginStore.get(PLUGIN_NAME, 'filters') || {})
       reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
 
@@ -99,18 +99,18 @@ module ::Patreon
 
     private
 
-    def find_user_by_rewards rewards
-      reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
+    def self.find_user_by_rewards rewards
+      reward_users = ::PluginStore.get(PLUGIN_NAME, 'reward-users')
 
-      rewards.each {|id| reward_users[id] }.reduce(:+)
+      rewards.map {|id| reward_users[id] }.reduce(:+)
     end
 
-    def patreon_users_to_discourse_users patreon_users_ids
-      users = PluginStore.get(PLUGIN_NAME, 'users')
+    def self.patreon_users_to_discourse_users patreon_users_ids
+      users = ::PluginStore.get(PLUGIN_NAME, 'users')
 
-      mails = patreon_users_ids.each { |id| users[id]['email'] }
+      mails = patreon_users_ids.map { |id| users[id]['email'] }
 
-      discourse_users = pledges.each do |email|
+      discourse_users = mails.map do |email|
         User.find_by(email: email)
       end
       discourse_users.compact

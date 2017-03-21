@@ -61,6 +61,24 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
     render json: success_json
   end
 
+  def sync_groups
+    begin
+      Patreon::Pledges.sync_groups
+      render json: success_json
+    rescue => e
+      render json: { message: e.message }, status: 500
+    end
+  end
+
+  def update_data
+    begin
+      Patreon::Pledges.update_data
+      render json: success_json
+    rescue => e
+      render json: { message: e.message }, status: 500
+    end
+  end
+
   def patreon_tokens_present?
     raise Discourse::InvalidAccess.new if SiteSetting.patreon_creator_access_token.blank?
     raise Discourse::InvalidAccess.new if SiteSetting.patreon_creator_refresh_token.blank?
