@@ -15,7 +15,7 @@ module ::Patreon
       users = {}
       campaign_rewards = []
       reward_users = {}
-      pledges_uris = ''
+      pledges_uris = []
 
       conn = Faraday.new(url: 'https://api.patreon.com',
                          headers: { 'Authorization' => "Bearer #{SiteSetting.patreon_creator_access_token}" })
@@ -24,7 +24,7 @@ module ::Patreon
       campaign_data = JSON.parse campaign_response.body
 
       campaign_data['data'].map do |campaign|
-        pledges_uris = campaign['relationships']['pledges']['links']['first']
+        pledges_uris << campaign['relationships']['pledges']['links']['first']
 
         campaign['relationships']['rewards']['data'].each do |entry|
           campaign_rewards << entry['id']
