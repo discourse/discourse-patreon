@@ -45,7 +45,7 @@ module ::Patreon
 
         # get next page if necessary and add to the current loop
         if pledge_data['links'] && pledge_data['links']['next']
-          pledges_uris << pledges_data['links']['next']
+          pledges_uris << pledge_data['links']['next']
         end
 
         # get pledges info
