@@ -3,27 +3,11 @@ en:
     patreon:
       title: 'Patreon'
       header:
-        rules: 'Reward to Group rules'
+        rules: 'Filters'
       group: 'Group'
       rewards: 'Rewards'
       filter: 'Filter'
-      test_notification: 'Test Notification'
-      reset_settings: 'Reset All Settings'
+      help_text: 'You can sync a Discourse group with one or more Patreon reward tiers.'
       edit: 'Edit'
       delete: 'Delete'
       save: 'Save'
-      choose:
-        filter: 'Choose a filter'
-        category: 'Choose a category'
-      error:
-        category: 'Please choose a category.'
-        channel: 'Please enter a channel to post to.'
-        filter: 'Please choose a filter.'
-      present:
-        mute: 'Muting'
-        follow: 'First post only'
-        watch: 'All posts and replies'
-      future:
-        mute: 'Mute notifications'
-        follow: 'Notify of first post'
-        watch: 'Notify of all posts and replies'

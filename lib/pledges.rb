@@ -1,4 +1,3 @@
-require 'patreon'
 require 'json'
 
 module ::Patreon
@@ -7,6 +6,7 @@ module ::Patreon
 
     def self.update_patrons!
       update_data
+      sync_groups
     end
 
     def self.update_data
@@ -68,6 +68,52 @@ module ::Patreon
       ::PluginStore.set(PLUGIN_NAME, 'rewards', rewards)
       ::PluginStore.set(PLUGIN_NAME, 'users', users)
       ::PluginStore.set(PLUGIN_NAME, 'reward-users', reward_users)
+    end
+
+    def sync_groups
+      filters = (PluginStore.get(PLUGIN_NAME, 'filters') || {})
+      reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
+
+      filters.each_pair do |group_id, rewards|
+
+        group = Group.find_by(id: group_id)
+
+        next if group.nil?
+
+        patreon_users = find_user_by_rewards(rewards)
+
+        users = patreon_users_to_discourse_users(patreon_users)
+
+        group.transaction do
+          (users - group.users).each do |user|
+            group.add user
+          end
+
+          (group.users - users).each do |user|
+            group.remove user
+          end
+        end
+
+      end
+    end
+
+    private
+
+    def find_user_by_rewards rewards
+      reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
+
+      rewards.each {|id| reward_users[id] }.reduce(:+)
+    end
+
+    def patreon_users_to_discourse_users patreon_users_ids
+      users = PluginStore.get(PLUGIN_NAME, 'users')
+
+      mails = patreon_users_ids.each { |id| users[id]['email'] }
+
+      discourse_users = pledges.each do |email|
+        User.find_by(email: email)
+      end
+      discourse_users.compact
     end
 
   end

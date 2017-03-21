@@ -1,4 +1,6 @@
 plugins:
+  patreon_enabled:
+    default: false
   patreon_client_id:
     default: ''
   patreon_client_secret:
@@ -6,6 +8,4 @@ plugins:
   patreon_creator_access_token:
     default: ''
   patreon_creator_refresh_token:
-    default: ''
-  patreon_sync_patrons_to_group:
     default: ''

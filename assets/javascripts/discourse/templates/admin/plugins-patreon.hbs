@@ -21,7 +21,7 @@
 
     <tr class="new-filter">
       <td>{{combo-box value=editing.group_id content=groups}}</td>
-      <td>{{list-setting settingValue=editing.reward_list choices=rewards_names placeholder='One or more rewards' class="rewards"}}</td>
+      <td>{{list-setting settingValue=editing.reward_list choices=rewardsNames class="rewards"}}</td>
       <td>
         <div class="pull-right">
           {{d-button action="save" icon="save" class="save btn-primary" title="patreon.save"}}
@@ -30,6 +30,5 @@
     </tr>
   </table>
 
-  {{!-- TODO translate --}}
-  <p>You can choose a Discourse group to one or more Patreon reward tiers.</p>
+  <p>{{i18n "patreon.help_text"}}</p>
 </section>

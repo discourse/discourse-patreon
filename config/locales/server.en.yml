@@ -1,13 +1,7 @@
 en:
   site_settings:
-    slack_enabled: 'Enable the discourse-slack-official plugin'
-    slack_discourse_username: 'Name of user act as when fetching content'
-    slack_incoming_webhook_token: 'Token sent in the payload from the Slack outoing webhook'
-    slack_outbound_webhook_url: 'URL for outbound slack requests'
-    slack_discourse_excerpt_length: 'Post excerpt length'
-    slack_icon_url: 'Icon to post to slack with (Defaults to forum icon)'
-    slack_access_token: 'Token if you are using the Web API instead of webhooks'
-    post_to_slack_window_secs: 'Wait (n) seconds before posting to slack, to give users a chance to edit and finalize their posts.'
-    errors:
-      invalid_webhook_url: "'slack outbound webhook url' is not a valid URL."
-      slack_outbound_webhook_url_is_empty: "You must set 'slack outbound webhook url' before enabling this setting."
+    patreon_enabled: 'Enable the discourse-patreon plugin'
+    patreon_client_id: 'Generated Patreon Client ID'
+    patreon_client_secret: 'Generated Patreon Client Secret'
+    patreon_creator_access_token: "Generated Patreon Creator\'s Access Token"
+    patreon_creator_refresh_token: "Generated Patreon Creator\'s Refesh Token"

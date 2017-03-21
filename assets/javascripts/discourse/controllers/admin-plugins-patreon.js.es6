@@ -3,9 +3,13 @@ import { ajax } from 'discourse/lib/ajax';
 import { popupAjaxError } from 'discourse/lib/ajax-error';
 
 export default Ember.Controller.extend({
+
+  prettyPrintReward: (reward) => {
+    return `$${reward.amount_cents} - ${reward.title}`;
+  },
   
-  rewards_names: function() {
-    return _.filter(this.rewards, (r) => r.amount_cents > 1).map((r) => ` $${r.amount_cents} - ${r.title}`);
+  rewardsNames: function() {
+    return _.filter(this.rewards, (r) => r.amount_cents > 1).map((r) => this.prettyPrintReward(r));
   }.property(),
 
   editing: FilterRule.create({}),
@@ -16,14 +20,14 @@ export default Ember.Controller.extend({
       const model = this.get('model');
 
       rule.set('group', this.groups.find((x) => x.id === parseInt(rule.get('group_id'))));
-      rule.set('rewards_ids', _.filter(this.rewards, (v) => rule.get('reward_list').includes(`$${v.amount_cents} - ${v.title}`)).map((r) => r.id));
+      rule.set('rewards_ids', _.filter(this.rewards, (v) => rule.get('reward_list').includes(this.prettyPrintReward(v))).map((r) => r.id));
 
       ajax("/patreon/list.json", {
         method: 'POST',
         data: rule.getProperties('group_id', 'rewards_ids')
       }).then(() => {
         var obj = model.find((x) => ( x.get('group_id') === rule.get('group_id') ));
-        const rewards = rule.get('reward_list').replace('|', ', ');
+        const rewards = rule.get('reward_list').replace(/\|/g, ', ');
         if (obj) {
           obj.set('reward_list', rewards);
           obj.set('rewards', rewards);
