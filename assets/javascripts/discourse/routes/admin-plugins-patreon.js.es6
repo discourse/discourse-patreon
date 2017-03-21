@@ -1,5 +1,5 @@
 import { ajax } from 'discourse/lib/ajax';
-import FilterRule from 'discourse/plugins/discourse-slack-official/discourse/models/filter-rule';
+import FilterRule from 'discourse/plugins/discourse-patreon/discourse/models/filter-rule';
 
 /* We use three main model to get this page working:
 *  Discourse Groups (excluding the automatic ones), Patreon rewards and
