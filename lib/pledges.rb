@@ -83,6 +83,8 @@ module ::Patreon
 
         patreon_users = find_user_by_rewards(rewards)
 
+        next if patreon_users.nil? || patreon_users.empty?
+
         users = patreon_users_to_discourse_users(patreon_users)
 
         group.transaction do
