@@ -6,24 +6,22 @@ class ::Patreon::PatreonWebhookController < ActionController::Base
 
   def index
 
-    raise Discourse::InvalidAccess.new unless TRIGGERS.include? headers['X-Patreon-Event']
+    raise Discourse::InvalidAccess.new unless TRIGGERS.include?(request.headers['X-Patreon-Event'])
 
-    raise Discourse::InvalidAccess.new unless valid_signature?(headers, params)
+    raise Discourse::InvalidAccess.new unless valid_signature?(request.headers['X-Patreon-Signature'], request.raw_post)
 
-
-    byebug
-
-    Jobs.enqueue(:sync_patrons_to_groups)
+    opts = {}
+    opts[:current_site_id] = RailsMultisite::ConnectionManagement.current_db
+    klass = 'Patreon::SyncPatronsToGroups'.constantize
+    Sidekiq::Client.enqueue(klass, opts)
 
     render nothing: true, status: 200
   end
 
   private
 
-  def valid_signature?(headers, params)
+  def valid_signature?(signature, data)
     digest = OpenSSL::Digest::MD5.new
-    data = params[:data]
-    signature = headers['X-Patreon-Signature']
     signature == OpenSSL::HMAC.hexdigest(digest, SiteSetting.patreon_client_secret, data)
   end
 end
