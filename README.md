@@ -44,7 +44,7 @@ This can pave the way to grant category access, titles and custom css to please 
 
 This plugin will also enable a Social Login with Patreon, making it easier for your patron to sign up on Discourse.
 
-<img src="//discourse-meta.s3-us-west-1.amazonaws.com/original/3X/d/6/d6fc81667227c41d1a59f374fa10dbc31c32bdf0.png" width="690" height="329">
+<img src="https://discourse-meta.s3-us-west-1.amazonaws.com/original/3X/d/6/d6fc81667227c41d1a59f374fa10dbc31c32bdf0.png" width="690" height="329">
 
 ## About
 
