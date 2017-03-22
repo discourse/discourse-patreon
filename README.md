@@ -1,11 +1,8 @@
 # Discourse Patreon
 
-Enable sign up and sign in with Patreon.
+Enable syncronization between Discourse Groups and Patreon rewards, and enable Patreon Social Login,
 
 <img src="https://s3.amazonaws.com/patreon_public_assets/toolbox/patreon.png" width="426" height="97">
-
-**Install Discourse Patreon!**
-
 
 ## Installation
 
@@ -35,7 +32,5 @@ This is a work in progress! Feel free to use and ask questions here, or on [Meta
 
 ## TODO
 
-- Save more data that comes with the payload
-- Make multiple pledges values grant different groups
-- Listen to webhooks to triggers syncs
-
+- Create a catch-all reward group
+- Button to invite patrons who aren't on Discourse yet.

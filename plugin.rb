@@ -1,8 +1,8 @@
 # name: discourse-patreon
 # about: Integration features between Patreon and Discourse
-# version: 0.2
+# version: 1.0
 # author: Rafael dos Santos Silva <xfalcox@gmail.com>
-# url: https://github.com/xfalcox/discourse-patreon
+# url: https://github.com/discourse/discourse-patreon
 
 gem 'patreon', '0.2.0', require: false
 
