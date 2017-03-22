@@ -52,5 +52,4 @@ This is a work in progress! Feel free to use and ask questions here, or on [Meta
 
 ## TODO
 
-- Create a catch-all reward group
 - Button to invite patrons who aren't on Discourse yet.
