@@ -1,0 +1,7 @@
+en:
+  site_settings:
+    patreon_enabled: 'Enable the discourse-patreon plugin'
+    patreon_client_id: 'Generated Patreon Client ID'
+    patreon_client_secret: 'Generated Patreon Client Secret'
+    patreon_creator_access_token: "Generated Patreon Creator\'s Access Token"
+    patreon_creator_refresh_token: "Generated Patreon Creator\'s Refesh Token"

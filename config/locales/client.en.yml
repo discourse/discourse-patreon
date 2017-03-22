@@ -1,0 +1,15 @@
+en:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filters'
+      group: 'Group'
+      rewards: 'Rewards'
+      filter: 'Filter'
+      help_text: 'You can sync a Discourse group with one or more Patreon reward tiers.'
+      edit: 'Edit'
+      delete: 'Delete'
+      save: 'Save'
+      update_data: 'Download Patreon Data'
+      sync_groups: 'Sync Groups'

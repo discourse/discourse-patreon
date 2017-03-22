@@ -1,0 +1,48 @@
+<section id="patreon">
+  <h1>{{i18n "patreon.header.rules"}}</h1>
+  <table>
+    <tr>
+      <th>{{i18n "patreon.group"}}</th>
+      <th>{{i18n "patreon.rewards"}}</th>
+      <th></th>
+    </tr>
+
+    {{#each model as |rule|}}
+      <tr class="">
+        <td>{{rule.group}}</td>
+        <td>{{rule.rewards}}</td>
+        <td>
+          <div class="pull-right">
+            {{d-button action="delete" actionParam=rule icon="trash-o" class="delete btn-danger" title="patreon.delete"}}
+          </div>
+        </td>
+      </tr>
+    {{/each}}
+
+    <tr class="new-filter">
+      <td>{{combo-box value=editing.group_id content=groups}}</td>
+      <td>{{list-setting settingValue=editing.reward_list choices=rewardsNames class="rewards"}}</td>
+      <td>
+        <div class="pull-right">
+          {{d-button action="save" icon="save" class="save btn-primary" title="patreon.save"}}
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <p>{{i18n "patreon.help_text"}}</p>
+
+  {{d-button action="updateData"
+    icon="cloud-download"
+    class="test"
+    disabled=updatingData
+    title="patreon.update_data"
+    label="patreon.update_data"}}
+
+  {{d-button action="syncGroups"
+    icon="refresh"
+    class="test"
+    disabled=syncingGroups
+    title="patreon.sync_groups"
+    label="patreon.sync_groups"}}
+</section>
