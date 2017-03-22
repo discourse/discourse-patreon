@@ -65,6 +65,11 @@ module ::Patreon
         end
       end
 
+      # Special catch all patrons virtual reward
+      rewards['0']['title'] = 'All Patrons'
+      rewards['0']['amount_cents'] = 0
+      reward_users['0'] = pledges.keys
+
       ::PluginStore.set(PLUGIN_NAME, 'pledges', pledges)
       ::PluginStore.set(PLUGIN_NAME, 'rewards', rewards)
       ::PluginStore.set(PLUGIN_NAME, 'users', users)
@@ -105,7 +110,7 @@ module ::Patreon
     def self.find_user_by_rewards rewards
       reward_users = ::PluginStore.get(PLUGIN_NAME, 'reward-users')
 
-      rewards.map {|id| reward_users[id] }.reduce(:+)
+      rewards.map {|id| reward_users[id] }.reduce(:+).uniq
     end
 
     def self.patreon_users_to_discourse_users patreon_users_ids

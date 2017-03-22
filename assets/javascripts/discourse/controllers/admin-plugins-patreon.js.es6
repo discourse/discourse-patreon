@@ -9,7 +9,7 @@ export default Ember.Controller.extend({
   },
   
   rewardsNames: function() {
-    return _.filter(this.rewards, (r) => r.amount_cents > 1).map((r) => this.prettyPrintReward(r));
+    return _.filter(this.rewards, (r) => r.id >= 0).map((r) => this.prettyPrintReward(r));
   }.property(),
 
   editing: FilterRule.create({}),
