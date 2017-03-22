@@ -110,7 +110,7 @@ module ::Patreon
     def self.find_user_by_rewards rewards
       reward_users = ::PluginStore.get(PLUGIN_NAME, 'reward-users')
 
-      rewards.map {|id| reward_users[id] }.reduce(:+).uniq
+      rewards.map {|id| reward_users[id] }.compact.flatten.uniq
     end
 
     def self.patreon_users_to_discourse_users patreon_users_ids
