@@ -1,6 +1,9 @@
 plugins:
   patreon_enabled:
     default: false
+  patreon_login_enabled:
+    default: false
+    client: true
   patreon_client_id:
     default: ''
   patreon_client_secret:

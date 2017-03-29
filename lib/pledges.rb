@@ -74,11 +74,21 @@ module ::Patreon
       ::PluginStore.set(PLUGIN_NAME, 'rewards', rewards)
       ::PluginStore.set(PLUGIN_NAME, 'users', users)
       ::PluginStore.set(PLUGIN_NAME, 'reward-users', reward_users)
+
+      filters = PluginStore.get(PLUGIN_NAME, 'filters')
+
+      # Sets all patrons to the seed group by default
+      if filters.nil?
+        default_group = Group.find_by name: 'Patrons'
+
+        basic_filter = {default_group.id_to_s => ['0']}
+
+        ::PluginStore.set(PLUGIN_NAME, 'filters', basic_filter)
+      end
     end
 
     def self.sync_groups
       filters = (PluginStore.get(PLUGIN_NAME, 'filters') || {})
-      reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
 
       filters.each_pair do |group_id, rewards|
 
@@ -107,13 +117,13 @@ module ::Patreon
 
     private
 
-    def self.find_user_by_rewards rewards
+    def self.find_user_by_rewards(rewards)
       reward_users = ::PluginStore.get(PLUGIN_NAME, 'reward-users')
 
       rewards.map {|id| reward_users[id] }.compact.flatten.uniq
     end
 
-    def self.patreon_users_to_discourse_users patreon_users_ids
+    def self.patreon_users_to_discourse_users(patreon_users_ids)
       users = ::PluginStore.get(PLUGIN_NAME, 'users')
 
       mails = patreon_users_ids.map { |id| users[id]['email'] }
