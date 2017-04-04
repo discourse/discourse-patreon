@@ -25,7 +25,7 @@ after_initialize do
     # seed
 
     group = Group.new(
-      name: 'Patrons',
+      name: 'patrons',
       visible: true,
       primary_group: true,
       title: 'Patron',
@@ -42,7 +42,7 @@ after_initialize do
       icon: 'https://www.patreon.com/images/patreon_navigation_logo_mini_orange.png',
       listable: true,
       target_posts: false,
-      query: "select user_id, created_at granted_at, NULL post_id from group_users where group_id = ( select g.id from groups g where g.name = 'Patrons' )",
+      query: "select user_id, created_at granted_at, NULL post_id from group_users where group_id = ( select g.id from groups g where g.name = 'patrons' )",
       enabled: true,
       auto_revoke: true,
       badge_grouping_id: 2,
@@ -50,7 +50,7 @@ after_initialize do
       show_posts: false,
       system: false,
       image: 'https://www.patreon.com/images/patreon_navigation_logo_mini_orange.png',
-      long_description: 'To get access to this badge go to our [Patreon page](https://www.patreon.com/) and add your pledge.'
+      long_description: 'To get access to this badge go to our <a href="https://www.patreon.com/">Patreon page</a> and add your pledge.'
     )
     badge.save
 
