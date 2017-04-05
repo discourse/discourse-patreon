@@ -79,11 +79,12 @@ module ::Patreon
 
       # Sets all patrons to the seed group by default
       if filters.nil?
-        default_group = Group.find_by name: 'Patrons'
+        default_group = Group.find_by name: 'patrons'
 
-        basic_filter = {default_group.id_to_s => ['0']}
-
-        ::PluginStore.set(PLUGIN_NAME, 'filters', basic_filter)
+        unless default_group.nil?
+          basic_filter = { default_group.id_to_s => ['0'] }
+          ::PluginStore.set(PLUGIN_NAME, 'filters', basic_filter)
+        end
       end
     end
 
