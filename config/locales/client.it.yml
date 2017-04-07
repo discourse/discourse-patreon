@@ -1,0 +1,15 @@
+it:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filtri'
+      group: 'Gruppo'
+      rewards: 'Ricompense'
+      filter: 'Filtro'
+      help_text: 'Puoi sincronizzare un gruppo Discourse con uno o più livelli di ricompense di Patreon.'
+      edit: 'Modifica'
+      delete: 'Cancella'
+      save: 'Salva'
+      update_data: 'Scarica Dati Patreon'
+      sync_groups: 'Sincronizza Gruppi'
