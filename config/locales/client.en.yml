@@ -12,3 +12,4 @@ en:
       delete: 'Delete'
       save: 'Save'
       update_data: 'Update Patreon Data & Sync Groups'
+      refresh_page: 'New data has been downloaded from Patron API. Please refresh the page.'

@@ -1,3 +1,4 @@
+import { default as computed } from 'ember-addons/ember-computed-decorators';
 import FilterRule from 'discourse/plugins/discourse-patreon/discourse/models/filter-rule';
 import { ajax } from 'discourse/lib/ajax';
 import { popupAjaxError } from 'discourse/lib/ajax-error';
@@ -8,9 +9,10 @@ export default Ember.Controller.extend({
     return `$${reward.amount_cents/100} - ${reward.title}`;
   },
   
-  rewardsNames: function() {
+  @computed('rewards')
+  rewardsNames() {
     return _.filter(this.rewards, (r) => r.id >= 0).map((r) => this.prettyPrintReward(r));
-  }.property(),
+  },
 
   editing: FilterRule.create({}),
 
@@ -58,8 +60,12 @@ export default Ember.Controller.extend({
 
       this.messageBus.subscribe("/patreon/background_sync", (rewards) => {
         this.messageBus.unsubscribe("/patreon/background_sync");
-        this.rewards = rewards;
+
         this.set('updatingData', false);
+
+        bootbox.alert(I18n.t('patreon.refresh_page'), () => {
+          window.location.pathname = Discourse.getURL('/admin/plugins/patreon');
+        });
       });
     }
   }
