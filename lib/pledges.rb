@@ -7,6 +7,9 @@ module ::Patreon
     def self.update_patrons!
       update_data
       sync_groups
+
+      rewards = ::PluginStore.get(PLUGIN_NAME, 'rewards')
+      ::MessageBus.publish '/patreon/background_sync', rewards
     end
 
     def self.update_data

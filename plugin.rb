@@ -4,8 +4,6 @@
 # author: Rafael dos Santos Silva <xfalcox@gmail.com>
 # url: https://github.com/discourse/discourse-patreon
 
-gem 'patreon', '0.2.0', require: false
-
 require 'auth/oauth2_authenticator'
 require 'omniauth-oauth2'
 
@@ -165,7 +163,7 @@ class PatreonAuthenticator < ::Auth::OAuth2Authenticator
 
   def after_create_account(user, auth)
     data = auth[:extra_data]
-    ::PluginStore.set('patreon', "login_user_#{user.id}", patreon_id: data[:uid])
+    ::PluginStore.set(PLUGIN_NAME, "login_user_#{user.id}", patreon_id: data[:uid])
 
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
 

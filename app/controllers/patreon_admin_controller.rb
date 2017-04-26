@@ -71,12 +71,12 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
   end
 
   def update_data
-    begin
-      Patreon::Pledges.update_data
-      render json: success_json
-    rescue => e
-      render json: { message: e.message }, status: 500
-    end
+    opts = {}
+    opts[:current_site_id] = RailsMultisite::ConnectionManagement.current_db
+    klass = 'Patreon::SyncPatronsToGroups'.constantize
+    Sidekiq::Client.enqueue(klass, opts)
+
+    render json: success_json
   end
 
   def patreon_tokens_present?

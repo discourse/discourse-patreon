@@ -54,20 +54,13 @@ export default Ember.Controller.extend({
       this.set('updatingData', true);
 
       ajax("/patreon/update_data.json", { method: 'POST' })
-        .catch(popupAjaxError)
-        .finally(() => {
-          this.set('updatingData', false);
-        });
-    },
+        .catch(popupAjaxError => this.set('updatingData', false));
 
-    syncGroups() {
-      this.set('syncingGroups', true);
-
-      ajax("/patreon/sync_groups.json", { method: 'POST' })
-        .catch(popupAjaxError)
-        .finally(() => {
-          this.set('syncingGroups', false);
-        });
+      this.messageBus.subscribe("/patreon/background_sync", (rewards) => {
+        this.messageBus.unsubscribe("/patreon/background_sync");
+        this.rewards = rewards;
+        this.set('updatingData', false);
+      });
     }
   }
 });
