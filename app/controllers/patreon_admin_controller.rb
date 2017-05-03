@@ -50,11 +50,7 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
 
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
 
-    puts filters
-
     filters.delete(params[:group_id])
-
-    puts filters
 
     PluginStore.set(PLUGIN_NAME, 'filters', filters)
 
@@ -71,27 +67,12 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
   end
 
   def update_data
-    opts = {}
-    opts[:current_site_id] = RailsMultisite::ConnectionManagement.current_db
-    klass = 'Patreon::SyncPatronsToGroups'.constantize
-    Sidekiq::Client.enqueue(klass, opts)
-
+    Jobs.enqueue(:patreon_sync_patrons_to_groups)
     render json: success_json
   end
 
   def patreon_tokens_present?
     raise Discourse::InvalidAccess.new if SiteSetting.patreon_creator_access_token.blank?
     raise Discourse::InvalidAccess.new if SiteSetting.patreon_creator_refresh_token.blank?
-  end
-
-  # ----- Access control methods -----
-  def handle_unverified_request
-  end
-
-  def api_key_valid?
-    true
-  end
-
-  def redirect_to_login_if_required
   end
 end

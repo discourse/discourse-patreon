@@ -10,10 +10,7 @@ class ::Patreon::PatreonWebhookController < ActionController::Base
 
     raise Discourse::InvalidAccess.new unless valid_signature?(request.headers['X-Patreon-Signature'], request.raw_post)
 
-    opts = {}
-    opts[:current_site_id] = RailsMultisite::ConnectionManagement.current_db
-    klass = 'Patreon::SyncPatronsToGroups'.constantize
-    Sidekiq::Client.enqueue(klass, opts)
+    Jobs.enqueue(:patreon_sync_patrons_to_groups)
 
     render nothing: true, status: 200
   end
