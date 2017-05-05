@@ -78,17 +78,9 @@ module ::Patreon
       ::PluginStore.set(PLUGIN_NAME, 'users', users)
       ::PluginStore.set(PLUGIN_NAME, 'reward-users', reward_users)
 
+      # Sets all patrons to the seed group by default on first run
       filters = PluginStore.get(PLUGIN_NAME, 'filters')
-
-      # Sets all patrons to the seed group by default
-      if filters.nil?
-        default_group = Group.find_by name: 'patrons'
-
-        unless default_group.nil?
-          basic_filter = { default_group.id_to_s => ['0'] }
-          ::PluginStore.set(PLUGIN_NAME, 'filters', basic_filter)
-        end
-      end
+      Patreon::Seed.seed_content! if filters.nil?
     end
 
     def self.sync_groups

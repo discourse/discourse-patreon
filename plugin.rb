@@ -30,6 +30,7 @@ after_initialize do
   load File.expand_path('../app/controllers/patreon_webhook_controller.rb', __FILE__)
   load File.expand_path('../app/jobs/scheduled/patreon_sync_patrons_to_groups.rb', __FILE__)
   load File.expand_path('../app/jobs/scheduled/patreon_update_tokens.rb', __FILE__)
+  load File.expand_path('../lib/seed.rb', __FILE__)
   load File.expand_path('../lib/pledges.rb', __FILE__)
   load File.expand_path('../lib/tokens.rb', __FILE__)
 
