@@ -1,4 +1,4 @@
-module ::Patreon
+module ::Jobs
   class PatreonUpdateTokens < ::Jobs::Scheduled
     every 7.days
 
