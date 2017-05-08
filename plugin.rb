@@ -17,8 +17,6 @@ after_initialize do
 
   require_dependency 'admin_constraint'
 
-  SeedFu.fixture_paths << Rails.root.join("plugins", "discourse-patreon", "db", "fixtures").to_s
-
   module ::Patreon
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME

@@ -3,7 +3,6 @@ require 'json'
 module ::Patreon
   class Tokens
     def self.update!
-      redirect_uri = "#{Discourse.base_url}/auth/patreon/callback"
 
       conn = Faraday.new(url: 'https://api.patreon.com')
 
