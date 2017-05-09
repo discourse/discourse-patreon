@@ -46,6 +46,9 @@ module ::Patreon
         request = conn.get(uri.sub('https://api.patreon.com', ''))
         pledge_data = JSON.parse request.body
 
+        # handle a brand new Patreon with 0 patrons
+        break if pledge_data['data'].empty?
+
         # get next page if necessary and add to the current loop
         if pledge_data['links'] && pledge_data['links']['next']
           pledges_uris << pledge_data['links']['next']
