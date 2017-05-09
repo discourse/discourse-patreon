@@ -64,13 +64,10 @@ after_initialize do
 
     option :authorize_params, {
       response_type: 'code',
-      client_id: SiteSetting.patreon_client_id,
       redirect_uri: "#{Discourse.base_url}/auth/patreon/callback"
     }
 
     option :auth_token_params, {
-      client_id: SiteSetting.patreon_client_id,
-      client_secret: SiteSetting.patreon_client_secret,
       redirect_uri: "#{Discourse.base_url}/auth/patreon/callback"
     }
 
@@ -119,8 +116,11 @@ end
 class PatreonAuthenticator < ::Auth::OAuth2Authenticator
   def register_middleware(omniauth)
     omniauth.provider :patreon,
-                      SiteSetting.patreon_client_id,
-                      SiteSetting.patreon_client_secret
+                      setup: lambda { |env|
+                        strategy = env['omniauth.strategy']
+                        strategy.options[:client_id] = SiteSetting.patreon_client_id
+                        strategy.options[:client_secret] = SiteSetting.patreon_client_secret
+                      }
   end
 
   def after_create_account(user, auth)
