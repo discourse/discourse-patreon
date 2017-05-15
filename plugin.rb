@@ -62,14 +62,7 @@ after_initialize do
       token_url: 'https://api.patreon.com/oauth2/token'
     }
 
-    option :authorize_params, {
-      response_type: 'code',
-      redirect_uri: "#{Discourse.base_url}/auth/patreon/callback"
-    }
-
-    option :auth_token_params, {
-      redirect_uri: "#{Discourse.base_url}/auth/patreon/callback"
-    }
+    option :authorize_params, response_type: 'code'
 
     def custom_build_access_token
       verifier = request.params['code']
@@ -120,6 +113,7 @@ class PatreonAuthenticator < ::Auth::OAuth2Authenticator
                         strategy = env['omniauth.strategy']
                         strategy.options[:client_id] = SiteSetting.patreon_client_id
                         strategy.options[:client_secret] = SiteSetting.patreon_client_secret
+                        strategy.options[:redirect_uri] = "#{Discourse.base_url}/auth/patreon/callback"
                       }
   end
 
