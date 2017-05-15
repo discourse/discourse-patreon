@@ -66,7 +66,7 @@ after_initialize do
 
     def custom_build_access_token
       verifier = request.params['code']
-      client.auth_code.get_token(verifier, options.auth_token_params)
+      client.auth_code.get_token(verifier, redirect_uri: options.redirect_uri)
     end
 
     alias_method :build_access_token, :custom_build_access_token
