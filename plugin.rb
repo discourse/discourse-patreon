@@ -99,7 +99,26 @@ after_initialize do
     end
   end
 
+  add_model_callback(User, :after_commit, on: :create) do
+    return unless SiteSetting.patreon_enabled
 
+    user = self
+    filters = PluginStore.get(PLUGIN_NAME, 'filters')
+
+    unless filters.nil?
+      patreon_id = PluginStore.get(PLUGIN_NAME, 'users').key({"email"=>"#{user.email}"})
+      reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
+
+      reward_id = reward_users.detect { |_k, v| v.include? patreon_id }.first
+
+      group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
+
+      group_ids.each do |id|
+        group = Group.find_by id: id
+        group.add user
+      end
+    end
+  end
 end
 
 # Authentication with Patreon
@@ -120,25 +139,6 @@ class PatreonAuthenticator < ::Auth::OAuth2Authenticator
   def after_create_account(user, auth)
     data = auth[:extra_data]
     ::PluginStore.set(PLUGIN_NAME, "login_user_#{user.id}", patreon_id: data[:uid])
-
-    filters = PluginStore.get(PLUGIN_NAME, 'filters')
-
-    # try to apply group membership immediatly on user creation
-    unless filters.nil?
-      patreon_id = data[:uid]
-      reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
-
-      reward_id = reward_users.detect { |_k, v| v.include? patreon_id }.first
-
-      group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
-
-      group_ids.each do |id|
-        group = Group.find_by id: id
-        group.add user
-      end
-    end
-
-
   end
 end
 
