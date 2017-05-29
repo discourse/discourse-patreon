@@ -106,16 +106,20 @@ after_initialize do
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
 
     unless filters.nil?
-      patreon_id = PluginStore.get(PLUGIN_NAME, 'users').key({"email"=>"#{user.email}"})
-      reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
+      begin
+        patreon_id = PluginStore.get(PLUGIN_NAME, 'users').key({"email"=>"#{user.email}"})
+        reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
 
-      reward_id = reward_users.detect { |_k, v| v.include? patreon_id }.first
+        reward_id = reward_users.detect { |_k, v| v.include? patreon_id }.first
 
-      group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
+        group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
 
-      group_ids.each do |id|
-        group = Group.find_by id: id
-        group.add user
+        group_ids.each do |id|
+          group = Group.find_by id: id
+          group.add user
+        end
+      rescue => e
+        Rails.logger.warn("Patreon group membership callback failed for new user #{self.id} with error: #{e}.\n\n #{e.backtrace.join("\n")}")
       end
     end
   end
