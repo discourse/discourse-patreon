@@ -110,7 +110,7 @@ after_initialize do
         patreon_id = PluginStore.get(PLUGIN_NAME, 'users').key({"email"=>"#{user.email}"})
         reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
 
-        reward_id = reward_users.detect { |_k, v| v.include? patreon_id }.first
+        reward_id = reward_users.except('0').detect { |_k, v| v.include? patreon_id }&.first
 
         group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
 
