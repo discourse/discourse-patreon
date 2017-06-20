@@ -104,8 +104,9 @@ after_initialize do
 
     user = self
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
+    patreon_id = PluginStore.get(PLUGIN_NAME, 'users').key({"email"=>"#{user.email}"})
 
-    unless filters.nil?
+    if filters.present? && patreon_id.present?
       begin
         patreon_id = PluginStore.get(PLUGIN_NAME, 'users').key({"email"=>"#{user.email}"})
         reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
