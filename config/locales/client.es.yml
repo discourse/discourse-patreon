@@ -1,0 +1,15 @@
+es:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filtros'
+      group: 'Grupo'
+      rewards: 'Recompensas'
+      filter: 'Filtro'
+      help_text: 'Puedes sincronizar un grupo de Discourse con uno o varios niveles de recompenza Patreon.'
+      edit: 'Editar'
+      delete: 'Borrar'
+      save: 'Guardar'
+      update_data: 'Actualizar Patreon Data & Sync Grupos'
+      refresh_page: 'Nuevos datos han sido descargados desde el Patron API. Por favor refrescar la página.'
