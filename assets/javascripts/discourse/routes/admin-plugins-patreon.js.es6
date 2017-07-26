@@ -8,7 +8,7 @@ import FilterRule from 'discourse/plugins/discourse-patreon/discourse/models/fil
 export default Discourse.Route.extend({
   model() {
 
-    return Ember.RSVP.Promise.all([ajax("/patreon/list.json"), ajax("/patreon/rewards.json"), ajax("/admin/groups.json")])
+    return Ember.RSVP.Promise.all([ajax("/patreon/list.json"), ajax("/patreon/rewards.json"), ajax("/groups/search.json?ignore_automatic=true")])
                               .then(([filtersResult, rewardsResult, groupsResult]) => {
                                 return {filters: filtersResult, rewards: rewardsResult, groups: groupsResult};
                               });
@@ -23,8 +23,6 @@ export default Discourse.Route.extend({
       return FilterRule.create({group: group.name, rewards: rewardsNames, group_id: k, reward_ids: v});
     });
 
-    const automaticGroups = model.groups.reject((g) => g.automatic);
-
-    controller.setProperties({ model: filtersArray, groups: automaticGroups, rewards: model.rewards });
+    controller.setProperties({ model: filtersArray, groups: model.groups, rewards: model.rewards });
   }
 });
