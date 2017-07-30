@@ -128,7 +128,7 @@ module ::Patreon
       mails = patreon_users_ids.map { |id| users[id]['email'] }
 
       discourse_users = mails.map do |email|
-        User.find_by(email: email)
+        User.find_by_email(email)
       end
       discourse_users.compact
     end
