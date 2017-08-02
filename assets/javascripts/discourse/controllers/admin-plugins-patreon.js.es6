@@ -8,7 +8,7 @@ export default Ember.Controller.extend({
   prettyPrintReward: (reward) => {
     return `$${reward.amount_cents/100} - ${reward.title}`;
   },
-  
+
   @computed('rewards')
   rewardsNames() {
     return _.filter(this.rewards, (r) => r.id >= 0).map((r) => this.prettyPrintReward(r));
@@ -56,9 +56,10 @@ export default Ember.Controller.extend({
       this.set('updatingData', true);
 
       ajax("/patreon/update_data.json", { method: 'POST' })
-        .catch(popupAjaxError => this.set('updatingData', false));
+        .catch(popupAjaxError)
+        .finally(() => this.set('updatingData', false));
 
-      this.messageBus.subscribe("/patreon/background_sync", (rewards) => {
+      this.messageBus.subscribe("/patreon/background_sync", () => {
         this.messageBus.unsubscribe("/patreon/background_sync");
 
         this.set('updatingData', false);
