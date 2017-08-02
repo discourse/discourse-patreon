@@ -56,11 +56,10 @@ after_initialize do
   class ::OmniAuth::Strategies::Patreon
     option :name, 'patreon'
 
-    option :client_options, {
+    option :client_options,
       site: 'https://www.patreon.com',
       authorize_url: 'https://www.patreon.com/oauth2/authorize',
       token_url: 'https://api.patreon.com/oauth2/token'
-    }
 
     option :authorize_params, response_type: 'code'
 
@@ -71,29 +70,28 @@ after_initialize do
 
     alias_method :build_access_token, :custom_build_access_token
 
-
     uid {
       raw_info['data']['id'].to_s
     }
 
     info do
       {
-        :email => raw_info['data']['attributes']['email'],
-        :name => raw_info['data']['attributes']['full_name']
+        email: raw_info['data']['attributes']['email'],
+        name: raw_info['data']['attributes']['full_name']
       }
     end
 
     extra do
       {
-        :raw_info => raw_info
+        raw_info: raw_info
       }
     end
 
     def raw_info
       @raw_info ||= begin
-        response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user", :headers => {
+        response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user", headers: {
             'Authorization' => "Bearer #{access_token.token}"
-        }, :parse => :json)
+        }, parse: :json)
         response.parsed
       end
     end
@@ -104,7 +102,7 @@ after_initialize do
 
     user = self
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
-    patreon_id = PluginStore.get(PLUGIN_NAME, 'users')&.key({"email"=>"#{user.email}"})
+    patreon_id = PluginStore.get(PLUGIN_NAME, 'users')&.key({ "email" => "#{user.email}" })
 
     if filters.present? && patreon_id.present?
       begin
@@ -152,4 +150,3 @@ auth_provider title: 'with Patreon',
               frame_height: 570,
               authenticator: PatreonAuthenticator.new('patreon', trusted: true),
               enabled_setting: 'patreon_login_enabled'
-

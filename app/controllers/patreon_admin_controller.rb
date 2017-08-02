@@ -1,5 +1,5 @@
 require_dependency 'application_controller'
-  
+
 class ::Patreon::PatreonAdminController < Admin::AdminController
 
   PLUGIN_NAME = 'discourse-patreon'.freeze
@@ -18,7 +18,7 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
 
     groups = ::Group.all.pluck(:id)
 
-    valid_filters = filters.select {|k| groups.include?(k.to_i) }
+    valid_filters = filters.select { |k| groups.include?(k.to_i) }
 
     render json: valid_filters
   end
@@ -29,12 +29,12 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
     render json: rewards
   end
 
-  def is_number? string
+  def is_number?(string)
     true if Float(string) rescue false
   end
 
   def edit
-    return render json: { message: "Error"}, status: 500 if params[:rewards_ids].nil? || !is_number?(params[:group_id])
+    return render json: { message: "Error" }, status: 500 if params[:rewards_ids].nil? || !is_number?(params[:group_id])
 
     filters = PluginStore.get(PLUGIN_NAME, 'filters') || {}
 
@@ -46,7 +46,7 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
   end
 
   def delete
-    return render json: { message: "Error"}, status: 500 unless is_number?(params[:group_id])
+    return render json: { message: "Error" }, status: 500 unless is_number?(params[:group_id])
 
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
 
