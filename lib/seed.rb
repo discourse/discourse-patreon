@@ -6,7 +6,7 @@ module ::Patreon
 
       default_group = Group.new(
         name: 'patrons',
-        visible: true,
+        visibility_level: Group.visibility_levels[:public],
         primary_group: true,
         title: 'Patron',
         flair_url: 'https://www.patreon.com/images/patreon_navigation_logo_mini_orange.png',
