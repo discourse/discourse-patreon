@@ -6,8 +6,8 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
 
   requires_plugin PLUGIN_NAME
 
-  before_filter :patreon_enabled?
-  before_filter :patreon_tokens_present?
+  before_action :patreon_enabled?
+  before_action :patreon_tokens_present?
 
   def patreon_enabled?
     raise Discourse::NotFound unless SiteSetting.patreon_enabled
