@@ -24,6 +24,8 @@ module ::Patreon
                          headers: { 'Authorization' => "Bearer #{SiteSetting.patreon_creator_access_token}" })
 
       campaign_response = conn.get '/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges'
+      return unless campaign_response.status == 200
+
       campaign_data = JSON.parse campaign_response.body
 
       campaign_data['data'].map do |campaign|
