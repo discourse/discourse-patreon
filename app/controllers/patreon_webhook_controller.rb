@@ -12,7 +12,7 @@ class ::Patreon::PatreonWebhookController < ActionController::Base
 
     Jobs.enqueue(:patreon_sync_patrons_to_groups)
 
-    render nothing: true, status: 200
+    render body: nil, status: 200
   end
 
   private
