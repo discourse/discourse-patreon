@@ -8,6 +8,8 @@ plugins:
     default: ''
   patreon_client_secret:
     default: ''
+  patreon_webhook_secret:
+    default: ''
   patreon_creator_access_token:
     default: ''
   patreon_creator_refresh_token:
