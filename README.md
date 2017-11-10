@@ -2,7 +2,7 @@
 
 Enable syncronization between Discourse Groups and Patreon rewards, and enable Patreon Social Login,
 
-<img src="https://s3.amazonaws.com/patreon_public_assets/toolbox/patreon.png" width="426" height="97">
+<img src="public/images/patreon-wordmark-navy.png?raw=true" width="292" height="104">
 
 ## Installation
 

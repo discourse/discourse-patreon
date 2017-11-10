@@ -18,19 +18,24 @@ after_initialize do
   require_dependency 'admin_constraint'
 
   module ::Patreon
+    DEFAULT_IMAGE_URL = '/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png'.freeze
+
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
       isolate_namespace Patreon
     end
   end
 
-  load File.expand_path('../app/controllers/patreon_admin_controller.rb', __FILE__)
-  load File.expand_path('../app/controllers/patreon_webhook_controller.rb', __FILE__)
-  load File.expand_path('../app/jobs/scheduled/patreon_sync_patrons_to_groups.rb', __FILE__)
-  load File.expand_path('../app/jobs/scheduled/patreon_update_tokens.rb', __FILE__)
-  load File.expand_path('../lib/seed.rb', __FILE__)
-  load File.expand_path('../lib/pledges.rb', __FILE__)
-  load File.expand_path('../lib/tokens.rb', __FILE__)
+  [
+    '../app/controllers/patreon_admin_controller.rb',
+    '../app/controllers/patreon_webhook_controller.rb',
+    '../app/jobs/scheduled/patreon_sync_patrons_to_groups.rb',
+    '../app/jobs/scheduled/patreon_update_tokens.rb',
+    '../app/jobs/onceoff/update_brand_images.rb',
+    '../lib/seed.rb',
+    '../lib/pledges.rb',
+    '../lib/tokens.rb'
+  ].each { |path| load File.expand_path(path, __FILE__) }
 
   Patreon::Engine.routes.draw do
     get '/rewards' => 'patreon_admin#rewards', constraints: AdminConstraint.new
