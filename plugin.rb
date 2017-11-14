@@ -18,6 +18,7 @@ after_initialize do
   require_dependency 'admin_constraint'
 
   module ::Patreon
+    PLUGIN_NAME = 'discourse-patreon'.freeze
     DEFAULT_IMAGE_URL = '/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png'.freeze
 
     class Engine < ::Rails::Engine
@@ -32,6 +33,7 @@ after_initialize do
     '../app/jobs/scheduled/patreon_sync_patrons_to_groups.rb',
     '../app/jobs/scheduled/patreon_update_tokens.rb',
     '../app/jobs/onceoff/update_brand_images.rb',
+    '../app/jobs/onceoff/migrate_patreon_user_infos.rb',
     '../lib/seed.rb',
     '../lib/pledges.rb',
     '../lib/tokens.rb'
@@ -141,11 +143,6 @@ class PatreonAuthenticator < ::Auth::OAuth2Authenticator
                         strategy.options[:client_secret] = SiteSetting.patreon_client_secret
                         strategy.options[:redirect_uri] = "#{Discourse.base_url}/auth/patreon/callback"
                       }
-  end
-
-  def after_create_account(user, auth)
-    data = auth[:extra_data]
-    ::PluginStore.set(PLUGIN_NAME, "login_user_#{user.id}", patreon_id: data[:uid])
   end
 end
 
