@@ -7,12 +7,11 @@ module Jobs
         rows.each do |row|
           user_id = row.key.gsub('login_user_', '')
 
-          user_info = Oauth2UserInfo.create(
-                        uid: eval(row.value)[:patreon_id],
-                        provider: "patreon",
-                        user_id: user_id
-                      )
-          user_info.save!
+          Oauth2UserInfo.create(
+            uid: eval(row.value)[:patreon_id],
+            provider: "patreon",
+            user_id: user_id
+          )
         end
       end
     end
