@@ -11,6 +11,8 @@ RSpec.describe Jobs::Patreon::MigratePatreonUserInfos do
     described_class.new.execute_onceoff({})
 
     expect(Oauth2UserInfo.find_by(uid: patreon_id, provider: "patreon").user_id).to eq(user.id)
+
+    described_class.new.execute_onceoff({}) # should not raise error if records already exist
   end
 
 end

@@ -7,11 +7,15 @@ module Jobs
         rows.each do |row|
           user_id = row.key.gsub('login_user_', '')
 
-          Oauth2UserInfo.create(
-            uid: eval(row.value)[:patreon_id],
-            provider: "patreon",
-            user_id: user_id
-          )
+          begin
+            Oauth2UserInfo.create(
+              uid: eval(row.value)[:patreon_id],
+              provider: "patreon",
+              user_id: user_id
+            )
+          rescue ActiveRecord::RecordNotUnique => e
+            # record already migrated
+          end
         end
       end
     end
