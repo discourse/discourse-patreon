@@ -3,7 +3,7 @@ module ::Jobs
     every 6.hours
 
     def execute(args)
-      Patreon::Pledges.update_patrons! if SiteSetting.patreon_enabled && SiteSetting.patreon_creator_access_token && SiteSetting.patreon_creator_refresh_token
+      ::Patreon::Pledges.update_patrons! if SiteSetting.patreon_enabled && SiteSetting.patreon_creator_access_token && SiteSetting.patreon_creator_refresh_token
     end
   end
 end
