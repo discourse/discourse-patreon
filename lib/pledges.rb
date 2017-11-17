@@ -58,7 +58,13 @@ module ::Patreon
 
         # get pledges info
         pledge_data['data'].each do |entry|
-          if entry['type'] == 'pledge' && entry['attributes']['declined_since'].nil?
+          if entry['type'] == 'pledge'
+            declined_since = entry['attributes']['declined_since']
+            if declined_since.present?
+              declined_days_count = Time.now.to_date - declined_since.to_date
+              next unless declined_days_count < SiteSetting.patreon_declined_pledges_grace_period_days
+            end
+
             (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << entry['relationships']['patron']['data']['id'] unless entry['relationships']['reward']['data'].nil?
             pledges[entry['relationships']['patron']['data']['id']] = entry['attributes']['amount_cents']
           end
