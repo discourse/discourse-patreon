@@ -2,6 +2,15 @@ require 'rails_helper'
 
 RSpec.describe ::Patreon::Pledges do
 
+  Fabricator(:oauth2_user_info) do
+    provider "patreon"
+    user
+  end
+
+  def get(key)
+    ::Patreon.get(key)
+  end
+
   def get_patreon_response(filename)
     FileUtils.mkdir_p("#{Rails.root}/tmp/spec") unless Dir.exists?("#{Rails.root}/tmp/spec")
     FileUtils.cp("#{Rails.root}/plugins/discourse-patreon/spec/fixtures/#{filename}", "#{Rails.root}/tmp/spec/#{filename}")
@@ -27,10 +36,40 @@ RSpec.describe ::Patreon::Pledges do
     SiteSetting.patreon_declined_pledges_grace_period_days = 7
   end
 
-  it "should update campaigns data" do
+  it "should update campaigns and group users data" do
     freeze_time("2017-11-15T20:59:52+00:00")
-    described_class.update_data
-    expect(::PluginStore.get(::Patreon::PLUGIN_NAME, 'pledges').count).to eq(2)
+    expect {
+      described_class.update_data
+    }.to change { Group.count }.by(1)
+    .and change { Badge.count }.by(1)
+
+    expect(get('pledges').count).to eq(2)
+    expect(get('rewards').count).to eq(2)
+    expect(get('users').count).to eq(3)
+    expect(get('reward-users').count).to eq(3)
+    expect(get('filters').count).to eq(1)
+
+    freeze_time("2017-11-11T20:59:52+00:00")
+    get('users').each do |id, user|
+      Fabricate(:user, id: id, email: user[:email])
+    end
+
+    expect {
+      described_class.update_data
+      described_class.sync_groups
+    }.to change { get('pledges').count }.by(1)
+    .and change { get('reward-users').count }.by(1)
+    .and change { GroupUser.count }.by(3)
+  end
+
+  it "should find user by patreon id or email" do
+    users = {"111111"=>{"email"=>"foo@bar.com"}, "111112"=>{"email"=>"boo@far.com"}, "111113"=>{"email"=>"roo@aar.com"}}
+    ::Patreon.set("users", users)
+
+    Fabricate(:user, email: "foo@bar.com")
+    Fabricate(:oauth2_user_info, uid: "111112")
+
+    expect(described_class.patreon_users_to_discourse_users(users.keys).count).to eq(2)
   end
 
 end
