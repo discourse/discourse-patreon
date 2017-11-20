@@ -133,10 +133,8 @@ module ::Patreon
     def self.patreon_users_to_discourse_users(patreon_users_ids)
       users = ::PluginStore.get(PLUGIN_NAME, 'users')
 
-      mails = patreon_users_ids.map { |id| users[id]['email'] }
-
-      discourse_users = mails.map do |email|
-        User.find_by_email(email)
+      discourse_users = patreon_users_ids.map do |id|
+        ::Oauth2UserInfo.find_by(provider: "patreon", uid: id).try(:user) || User.find_by_email(users[id]['email'])
       end
       discourse_users.compact
     end

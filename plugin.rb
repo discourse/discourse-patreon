@@ -25,6 +25,18 @@ after_initialize do
       engine_name PLUGIN_NAME
       isolate_namespace Patreon
     end
+
+    def self.store
+      @store ||= PluginStore.new(PLUGIN_NAME)
+    end
+
+    def self.get(key)
+      store.get(key)
+    end
+
+    def self.set(key, value)
+      store.set(key, value)
+    end
   end
 
   [
