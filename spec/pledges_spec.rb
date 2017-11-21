@@ -33,6 +33,7 @@ RSpec.describe ::Patreon::Pledges do
 
     stub_request(:get, campaigns_url).to_return(campaigns).with(headers)
     stub_request(:get, pledges_url).to_return(pledges).with(headers)
+    SiteSetting.patreon_enabled = true
     SiteSetting.patreon_declined_pledges_grace_period_days = 7
   end
 
@@ -50,16 +51,16 @@ RSpec.describe ::Patreon::Pledges do
     expect(get('filters').count).to eq(1)
 
     freeze_time("2017-11-11T20:59:52+00:00")
-    get('users').each do |id, user|
-      Fabricate(:user, id: id, email: user[:email])
-    end
-
     expect {
       described_class.update_data
-      described_class.sync_groups
     }.to change { get('pledges').count }.by(1)
     .and change { get('reward-users').count }.by(1)
-    .and change { GroupUser.count }.by(3)
+
+    expect { # To check `add_model_callback(User, :after_commit, on: :create)` in plugin.rb
+      get('users').each do |id, user|
+        Fabricate(:user, email: user[:email])
+      end
+    }.to change { GroupUser.count }.by(3)
   end
 
   it "should find user by patreon id or email" do
