@@ -3,7 +3,7 @@ module Jobs
     class MigratePatreonUserInfos < ::Jobs::Onceoff
 
       def execute_onceoff(args)
-        rows = PluginStoreRow.where(plugin_name: ::Patreon::PLUGIN_NAME).where("key ~* :pat", :pat => '^login_user_')
+        rows = PluginStoreRow.where(plugin_name: ::Patreon::PLUGIN_NAME).where("key ~* :pat", pat: '^login_user_')
         rows.each do |row|
           user_id = row.key.gsub('login_user_', '')
 
