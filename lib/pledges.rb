@@ -20,10 +20,7 @@ module ::Patreon
       reward_users = {}
       pledges_uris = []
 
-      conn = Faraday.new(url: 'https://api.patreon.com',
-                         headers: { 'Authorization' => "Bearer #{SiteSetting.patreon_creator_access_token}" })
-
-      campaign_response = conn.get '/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges'
+      campaign_response = get('/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges')
       return unless campaign_response.status == 200
 
       campaign_data = JSON.parse campaign_response.body
@@ -45,7 +42,7 @@ module ::Patreon
       end
 
       pledges_uris.each do |uri|
-        request = conn.get(uri.sub('https://api.patreon.com', ''))
+        request = get(uri.sub('https://api.patreon.com', ''))
         pledge_data = JSON.parse request.body
 
         # handle a brand new Patreon with 0 patrons
@@ -123,6 +120,13 @@ module ::Patreon
     end
 
     private
+
+    def self.get(uri)
+      Faraday.new(
+        url: 'https://api.patreon.com',
+        headers: { 'Authorization' => "Bearer #{SiteSetting.patreon_creator_access_token}" }
+      ).get(uri)
+    end
 
     def self.find_user_by_rewards(rewards)
       reward_users = ::PluginStore.get(PLUGIN_NAME, 'reward-users')
