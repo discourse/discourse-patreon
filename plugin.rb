@@ -46,6 +46,7 @@ after_initialize do
     '../app/jobs/scheduled/patreon_update_tokens.rb',
     '../app/jobs/onceoff/update_brand_images.rb',
     '../app/jobs/onceoff/migrate_patreon_user_infos.rb',
+    '../lib/api.rb',
     '../lib/seed.rb',
     '../lib/pledges.rb',
     '../lib/tokens.rb'

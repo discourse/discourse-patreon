@@ -8,3 +8,5 @@ en:
     patreon_creator_access_token: "Generated Patreon Creator\'s Access Token"
     patreon_creator_refresh_token: "Generated Patreon Creator\'s Refesh Token"
     patreon_declined_pledges_grace_period_days: "Grace period (in days) before a pledge is declined completely."
+    max_patreon_api_reqs_per_hr: "Maximum number of Patreon API requests per hour"
+    max_patreon_api_reqs_per_day: "Maximum number of Patreon API requests per day"
