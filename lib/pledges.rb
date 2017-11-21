@@ -20,7 +20,7 @@ module ::Patreon
       reward_users = {}
       pledges_uris = []
 
-      campaign_response = get('/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges')
+      campaign_response = get('/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page[count]=200')
       return unless campaign_response.status == 200
 
       campaign_data = JSON.parse campaign_response.body
@@ -42,7 +42,7 @@ module ::Patreon
       end
 
       pledges_uris.each do |uri|
-        request = get(uri.sub('https://api.patreon.com', ''))
+        request = get(uri.sub('page%5Bcount%5D=10', 'page%5Bcount%5D=200'))
         pledge_data = JSON.parse request.body
 
         # handle a brand new Patreon with 0 patrons
