@@ -37,6 +37,14 @@ after_initialize do
     def self.set(key, value)
       store.set(key, value)
     end
+
+    class RewardUser
+
+      def self.all
+        Patreon.get("reward-users") || {}
+      end
+
+    end
   end
 
   [
@@ -48,7 +56,9 @@ after_initialize do
     '../app/jobs/onceoff/migrate_patreon_user_infos.rb',
     '../lib/api.rb',
     '../lib/seed.rb',
+    '../lib/campaign.rb',
     '../lib/pledges.rb',
+    '../lib/patron.rb',
     '../lib/tokens.rb'
   ].each { |path| load File.expand_path(path, __FILE__) }
 

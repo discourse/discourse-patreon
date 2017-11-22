@@ -59,7 +59,7 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
 
   def sync_groups
     begin
-      Patreon::Pledges.sync_groups
+      Patreon::Patron.sync_groups
       render json: success_json
     rescue => e
       render json: { message: e.message }, status: 500

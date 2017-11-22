@@ -1,7 +1,7 @@
 require 'rails_helper'
 require_relative 'spec_helper'
 
-RSpec.describe ::Patreon::Pledges do
+RSpec.describe ::Patreon::Campaign do
   include_context "spec helper"
 
   Fabricator(:oauth2_user_info) do
@@ -32,7 +32,7 @@ RSpec.describe ::Patreon::Pledges do
   it "should update campaigns and group users data" do
     freeze_time("2017-11-15T20:59:52+00:00")
     expect {
-      described_class.update_data
+      described_class.update!
     }.to change { Group.count }.by(1)
       .and change { Badge.count }.by(1)
 
@@ -44,7 +44,7 @@ RSpec.describe ::Patreon::Pledges do
 
     freeze_time("2017-11-11T20:59:52+00:00")
     expect {
-      described_class.update_data
+      described_class.update!
     }.to change { get('pledges').count }.by(1)
       .and change { get('reward-users').count }.by(1)
 
@@ -65,7 +65,7 @@ RSpec.describe ::Patreon::Pledges do
     Fabricate(:user, email: "foo@bar.com")
     Fabricate(:oauth2_user_info, uid: "111112")
 
-    expect(described_class.patreon_users_to_discourse_users(users.keys).count).to eq(2)
+    expect(Patreon::Patron.get_local_users_by_patron_ids(users.keys).count).to eq(2)
   end
 
 end

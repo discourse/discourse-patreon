@@ -53,7 +53,7 @@ describe Patreon::PatreonAdminController do
     end
 
     it 'should sync patreon groups' do
-      Patreon::Pledges.expects(:sync_groups)
+      Patreon::Patron.expects(:sync_groups)
       post '/patreon/sync_groups.json'
     end
 
