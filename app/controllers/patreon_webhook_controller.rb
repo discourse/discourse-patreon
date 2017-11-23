@@ -1,24 +1,41 @@
 require 'openssl'
+require 'json'
 
 class ::Patreon::PatreonWebhookController < ActionController::Base
 
   TRIGGERS = ['pledges:create', 'pledges:update', 'pledges:delete']
 
   def index
+    raise Discourse::InvalidAccess.new unless is_valid?
 
-    raise Discourse::InvalidAccess.new unless TRIGGERS.include?(request.headers['X-Patreon-Event'])
+    pledge_data = JSON.parse(request.body.read)
 
-    raise Discourse::InvalidAccess.new unless valid_signature?(request.headers['X-Patreon-Signature'], request.raw_post)
-
-    Jobs.enqueue(:patreon_sync_patrons_to_groups)
+    case event
+    when 'pledges:create'
+      Patreon::Pledges.create!(pledge_data)
+    when 'pledges:update'
+      Patreon::Pledges.update!(pledge_data)
+    when 'pledges:delete'
+      Patreon::Pledges.delete!(pledge_data)
+    end
 
     render body: nil, status: 200
   end
 
+  def event
+    request.headers['X-Patreon-Event']
+  end
+
+  def is_valid?
+    TRIGGERS.include?(event) && is_valid_signature?
+  end
+
   private
 
-  def valid_signature?(signature, data)
-    digest = OpenSSL::Digest::MD5.new
-    signature == OpenSSL::HMAC.hexdigest(digest, SiteSetting.patreon_webhook_secret, data)
-  end
+    def is_valid_signature?
+      signature = request.headers['X-Patreon-Signature']
+      digest = OpenSSL::Digest::MD5.new
+
+      signature == OpenSSL::HMAC.hexdigest(digest, SiteSetting.patreon_webhook_secret, request.raw_post)
+    end
 end
