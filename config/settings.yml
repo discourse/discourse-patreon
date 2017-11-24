@@ -10,6 +10,9 @@ plugins:
     default: ''
   patreon_webhook_secret:
     default: ''
+  patreon_creator_discourse_username:
+    default: ''
+    type: username
   patreon_creator_access_token:
     default: ''
   patreon_creator_refresh_token:
