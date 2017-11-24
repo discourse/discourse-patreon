@@ -107,7 +107,9 @@ after_initialize do
     info do
       {
         email: raw_info['data']['attributes']['email'],
-        name: raw_info['data']['attributes']['full_name']
+        name: raw_info['data']['attributes']['full_name'],
+        access_token: access_token.token,
+        refresh_token: access_token.refresh_token
       }
     end
 
@@ -157,7 +159,7 @@ end
 class OmniAuth::Strategies::Patreon < OmniAuth::Strategies::OAuth2
 end
 
-class PatreonAuthenticator < ::Auth::OAuth2Authenticator
+class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
   def register_middleware(omniauth)
     omniauth.provider :patreon,
                       setup: lambda { |env|
@@ -167,11 +169,24 @@ class PatreonAuthenticator < ::Auth::OAuth2Authenticator
                         strategy.options[:redirect_uri] = "#{Discourse.base_url}/auth/patreon/callback"
                       }
   end
+
+  def after_authenticate(auth_token)
+    result = super
+
+    user = result.user
+    discourse_username = SiteSetting.patreon_creator_discourse_username
+    if discourse_username.present? && user && user.username == discourse_username
+      SiteSetting.patreon_creator_access_token = auth_token[:info][:access_token]
+      SiteSetting.patreon_creator_refresh_token = auth_token[:info][:refresh_token]
+    end
+
+    result
+  end
 end
 
 auth_provider title: 'with Patreon',
               message: 'Authentication with Patreon (make sure pop up blockers are not enabled)',
               frame_width: 840,
               frame_height: 570,
-              authenticator: PatreonAuthenticator.new('patreon', trusted: true),
+              authenticator: Auth::PatreonAuthenticator.new('patreon', trusted: true),
               enabled_setting: 'patreon_login_enabled'
