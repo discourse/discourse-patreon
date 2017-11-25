@@ -4,7 +4,7 @@ module ::Patreon
   class Api
 
     def self.campaign_data
-      get('/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page[count]=200')
+      get('/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page[count]=100')
     end
 
     def self.get(uri)

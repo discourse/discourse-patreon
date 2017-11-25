@@ -34,11 +34,10 @@ module ::Patreon
         # get next page if necessary and add to the current loop
         if pledge_data['links'] && pledge_data['links']['next']
           next_page_uri = pledge_data['links']['next']
-          next_page_uri.sub!('page%5Bcount%5D=10', 'page%5Bcount%5D=200')
+          uris << next_page_uri if next_page_uri.present?
         end
 
         pledges_data << pledge_data if pledge_data.present?
-        uris << next_page_uri if next_page_uri.present?
       end
 
       save!(pledges_data)

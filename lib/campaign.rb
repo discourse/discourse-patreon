@@ -14,7 +14,7 @@ module ::Patreon
 
       response['data'].map do |campaign|
         uri = campaign['relationships']['pledges']['links']['first']
-        pledges_uris << uri.sub('page%5Bcount%5D=10', 'page%5Bcount%5D=200')
+        pledges_uris << uri.sub('page%5Bcount%5D=20', 'page%5Bcount%5D=100')
 
         campaign['relationships']['rewards']['data'].each do |entry|
           campaign_rewards << entry['id']
@@ -29,13 +29,13 @@ module ::Patreon
         end
       end
 
-      Patreon::Pledges.pull!(pledges_uris)
-
       # Special catch all patrons virtual reward
       rewards['0']['title'] = 'All Patrons'
       rewards['0']['amount_cents'] = 0
 
       Patreon.set('rewards', rewards)
+
+      Patreon::Pledges.pull!(pledges_uris)
 
       # Sets all patrons to the seed group by default on first run
       filters = Patreon.get('filters')
