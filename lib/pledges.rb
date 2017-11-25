@@ -52,8 +52,11 @@ module ::Patreon
         new_pledges, new_reward_users, new_users = extract(pledge_data)
 
         pledges.merge!(new_pledges)
-        reward_users.merge!(new_reward_users)
         users.merge!(new_users)
+
+        Patreon::Reward.all.keys.each do |key|
+          reward_users[key] = (reward_users[key] || []) + (new_reward_users[key] || [])
+        end
       end
 
       reward_users['0'] = pledges.keys

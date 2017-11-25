@@ -38,6 +38,14 @@ after_initialize do
       store.set(key, value)
     end
 
+    class Reward
+
+      def self.all
+        Patreon.get("rewards") || {}
+      end
+
+    end
+
     class RewardUser
 
       def self.all

@@ -35,7 +35,7 @@
       },
       "reward": {
         "data": {
-          "id": "599336",
+          "id": "999999",
           "type": "reward"
         },
         "links": {
@@ -82,14 +82,14 @@
         "amount_cents": 1,
         "created_at": null,
         "description": "Patrons Only",
-        "id": "0",
+        "id": "999999",
         "remaining": 0,
         "requires_shipping": false,
         "type": "reward",
         "url": null,
         "user_limit": null
       },
-      "id": "0",
+      "id": "999999",
       "relationships": {
         "creator": {
           "data": {
