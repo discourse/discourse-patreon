@@ -49,6 +49,18 @@
           {
             "id": "0",
             "type": "reward"
+          },
+          {
+            "id": "999997",
+            "type": "reward"
+          },
+          {
+            "id": "999998",
+            "type": "reward"
+          },
+          {
+            "id": "999999",
+            "type": "reward"
           }
         ]
       },
@@ -150,6 +162,87 @@
         "user_limit": null
       },
       "id": "0",
+      "relationships": {
+        "creator": {
+          "data": {
+            "id": "1111111",
+            "type": "user"
+          },
+          "links": {
+            "related": "https://www.patreon.com/api/user/1111111"
+          }
+        }
+      },
+      "type": "reward"
+    },
+    {
+      "attributes": {
+        "amount": 10,
+        "amount_cents": 10,
+        "created_at": null,
+        "description": "Standard",
+        "id": "0",
+        "remaining": 0,
+        "requires_shipping": false,
+        "type": "reward",
+        "url": null,
+        "user_limit": null
+      },
+      "id": "999997",
+      "relationships": {
+        "creator": {
+          "data": {
+            "id": "1111111",
+            "type": "user"
+          },
+          "links": {
+            "related": "https://www.patreon.com/api/user/1111111"
+          }
+        }
+      },
+      "type": "reward"
+    },
+    {
+      "attributes": {
+        "amount": 100,
+        "amount_cents": 100,
+        "created_at": null,
+        "description": "Pro",
+        "id": "0",
+        "remaining": 0,
+        "requires_shipping": false,
+        "type": "reward",
+        "url": null,
+        "user_limit": null
+      },
+      "id": "999998",
+      "relationships": {
+        "creator": {
+          "data": {
+            "id": "1111111",
+            "type": "user"
+          },
+          "links": {
+            "related": "https://www.patreon.com/api/user/1111111"
+          }
+        }
+      },
+      "type": "reward"
+    },
+    {
+      "attributes": {
+        "amount": 1000,
+        "amount_cents": 1000,
+        "created_at": null,
+        "description": "Premium",
+        "id": "0",
+        "remaining": 0,
+        "requires_shipping": false,
+        "type": "reward",
+        "url": null,
+        "user_limit": null
+      },
+      "id": "999999",
       "relationships": {
         "creator": {
           "data": {

@@ -31,6 +31,19 @@ RSpec.describe ::Patreon::PatreonWebhookController do
       let(:digest) { OpenSSL::Digest::MD5.new }
       let(:secret) { SiteSetting.patreon_webhook_secret = "WEBHOOK SECRET" }
 
+      before do
+        Patreon.set("rewards", {
+          "0": {
+            "title": "All Patrons",
+            "amount_cents": 0
+          },
+          "999999": {
+            "title": "Premium",
+            "amount_cents": 1000
+          }
+        })
+      end
+
       def add_pledge
         pledge_data = JSON.parse(body)
         Patreon::Pledges.create!(pledge_data.dup)
