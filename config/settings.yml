@@ -20,6 +20,6 @@ plugins:
   patreon_declined_pledges_grace_period_days:
     default: 7
   max_patreon_api_reqs_per_hr:
-    default: 20
+    default: 100
   max_patreon_api_reqs_per_day:
-    default: 200
+    default: 1000
