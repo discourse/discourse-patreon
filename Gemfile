@@ -1,3 +1,3 @@
 group :development do
-  gem 'translations-manager', path: '/Users/neil/Code/discourse/translations_manager'
+  gem 'translations-manager', git: 'https://github.com/discourse/translations-manager.git'
 end
