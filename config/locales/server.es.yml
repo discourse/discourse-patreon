@@ -1,8 +1,15 @@
+# encoding: utf-8
+#
+# Never edit this file. It will be overwritten when translations are pulled from Transifex.
+#
+# To work with us on translations, join this project:
+# https://www.transifex.com/projects/p/discourse-org/
+
 es:
   site_settings:
     patreon_enabled: 'Habilitar el plugin discourse-patreon'
     patreon_login_enabled: 'Habilitar el ingreso vía Enable Patreon Social'
     patreon_client_id: 'Generated Patreon Client ID'
     patreon_client_secret: 'Generated Patreon Client Secret'
-    patreon_creator_access_token: "Generated Patreon Creator\'s Access Token"
-    patreon_creator_refresh_token: "Generated Patreon Creator\'s Refesh Token"
+    patreon_creator_access_token: "Generated Patreon Creator's Access Token"
+    patreon_creator_refresh_token: "Generated Patreon Creator's Refesh Token"

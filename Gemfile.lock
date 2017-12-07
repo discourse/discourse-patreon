@@ -1,0 +1,16 @@
+PATH
+  remote: /Users/neil/Code/discourse/translations_manager
+  specs:
+    translations-manager (0.1.0)
+
+GEM
+  specs:
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  translations-manager!
+
+BUNDLED WITH
+   1.13.6
