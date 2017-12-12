@@ -5,4 +5,18 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-de: {}
+de:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filter'
+      group: 'Gruppe'
+      rewards: 'Belohnungen'
+      filter: 'Filter'
+      help_text: 'Du kannst eine Discourse-Gruppe mit ein oder mehreren Patreon-Belohnungsstufen synchronisieren.'
+      edit: 'Bearbeiten'
+      delete: 'Löschen'
+      save: 'Speichern'
+      update_data: 'Patreon-Daten aktualisieren & Gruppen synchronisieren'
+      refresh_page: 'Neue Daten wurden von der Patreon-Schnittstelle heruntergeladen. Bitte lade die Seite neu.'

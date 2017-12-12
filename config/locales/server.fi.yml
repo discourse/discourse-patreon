@@ -5,4 +5,12 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-fi: {}
+fi:
+  site_settings:
+    patreon_enabled: 'Ota discourse-patreon -lisäosa käyttöön'
+    patreon_login_enabled: 'Ota käyttöön sosiaalinen kirjautuminen Patreonilla'
+    patreon_client_id: 'Muodostettu Patreon asiakas-ID (engl. client ID)'
+    patreon_client_secret: 'Muodostettu Patreon asiakassalausavain (engl. Client secret)'
+    patreon_webhook_secret: 'Muodostettu Patreon webhook-salausavain (engl. Webhook Secret)'
+    patreon_creator_discourse_username: "Sen Discourse-käyttäjätilin käyttäjänimi jota käytetään, kun kirjaudutaan Patreon-tuottajatilille (engl. creator account) Patreonin sosiaalisen kirjautumisen kautta"
+    patreon_creator_access_token: "Muodostettu Patreonin tuottajan tunnistusväline (engl. creator's access token)"

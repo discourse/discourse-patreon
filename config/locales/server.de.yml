@@ -5,4 +5,16 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-de: {}
+de:
+  site_settings:
+    patreon_enabled: 'Aktiviert das discourse-patreon Plugin'
+    patreon_login_enabled: 'Aktiviert das Patreon-Social-Login'
+    patreon_client_id: 'Generierte Patreon-Kundennummer'
+    patreon_client_secret: 'Generiertes Patreon-Kundengeheimnis'
+    patreon_webhook_secret: 'Generiertes Patreon-Webhook-Geheimnis'
+    patreon_creator_discourse_username: "Benutzername des Discourse-Kontos, das zur Anmeldung durch das Patreon-Ersteller-Konto über das 'Patreon Social Login' verwendet wird."
+    patreon_creator_access_token: "Generiertes Patreon-Ersteller-Zugriffsschlüssel"
+    patreon_creator_refresh_token: "Generiertes Patreon-Ersteller-Aktualisierungstoken"
+    patreon_declined_pledges_grace_period_days: "Frist (in Tagen), bevor ein Versprechen vollständig abgelehnt wird."
+    max_patreon_api_reqs_per_hr: "Maximale Anzahl an Patreon-API-Anfragen pro Stunde"
+    max_patreon_api_reqs_per_day: "Maximale Anzahl von Patreon-API-Anfragen pro Tag"
