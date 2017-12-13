@@ -14,7 +14,7 @@ module ::Patreon
 
       response['data'].map do |campaign|
         uri = campaign['relationships']['pledges']['links']['first']
-        pledges_uris << uri.sub('page%5Bcount%5D=20', 'page%5Bcount%5D=100')
+        pledges_uris << uri.sub("include=rewards%2Ccreator%2Cgoals%2Cpledges&", "");
 
         campaign['relationships']['rewards']['data'].each do |entry|
           campaign_rewards << entry['id']
