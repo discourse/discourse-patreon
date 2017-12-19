@@ -1,7 +1,9 @@
 require 'openssl'
 require 'json'
 
-class ::Patreon::PatreonWebhookController < ActionController::Base
+class ::Patreon::PatreonWebhookController < ApplicationController
+
+  skip_before_action :redirect_to_login_if_required, :preload_json, :check_xhr
 
   TRIGGERS = ['pledges:create', 'pledges:update', 'pledges:delete']
 
