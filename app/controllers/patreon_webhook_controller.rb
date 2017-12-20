@@ -3,7 +3,7 @@ require 'json'
 
 class ::Patreon::PatreonWebhookController < ApplicationController
 
-  skip_before_action :redirect_to_login_if_required, :preload_json, :check_xhr
+  skip_before_action :redirect_to_login_if_required, :preload_json, :check_xhr, :verify_authenticity_token
 
   TRIGGERS = ['pledges:create', 'pledges:update', 'pledges:delete']
 
