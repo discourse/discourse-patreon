@@ -19,7 +19,7 @@ after_initialize do
 
   module ::Patreon
     PLUGIN_NAME = 'discourse-patreon'.freeze
-    DEFAULT_IMAGE_URL = '/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png'.freeze
+    DEFAULT_IMAGE_URL = "#{Discourse.base_url}/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png".freeze
 
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
