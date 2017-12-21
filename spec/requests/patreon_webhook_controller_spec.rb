@@ -32,7 +32,7 @@ RSpec.describe ::Patreon::PatreonWebhookController do
       let(:secret) { SiteSetting.patreon_webhook_secret = "WEBHOOK SECRET" }
 
       before do
-        Patreon.set("rewards", {
+        Patreon.set("rewards",
           "0": {
             "title": "All Patrons",
             "amount_cents": 0
@@ -41,7 +41,7 @@ RSpec.describe ::Patreon::PatreonWebhookController do
             "title": "Premium",
             "amount_cents": 1000
           }
-        })
+        )
       end
 
       def add_pledge
