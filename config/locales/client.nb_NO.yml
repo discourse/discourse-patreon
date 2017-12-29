@@ -5,4 +5,18 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-nb_NO: {}
+nb_NO:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filter'
+      group: 'Gruppe'
+      rewards: 'Belønninger'
+      filter: 'Filter'
+      help_text: 'Du kan synkronisere en Discourse-gruppe med én eller flere Patreon-belønningsnivåer.'
+      edit: 'Rediger'
+      delete: 'Slett'
+      save: 'Lagre'
+      update_data: 'Oppdater Patreon-data og synkroniser grupper'
+      refresh_page: 'Ny data lastet ned fra Patreon-API-et. Gjenoppfrisk siden.'
