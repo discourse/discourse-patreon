@@ -8,8 +8,13 @@
 es:
   site_settings:
     patreon_enabled: 'Habilitar el plugin discourse-patreon'
-    patreon_login_enabled: 'Habilitar el ingreso vía Enable Patreon Social'
-    patreon_client_id: 'Generated Patreon Client ID'
-    patreon_client_secret: 'Generated Patreon Client Secret'
+    patreon_login_enabled: 'Habilitar el inicio de sesión vía Patreon Social Login'
+    patreon_client_id: 'ID de Cliente de Patreon generado'
+    patreon_client_secret: 'Secreto de cliente de Patreon generado'
+    patreon_webhook_secret: 'Secreto de Webhook de Patreon generado'
+    patreon_creator_discourse_username: "Nombre de usuario de la cuenta de Discourse usada para iniciar sesión a través de la cuenta de creador de Patreon usando 'Patreon Social Login'"
     patreon_creator_access_token: "Generated Patreon Creator's Access Token"
     patreon_creator_refresh_token: "Generated Patreon Creator's Refesh Token"
+    patreon_declined_pledges_grace_period_days: "Periodo de gracia (en días) antes de que un pledge sea rechazado completamente."
+    max_patreon_api_reqs_per_hr: "Máximo número de solicitudes a la API de Patreon por hora"
+    max_patreon_api_reqs_per_day: "Máximo número de solicitudes a la API de Patreon al día"
