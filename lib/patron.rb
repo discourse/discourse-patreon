@@ -32,6 +32,7 @@ module ::Patreon
 
           (group.users - users).each do |user|
             group.remove user
+            user.custom_fields.where(name: ::Patreon::USER_DETAIL_FIELDS).destroy_all
           end
         end
       end
@@ -39,6 +40,24 @@ module ::Patreon
 
     def self.all
       Patreon.get('users') || {}
+    end
+
+    def self.get_local_users_by_patron_ids(ids)
+      local_users.select do |user|
+        id = user.custom_fields["patreon_id"]
+        id.present? && ids.include?(id)
+      end
+    end
+
+    def self.update_local_user(user, patreon_id, skip_save = false)
+      return if user.blank?
+
+      user.custom_fields["patreon_id"] = patreon_id
+      user.custom_fields["patreon_email"] = all[patreon_id]["email"]
+      user.custom_fields["patreon_amount_cents"] = Patreon::Pledges.all[patreon_id]
+      reward_users = Patreon::RewardUser.all
+      user.custom_fields["patreon_rewards"] = Patreon::Reward.all.map { |i, r| r["title"] if reward_users[i].include?(patreon_id) }.compact.join(", ")
+      user.save unless skip_save || user.custom_fields_clean?
     end
 
     private
@@ -49,13 +68,19 @@ module ::Patreon
         rewards.map { |id| reward_users[id] }.compact.flatten.uniq
       end
 
-      def self.get_local_users_by_patron_ids(ids)
-        users = ::Patreon.get('users')
+      def self.local_users
+        @local_users ||= begin
+          users = Patron.all.map do |p|
+            patreon_id = p[0]
+            patreon_email = p[1]['email']
 
-        local_users = ids.map do |id|
-          ::Oauth2UserInfo.find_by(provider: "patreon", uid: id).try(:user) || ::User.find_by_email(users[id]['email'])
+            user = ::Oauth2UserInfo.find_by(provider: "patreon", uid: patreon_id).try(:user) || ::User.find_by_email(patreon_email)
+            update_local_user(user, patreon_id)
+
+            user
+          end
+          users.compact
         end
-        local_users.compact
       end
   end
 end

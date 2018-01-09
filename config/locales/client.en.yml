@@ -13,3 +13,8 @@ en:
       save: 'Save'
       update_data: 'Update Patreon Data & Sync Groups'
       refresh_page: 'New data has been downloaded from Patron API. Please refresh the page.'
+      field:
+        id: "Id"
+        email: "Email"
+        amount_cents: "Amount (in cents)"
+        rewards: "Rewards"
