@@ -1,19 +1,21 @@
-<section class='details'>
-  <h1>{{i18n 'patreon.title'}}</h1>
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.id'}}</div>
-    <div class='value'>{{model.patreon_id}}</div>
-  </div>
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.email'}}</div>
-    <div class='value'>{{model.patreon_email}}</div>
-  </div>
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.amount_cents'}}</div>
-    <div class='value'>{{model.patreon_amount_cents}}</div>
-  </div>
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.rewards'}}</div>
-    <div class='value'>{{model.patreon_rewards}}</div>
-  </div>
-</section>
+{{#if this.siteSettings.patreon_enabled}}
+  <section class='details'>
+    <h1>{{i18n 'patreon.title'}}</h1>
+    <div class='display-row'>
+      <div class='field'>{{i18n 'patreon.field.id'}}</div>
+      <div class='value'>{{model.patreon_id}}</div>
+    </div>
+    <div class='display-row'>
+      <div class='field'>{{i18n 'patreon.field.email'}}</div>
+      <div class='value'>{{model.patreon_email}}</div>
+    </div>
+    <div class='display-row'>
+      <div class='field'>{{i18n 'patreon.field.amount_cents'}}</div>
+      <div class='value'>{{model.patreon_amount_cents}}</div>
+    </div>
+    <div class='display-row'>
+      <div class='field'>{{i18n 'patreon.field.rewards'}}</div>
+      <div class='value'>{{model.patreon_rewards}}</div>
+    </div>
+  </section>
+{{/if}}
