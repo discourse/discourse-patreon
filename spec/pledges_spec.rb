@@ -49,8 +49,11 @@ RSpec.describe ::Patreon::Campaign do
       .and change { get('reward-users')["0"].count }.by(1)
 
     expect { # To check `add_model_callback(User, :after_commit, on: :create)` in plugin.rb
-      get('users').each do |id, user|
-        Fabricate(:user, email: user[:email])
+      get('users').each do |id, u|
+        cf = Fabricate(:user, email: u[:email]).custom_fields
+        expect(cf["patreon_id"]).to eq(id)
+        expect(cf["patreon_email"]).to eq(u[:email])
+        expect(cf["patreon_amount_cents"]).to eq(get("pledges")[id])
       end
     }.to change { GroupUser.count }.by(3)
   end
@@ -62,10 +65,29 @@ RSpec.describe ::Patreon::Campaign do
             }
     ::Patreon.set("users", users)
 
+    pledges = { "111111" => "100", "111112" => "500" }
+    ::Patreon.set("pledges", pledges)
+
+    rewards = { "0" => { title: "All Patrons", amount_cents: "0" }, "4589" => { title: "Sponsers", amount_cents: "1000" } }
+    ::Patreon.set("rewards", rewards)
+
+    reward_users = { "0" => ["111111", "111112"], "4589" => ["111112"] }
+    titles = { "111111" => "All Patrons", "111112" => "All Patrons, Sponsers" }
+    ::Patreon.set("reward-users", reward_users)
+
     Fabricate(:user, email: "foo@bar.com")
     Fabricate(:oauth2_user_info, uid: "111112")
 
-    expect(Patreon::Patron.get_local_users_by_patron_ids(users.keys).count).to eq(2)
+    local_users = Patreon::Patron.get_local_users_by_patron_ids(users.keys)
+    expect(local_users.count).to eq(2)
+
+    local_users.each do |user|
+      cf = user.custom_fields
+      id = cf["patreon_id"]
+      expect(cf["patreon_email"]).to eq(users[id]["email"])
+      expect(cf["patreon_amount_cents"]).to eq(pledges[id])
+      expect(cf["patreon_rewards"]).to eq(titles[id])
+    end
   end
 
 end

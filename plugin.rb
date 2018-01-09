@@ -20,6 +20,7 @@ after_initialize do
   module ::Patreon
     PLUGIN_NAME = 'discourse-patreon'.freeze
     DEFAULT_IMAGE_URL = "#{Discourse.base_url}/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png".freeze
+    USER_DETAIL_FIELDS = ["patreon_id", "patreon_email", "patreon_amount_cents", "patreon_rewards"].freeze
 
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
@@ -142,13 +143,11 @@ after_initialize do
 
     user = self
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
-    patreon_id = PluginStore.get(PLUGIN_NAME, 'users')&.key({ "email" => "#{user.email}" })
+    patreon_id = Patreon::Patron.all&.key({ "email" => "#{user.email}" })
 
     if filters.present? && patreon_id.present?
       begin
-        reward_users = PluginStore.get(PLUGIN_NAME, 'reward-users')
-
-        reward_id = reward_users.except('0').detect { |_k, v| v.include? patreon_id }&.first
+        reward_id = Patreon::RewardUser.all.except('0').detect { |_k, v| v.include? patreon_id }&.first
 
         group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
 
@@ -156,9 +155,21 @@ after_initialize do
           group = Group.find_by id: id
           group.add user
         end
+
+        Patreon::Patron.update_local_user(user, patreon_id, true)
       rescue => e
         Rails.logger.warn("Patreon group membership callback failed for new user #{self.id} with error: #{e}.\n\n #{e.backtrace.join("\n")}")
       end
+    end
+  end
+
+  ::Patreon::USER_DETAIL_FIELDS.each do |attribute|
+    add_to_serializer(:admin_detailed_user, attribute.to_sym, false) do
+      object.custom_fields[attribute]
+    end
+
+    add_to_serializer(:admin_detailed_user, "include_#{attribute}?".to_sym) do
+      object.custom_fields[attribute]
     end
   end
 end
