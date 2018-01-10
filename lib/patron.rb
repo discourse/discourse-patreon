@@ -32,7 +32,8 @@ module ::Patreon
 
           (group.users - users).each do |user|
             group.remove user
-            user.custom_fields.where(name: ::Patreon::USER_DETAIL_FIELDS).destroy_all
+            user.custom_fields.except!(*Patreon::USER_DETAIL_FIELDS)
+            user.save user.custom_fields_clean?
           end
         end
       end
