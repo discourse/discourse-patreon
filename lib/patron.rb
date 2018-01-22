@@ -70,7 +70,9 @@ module ::Patreon
       end
 
       def self.local_users
-        @local_users ||= begin
+        @local_users ||= {}
+
+        @local_users[RailsMultisite::ConnectionManagement.current_db] ||= begin
           users = Patron.all.map do |p|
             patreon_id = p[0]
             patreon_email = p[1]['email']
