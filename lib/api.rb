@@ -1,7 +1,13 @@
 require 'json'
 
 module ::Patreon
+
+  class InvalidApiResponse < ::StandardError; end
+
   class Api
+
+    ACCESS_TOKEN_INVALID = "dashboard.patreon.access_token_invalid".freeze
+    INVALID_RESPONSE = "patreon.error.invalid_response".freeze
 
     def self.campaign_data
       get('/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page[count]=100')
@@ -10,6 +16,7 @@ module ::Patreon
     def self.get(uri)
       limiter_hr = RateLimiter.new(nil, "patreon_api_hr", SiteSetting.max_patreon_api_reqs_per_hr, 1.hour)
       limiter_day = RateLimiter.new(nil, "patreon_api_day", SiteSetting.max_patreon_api_reqs_per_day, 1.day)
+      AdminDashboardData.clear_problem_message(ACCESS_TOKEN_INVALID) if AdminDashboardData.problem_message_check(ACCESS_TOKEN_INVALID)
 
       unless limiter_hr.can_perform?
         limiter_hr.performed!
@@ -27,12 +34,18 @@ module ::Patreon
       limiter_hr.performed!
       limiter_day.performed!
 
-      unless response.status == 200
-        Rails.logger.warn("Patreon API returning error for URL: #{uri}.\n\n #{ response.body.presence || '' }")
-        return { "error": "Invalid response from Patreon API" }
+      case response.status
+      when 200
+        return JSON.parse response.body
+      when 401
+        AdminDashboardData.add_problem_message(ACCESS_TOKEN_INVALID)
+      else
+        e = ::Patreon::InvalidApiResponse.new(response.body.presence || '')
+        e.set_backtrace(caller)
+        Discourse.warn_exception(e, message: I18n.t(INVALID_RESPONSE), env: { api_uri: uri })
       end
 
-      JSON.parse response.body
+      { error: I18n.t(INVALID_RESPONSE) }
     end
 
   end
