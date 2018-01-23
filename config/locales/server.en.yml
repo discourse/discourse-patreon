@@ -11,3 +11,9 @@ en:
     patreon_declined_pledges_grace_period_days: "Grace period (in days) before a pledge is declined completely."
     max_patreon_api_reqs_per_hr: "Maximum number of Patreon API requests per hour"
     max_patreon_api_reqs_per_day: "Maximum number of Patreon API requests per day"
+  dashboard:
+    patreon:
+      access_token_invalid: "Patreon creator access token and refresh token values in your site settings are wrong."
+  patreon:
+    error:
+      invalid_response: "Invalid response from Patreon API"
