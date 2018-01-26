@@ -14,6 +14,8 @@ module ::Patreon
     def self.sync_groups
       filters = (Patreon.get('filters') || {})
 
+      local_users = get_local_users
+
       filters.each_pair do |group_id, rewards|
         group = Group.find_by(id: group_id)
 
@@ -23,7 +25,10 @@ module ::Patreon
 
         next if patron_ids.blank?
 
-        users = get_local_users_by_patron_ids(patron_ids)
+        users = local_users.select do |user|
+          id = user.custom_fields["patreon_id"]
+          id.present? && patron_ids.include?(id)
+        end
 
         group.transaction do
           (users - group.users).each do |user|
@@ -43,13 +48,6 @@ module ::Patreon
       Patreon.get('users') || {}
     end
 
-    def self.get_local_users_by_patron_ids(ids)
-      local_users.select do |user|
-        id = user.custom_fields["patreon_id"]
-        id.present? && ids.include?(id)
-      end
-    end
-
     def self.update_local_user(user, patreon_id, skip_save = false)
       return if user.blank?
 
@@ -61,6 +59,19 @@ module ::Patreon
       user.save unless skip_save || user.custom_fields_clean?
     end
 
+    def self.get_local_users
+      users = Patron.all.map do |p|
+        patreon_id = p[0]
+        patreon_email = p[1]['email']
+
+        user = ::Oauth2UserInfo.find_by(provider: "patreon", uid: patreon_id).try(:user) || ::User.find_by_email(patreon_email)
+        update_local_user(user, patreon_id)
+
+        user
+      end
+      users.compact
+    end
+
     private
 
       def self.get_ids_by_rewards(rewards)
@@ -69,21 +80,5 @@ module ::Patreon
         rewards.map { |id| reward_users[id] }.compact.flatten.uniq
       end
 
-      def self.local_users
-        @local_users ||= {}
-
-        @local_users[RailsMultisite::ConnectionManagement.current_db] ||= begin
-          users = Patron.all.map do |p|
-            patreon_id = p[0]
-            patreon_email = p[1]['email']
-
-            user = ::Oauth2UserInfo.find_by(provider: "patreon", uid: patreon_id).try(:user) || ::User.find_by_email(patreon_email)
-            update_local_user(user, patreon_id)
-
-            user
-          end
-          users.compact
-        end
-      end
   end
 end

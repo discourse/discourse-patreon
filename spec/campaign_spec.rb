@@ -4,11 +4,6 @@ require_relative 'spec_helper'
 RSpec.describe ::Patreon::Campaign do
   include_context "spec helper"
 
-  Fabricator(:oauth2_user_info) do
-    provider "patreon"
-    user
-  end
-
   before do
     campaigns_url = "https://api.patreon.com/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page%5Bcount%5D=100"
     pledges_url = "https://www.patreon.com/api/oauth2/api/campaigns/70261/pledges?page%5Bcount%5D=100&sort=created"
@@ -56,38 +51,6 @@ RSpec.describe ::Patreon::Campaign do
         expect(cf["patreon_amount_cents"]).to eq(get("pledges")[id])
       end
     }.to change { GroupUser.count }.by(3)
-  end
-
-  it "should find user by patreon id or email" do
-    users = { "111111" => { "email" => "foo@bar.com" },
-              "111112" => { "email" => "boo@far.com" },
-              "111113" => { "email" => "roo@aar.com" }
-            }
-    ::Patreon.set("users", users)
-
-    pledges = { "111111" => "100", "111112" => "500" }
-    ::Patreon.set("pledges", pledges)
-
-    rewards = { "0" => { title: "All Patrons", amount_cents: "0" }, "4589" => { title: "Sponsers", amount_cents: "1000" } }
-    ::Patreon.set("rewards", rewards)
-
-    reward_users = { "0" => ["111111", "111112"], "4589" => ["111112"] }
-    titles = { "111111" => "All Patrons", "111112" => "All Patrons, Sponsers" }
-    ::Patreon.set("reward-users", reward_users)
-
-    Fabricate(:user, email: "foo@bar.com")
-    Fabricate(:oauth2_user_info, uid: "111112")
-
-    local_users = Patreon::Patron.get_local_users_by_patron_ids(users.keys)
-    expect(local_users.count).to eq(2)
-
-    local_users.each do |user|
-      cf = user.custom_fields
-      id = cf["patreon_id"]
-      expect(cf["patreon_email"]).to eq(users[id]["email"])
-      expect(cf["patreon_amount_cents"]).to eq(pledges[id])
-      expect(cf["patreon_rewards"]).to eq(titles[id])
-    end
   end
 
 end
