@@ -78,7 +78,7 @@ RSpec.describe ::Patreon::Campaign do
     Fabricate(:user, email: "foo@bar.com")
     Fabricate(:oauth2_user_info, uid: "111112")
 
-    local_users = Patreon::Patron.get_local_users_by_patron_ids(users.keys)
+    local_users = Patreon::Patron.get_local_users
     expect(local_users.count).to eq(2)
 
     local_users.each do |user|
