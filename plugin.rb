@@ -143,7 +143,7 @@ after_initialize do
 
     user = self
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
-    patreon_id = Patreon::Patron.all&.key({ "email" => "#{user.email}" })
+    patreon_id = Patreon::Patron.all.key(user.email)
 
     if filters.present? && patreon_id.present?
       begin
@@ -165,11 +165,11 @@ after_initialize do
 
   ::Patreon::USER_DETAIL_FIELDS.each do |attribute|
     add_to_serializer(:admin_detailed_user, attribute.to_sym, false) do
-      object.custom_fields[attribute]
+      ::Patreon::Patron.attr(attribute, object)
     end
 
     add_to_serializer(:admin_detailed_user, "include_#{attribute}?".to_sym) do
-      object.custom_fields[attribute]
+      ::Patreon::Patron.attr(attribute, object)
     end
   end
 end

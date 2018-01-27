@@ -12,7 +12,10 @@ module ::Patreon
     end
 
     def self.sync_groups
-      filters = (Patreon.get('filters') || {})
+      filters = Patreon.get('filters') || {}
+      return if filters.blank?
+
+      local_users = get_local_users
 
       local_users = get_local_users
 
@@ -21,7 +24,8 @@ module ::Patreon
 
         next if group.nil?
 
-        patron_ids = get_ids_by_rewards(rewards)
+        reward_users = Patreon::RewardUser.all
+        patron_ids = rewards.map { |id| reward_users[id] }.compact.flatten.uniq
 
         next if patron_ids.blank?
 
@@ -52,33 +56,47 @@ module ::Patreon
       return if user.blank?
 
       user.custom_fields["patreon_id"] = patreon_id
-      user.custom_fields["patreon_email"] = all[patreon_id]["email"]
-      user.custom_fields["patreon_amount_cents"] = Patreon::Pledges.all[patreon_id]
-      reward_users = Patreon::RewardUser.all
-      user.custom_fields["patreon_rewards"] = Patreon::Reward.all.map { |i, r| r["title"] if reward_users[i].include?(patreon_id) }.compact.join(", ")
       user.save unless skip_save || user.custom_fields_clean?
+
+      user
+    end
+
+    def self.attr(name, user)
+      id = user.custom_fields['patreon_id']
+      return if id.blank?
+
+      case name
+      when /email$/
+        all[id]
+      when /amount_cents$/
+        Patreon::Pledges.all[id]
+      when /rewards$/
+        reward_users = Patreon::RewardUser.all
+        Patreon::Reward.all.map { |i, r| r["title"] if reward_users[i].include?(id) }.compact.join(", ")
+      else
+        id
+      end
     end
 
     def self.get_local_users
-      users = Patron.all.map do |p|
-        patreon_id = p[0]
-        patreon_email = p[1]['email']
+      users = User.joins(:_custom_fields).where(user_custom_fields: { name: 'patreon_id' }).uniq
+      patrons = all.slice!(*UserCustomField.where(name: 'patreon_id').where("value IS NOT NULL").pluck(:value))
 
-        user = ::Oauth2UserInfo.find_by(provider: "patreon", uid: patreon_id).try(:user) || ::User.find_by_email(patreon_email)
-        update_local_user(user, patreon_id)
+      oauth_users = Oauth2UserInfo.includes(:user).where(provider: "patreon")
+      oauth_users = oauth_users.where("uid IN (?)", patrons.keys) if patrons.present?
 
-        user
+      users += oauth_users.map do |o|
+        patrons = patrons.slice!(o.uid)
+        update_local_user(o.user, o.uid)
       end
+
+      users += UserEmail.includes(:user).where(email: patrons.values).map do |u|
+        patreon_id = patrons.key(u.email)
+        update_local_user(u.user, patreon_id)
+      end
+
       users.compact
     end
-
-    private
-
-      def self.get_ids_by_rewards(rewards)
-        reward_users = Patreon.get('reward-users')
-
-        rewards.map { |id| reward_users[id] }.compact.flatten.uniq
-      end
 
   end
 end
