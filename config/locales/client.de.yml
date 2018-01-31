@@ -20,3 +20,8 @@ de:
       save: 'Speichern'
       update_data: 'Patreon-Daten aktualisieren & Gruppen synchronisieren'
       refresh_page: 'Neue Daten wurden von der Patreon-Schnittstelle heruntergeladen. Bitte lade die Seite neu.'
+      field:
+        id: "Id"
+        email: "E-Mail"
+        amount_cents: "Betrag (in Cents)"
+        rewards: "Belohnungen"

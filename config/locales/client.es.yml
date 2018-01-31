@@ -20,3 +20,8 @@ es:
       save: 'Guardar'
       update_data: 'Actualizar Patreon Data & Sync Grupos'
       refresh_page: 'Nuevos datos han sido descargados desde el Patron API. Por favor refrescar la página.'
+      field:
+        id: "ID"
+        email: "Emai"
+        amount_cents: "Cantidad (en céntimos)"
+        rewards: "Recompensa"

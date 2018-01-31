@@ -18,3 +18,9 @@ de:
     patreon_declined_pledges_grace_period_days: "Frist (in Tagen), bevor ein Versprechen vollständig abgelehnt wird."
     max_patreon_api_reqs_per_hr: "Maximale Anzahl an Patreon-API-Anfragen pro Stunde"
     max_patreon_api_reqs_per_day: "Maximale Anzahl von Patreon-API-Anfragen pro Tag"
+  dashboard:
+    patreon:
+      access_token_invalid: "Werte für Patreon-Ersteller-Zugriffstoken und Refresh-Token in deinen Seiteneinstellungen sind falsch."
+  patreon:
+    error:
+      invalid_response: "Ungültige Antwort von der Patreon API"

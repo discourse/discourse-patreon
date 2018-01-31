@@ -5,4 +5,23 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-he: {}
+he:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'מסננים'
+      group: 'קבוצה'
+      rewards: 'פרסים'
+      filter: 'מסנן'
+      help_text: 'ניתן לסנכרן קבוצת Discourse עם שכבה אחת או יותר של פרסים מ־Patreon.'
+      edit: 'עריכה'
+      delete: 'מחיקה'
+      save: 'שמירה'
+      update_data: 'עדכון הנתונים של Patreon וסנכרון הקבוצות'
+      refresh_page: 'התקבלו נתונים חדשים מה־API של Patron נא לרענן את העמוד.'
+      field:
+        id: "מזהה"
+        email: "דוא״ל"
+        amount_cents: "כמות (בסנטים)"
+        rewards: "פרסים"

@@ -5,4 +5,23 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-ur: {}
+ur:
+  js:
+    patreon:
+      title: 'پَیٹریئون'
+      header:
+        rules: 'فِلٹر'
+      group: 'گروپ'
+      rewards: 'انعامات'
+      filter: 'فِلٹر'
+      help_text: 'آپ کسی ڈسکورس گروپ کو ایک یا ایک سے زیادہ پَیٹریئون کے انعامات والے زمروں کے ساتھ مطابقت پذیر بنا سکتے ہیں۔'
+      edit: 'ترمیم کریں'
+      delete: 'حذف کریں'
+      save: 'محفوظ کریں'
+      update_data: 'پَیٹریئون ڈیٹا اَپ ڈیٹ کریں اور گروپس کو مطابقت پذیر بنائیں'
+      refresh_page: 'پَیٹرن API سے نیا ڈیٹا ڈاؤن لوڈ کیا گیا ہے۔ براہ کرم صفحہ ریفریش کریں۔'
+      field:
+        id: "آئی ڈی"
+        email: "اِی میل"
+        amount_cents: "رقم (سینٹ میں)"
+        rewards: "انعامات"
