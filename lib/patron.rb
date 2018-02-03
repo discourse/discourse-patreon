@@ -30,16 +30,12 @@ module ::Patreon
           id.present? && patron_ids.include?(id)
         end
 
-        group.transaction do
-          (users - group.users).each do |user|
-            group.add user
-          end
+        (users - group.users).each do |user|
+          group.add user
+        end
 
-          (group.users - users).each do |user|
-            group.remove user
-            user.custom_fields.except!(*Patreon::USER_DETAIL_FIELDS)
-            user.save unless user.custom_fields_clean?
-          end
+        (group.users - users).each do |user|
+          group.remove user
         end
       end
     end
