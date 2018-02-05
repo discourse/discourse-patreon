@@ -17,8 +17,6 @@ module ::Patreon
 
       local_users = get_local_users
 
-      local_users = get_local_users
-
       filters.each_pair do |group_id, rewards|
         group = Group.find_by(id: group_id)
 
