@@ -1,5 +1,5 @@
 module ::Patreon
-  class Pledges
+  class Pledge
 
     def self.create!(pledge_data)
       save!([pledge_data], true)
@@ -16,11 +16,13 @@ module ::Patreon
       reward_id = rel['reward']['data']['id'] unless rel['reward']['data'].blank?
 
       pledges = all.except(patron_id)
+      declines = Decline.all.except(patron_id)
       patrons = Patreon::Patron.all.except(patron_id)
       reward_users = Patreon::RewardUser.all
       reward_users[reward_id].reject! { |i| i == patron_id } if reward_id.present?
 
       Patreon.set("pledges", pledges)
+      Decline.set(declines)
       Patreon.set("users", patrons)
       Patreon.set("reward-users", reward_users)
     end
@@ -47,11 +49,13 @@ module ::Patreon
       pledges = is_append ? all : {}
       reward_users = is_append ? Patreon::RewardUser.all : {}
       users = is_append ? Patreon::Patron.all : {}
+      declines = is_append ? Decline.all : {}
 
       pledges_data.each do |pledge_data|
-        new_pledges, new_reward_users, new_users = extract(pledge_data)
+        new_pledges, new_declines, new_reward_users, new_users = extract(pledge_data)
 
         pledges.merge!(new_pledges)
+        declines.merge!(new_declines)
         users.merge!(new_users)
 
         Patreon::Reward.all.keys.each do |key|
@@ -62,6 +66,7 @@ module ::Patreon
       reward_users['0'] = pledges.keys
 
       Patreon.set('pledges', pledges)
+      Decline.set(declines)
       Patreon.set('reward-users', reward_users)
       Patreon.set('users', users)
     end
@@ -69,23 +74,19 @@ module ::Patreon
     def self.extract(pledge_data)
       return if pledge_data.blank? || pledge_data["data"].blank?
 
-      pledges = {}
-      reward_users = {}
-      users = {}
+      pledges, declines, reward_users, users = {}, {}, {}, {}
 
       pledge_data['data'] = [pledge_data['data']] unless pledge_data['data'].kind_of?(Array)
 
       # get pledges info
       pledge_data['data'].each do |entry|
         if entry['type'] == 'pledge'
-          declined_since = entry['attributes']['declined_since']
-          if declined_since.present?
-            declined_days_count = Time.now.to_date - declined_since.to_date
-            next unless declined_days_count < SiteSetting.patreon_declined_pledges_grace_period_days
-          end
+          patron_id = entry['relationships']['patron']['data']['id']
+          attrs = entry['attributes']
 
-          (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << entry['relationships']['patron']['data']['id'] unless entry['relationships']['reward']['data'].nil?
-          pledges[entry['relationships']['patron']['data']['id']] = entry['attributes']['amount_cents']
+          (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << patron_id unless entry['relationships']['reward']['data'].nil?
+          pledges[patron_id] = attrs['amount_cents']
+          declines[patron_id] = attrs['declined_since'] if attrs['declined_since'].present?
         end
       end
 
@@ -97,11 +98,25 @@ module ::Patreon
         end
       end
 
-      return pledges, reward_users, users
+      return pledges, declines, reward_users, users
     end
 
     def self.all
       Patreon.get('pledges') || {}
+    end
+
+    class Decline
+
+      KEY = "pledge-declines".freeze
+
+      def self.all
+        Patreon.get(KEY) || {}
+      end
+
+      def self.set(value)
+        Patreon.set(KEY, value)
+      end
+
     end
   end
 end

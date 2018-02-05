@@ -25,23 +25,17 @@ RSpec.describe ::Patreon::Campaign do
   end
 
   it "should update campaigns and group users data" do
-    freeze_time("2017-11-15T20:59:52+00:00")
     expect {
       described_class.update!
     }.to change { Group.count }.by(1)
       .and change { Badge.count }.by(1)
 
-    expect(get('pledges').count).to eq(2)
+    expect(get('pledges').count).to eq(3)
+    expect(Patreon::Pledge::Decline.all.count).to eq(2)
     expect(get('rewards').count).to eq(5)
     expect(get('users').count).to eq(3)
-    expect(get('reward-users')["0"].count).to eq(2)
+    expect(get('reward-users')["0"].count).to eq(3)
     expect(get('filters').count).to eq(1)
-
-    freeze_time("2017-11-11T20:59:52+00:00")
-    expect {
-      described_class.update!
-    }.to change { get('pledges').count }.by(1)
-      .and change { get('reward-users')["0"].count }.by(1)
 
     expect { # To check `add_model_callback(User, :after_commit, on: :create)` in plugin.rb
       get('users').each do |id, email|
