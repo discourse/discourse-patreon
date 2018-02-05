@@ -7,7 +7,7 @@ RSpec.describe ::Patreon::Patron do
     user
   end
 
-  let(:patrons) { { "111111" => { "email" => "foo@bar.com" }, "111112" => { "email" => "boo@far.com" },  "111113" => { "email" => "roo@aar.com" } } }
+  let(:patrons) { { "111111" => "foo@bar.com", "111112" => "boo@far.com",  "111113" => "roo@aar.com" } }
   let(:pledges) { { "111111" => "100", "111112" => "500" } }
   let(:rewards) { { "0" => { title: "All Patrons", amount_cents: "0" }, "4589" => { title: "Sponsers", amount_cents: "1000" } } }
   let(:reward_users) { { "0" => ["111111", "111112"], "4589" => ["111112"] } }
@@ -30,9 +30,9 @@ RSpec.describe ::Patreon::Patron do
     local_users.each do |user|
       cf = user.custom_fields
       id = cf["patreon_id"]
-      expect(cf["patreon_email"]).to eq(patrons[id]["email"])
-      expect(cf["patreon_amount_cents"]).to eq(pledges[id])
-      expect(cf["patreon_rewards"]).to eq(titles[id])
+      expect(described_class.attr("patreon_email", user)).to eq(patrons[id])
+      expect(described_class.attr("patreon_amount_cents", user)).to eq(pledges[id])
+      expect(described_class.attr("patreon_rewards", user)).to eq(titles[id])
     end
   end
 
@@ -44,7 +44,7 @@ RSpec.describe ::Patreon::Patron do
     filters = { group1.id.to_s => ["0"], group2.id.to_s => ["4589"] }
     Patreon.set("filters", filters)
     described_class.sync_groups
-    expect(group1.users.to_a).to eq([user, ouser.user])
+    expect(group1.users.to_a).to eq([ouser.user, user])
     expect(group2.users.to_a).to eq([ouser.user])
   end
 

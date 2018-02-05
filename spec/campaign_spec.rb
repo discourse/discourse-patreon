@@ -44,11 +44,9 @@ RSpec.describe ::Patreon::Campaign do
       .and change { get('reward-users')["0"].count }.by(1)
 
     expect { # To check `add_model_callback(User, :after_commit, on: :create)` in plugin.rb
-      get('users').each do |id, u|
-        cf = Fabricate(:user, email: u[:email]).custom_fields
+      get('users').each do |id, email|
+        cf = Fabricate(:user, email: email).custom_fields
         expect(cf["patreon_id"]).to eq(id)
-        expect(cf["patreon_email"]).to eq(u[:email])
-        expect(cf["patreon_amount_cents"]).to eq(get("pledges")[id])
       end
     }.to change { GroupUser.count }.by(3)
   end
