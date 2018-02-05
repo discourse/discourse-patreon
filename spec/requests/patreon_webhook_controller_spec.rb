@@ -46,7 +46,7 @@ RSpec.describe ::Patreon::PatreonWebhookController do
 
       def add_pledge
         pledge_data = JSON.parse(body)
-        Patreon::Pledges.create!(pledge_data.dup)
+        Patreon::Pledge.create!(pledge_data.dup)
 
         pledge_data
       end
@@ -61,7 +61,7 @@ RSpec.describe ::Patreon::PatreonWebhookController do
       it "for event pledge:create" do
         expect {
           post_request(body, "create")
-        }.to change { Patreon::Pledges.all.keys.count }.by(1)
+        }.to change { Patreon::Pledge.all.keys.count }.by(1)
           .and change { Patreon::Patron.all.keys.count }.by(1)
           .and change { Patreon::RewardUser.all.keys.count }.by(2)
       end
@@ -85,7 +85,7 @@ RSpec.describe ::Patreon::PatreonWebhookController do
 
         expect {
           post_request(body, "delete")
-        }.to change { Patreon::Pledges.all.keys.count }.by(-1)
+        }.to change { Patreon::Pledge.all.keys.count }.by(-1)
           .and change { Patreon::Patron.all.keys.count }.by(-1)
           .and change { Patreon::RewardUser.all[reward_id].count }.by(-1)
       end

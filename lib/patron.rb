@@ -29,7 +29,15 @@ module ::Patreon
 
         users = local_users.select do |user|
           id = user.custom_fields["patreon_id"]
-          id.present? && patron_ids.include?(id)
+          is_declined = false
+          declined_since = Patreon::Pledge::Decline.all[id]
+
+          if declined_since.present?
+            declined_days_count = Time.now.to_date - declined_since.to_date
+            is_declined = declined_days_count > SiteSetting.patreon_declined_pledges_grace_period_days
+          end
+
+          id.present? && patron_ids.include?(id) && !is_declined
         end
 
         (users - group.users).each do |user|
@@ -60,13 +68,15 @@ module ::Patreon
       return if id.blank?
 
       case name
-      when /email$/
+      when "email"
         all[id]
-      when /amount_cents$/
-        Patreon::Pledges.all[id]
-      when /rewards$/
+      when "amount_cents"
+        Patreon::Pledge.all[id]
+      when "rewards"
         reward_users = Patreon::RewardUser.all
         Patreon::Reward.all.map { |i, r| r["title"] if reward_users[i].include?(id) }.compact.join(", ")
+      when "declined_since"
+        Patreon::Pledge::Decline.all[id]
       else
         id
       end

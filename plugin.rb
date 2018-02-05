@@ -20,7 +20,7 @@ after_initialize do
   module ::Patreon
     PLUGIN_NAME = 'discourse-patreon'.freeze
     DEFAULT_IMAGE_URL = "#{Discourse.base_url}/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png".freeze
-    USER_DETAIL_FIELDS = ["patreon_id", "patreon_email", "patreon_amount_cents", "patreon_rewards"].freeze
+    USER_DETAIL_FIELDS = ["id", "email", "amount_cents", "rewards", "declined_since"].freeze
 
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
@@ -66,7 +66,7 @@ after_initialize do
     '../lib/api.rb',
     '../lib/seed.rb',
     '../lib/campaign.rb',
-    '../lib/pledges.rb',
+    '../lib/pledge.rb',
     '../lib/patron.rb',
     '../lib/tokens.rb'
   ].each { |path| load File.expand_path(path, __FILE__) }
@@ -164,11 +164,11 @@ after_initialize do
   end
 
   ::Patreon::USER_DETAIL_FIELDS.each do |attribute|
-    add_to_serializer(:admin_detailed_user, attribute.to_sym, false) do
+    add_to_serializer(:admin_detailed_user, "patreon_#{attribute}".to_sym, false) do
       ::Patreon::Patron.attr(attribute, object)
     end
 
-    add_to_serializer(:admin_detailed_user, "include_#{attribute}?".to_sym) do
+    add_to_serializer(:admin_detailed_user, "include_patreon_#{attribute}?".to_sym) do
       ::Patreon::Patron.attr(attribute, object)
     end
   end

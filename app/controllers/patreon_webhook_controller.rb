@@ -14,11 +14,11 @@ class ::Patreon::PatreonWebhookController < ApplicationController
 
     case event
     when 'pledges:create'
-      Patreon::Pledges.create!(pledge_data)
+      Patreon::Pledge.create!(pledge_data)
     when 'pledges:update'
-      Patreon::Pledges.update!(pledge_data)
+      Patreon::Pledge.update!(pledge_data)
     when 'pledges:delete'
-      Patreon::Pledges.delete!(pledge_data)
+      Patreon::Pledge.delete!(pledge_data)
     end
 
     render body: nil, status: 200
