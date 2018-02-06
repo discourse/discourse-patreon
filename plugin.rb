@@ -169,7 +169,7 @@ after_initialize do
     end
 
     add_to_serializer(:admin_detailed_user, "include_patreon_#{attribute}?".to_sym) do
-      ::Patreon::Patron.attr(attribute, object)
+      ::Patreon::Patron.attr(attribute, object).present?
     end
   end
 end

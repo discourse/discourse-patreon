@@ -19,3 +19,4 @@ en:
         email: "Email"
         amount_cents: "Amount (in cents)"
         rewards: "Rewards"
+        declined_since: "Pledge Declined Since"

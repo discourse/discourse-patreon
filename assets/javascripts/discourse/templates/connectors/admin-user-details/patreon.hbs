@@ -5,17 +5,29 @@
       <div class='field'>{{i18n 'patreon.field.id'}}</div>
       <div class='value'>{{model.patreon_id}}</div>
     </div>
+    {{#if model.patreon_email}}
     <div class='display-row'>
       <div class='field'>{{i18n 'patreon.field.email'}}</div>
       <div class='value'>{{model.patreon_email}}</div>
     </div>
+    {{/if}}
+    {{#if model.patreon_amount_cents}}
     <div class='display-row'>
       <div class='field'>{{i18n 'patreon.field.amount_cents'}}</div>
       <div class='value'>{{model.patreon_amount_cents}}</div>
     </div>
+    {{/if}}
+    {{#if model.patreon_rewards}}
     <div class='display-row'>
       <div class='field'>{{i18n 'patreon.field.rewards'}}</div>
       <div class='value'>{{model.patreon_rewards}}</div>
     </div>
+    {{/if}}
+    {{#if model.patreon_declined_since}}
+    <div class='display-row'>
+      <div class='field'>{{i18n 'patreon.field.declined_since'}}</div>
+      <div class='value'>{{{format-date model.patreon_declined_since}}}</div>
+    </div>
+    {{/if}}
   </section>
 {{/if}}

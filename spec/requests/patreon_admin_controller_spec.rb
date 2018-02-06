@@ -21,8 +21,9 @@ describe Patreon::PatreonAdminController do
     it 'should display list of patreon groups' do
       get '/patreon/list.json'
 
-      filters = JSON.parse(response.body)
-      expect(filters.count).to eq(2)
+      result = JSON.parse(response.body)
+      expect(result["filters"].count).to eq(2)
+      expect(result["rewards"].count).to eq(2)
     end
 
     it 'should display list of rewards' do
