@@ -8,6 +8,7 @@ en:
       rewards: 'Rewards'
       filter: 'Filter'
       help_text: 'You can sync a Discourse group with one or more Patreon reward tiers.'
+      last_synced: 'Last Synced'
       edit: 'Edit'
       delete: 'Delete'
       save: 'Save'

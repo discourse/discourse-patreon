@@ -14,17 +14,19 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
   end
 
   def list
-    filters = (PluginStore.get(PLUGIN_NAME, 'filters') || {})
+    filters = PluginStore.get(PLUGIN_NAME, 'filters') || {}
+    rewards = ::Patreon::Reward.all
+    last_sync = ::Patreon.get("last_sync") || {}
 
     groups = ::Group.all.pluck(:id)
 
     valid_filters = filters.select { |k| groups.include?(k.to_i) }
 
-    render json: valid_filters
+    render json: { filters: valid_filters, rewards: rewards, last_sync_at: last_sync["at"] }
   end
 
   def rewards
-    rewards = PluginStore.get(PLUGIN_NAME, 'rewards')
+    rewards = ::Patreon::Reward.all
 
     render json: rewards
   end

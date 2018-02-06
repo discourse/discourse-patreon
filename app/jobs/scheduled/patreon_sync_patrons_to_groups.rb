@@ -4,7 +4,10 @@ module ::Jobs
     sidekiq_options retry: false
 
     def execute(args)
-      ::Patreon::Patron.update! if SiteSetting.patreon_enabled && SiteSetting.patreon_creator_access_token && SiteSetting.patreon_creator_refresh_token
+      return unless SiteSetting.patreon_enabled && SiteSetting.patreon_creator_access_token && SiteSetting.patreon_creator_refresh_token
+
+      ::Patreon::Patron.update!
+      ::Patreon.set("last_sync", at: Time.now)
     end
   end
 end

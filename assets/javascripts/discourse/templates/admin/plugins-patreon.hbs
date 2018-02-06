@@ -38,4 +38,8 @@
     disabled=updatingData
     title="patreon.update_data"
     label="patreon.update_data"}}
+
+  {{#if last_sync_at}}
+    <span class="last_synced">{{i18n "patreon.last_synced"}}: {{{format-date last_sync_at leaveAgo="true"}}}</span>
+  {{/if}}
 </section>
