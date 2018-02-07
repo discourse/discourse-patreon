@@ -44,8 +44,8 @@ RSpec.describe ::Patreon::Patron do
     filters = { group1.id.to_s => ["0"], group2.id.to_s => ["4589"] }
     Patreon.set("filters", filters)
     described_class.sync_groups
-    expect(group1.users.to_a).to eq([ouser.user, user])
-    expect(group2.users.to_a).to eq([ouser.user])
+    expect(group1.users.to_a - [ouser.user, user]).to eq([])
+    expect(group2.users.to_a - [ouser.user]).to eq([])
   end
 
 end
