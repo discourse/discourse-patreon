@@ -39,7 +39,7 @@ module ::Patreon
 
       # Sets all patrons to the seed group by default on first run
       filters = Patreon.get('filters')
-      Patreon::Seed.seed_content! if filters.nil?
+      Patreon::Seed.seed_content! if filters.blank?
     end
 
   end
