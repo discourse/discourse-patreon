@@ -10,7 +10,7 @@ module ::Patreon
 
       response = ::Patreon::Api.campaign_data
 
-      return if response.blank? || response['data'].blank?
+      return false if response.blank? || response['data'].blank?
 
       response['data'].map do |campaign|
         uri = campaign['relationships']['pledges']['links']['first']
@@ -40,6 +40,8 @@ module ::Patreon
       # Sets all patrons to the seed group by default on first run
       filters = Patreon.get('filters')
       Patreon::Seed.seed_content! if filters.blank?
+
+      true
     end
 
   end

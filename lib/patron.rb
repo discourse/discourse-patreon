@@ -4,7 +4,7 @@ module ::Patreon
   class Patron
 
     def self.update!
-      Patreon::Campaign.update!
+      return unless Patreon::Campaign.update!
       sync_groups
 
       rewards = Patreon.get('rewards')
