@@ -71,6 +71,8 @@ after_initialize do
     '../lib/tokens.rb'
   ].each { |path| load File.expand_path(path, __FILE__) }
 
+  AdminDashboardData.problem_messages << ::Patreon::Api::ACCESS_TOKEN_INVALID
+
   Patreon::Engine.routes.draw do
     get '/rewards' => 'patreon_admin#rewards', constraints: AdminConstraint.new
     get '/list' => 'patreon_admin#list', constraints: AdminConstraint.new
