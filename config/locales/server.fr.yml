@@ -5,4 +5,22 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-fr: {}
+fr:
+  site_settings:
+    patreon_enabled: 'Activer le plugin discourse-patreon'
+    patreon_login_enabled: 'Activer le Patreon Social Login'
+    patreon_client_id: 'Client ID généré par Patreon'
+    patreon_client_secret: 'Client Secret généré par Patreon'
+    patreon_webhook_secret: 'Webhook Secret généré par Patreon'
+    patreon_creator_discourse_username: "Nom d'utilisateur du compte Discourse qui est uitlisé pour se connecter à travers le compte créateur Patreon en utilisant 'Patreon Social Login'"
+    patreon_creator_access_token: "Creator's Acces Token généré par Patreon"
+    patreon_creator_refresh_token: "Creator's Refresh Token généré par Patreon"
+    patreon_declined_pledges_grace_period_days: "Période de grâce (en jours) avant qu'un engagement est entièrement refusé"
+    max_patreon_api_reqs_per_hr: "Nombre maximum de requêtes Patreon API par heure"
+    max_patreon_api_reqs_per_day: "Nombre maximum de requêtes Patreon API par jour"
+  dashboard:
+    patreon:
+      access_token_invalid: "Le Creator Access Token et Creator Refresh Token Patreon dans vos paramètres du site sont erronés."
+  patreon:
+    error:
+      invalid_response: "Réponse invalide de l'API Patreon"

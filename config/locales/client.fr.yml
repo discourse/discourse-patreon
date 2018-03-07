@@ -5,4 +5,23 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-fr: {}
+fr:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filtres'
+      group: 'Groupe'
+      rewards: 'Récompenses'
+      filter: 'Filtre'
+      last_synced: 'Dernière sychronisation'
+      edit: 'Modifier'
+      delete: 'Supprimer'
+      save: 'Sauvegarder'
+      update_data: 'Mettre à jour données Patreon & synchroniser groupes'
+      refresh_page: 'Des nouvelles données ont été téléchargées depuis Patreon API. Merci de rafraichir la page.'
+      field:
+        id: "Id"
+        email: "Courriel"
+        amount_cents: "Montant (en cents)"
+        rewards: "Récompenses"
