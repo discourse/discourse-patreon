@@ -14,14 +14,16 @@ es:
       group: 'Grupo'
       rewards: 'Recompensas'
       filter: 'Filtro'
-      help_text: 'Puedes sincronizar un grupo de Discourse con uno o varios niveles de recompenza Patreon.'
+      help_text: 'Puedes sincronizar un grupo de Discourse con uno o varios niveles de recompensa Patreon.'
+      last_synced: 'Última sincronización'
       edit: 'Editar'
       delete: 'Borrar'
       save: 'Guardar'
-      update_data: 'Actualizar Patreon Data & Sync Grupos'
-      refresh_page: 'Nuevos datos han sido descargados desde el Patron API. Por favor refrescar la página.'
+      update_data: 'Actualizar datos de Patreon y sincronizar grupos'
+      refresh_page: 'Se han descargado nuevos datos desde la API de Patron. Por favor, actualiza la página.'
       field:
         id: "ID"
-        email: "Emai"
+        email: "Email"
         amount_cents: "Cantidad (en céntimos)"
-        rewards: "Recompensa"
+        rewards: "Recompensas"
+        declined_since: "Pledge declinado desde"

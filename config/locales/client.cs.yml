@@ -14,3 +14,6 @@ cs:
       group: 'Skupina'
       rewards: 'Odměny'
       filter: 'Filtr'
+      edit: 'Upravit'
+      delete: 'Smazat'
+      save: 'Uložit'

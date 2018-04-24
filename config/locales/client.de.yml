@@ -15,6 +15,7 @@ de:
       rewards: 'Belohnungen'
       filter: 'Filter'
       help_text: 'Du kannst eine Discourse-Gruppe mit ein oder mehreren Patreon-Belohnungsstufen synchronisieren.'
+      last_synced: 'Zuletzt synchronisiert'
       edit: 'Bearbeiten'
       delete: 'Löschen'
       save: 'Speichern'
@@ -25,3 +26,4 @@ de:
         email: "E-Mail"
         amount_cents: "Betrag (in Cents)"
         rewards: "Belohnungen"
+        declined_since: "Versprechen abgelehnt seit"

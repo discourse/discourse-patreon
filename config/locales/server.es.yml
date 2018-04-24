@@ -18,3 +18,6 @@ es:
     patreon_declined_pledges_grace_period_days: "Periodo de gracia (en días) antes de que un pledge sea rechazado completamente."
     max_patreon_api_reqs_per_hr: "Máximo número de solicitudes a la API de Patreon por hora"
     max_patreon_api_reqs_per_day: "Máximo número de solicitudes a la API de Patreon al día"
+  patreon:
+    error:
+      invalid_response: "Respuesta no válida de la API de Patreon"

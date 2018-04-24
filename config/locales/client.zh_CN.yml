@@ -5,4 +5,15 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-zh_CN: {}
+zh_CN:
+  js:
+    patreon:
+      title: 'Patreon 赞助'
+      header:
+        rules: '筛选'
+      group: '群组'
+      rewards: '奖励'
+      filter: '过滤器'
+      save: '保存'
+      field:
+        email: "邮箱"

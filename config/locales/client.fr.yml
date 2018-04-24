@@ -14,6 +14,7 @@ fr:
       group: 'Groupe'
       rewards: 'Récompenses'
       filter: 'Filtre'
+      help_text: 'Vous pouvez synchroniser un groupe Discourse avec un ou plusieurs niveau de récompense Patreon.'
       last_synced: 'Dernière sychronisation'
       edit: 'Modifier'
       delete: 'Supprimer'
@@ -25,3 +26,4 @@ fr:
         email: "Courriel"
         amount_cents: "Montant (en cents)"
         rewards: "Récompenses"
+        declined_since: "Promesse de don refusé depuis"
