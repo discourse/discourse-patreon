@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Jobs::Patreon::UpdateBrandImages do
 
   let(:old_image_url) { Jobs::Patreon::UpdateBrandImages::OLD_IMAGE_URL }
-  let(:new_image_url) { ::Patreon::DEFAULT_IMAGE_URL }
+  let(:new_image_url) { ::Patreon.default_image_url }
 
   it 'should update to old image url to new local path' do
     group = Fabricate(:group, flair_url: old_image_url)

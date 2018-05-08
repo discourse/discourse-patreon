@@ -9,7 +9,7 @@ module ::Patreon
         visibility_level: Group.visibility_levels[:public],
         primary_group: true,
         title: 'Patron',
-        flair_url: ::Patreon::DEFAULT_IMAGE_URL,
+        flair_url: ::Patreon.default_image_url,
         bio_raw: 'To get access to this group go to our [Patreon page](https://www.patreon.com/) and add your pledge.',
         full_name: 'Our Patreon supporters'
       )
@@ -19,7 +19,7 @@ module ::Patreon
         name: 'Patron',
         description: 'Active Patron',
         badge_type_id: 1,
-        icon: ::Patreon::DEFAULT_IMAGE_URL,
+        icon: ::Patreon.default_image_url,
         listable: true,
         target_posts: false,
         query: "select user_id, created_at granted_at, NULL post_id from group_users where group_id = ( select g.id from groups g where g.name = 'patrons' )",
@@ -29,7 +29,7 @@ module ::Patreon
         trigger: 0,
         show_posts: false,
         system: false,
-        image: ::Patreon::DEFAULT_IMAGE_URL,
+        image: ::Patreon.default_image_url,
         long_description: 'To get access to this badge go to our <a href="https://www.patreon.com/">Patreon page</a> and add your pledge.'
       )
       badge.save!

@@ -19,12 +19,15 @@ after_initialize do
 
   module ::Patreon
     PLUGIN_NAME = 'discourse-patreon'.freeze
-    DEFAULT_IMAGE_URL = "#{Discourse.base_url}/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png".freeze
     USER_DETAIL_FIELDS = ["id", "email", "amount_cents", "rewards", "declined_since"].freeze
 
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
       isolate_namespace Patreon
+    end
+
+    def self.default_image_url
+      "#{Discourse.base_url}/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png"
     end
 
     def self.store
