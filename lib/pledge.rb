@@ -72,33 +72,33 @@ module ::Patreon
     end
 
     def self.extract(pledge_data)
-      return if pledge_data.blank? || pledge_data["data"].blank?
-
       pledges, declines, reward_users, users = {}, {}, {}, {}
 
-      pledge_data['data'] = [pledge_data['data']] unless pledge_data['data'].kind_of?(Array)
+      if pledge_data && pledge_data["data"].present?
+        pledge_data['data'] = [pledge_data['data']] unless pledge_data['data'].kind_of?(Array)
 
-      # get pledges info
-      pledge_data['data'].each do |entry|
-        if entry['type'] == 'pledge'
-          patron_id = entry['relationships']['patron']['data']['id']
-          attrs = entry['attributes']
+        # get pledges info
+        pledge_data['data'].each do |entry|
+          if entry['type'] == 'pledge'
+            patron_id = entry['relationships']['patron']['data']['id']
+            attrs = entry['attributes']
 
-          (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << patron_id unless entry['relationships']['reward']['data'].nil?
-          pledges[patron_id] = attrs['amount_cents']
-          declines[patron_id] = attrs['declined_since'] if attrs['declined_since'].present?
+            (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << patron_id unless entry['relationships']['reward']['data'].nil?
+            pledges[patron_id] = attrs['amount_cents']
+            declines[patron_id] = attrs['declined_since'] if attrs['declined_since'].present?
+          end
+        end
+
+        # get user list too
+        pledge_data['included'].each do |entry|
+          case entry['type']
+          when 'user'
+            users[entry['id']] = entry['attributes']['email'].downcase
+          end
         end
       end
 
-      # get user list too
-      pledge_data['included'].each do |entry|
-        case entry['type']
-        when 'user'
-          users[entry['id']] = entry['attributes']['email'].downcase
-        end
-      end
-
-      return pledges, declines, reward_users, users
+      [pledges, declines, reward_users, users]
     end
 
     def self.all
