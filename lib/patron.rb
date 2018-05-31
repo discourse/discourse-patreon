@@ -94,7 +94,8 @@ module ::Patreon
         update_local_user(o.user, o.uid)
       end
 
-      users += UserEmail.includes(:user).where(email: patrons.values).map do |u|
+      emails = patrons.values.map { |e| e.downcase }
+      users += UserEmail.includes(:user).where(email: emails).map do |u|
         patreon_id = patrons.key(u.email)
         update_local_user(u.user, patreon_id)
       end

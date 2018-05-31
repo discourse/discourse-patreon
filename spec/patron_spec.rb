@@ -36,6 +36,15 @@ RSpec.describe ::Patreon::Patron do
     end
   end
 
+  it "should find local users matching email address without case-sensitivity" do
+    patrons["111111"] = "Foo@bar.com"
+    Patreon.set("users", patrons)
+    Fabricate(:user, email: "foo@bar.com")
+
+    local_users = described_class.get_local_users
+    expect(local_users.count).to eq(1)
+  end
+
   it "should sync Discourse groups with Patreon users" do
     user = Fabricate(:user, email: "foo@bar.com")
     ouser = Fabricate(:oauth2_user_info, uid: "111112")
