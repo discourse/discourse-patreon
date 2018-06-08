@@ -5,14 +5,15 @@ RSpec.describe ::Patreon::Api do
   let(:url) { "https://api.patreon.com/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page%5Bcount%5D=100" }
 
   def stub(status)
-    headers = { headers: {
-                'Accept' => '*/*',
-                'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-                'Authorization' => 'Bearer',
-                'User-Agent' => 'Faraday v0.12.2'
-              } }
-    content = { status: status, headers: { "Content-Type" => "application/json" }, body: '{}' }
-    stub_request(:get, url).to_return(content).with(headers)
+    content = {
+      status: status,
+      headers: {
+        "Content-Type" => "application/json"
+      },
+      body: '{}'
+    }
+
+    stub_request(:get, url).to_return(content)
   end
 
   it "should add admin warning message for invalid api response" do

@@ -7,19 +7,13 @@ RSpec.describe ::Patreon::Campaign do
   before do
     campaigns_url = "https://api.patreon.com/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page%5Bcount%5D=100"
     pledges_url = "https://www.patreon.com/api/oauth2/api/campaigns/70261/pledges?page%5Bcount%5D=100&sort=created"
-    headers = { headers: {
-                'Accept' => '*/*',
-                'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-                'Authorization' => 'Bearer',
-                'User-Agent' => 'Faraday v0.12.2'
-              } }
     content = { status: 200, headers: { "Content-Type" => "application/json" } }
 
     campaigns = content.merge(body: get_patreon_response('campaigns.json'))
     pledges = content.merge(body: get_patreon_response('pledges.json'))
 
-    stub_request(:get, campaigns_url).to_return(campaigns).with(headers)
-    stub_request(:get, pledges_url).to_return(pledges).with(headers)
+    stub_request(:get, campaigns_url).to_return(campaigns)
+    stub_request(:get, pledges_url).to_return(pledges)
     SiteSetting.patreon_enabled = true
     SiteSetting.patreon_declined_pledges_grace_period_days = 7
   end
