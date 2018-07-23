@@ -206,9 +206,14 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
 
     result
   end
+
+  def enabled?
+    SiteSetting.patreon_login_enabled
+  end
 end
 
-auth_provider title: 'with Patreon',
+auth_provider pretty_name: 'Patreon',
+              title: 'with Patreon',
               message: 'Authentication with Patreon (make sure pop up blockers are not enabled)',
               frame_width: 840,
               frame_height: 570,
