@@ -38,7 +38,7 @@ module ::Patreon
       when 200
         return JSON.parse response.body
       when 401
-        AdminDashboardData.add_problem_message(ACCESS_TOKEN_INVALID)
+        AdminDashboardData.add_problem_message(ACCESS_TOKEN_INVALID, 7.hours)
       else
         e = ::Patreon::InvalidApiResponse.new(response.body.presence || '')
         e.set_backtrace(caller)
