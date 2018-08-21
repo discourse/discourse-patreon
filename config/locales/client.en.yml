@@ -20,3 +20,8 @@ en:
         amount_cents: "Amount (in cents)"
         rewards: "Rewards"
         declined_since: "Pledge Declined Since"
+        more_details:
+          label: "Payments & More Details"
+          help_text:
+            email_available: "Reach bottom right of the page to see this Patron's pledge history."
+            email_not_available: "Select the Patron member and reach bottom right of the page to see the pledge history."
