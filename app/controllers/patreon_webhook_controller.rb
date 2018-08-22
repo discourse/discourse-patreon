@@ -12,6 +12,10 @@ class ::Patreon::PatreonWebhookController < ApplicationController
 
     pledge_data = JSON.parse(request.body.read)
 
+    if SiteSetting.patreon_verbose_log
+      Rails.logger.warn("Patreon verbose log for Webhook:\n #{pledge_data.inspect}")
+    end
+
     case event
     when 'pledges:create'
       Patreon::Pledge.create!(pledge_data)

@@ -24,3 +24,5 @@ plugins:
     default: 100
   max_patreon_api_reqs_per_day:
     default: 1000
+  patreon_verbose_log:
+    default: false
