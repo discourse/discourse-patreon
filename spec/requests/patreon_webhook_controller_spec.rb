@@ -65,7 +65,7 @@ RSpec.describe ::Patreon::PatreonWebhookController do
       it "for event pledge:create" do
         user = Fabricate(:user, email: "roo@aar.com")
         group = Fabricate(:group)
-        Patreon.set("filters", { group.id.to_s => ["0"] })
+        Patreon.set("filters", group.id.to_s => ["0"])
 
         expect {
           post_request(body, "create")
