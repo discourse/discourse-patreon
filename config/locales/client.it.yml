@@ -18,5 +18,5 @@ it:
       edit: 'Modifica'
       delete: 'Cancella'
       save: 'Salva'
-      update_data: 'Scarica Dati Patreon & Sincronizza Gruppi'
-      refresh_page: 'Nuovi dati sono stati scaricati da Patron API. Per favore, aggiorna la pagina.'
+      update_data: 'Aggiorna Dati Patreon & Sincronizza Gruppi'
+      refresh_page: 'Sono stati scaricati dati aggiornati da Patron API. Aggiorna la pagina.'

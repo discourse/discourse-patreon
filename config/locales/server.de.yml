@@ -20,7 +20,7 @@ de:
     max_patreon_api_reqs_per_day: "Maximale Anzahl von Patreon-API-Anfragen pro Tag"
   dashboard:
     patreon:
-      access_token_invalid: "Werte für Patreon-Ersteller-Zugriffstoken und Refresh-Token in deinen Seiteneinstellungen sind falsch."
+      access_token_invalid: "Die Werte für die Patreon Creator Access- und Refresh-Token sind ungültig. Du musst neue Tokens von der <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-Webseite</a> in die <a href='/admin/site_settings/category/all_results?filter=patreon'>Seiteneinstellungen</a> kopieren."
   patreon:
     error:
       invalid_response: "Ungültige Antwort von der Patreon API"

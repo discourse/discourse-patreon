@@ -18,9 +18,6 @@ ur:
     patreon_declined_pledges_grace_period_days: "رعایتی مدت (دنوں میں) اِس سے پہلے کہ وعدہ مکمل طور پر رد کر دیا جائے۔"
     max_patreon_api_reqs_per_hr: "فی گھنٹہ پَیٹریئون API درخواستوں کی زیادہ سے زیادہ تعداد"
     max_patreon_api_reqs_per_day: "فی دن پَیٹریئون API درخواستوں کی زیادہ سے زیادہ تعداد"
-  dashboard:
-    patreon:
-      access_token_invalid: "آپ کی سائٹ سیٹِنگ میں پَیٹریئون کرِییٹر اِکسس ٹوکن اور ریفریش ٹوکن کی وَیلیوز غلط ہیں۔"
   patreon:
     error:
       invalid_response: "پَیٹریئون API کی طرف سے غلط جواب"

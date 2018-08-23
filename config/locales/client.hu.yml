@@ -1,0 +1,24 @@
+# encoding: utf-8
+#
+# Never edit this file. It will be overwritten when translations are pulled from Transifex.
+#
+# To work with us on translations, join this project:
+# https://www.transifex.com/projects/p/discourse-org/
+
+hu:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Szűrők'
+      group: 'Csoport'
+      rewards: 'Jutalmak'
+      filter: 'Szűr'
+      last_synced: 'Utoljára szinkronizálva'
+      edit: 'Szerkeszt'
+      delete: 'Töröl'
+      save: 'Mentés'
+      field:
+        id: "Id"
+        email: "Email"
+        rewards: "Jutalmak"

@@ -5,4 +5,22 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-pt_BR: {}
+pt_BR:
+  site_settings:
+    patreon_enabled: 'Habilitar o plugin discourse-patreon'
+    patreon_login_enabled: 'Habilitar login Patreon Social '
+    patreon_client_id: 'ID do cliente Patreon gerado'
+    patreon_client_secret: 'Segredo do Cliente Patreon Gerado'
+    patreon_webhook_secret: 'Segredo gerado do Webhook de Patreon'
+    patreon_creator_discourse_username: "Nome de usuário da conta do Discourse que é usada para fazer login através da conta do criador do Patreon usando o 'Login social do Patreon'"
+    patreon_creator_access_token: "Token de Acesso do Criador do Patreon Gerado"
+    patreon_creator_refresh_token: "Token de Recarga do Criador do Patreon Gerado"
+    patreon_declined_pledges_grace_period_days: "Período de carência (em dias) antes que uma promessa seja recusada completamente."
+    max_patreon_api_reqs_per_hr: "Número máximo de solicitações da API do Patreon por hora"
+    max_patreon_api_reqs_per_day: "Número máximo de solicitações da API do Patreon por dia"
+  dashboard:
+    patreon:
+      access_token_invalid: "Os valores de token de acesso e atualização do Patreon Creator estão incorretos. Você deve copiar e colar novos tokens de <a href='https://www.patreon.com/platform/documentation/clients'>Patreon website</a> para <a href='/admin/site_settings/category/all_results?filter=patreon'>site settings</a>."
+  patreon:
+    error:
+      invalid_response: "Resposta inválida da API do Patreon"

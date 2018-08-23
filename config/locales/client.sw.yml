@@ -1,0 +1,27 @@
+# encoding: utf-8
+#
+# Never edit this file. It will be overwritten when translations are pulled from Transifex.
+#
+# To work with us on translations, join this project:
+# https://www.transifex.com/projects/p/discourse-org/
+
+sw:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Inachujwa'
+      group: 'Kikundi'
+      rewards: 'Tuzo'
+      filter: 'Ichujwe'
+      last_synced: 'Mara ya mwisho Ulandanishi umefanyika'
+      edit: 'Hariri'
+      delete: 'Futa'
+      save: 'Hifadhi'
+      refresh_page: 'Taarifa mpya zimepatikana kutoka kwa Patron API. Tafadhali onesha upya karatasi.'
+      field:
+        id: "Utambulisho"
+        email: "Barua Pepe"
+        amount_cents: "Kiasi (kwenye senti)"
+        rewards: "Tuzo"
+        declined_since: "Ombi Limekataliwa Tangia"
