@@ -6,6 +6,10 @@ require_relative '../spec_helper'
 RSpec.describe ::Patreon::PatreonWebhookController do
   include_context "spec helper"
 
+  before do
+    SiteSetting.queue_jobs = false
+  end
+
   context "index" do
 
     context 'checking headers' do
