@@ -14,9 +14,6 @@ PLUGIN_NAME = 'discourse-patreon'.freeze
 register_asset 'stylesheets/patreon.scss'
 
 after_initialize do
-  if Rails.env.production?
-    Logster.store.ignore << /^Patreon verbose log/
-  end
 
   require_dependency 'admin_constraint'
 
