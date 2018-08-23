@@ -25,6 +25,8 @@ class ::Patreon::PatreonWebhookController < ApplicationController
       Patreon::Pledge.delete!(pledge_data)
     end
 
+    Patreon::Patron.sync_groups
+
     render body: nil, status: 200
   end
 
