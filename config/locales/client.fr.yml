@@ -27,3 +27,8 @@ fr:
         amount_cents: "Montant (en cents)"
         rewards: "Récompenses"
         declined_since: "Promesse de don refusé depuis"
+        more_details:
+          label: "Paiements & autres détails"
+          help_text:
+            email_available: "Aller en bas à droite de cette page pour consulter l'historique des promesses de don de ce Patron."
+            email_not_available: "Sélectionnez le Patron et accédez en bas à droite de la page pour voir l'historique des promesses de dons."

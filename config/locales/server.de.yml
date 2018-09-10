@@ -18,6 +18,7 @@ de:
     patreon_declined_pledges_grace_period_days: "Frist (in Tagen), bevor ein Versprechen vollständig abgelehnt wird."
     max_patreon_api_reqs_per_hr: "Maximale Anzahl an Patreon-API-Anfragen pro Stunde"
     max_patreon_api_reqs_per_day: "Maximale Anzahl von Patreon-API-Anfragen pro Tag"
+    patreon_verbose_log: 'Aktiviert ausführliches Logginf der Patreon Serverlast'
   dashboard:
     patreon:
       access_token_invalid: "Die Werte für die Patreon Creator Access- und Refresh-Token sind ungültig. Du musst neue Tokens von der <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-Webseite</a> in die <a href='/admin/site_settings/category/all_results?filter=patreon'>Seiteneinstellungen</a> kopieren."

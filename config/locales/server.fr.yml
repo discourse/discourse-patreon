@@ -18,6 +18,10 @@ fr:
     patreon_declined_pledges_grace_period_days: "Période de grâce (en jours) avant qu'un engagement est entièrement refusé"
     max_patreon_api_reqs_per_hr: "Nombre maximum de requêtes Patreon API par heure"
     max_patreon_api_reqs_per_day: "Nombre maximum de requêtes Patreon API par jour"
+    patreon_verbose_log: 'activer la journalisation étendue de payload de patreon'
+  dashboard:
+    patreon:
+      access_token_invalid: "L'accès et le rafraîchissement des valeurs des jetons de Patreon Creator sont incorrects. Il faut copier-coller de nouveaux jetons depuis le <a href='https://www.patreon.com/platform/documentation/clients'>site web de Patreon</a> vers les <a href='/admin/site_settings/category/all_results?filter=patreon'>paramètres du site</a>."
   patreon:
     error:
       invalid_response: "Réponse invalide de l'API Patreon"

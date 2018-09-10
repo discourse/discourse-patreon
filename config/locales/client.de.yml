@@ -27,3 +27,8 @@ de:
         amount_cents: "Betrag (in Cents)"
         rewards: "Belohnungen"
         declined_since: "Versprechen abgelehnt seit"
+        more_details:
+          label: "Zahlungen & weitere Details"
+          help_text:
+            email_available: "Gehe nach unten rechts auf der Seite um die Patron Zusicherung Historie zu sehen"
+            email_not_available: "Wähle die Patron Mitglieder und gehe unten rechts auf der Seite um die Zusicherung Historie zu sehen."

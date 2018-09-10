@@ -8,6 +8,9 @@
 ca:
   js:
     patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filtres'
       group: 'Grup'
       filter: 'Filtre'
       edit: 'Edita'

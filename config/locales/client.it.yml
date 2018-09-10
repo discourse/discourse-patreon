@@ -15,8 +15,13 @@ it:
       rewards: 'Ricompense'
       filter: 'Filtro'
       help_text: 'Puoi sincronizzare un gruppo Discourse con uno o più livelli di ricompense di Patreon.'
+      last_synced: 'Ultima Sincronizzazione'
       edit: 'Modifica'
       delete: 'Cancella'
       save: 'Salva'
       update_data: 'Aggiorna Dati Patreon & Sincronizza Gruppi'
       refresh_page: 'Sono stati scaricati dati aggiornati da Patron API. Aggiorna la pagina.'
+      field:
+        email: "Email"
+        amount_cents: "Importo (in centesimi)"
+        rewards: "Premi"

@@ -15,6 +15,7 @@ he:
       rewards: 'פרסים'
       filter: 'מסנן'
       help_text: 'ניתן לסנכרן קבוצת Discourse עם שכבה אחת או יותר של פרסים מ־Patreon.'
+      last_synced: 'נסכרון אחרון'
       edit: 'עריכה'
       delete: 'מחיקה'
       save: 'שמירה'
