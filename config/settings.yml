@@ -26,3 +26,6 @@ plugins:
     default: 1000
   patreon_verbose_log:
     default: false
+  patreon_login_ignore_state:
+    default: false
+    hidden: true

@@ -192,6 +192,7 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
                         strategy.options[:client_id] = SiteSetting.patreon_client_id
                         strategy.options[:client_secret] = SiteSetting.patreon_client_secret
                         strategy.options[:redirect_uri] = "#{Discourse.base_url}/auth/patreon/callback"
+                        strategy.options[:provider_ignores_state] = SiteSetting.patreon_login_ignore_state
                       }
   end
 
