@@ -1,6 +1,6 @@
-import Group from 'discourse/models/group';
-import { ajax } from 'discourse/lib/ajax';
-import FilterRule from 'discourse/plugins/discourse-patreon/discourse/models/filter-rule';
+import Group from "discourse/models/group";
+import { ajax } from "discourse/lib/ajax";
+import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 
 /* We use three main model to get this page working:
 *  Discourse Groups (excluding the automatic ones), Patreon rewards and
@@ -8,24 +8,44 @@ import FilterRule from 'discourse/plugins/discourse-patreon/discourse/models/fil
 */
 export default Discourse.Route.extend({
   model() {
-
-    return Ember.RSVP.Promise.all([ajax("/patreon/list.json"), Group.findAll({ ignore_automatic: false })])
-                              .then(([result, groups]) => {
-                                return {filters: result.filters, rewards: result.rewards, last_sync_at: result.last_sync_at, groups: groups};
-                              });
+    return Ember.RSVP.Promise.all([
+      ajax("/patreon/list.json"),
+      Group.findAll({ ignore_automatic: false })
+    ]).then(([result, groups]) => {
+      return {
+        filters: result.filters,
+        rewards: result.rewards,
+        last_sync_at: result.last_sync_at,
+        groups: groups
+      };
+    });
   },
 
   setupController: function(controller, model) {
-
     const rewards = model.rewards;
     const groups = model.groups;
     const filtersArray = _.map(model.filters, (v, k) => {
-      const rewardsNames = v.map((r) => rewards[r] ? ` $${rewards[r].amount_cents/100} - ${rewards[r].title}` : "");
-      const group =_.find(groups, (g) => g.id === parseInt(k));
+      const rewardsNames = v.map(
+        r =>
+          rewards[r]
+            ? ` $${rewards[r].amount_cents / 100} - ${rewards[r].title}`
+            : ""
+      );
+      const group = _.find(groups, g => g.id === parseInt(k));
 
-      return FilterRule.create({group: group.name, rewards: rewardsNames, group_id: k, reward_ids: v});
+      return FilterRule.create({
+        group: group.name,
+        rewards: rewardsNames,
+        group_id: k,
+        reward_ids: v
+      });
     });
 
-    controller.setProperties({ model: filtersArray, groups: groups, rewards: rewards, last_sync_at: model.last_sync_at });
+    controller.setProperties({
+      model: filtersArray,
+      groups: groups,
+      rewards: rewards,
+      last_sync_at: model.last_sync_at
+    });
   }
 });

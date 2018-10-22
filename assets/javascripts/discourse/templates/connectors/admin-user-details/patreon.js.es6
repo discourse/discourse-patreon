@@ -7,10 +7,10 @@ export default {
       url = `${url}?query=${email}`;
     }
 
-    component.set('patron_url', url);
+    component.set("patron_url", url);
   },
 
   shouldRender(args, component) {
-     return component.siteSettings.patreon_enabled && args.model.patreon_id;
+    return component.siteSettings.patreon_enabled && args.model.patreon_id;
   }
 };
