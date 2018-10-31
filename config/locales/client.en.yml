@@ -13,7 +13,7 @@ en:
       delete: 'Delete'
       save: 'Save'
       update_data: 'Update Patreon Data & Sync Groups'
-      refresh_page: 'New data has been downloaded from Patron API. Please refresh the page.'
+      refresh_page: 'New data has been downloaded from Patreon API. Please refresh the page.'
       field:
         id: "Id"
         email: "Email"
@@ -23,5 +23,5 @@ en:
         more_details:
           label: "Payments & More Details"
           help_text:
-            email_available: "Reach bottom right of the page to see this Patron's pledge history."
-            email_not_available: "Select the Patron member and reach bottom right of the page to see the pledge history."
+            email_available: "Reach bottom right of the page to see this Patreon's pledge history."
+            email_not_available: "Select the Patreon member and reach bottom right of the page to see the pledge history."
