@@ -20,7 +20,7 @@ RSpec.describe ::Patreon::Api do
     stub(401)
 
     expect(described_class.get(url)).to eq(error: I18n.t(described_class::INVALID_RESPONSE))
-    expect(AdminDashboardData.problem_message_check(described_class::ACCESS_TOKEN_INVALID)).to eq(I18n.t(described_class::ACCESS_TOKEN_INVALID, base_path: ""))
+    expect(AdminDashboardData.problem_message_check(described_class::ACCESS_TOKEN_INVALID)).to eq(I18n.t(described_class::ACCESS_TOKEN_INVALID, base_path: "").sub('%{base_path}', ''))
 
     stub(200)
 
