@@ -14,7 +14,7 @@ en:
     patreon_verbose_log: 'enable verbose logging of patreon payload'
   dashboard:
     patreon:
-      access_token_invalid: "Patreon Creator's access and refresh token values are incorrect. You must copy-paste new tokens from <a href='https://www.patreon.com/platform/documentation/clients'>Patreon website</a> to <a href='/admin/site_settings/category/all_results?filter=patreon'>site settings</a>."
+      access_token_invalid: "Patreon Creator's access and refresh token values are incorrect. You must copy-paste new tokens from <a href='https://www.patreon.com/platform/documentation/clients'>Patreon website</a> to <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>site settings</a>."
   patreon:
     error:
       invalid_response: "Invalid response from Patreon API"
