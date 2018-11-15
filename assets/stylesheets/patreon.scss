@@ -22,21 +22,6 @@
 
 .btn-social.patreon {
   background-color: #052d49;
-
-  &:before {
-    background-image: url(/plugins/discourse-patreon/images/patreon-logomark-color-on-navy.png);
-    background-size: 16px;
-    display: inline-block;
-    width: 16px;
-    height: 15px;
-    content: "";
-  }
-}
-
-.mobile-view {
-  .btn-social.patreon {
-    background-position-x: 18px;
-  }
 }
 
 .badge-card.patreon .badge-contents .badge-icon img {
