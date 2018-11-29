@@ -18,9 +18,6 @@ pt_BR:
     patreon_declined_pledges_grace_period_days: "Período de carência (em dias) antes que uma promessa seja recusada completamente."
     max_patreon_api_reqs_per_hr: "Número máximo de solicitações da API do Patreon por hora"
     max_patreon_api_reqs_per_day: "Número máximo de solicitações da API do Patreon por dia"
-  dashboard:
-    patreon:
-      access_token_invalid: "Os valores de token de acesso e atualização do Patreon Creator estão incorretos. Você deve copiar e colar novos tokens de <a href='https://www.patreon.com/platform/documentation/clients'>Patreon website</a> para <a href='/admin/site_settings/category/all_results?filter=patreon'>site settings</a>."
   patreon:
     error:
       invalid_response: "Resposta inválida da API do Patreon"

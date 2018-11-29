@@ -15,8 +15,15 @@ fi:
       rewards: 'Palkinnot'
       filter: 'Suodatin'
       help_text: 'Voit synkronoida Discourse-ryhmän yhteen tai useampaan Patreon-palkintotasoon.'
+      last_synced: 'Viimeksi synkronisoitu'
       edit: 'Muokkaa'
       delete: 'Poista'
       save: 'Tallenna'
       update_data: 'Päivitä Patreonin data ja synkronoi ryhmät'
-      refresh_page: 'Uutta dataa on ladattu Patreonin rarjapinnasta. Päivitä sivu.'
+      field:
+        id: "Id"
+        email: "Sähköposti"
+        amount_cents: "Määrä (senteissä)"
+        rewards: "Palkinnot"
+        more_details:
+          label: "Maksut ja muita tietoja"

@@ -20,7 +20,6 @@ pt_BR:
       delete: 'Apagar'
       save: 'Salvar; Economizar'
       update_data: 'Atualizar dados do Patreon e grupos de sincronização'
-      refresh_page: 'Novos dados foram baixados da API do Patron. Por favor, atualize a página.'
       field:
         id: "Id"
         email: "e-mail"

@@ -20,7 +20,6 @@ he:
       delete: 'מחיקה'
       save: 'שמירה'
       update_data: 'עדכון הנתונים של Patreon וסנכרון הקבוצות'
-      refresh_page: 'התקבלו נתונים חדשים מה־API של Patron נא לרענן את העמוד.'
       field:
         id: "מזהה"
         email: "דוא״ל"

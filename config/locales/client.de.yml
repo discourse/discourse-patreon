@@ -30,5 +30,5 @@ de:
         more_details:
           label: "Zahlungen & weitere Details"
           help_text:
-            email_available: "Gehe nach unten rechts auf der Seite um die Patron Zusicherung Historie zu sehen"
-            email_not_available: "Wähle die Patron Mitglieder und gehe unten rechts auf der Seite um die Zusicherung Historie zu sehen."
+            email_available: "Gehe nach unten rechts auf der Seite um die Historie der Patreon-Spenden zu sehen."
+            email_not_available: "Wähle die Patreon-Mitglieder aus und gehe auf der Seite nach unten rechts, um die Historie der Patreon-Spenden zu sehen."

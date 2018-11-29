@@ -18,7 +18,6 @@ sw:
       edit: 'Hariri'
       delete: 'Futa'
       save: 'Hifadhi'
-      refresh_page: 'Taarifa mpya zimepatikana kutoka kwa Patron API. Tafadhali onesha upya karatasi.'
       field:
         id: "Utambulisho"
         email: "Barua Pepe"

@@ -5,10 +5,6 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-ru:
-  js:
-    patreon:
-      edit: 'Изменить'
-      delete: 'Удалить'
-      field:
-        rewards: "Награда"
+lt:
+  site_settings:
+    patreon_login_enabled: 'Įgalinti Patreon prisijungimą'

@@ -20,10 +20,15 @@ es:
       delete: 'Borrar'
       save: 'Guardar'
       update_data: 'Actualizar datos de Patreon y sincronizar grupos'
-      refresh_page: 'Se han descargado nuevos datos desde la API de Patron. Por favor, actualiza la página.'
+      refresh_page: 'Se han descargado nuevos datos desde la API de Patreon. Por favor, actualiza la página.'
       field:
         id: "ID"
         email: "Email"
         amount_cents: "Cantidad (en céntimos)"
         rewards: "Recompensas"
         declined_since: "Pledge declinado desde"
+        more_details:
+          label: "Pagos & Más Detalles"
+          help_text:
+            email_available: "Llega a la parte derecha de la página para ver el historial de compromisos de este Patreon."
+            email_not_available: "Seleccione el miembro de Patreon y llegue a la parte inferior derecha de la página para ver el historial de compromisos."

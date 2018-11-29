@@ -21,7 +21,7 @@ de:
     patreon_verbose_log: 'Aktiviert ausführliches Logginf der Patreon Serverlast'
   dashboard:
     patreon:
-      access_token_invalid: "Die Werte für die Patreon Creator Access- und Refresh-Token sind ungültig. Du musst neue Tokens von der <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-Webseite</a> in die <a href='/admin/site_settings/category/all_results?filter=patreon'>Seiteneinstellungen</a> kopieren."
+      access_token_invalid: "Die Werte für die Patreon Creator Access- und Refresh-Token sind ungültig. Du musst neue Tokens von der <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-Webseite</a> in die <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>Seiteneinstellungen</a> kopieren."
   patreon:
     error:
       invalid_response: "Ungültige Antwort von der Patreon API"

@@ -16,7 +16,6 @@ sk:
       edit: 'Upraviť'
       delete: 'Odstrániť'
       save: 'Uložiť'
-      refresh_page: 'Z Patron API boli stiahnuté nové údaje. Prosím obnovte stránku.'
       field:
         id: "Id"
         email: "Email"
