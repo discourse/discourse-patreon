@@ -10,7 +10,7 @@ export default Discourse.Route.extend({
   model() {
     return Ember.RSVP.Promise.all([
       ajax("/patreon/list.json"),
-      Group.findAll({ ignore_automatic: false })
+      Group.findAll({ ignore_automatic: true })
     ]).then(([result, groups]) => {
       return {
         filters: result.filters,
