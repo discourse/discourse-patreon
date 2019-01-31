@@ -31,7 +31,7 @@
     {{/if}}
     <div class='display-row'>
       <div class='field'>{{i18n 'patreon.field.more_details.label'}}</div>
-      <div class='value'><a target="_blank" href="{{patron_url}}"><i class="fa fa-external-link"></i></a></div>
+      <div class='value'><a target="_blank" href="{{patron_url}}">{{d-icon 'external-link-alt'}}</a></div>
       <div class="controls">
         {{#if model.patreon_email}}
           {{i18n 'patreon.field.more_details.help_text.email_available'}}
