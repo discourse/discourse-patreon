@@ -9,3 +9,7 @@ zh_CN:
   site_settings:
     patreon_enabled: '启用 discourse-patreon 插件'
     patreon_login_enabled: '启用 Patreon 登录'
+    patreon_client_id: '生成的Patreon客户端ID'
+    patreon_client_secret: '生成的Patreon客户端密钥'
+    patreon_webhook_secret: '生成Patreon Webhook密钥'
+    patreon_creator_discourse_username: "Discourse帐户的用户名，用于使用“Patreon社交登录”登录Patreon创建者帐户"
