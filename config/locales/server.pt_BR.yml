@@ -8,16 +8,20 @@
 pt_BR:
   site_settings:
     patreon_enabled: 'Habilitar o plugin discourse-patreon'
-    patreon_login_enabled: 'Habilitar login Patreon Social '
-    patreon_client_id: 'ID do cliente Patreon gerado'
+    patreon_login_enabled: 'Habilitar Login Social do Patreon'
+    patreon_client_id: 'ID do Cliente Patreon Gerado'
     patreon_client_secret: 'Segredo do Cliente Patreon Gerado'
-    patreon_webhook_secret: 'Segredo gerado do Webhook de Patreon'
-    patreon_creator_discourse_username: "Nome de usuário da conta do Discourse que é usada para fazer login através da conta do criador do Patreon usando o 'Login social do Patreon'"
-    patreon_creator_access_token: "Token de Acesso do Criador do Patreon Gerado"
-    patreon_creator_refresh_token: "Token de Recarga do Criador do Patreon Gerado"
-    patreon_declined_pledges_grace_period_days: "Período de carência (em dias) antes que uma promessa seja recusada completamente."
+    patreon_webhook_secret: 'Segredo do Webhook do Patreon Gerado'
+    patreon_creator_discourse_username: "Nome de usuário da conta do Discourse que é usada para fazer login através da conta do criador do Patreon usando o 'Login Social do Patreon'"
+    patreon_creator_access_token: "Token de Acesso do Criador Patreon Gerado"
+    patreon_creator_refresh_token: "Token de Atualização do Criador Patreon Gerado"
+    patreon_declined_pledges_grace_period_days: "Período de carência (em dias) antes que um compromisso seja recusado completamente."
     max_patreon_api_reqs_per_hr: "Número máximo de solicitações da API do Patreon por hora"
     max_patreon_api_reqs_per_day: "Número máximo de solicitações da API do Patreon por dia"
+    patreon_verbose_log: 'habilitar registro verboso do payload do patreon'
+  dashboard:
+    patreon:
+      access_token_invalid: "Token de acesso e atualização do Criador Patreon estão incorretos. Você precisa copiar-colar novos tokens do <a href='https://www.patreon.com/platform/documentation/clients'>site do Patreon</a> para <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>as configurações do site</a>."
   patreon:
     error:
       invalid_response: "Resposta inválida da API do Patreon"

@@ -5,4 +5,30 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-tr_TR: {}
+tr_TR:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filtreler'
+      group: 'Grup'
+      rewards: 'Ödüller'
+      filter: 'Filtre'
+      help_text: 'Bir Discourse grubunu bir veya daha fazla Patreon ödül kademesiyle senkronize edebilirsiniz.'
+      last_synced: 'Son senkronize'
+      edit: 'Düzenle'
+      delete: 'Sil'
+      save: 'Kaydet'
+      update_data: 'Patreon Verilerini Güncelle ve Grupları Senkronize Et'
+      refresh_page: 'Patreon API''den yeni veriler indirildi. Lütfen sayfayı yenileyin.'
+      field:
+        id: "Kmilik"
+        email: "Eposta"
+        amount_cents: "Miktar (sent)"
+        rewards: "Ödüller"
+        declined_since: "Rehin tarihten itibaren rededildi"
+        more_details:
+          label: "Ödemeler & Daha Fazla Detay"
+          help_text:
+            email_available: "Patreon'un rehin tarihini görmek için sayfanın sağ alt kısmına ulaşın."
+            email_not_available: "Patreon üyesini seç ve rehin tarihlerini görmek için sayfanın sağ alt kısmına ulaşın."

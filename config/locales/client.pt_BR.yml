@@ -14,15 +14,21 @@ pt_BR:
       group: 'Grupo'
       rewards: 'Recompensas'
       filter: 'Filtro'
-      help_text: 'Você pode sincronizar um grupo de Discurso com um ou mais níveis de recompensa do Patreon.'
-      last_synced: 'Última sincronização'
+      help_text: 'Você pode sincronizar um grupo do Discourse com um ou mais níveis de recompensa do Patreon.'
+      last_synced: 'Último Sincronizado'
       edit: 'Editar'
-      delete: 'Apagar'
-      save: 'Salvar; Economizar'
-      update_data: 'Atualizar dados do Patreon e grupos de sincronização'
+      delete: 'Excluir'
+      save: 'Salvar'
+      update_data: 'Atualizar Dados do Patreon & Sincronizar Grupos'
+      refresh_page: 'Novos dados foram baixados da API do Patreon. Por favor, atualize a página.'
       field:
         id: "Id"
-        email: "e-mail"
-        amount_cents: "Um monte (em centavos)"
+        email: "E-mail"
+        amount_cents: "Quantidade (em centavos)"
         rewards: "Recompensas"
-        declined_since: "Compromisso recusado desde"
+        declined_since: "Compromisso Recusado Desde"
+        more_details:
+          label: "Pagamentos & Mais Detalhes"
+          help_text:
+            email_available: "Vá para o canto inferior direito da página para ver este histórico de compromisso do Patreon."
+            email_not_available: "Selecione o membro Patreon e vá para o canto inferior direito da página para ver o histórico de compromisso."
