@@ -58,7 +58,7 @@ module ::Patreon
       return if user.blank?
 
       user.custom_fields["patreon_id"] = patreon_id
-      user.save unless skip_save || user.custom_fields_clean?
+      user.save_custom_fields unless skip_save || user.custom_fields_clean?
 
       user
     end

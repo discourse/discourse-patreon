@@ -151,7 +151,7 @@ after_initialize do
 
     user = self
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
-    patreon_id = Patreon::Patron.all.key(user.email)
+    patreon_id = Patreon::Patron.all.key(user.email)  
 
     if filters.present? && patreon_id.present?
       begin
