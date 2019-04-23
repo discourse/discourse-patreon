@@ -27,3 +27,14 @@
 .badge-card.patreon .badge-contents .badge-icon img {
   max-width: 48px;
 }
+
+.patreon-donation-prompt {
+  clear: both;
+  padding: 1rem;
+  border-radius: 3px;
+  background-color: $tertiary-low;
+
+  span.close {
+    float: right;
+  }
+}
