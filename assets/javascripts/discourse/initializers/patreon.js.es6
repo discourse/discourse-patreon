@@ -2,12 +2,15 @@ import { withPluginApi } from "discourse/lib/plugin-api";
 import TopicRoute from "discourse/routes/topic";
 
 let numTopicsOpened = 0;
-let donationPromptClosed = false;
 
 function initWithApi(api) {
+  const currentUser = api.getCurrentUser();
+
   TopicRoute.reopen({
     setupController(controller, model) {
       this._super(controller, model);
+
+      if (!currentUser) return;
 
       Ember.run.scheduleOnce("afterRender", () => {
         // only count regular topics
@@ -18,14 +21,18 @@ function initWithApi(api) {
     }
   });
 
-  api.registerConnectorClass("topic-above-suggested", "patreon", {
+  api.registerConnectorClass("topic-above-footer-buttons", "patreon", {
+    shouldRender(args, component) {
+      return component.currentUser;
+    },
+
     setupComponent(args, component) {
       component.didInsertElement = function() {
         const showDonationPrompt = (
           this.siteSettings.patreon_enabled &&
           this.siteSettings.patreon_donation_prompt_enabled &&
-          (!this.currentUser || this.currentUser.show_donation_prompt) &&
-          !donationPromptClosed &&
+          this.currentUser.show_donation_prompt &&
+          $.cookie("donationPromptClosed") !== "t" &&
           numTopicsOpened > this.siteSettings.patreon_donation_prompt_show_after_topics
         );
 
@@ -35,7 +42,8 @@ function initWithApi(api) {
 
     actions: {
       close() {
-        donationPromptClosed = true;
+        const expires = moment().add(30, "d").toDate();
+        $.cookie("donationPromptClosed", "t", { expires });
         this.$().fadeOut(700);
       }
     }

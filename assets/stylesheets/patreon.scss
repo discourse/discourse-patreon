@@ -33,6 +33,8 @@
   padding: 1rem;
   border-radius: 3px;
   background-color: $tertiary-low;
+  box-sizing: border-box;
+  margin: 1rem 0;
 
   span.close {
     float: right;

@@ -33,6 +33,6 @@ plugins:
     default: true
     client: true
   patreon_donation_prompt_show_after_topics:
-    default: 5
+    default: 20
     client: true
-    min: 1
+    min: 0
