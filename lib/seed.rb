@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ::Patreon
   class Seed
     PLUGIN_NAME = 'discourse-patreon'.freeze

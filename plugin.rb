@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # name: discourse-patreon
 # about: Integration features between Patreon and Discourse
 # version: 2.0

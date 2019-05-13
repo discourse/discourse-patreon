@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ::Jobs
   class PatreonSyncPatronsToGroups < ::Jobs::Scheduled
     every 6.hours
