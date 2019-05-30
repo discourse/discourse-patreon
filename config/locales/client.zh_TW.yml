@@ -19,3 +19,6 @@ zh_TW:
       delete: '刪除'
       save: '儲存'
       update_data: '更新 Patreon 資料與同步群組'
+      field:
+        email: "電子信箱"
+        rewards: "獎勵"

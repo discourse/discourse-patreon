@@ -19,3 +19,6 @@ nb_NO:
       delete: 'Slett'
       save: 'Lagre'
       update_data: 'Oppdater Patreon-data og synkroniser grupper'
+      field:
+        email: "E-post"
+        rewards: "Belønninger"

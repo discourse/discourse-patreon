@@ -14,6 +14,8 @@ ca:
       group: 'Grup'
       filter: 'Filtre'
       edit: 'Edita'
+      delete: 'Esborra'
       save: 'Desa'
       field:
         id: "Id"
+        email: "Correu electrònic"

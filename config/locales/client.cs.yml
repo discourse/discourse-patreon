@@ -17,3 +17,6 @@ cs:
       edit: 'Upravit'
       delete: 'Smazat'
       save: 'Uložit'
+      field:
+        email: "Email"
+        rewards: "Odměny"

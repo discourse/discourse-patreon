@@ -5,4 +5,13 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-lv: {}
+lv:
+  js:
+    patreon:
+      group: 'Grupa'
+      filter: 'Filtrs'
+      edit: 'Labot'
+      delete: 'Dzēst'
+      save: 'Saglabāt'
+      field:
+        email: "E-pasts"

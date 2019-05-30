@@ -12,3 +12,9 @@ lt:
       header:
         rules: 'Filtrai'
       group: 'Grupė'
+      filter: 'Filtruoti'
+      edit: 'Redaguoti'
+      delete: 'Pašalinti'
+      save: 'Saugoti'
+      field:
+        email: "Epaštas"

@@ -15,3 +15,5 @@ ar:
       edit: 'تعديل'
       delete: 'حذف'
       save: 'حفظ'
+      field:
+        email: "البريد الإلكتروني"

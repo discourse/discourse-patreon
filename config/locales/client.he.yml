@@ -20,8 +20,15 @@ he:
       delete: 'מחיקה'
       save: 'שמירה'
       update_data: 'עדכון הנתונים של Patreon וסנכרון הקבוצות'
+      refresh_page: 'התקבלו נתונים חדשים מה־API של Patreon. נא לרענן את העמוד.'
       field:
         id: "מזהה"
         email: "דוא״ל"
         amount_cents: "כמות (בסנטים)"
         rewards: "פרסים"
+        declined_since: "ההבטחה נדחתה מאז"
+        more_details:
+          label: "תשלומים ופרטים נוספים"
+          help_text:
+            email_available: "ניתן להגיע לפינה הימנית התחתונה של העמוד כדי לצפות בהיסטוריית ההבטחות של ה־Patreon הזה."
+            email_not_available: "נא לבחור בחבר ב־Patreon ולהגיע לפינה הימנית התחתונה של העמוד כדי לצפות בהיסטוריית ההבטחות."

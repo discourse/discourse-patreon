@@ -21,3 +21,4 @@ zh_CN:
       field:
         id: "Id"
         email: "邮箱"
+        rewards: "奖励"

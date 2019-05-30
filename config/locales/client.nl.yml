@@ -5,4 +5,30 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-nl: {}
+nl:
+  js:
+    patreon:
+      title: 'Patreon'
+      header:
+        rules: 'Filters'
+      group: 'Groep'
+      rewards: 'Beloningen'
+      filter: 'Filter'
+      help_text: 'U kunt een Discourse-groep met een of meer Patreon-beloningsniveaus synchroniseren.'
+      last_synced: 'Laatst gesynchroniseerd'
+      edit: 'Bewerken'
+      delete: 'Verwijderen'
+      save: 'Opslaan'
+      update_data: 'Patreon-gegevens bijwerken & Groepen synchroniseren'
+      refresh_page: 'Er zijn nieuwe gegevens gedownload vanaf de Patreon-API. Vernieuw de pagina.'
+      field:
+        id: "ID"
+        email: "E-mailadres"
+        amount_cents: "Bedrag (in centen)"
+        rewards: "Beloningen"
+        declined_since: "Donatie geweigerd sinds"
+        more_details:
+          label: "Betalingen & Meer details"
+          help_text:
+            email_available: "Bekijk de pagina rechts onderaan om de donatiegeschiedenis van Patreon te zien."
+            email_not_available: "Selecteer het Patreon-lid en bekijk de pagina rechts onderaan om de donatiegeschiedenis te zien."

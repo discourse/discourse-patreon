@@ -5,4 +5,13 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-ko: {}
+ko:
+  js:
+    patreon:
+      group: '그룹'
+      filter: '필터'
+      edit: '수정'
+      delete: '삭제'
+      save: '저장'
+      field:
+        email: "이메일"

@@ -9,7 +9,13 @@ ru:
   js:
     patreon:
       title: 'Patreon'
+      group: 'Группа'
+      rewards: 'Награда'
+      filter: 'Фильтр'
       edit: 'Изменить'
       delete: 'Удалить'
+      save: 'Сохранить'
+      update_data: 'Թարմացնել Patreon -ի Տվյալները և Համաժամանակեցնել Խմբերը'
       field:
+        email: "Email"
         rewards: "Награда"

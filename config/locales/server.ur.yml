@@ -18,6 +18,10 @@ ur:
     patreon_declined_pledges_grace_period_days: "رعایتی مدت (دنوں میں) اِس سے پہلے کہ وعدہ مکمل طور پر رد کر دیا جائے۔"
     max_patreon_api_reqs_per_hr: "فی گھنٹہ پَیٹریئون API درخواستوں کی زیادہ سے زیادہ تعداد"
     max_patreon_api_reqs_per_day: "فی دن پَیٹریئون API درخواستوں کی زیادہ سے زیادہ تعداد"
+    patreon_verbose_log: 'پَیٹریئون پَیلوڈ کیلئے تفصیلی لاگِنگ فعال کریں'
+  dashboard:
+    patreon:
+      access_token_invalid: "پَیٹریئون کرِییٹر اِکسس اور ریفریش ٹوکن کی وَیلیوز غلط ہیں۔ آپ کو <a href='https://www.patreon.com/platform/documentation/clients'>پَیٹریئون ویب سائٹ</a> سے نئے ٹوکن <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>سائٹ ترتیبات</a> میں کاپی کرنے کی ضرورت ہے۔"
   patreon:
     error:
       invalid_response: "پَیٹریئون API کی طرف سے غلط جواب"

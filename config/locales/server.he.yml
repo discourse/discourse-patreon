@@ -5,4 +5,23 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-he: {}
+he:
+  site_settings:
+    patreon_enabled: 'הפעלת התוסף discourse-patreon'
+    patreon_login_enabled: 'הפעלת כניסה ל־Patreon דרך רשת חברתית'
+    patreon_client_id: 'נוצר מזהה לקוח Patreon'
+    patreon_client_secret: 'נוצר סוד לקוח Patreon'
+    patreon_webhook_secret: 'נוצרה התליית סוד של Patreon'
+    patreon_creator_discourse_username: "שם המשתמש של חשבון ה־Discourse שמשמש לכניסה באמצעות חשבון יוצר ב־Patreon עם ‚כניסה ל־Patreon דרך רשת חברתית’"
+    patreon_creator_access_token: "נוצר אסימון גישה ליוצר ב־Patreon"
+    patreon_creator_refresh_token: "נוצר אסימון רענון ליוצר ב־Patreon"
+    patreon_declined_pledges_grace_period_days: "תקופת חסד (בימים) לפני שההבטחה תידחה לחלוטין."
+    max_patreon_api_reqs_per_hr: "מספר הבקשות המרבי ל־API של Patreon בשעה"
+    max_patreon_api_reqs_per_day: "מספר הבקשות המרבי ל־API של Patreon ביום"
+    patreon_verbose_log: 'הפעלת תיעוד מפורט ביומן של התעבורה מול patreon'
+  dashboard:
+    patreon:
+      access_token_invalid: "ערכי אסימוני הגישה והרענון של יוצר ב־Patreon שגויים. עליך להעתיק ולהדביק את האסימון החדשים מה<a href='https://www.patreon.com/platform/documentation/clients'>אתר של Patreon</a> אל <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>הגדרות האתר</a>."
+  patreon:
+    error:
+      invalid_response: "תגובה שגויה מה־API של Patreon"

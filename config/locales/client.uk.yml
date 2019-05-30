@@ -5,4 +5,13 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-uk: {}
+uk:
+  js:
+    patreon:
+      group: 'Група'
+      filter: 'Filter'
+      edit: 'Редагувати'
+      delete: 'Видалити'
+      save: 'Зберегти'
+      field:
+        email: "Електронна пошта"
