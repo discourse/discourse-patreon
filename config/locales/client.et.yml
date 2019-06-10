@@ -11,10 +11,13 @@ et:
       header:
         rules: 'Filtrid'
       group: 'Grupp'
+      rewards: 'Autasud'
       filter: 'Filter'
+      last_synced: 'Viimati sünkroonitud'
       edit: 'Muuda'
       delete: 'Kustuta'
       save: 'Salvesta'
       field:
         id: "D"
         email: "E-post"
+        rewards: "Autasud"
