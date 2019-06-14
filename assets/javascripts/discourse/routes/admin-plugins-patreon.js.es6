@@ -3,9 +3,9 @@ import { ajax } from "discourse/lib/ajax";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 
 /* We use three main model to get this page working:
-*  Discourse Groups (excluding the automatic ones), Patreon rewards and
-*  and current filters (one filter is a tuple between 1 Discourse group and N Patreon rewards)
-*/
+ *  Discourse Groups (excluding the automatic ones), Patreon rewards and
+ *  and current filters (one filter is a tuple between 1 Discourse group and N Patreon rewards)
+ */
 export default Discourse.Route.extend({
   model() {
     return Ember.RSVP.Promise.all([
@@ -25,11 +25,10 @@ export default Discourse.Route.extend({
     const rewards = model.rewards;
     const groups = model.groups;
     const filtersArray = _.map(model.filters, (v, k) => {
-      const rewardsNames = v.map(
-        r =>
-          rewards[r]
-            ? ` $${rewards[r].amount_cents / 100} - ${rewards[r].title}`
-            : ""
+      const rewardsNames = v.map(r =>
+        rewards[r]
+          ? ` $${rewards[r].amount_cents / 100} - ${rewards[r].title}`
+          : ""
       );
       const group = _.find(groups, g => g.id === parseInt(k));
 
