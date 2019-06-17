@@ -14,11 +14,21 @@ zh_CN:
       group: '群组'
       rewards: '奖励'
       filter: '过滤器'
+      help_text: '您可以将Discourse群组与一个或多个Patreon奖励等级同步。'
       last_synced: '最后同步'
       edit: '编辑'
       delete: '删除'
       save: '保存'
+      update_data: '更新Patreon数据并同步组'
+      refresh_page: '已从Patreon API下载新数据。请刷新页面。'
       field:
         id: "Id"
         email: "邮箱"
+        amount_cents: "金额（分）"
         rewards: "奖励"
+        declined_since: "Pledge被拒绝自"
+        more_details:
+          label: "付款和详情"
+          help_text:
+            email_available: "在页面右下角查看Patreon的pledge历史。"
+            email_not_available: "选择Patreon成员并在页面右下角查看pledge历史记录。"

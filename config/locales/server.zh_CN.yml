@@ -13,3 +13,15 @@ zh_CN:
     patreon_client_secret: '生成的Patreon客户端密钥'
     patreon_webhook_secret: '生成Patreon Webhook密钥'
     patreon_creator_discourse_username: "Discourse帐户的用户名，用于使用“Patreon社交登录”登录Patreon创建者帐户"
+    patreon_creator_access_token: "Patreon创建者生成的访问令牌"
+    patreon_creator_refresh_token: "Patreon创建者生成的刷新令牌"
+    patreon_declined_pledges_grace_period_days: "pledge被完全拒绝前的宽限期（单位：天）"
+    max_patreon_api_reqs_per_hr: " Patreon API每小时最大请求量限制"
+    max_patreon_api_reqs_per_day: " Patreon API每天最大请求量限制"
+    patreon_verbose_log: '启用patreon负载日志啰嗦模式'
+  dashboard:
+    patreon:
+      access_token_invalid: "Patreon 创建者的访问和刷新令牌值不正确。您必须将新的令牌从<a href='https://www.patreon.com/platform/documentation/clients'>Patreon网站</a>复制粘贴到<a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>网站设置</a> 。"
+  patreon:
+    error:
+      invalid_response: "来自Patreon API的无效响应"

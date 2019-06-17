@@ -5,4 +5,21 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-ru: {}
+ru:
+  site_settings:
+    patreon_enabled: 'Включить плагин discourse-patreon'
+    patreon_login_enabled: 'Включить Patreon Social Login'
+    patreon_client_id: 'Сгенерированный Patreon Client ID'
+    patreon_client_secret: 'Сгенерированный Patreon Client Secret'
+    patreon_webhook_secret: 'Сгенерированный Patreon Webhook Secret'
+    patreon_creator_discourse_username: "Имя пользователя учетной записи Discourse, которая используется для входа через учетную запись создателя Patreon с помощью 'Patreon Social Login'"
+    patreon_declined_pledges_grace_period_days: "Льготный период (в днях) до полного отказа от залога."
+    max_patreon_api_reqs_per_hr: "Максимальное количество запросов API Patreon в час"
+    max_patreon_api_reqs_per_day: "Максимальное количество запросов API Patreon в день"
+    patreon_verbose_log: 'включить подробное ведение журнала полезной нагрузки patreon'
+  dashboard:
+    patreon:
+      access_token_invalid: "Недопустимые значения доступа и обновления токенов в Patreon Creator. Вы должны скопировать и вставить новые токены с <a href='https://www.patreon.com/platform/documentation/clients'>Patreon сайта</a> из <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>настройки сайта</a>."
+  patreon:
+    error:
+      invalid_response: "Неверный ответ от Patreon API"

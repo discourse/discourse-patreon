@@ -11,5 +11,17 @@ it:
     patreon_login_enabled: 'Abilita il Patreon Social Login'
     patreon_client_id: 'Patreon Client ID generato'
     patreon_client_secret: 'Patreon Client Secret generato'
+    patreon_webhook_secret: 'Patreon Webhook Secret generato'
+    patreon_creator_discourse_username: "Nome utente dell'account Discourse che viene utilizzato per accedere tramite l'account di Patreon creator utilizzando 'Patreon Social Login'"
     patreon_creator_access_token: "Patreon Creator's Access Token generato"
     patreon_creator_refresh_token: "Patreon Creator's Refesh Token generato"
+    patreon_declined_pledges_grace_period_days: "Il periodo di grazia (in giorni) prima che un pledge venga completamente rifiutato."
+    max_patreon_api_reqs_per_hr: "Numero massimo di richieste API Patreon all'ora"
+    max_patreon_api_reqs_per_day: "Numero massimo di richieste API Patreon al giorno"
+    patreon_verbose_log: 'abilita la registrazione dettagliata del payload patreon'
+  dashboard:
+    patreon:
+      access_token_invalid: "I valori di accesso e aggiornamento dei token di Patreon Creator non sono corretti. È necessario copiare e incollare nuovi token dal <a href='https://www.patreon.com/platform/documentation/clients'>sito Web di Patreon</a> alle <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>impostazioni del sito</a> ."
+  patreon:
+    error:
+      invalid_response: "Risposta non valida dall'API Patreon"
