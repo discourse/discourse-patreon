@@ -2,12 +2,10 @@
 
 module ::Patreon
   class Seed
-    PLUGIN_NAME = 'discourse-patreon'.freeze
 
     def self.seed_content!
 
-      default_group = Group.new(
-        name: 'patrons',
+      default_group = Group.where(name: 'patrons').first_or_initialize(
         visibility_level: Group.visibility_levels[:public],
         primary_group: true,
         title: 'Patron',
@@ -17,8 +15,7 @@ module ::Patreon
       )
       default_group.save!
 
-      badge = Badge.new(
-        name: 'Patron',
+      badge = Badge.where(name: 'Patron').first_or_initialize(
         description: 'Active Patron',
         badge_type_id: 1,
         icon: ::Patreon.default_image_url,
@@ -37,7 +34,7 @@ module ::Patreon
       badge.save!
 
       basic_filter = { default_group.id.to_s => ['0'] }
-      ::PluginStore.set(PLUGIN_NAME, 'filters', basic_filter)
+      ::Patreon.set('filters', basic_filter)
 
     end
   end
