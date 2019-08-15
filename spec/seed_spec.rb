@@ -9,13 +9,13 @@ RSpec.describe ::Patreon::Seed do
     group = Group.last
     expect(group.name).to eq("patrons")
     expect(Badge.last.name).to eq("Patron")
-    expect(::Patreon.get('filters')).to eq({ group.id.to_s => ['0'] })
+    expect(::Patreon.get('filters')).to eq(group.id.to_s => ['0'])
   end
 
   it "should not raise error if group already exists" do
     group = Fabricate(:group, name: "patrons")
     described_class.seed_content!
-    expect(::Patreon.get('filters')).to eq({ group.id.to_s => ['0'] })
+    expect(::Patreon.get('filters')).to eq(group.id.to_s => ['0'])
   end
 
   it "should not raise error if badge already exists" do
