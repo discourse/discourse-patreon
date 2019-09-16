@@ -161,10 +161,7 @@ after_initialize do
 
         group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
 
-        group_ids.each do |id|
-          group = Group.find_by id: id
-          group.add user
-        end
+        Group.where(id: group_ids).each { |group| group.add user }
 
         Patreon::Patron.update_local_user(user, patreon_id, true)
       rescue => e
