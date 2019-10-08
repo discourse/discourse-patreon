@@ -29,12 +29,11 @@ RSpec.describe ::Patreon::Patron do
     local_users = described_class.get_local_users
     expect(local_users.count).to eq(2)
 
-    local_users.each do |user|
-      cf = user.custom_fields
-      id = cf["patreon_id"]
-      expect(described_class.attr("email", user)).to eq(patrons[id])
-      expect(described_class.attr("amount_cents", user)).to eq(pledges[id])
-      expect(described_class.attr("rewards", user)).to eq(titles[id])
+    local_users.each do |user_id, patreon_id|
+      user = User.find(user_id)
+      expect(described_class.attr("email", user)).to eq(patrons[patreon_id])
+      expect(described_class.attr("amount_cents", user)).to eq(pledges[patreon_id])
+      expect(described_class.attr("rewards", user)).to eq(titles[patreon_id])
     end
   end
 
