@@ -46,16 +46,28 @@ RSpec.describe ::Patreon::Patron do
     expect(local_users.count).to eq(1)
   end
 
-  it "should sync Discourse groups with Patreon users" do
-    user = Fabricate(:user, email: "foo@bar.com")
-    ouser = Fabricate(:oauth2_user_info, uid: "111112")
-    group1 = Fabricate(:group)
-    group2 = Fabricate(:group)
-    filters = { group1.id.to_s => ["0"], group2.id.to_s => ["4589"] }
-    Patreon.set("filters", filters)
-    described_class.sync_groups
-    expect(group1.users.to_a - [ouser.user, user]).to eq([])
-    expect(group2.users.to_a - [ouser.user]).to eq([])
+  describe "sync groups" do
+    let(:ouser) { Fabricate(:oauth2_user_info, uid: "111112") }
+    let(:group1) { Fabricate(:group) }
+    let(:group2) { Fabricate(:group) }
+
+    before do
+      filters = { group1.id.to_s => ["0"], group2.id.to_s => ["4589"] }
+      Patreon.set("filters", filters)
+    end
+
+    it "should sync all Patreon users" do
+      user = Fabricate(:user, email: "foo@bar.com")
+      described_class.sync_groups
+      expect(group1.users.to_a - [ouser.user, user]).to eq([])
+      expect(group2.users.to_a - [ouser.user]).to eq([])
+    end
+
+    it "should sync by Patreon id" do
+      described_class.sync_groups_by(patreon_id: ouser.uid)
+      expect(group1.users.to_a).to eq([ouser.user])
+      expect(group2.users.to_a).to eq([ouser.user])
+    end
   end
 
 end

@@ -55,6 +55,44 @@ module ::Patreon
       end
     end
 
+    def self.sync_groups_by(patreon_id:)
+      filters = Patreon.get('filters') || {}
+      return if filters.blank?
+
+      user = get_local_user(patreon_id)
+      return if user.blank?
+
+      reward_users = Patreon::RewardUser.all
+      declined_since = Patreon::Pledge::Decline.all[patreon_id]
+      declined_pledges_grace_period_days = SiteSetting.patreon_declined_pledges_grace_period_days
+      is_member = true
+
+      if declined_since.present?
+        declined_days_count = Time.now.to_date - declined_since.to_date
+        is_member = false if declined_days_count > declined_pledges_grace_period_days
+      end
+
+      filters.each_pair do |group_id, rewards|
+        group = Group.find_by(id: group_id)
+        next if group.blank?
+
+        if is_member
+          patron_ids = rewards.map { |id| reward_users[id] }.compact.flatten.uniq
+          next if patron_ids.blank?
+
+          is_member = false unless patron_ids.include?(patreon_id)
+        end
+
+        is_existing_member = GroupUser.exists?(group: group, user: user)
+
+        if is_member && !is_existing_member
+          group.add user
+        elsif !is_member && is_existing_member
+          group.remove user
+        end
+      end
+    end
+
     def self.all
       Patreon.get('users') || {}
     end
@@ -108,6 +146,17 @@ module ::Patreon
       end
 
       users.compact
+    end
+
+    def self.get_local_user(patreon_id)
+      user = User.joins(:_custom_fields).find_by(user_custom_fields: { name: 'patreon_id', value: patreon_id })
+      return user if user.present?
+
+      user = User.joins(:oauth2_user_infos).find_by(oauth2_user_infos: { provider: "patreon", uid: patreon_id })
+      user ||= User.joins(:user_emails).find_by(user_emails: { email: all[patreon_id] })
+      return if user.blank?
+
+      update_local_user(user, patreon_id)
     end
 
   end

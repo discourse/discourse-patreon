@@ -107,6 +107,10 @@ module ::Patreon
       Patreon.get('pledges') || {}
     end
 
+    def self.get_patreon_id(pledge_data)
+      pledge_data['data']['relationships']['patron']['data']['id']
+    end
+
     class Decline
 
       KEY = "pledge-declines".freeze

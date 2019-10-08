@@ -66,7 +66,7 @@ after_initialize do
   [
     '../app/controllers/patreon_admin_controller.rb',
     '../app/controllers/patreon_webhook_controller.rb',
-    '../app/jobs/regular/sync_local_patrons_to_groups.rb',
+    '../app/jobs/regular/sync_patron_groups.rb',
     '../app/jobs/scheduled/patreon_sync_patrons_to_groups.rb',
     '../app/jobs/scheduled/patreon_update_tokens.rb',
     '../app/jobs/onceoff/update_brand_images.rb',

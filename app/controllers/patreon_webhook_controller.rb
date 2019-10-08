@@ -13,9 +13,10 @@ class ::Patreon::PatreonWebhookController < ApplicationController
     raise Discourse::InvalidAccess.new unless is_valid?
 
     pledge_data = JSON.parse(request.body.read)
+    patreon_id = Patreon::Pledge.get_patreon_id(pledge_data)
 
     if SiteSetting.patreon_verbose_log
-      Rails.logger.warn("Patreon verbose log for Webhook:\n #{pledge_data.inspect}")
+      Rails.logger.warn("Patreon verbose log for Webhook:\n  Id = #{patreon_id}\n  Data = #{pledge_data.inspect}")
     end
 
     case event
@@ -27,7 +28,7 @@ class ::Patreon::PatreonWebhookController < ApplicationController
       Patreon::Pledge.delete!(pledge_data)
     end
 
-    Jobs.enqueue(:sync_local_patrons_to_groups)
+    Jobs.enqueue(:sync_patron_groups, patreon_id: patreon_id)
 
     render body: nil, status: 200
   end
