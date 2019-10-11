@@ -7,14 +7,17 @@ const cookieName = "PatreonDonationPromptClosed";
 function initWithApi(api) {
   const currentUser = api.getCurrentUser();
 
-  TopicRoute.on("setupTopicController", (route) => {
+  TopicRoute.on("setupTopicController", route => {
     const isPrivateMessage = route.controller.get("model.isPrivateMessage");
 
     if (!currentUser || isPrivateMessage) {
       return;
     }
 
-    if (numTopicsOpened <= route.siteSettings.patreon_donation_prompt_show_after_topics) {
+    if (
+      numTopicsOpened <=
+      route.siteSettings.patreon_donation_prompt_show_after_topics
+    ) {
       numTopicsOpened++;
     }
   });
@@ -26,13 +29,13 @@ function initWithApi(api) {
 
     setupComponent(_args, component) {
       component.didInsertElement = function() {
-        const showDonationPrompt = (
+        const showDonationPrompt =
           this.siteSettings.patreon_enabled &&
           this.siteSettings.patreon_donation_prompt_enabled &&
           this.currentUser.show_donation_prompt &&
           $.cookie(cookieName) !== "t" &&
-          numTopicsOpened > this.siteSettings.patreon_donation_prompt_show_after_topics
-        );
+          numTopicsOpened >
+            this.siteSettings.patreon_donation_prompt_show_after_topics;
 
         this.set("showDonationPrompt", showDonationPrompt);
       };
@@ -41,7 +44,9 @@ function initWithApi(api) {
     actions: {
       close() {
         // hide the donation prompt for 30 days
-        const expires = moment().add(30, "d").toDate();
+        const expires = moment()
+          .add(30, "d")
+          .toDate();
         $.cookie(cookieName, "t", { expires });
 
         this.$().fadeOut(700);
@@ -52,5 +57,7 @@ function initWithApi(api) {
 
 export default {
   name: "patreon",
-  initialize() { withPluginApi("0.8", initWithApi); }
-}
+  initialize() {
+    withPluginApi("0.8", initWithApi);
+  }
+};
