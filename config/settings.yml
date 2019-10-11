@@ -29,3 +29,10 @@ plugins:
   patreon_login_ignore_state:
     default: false
     hidden: true
+  patreon_donation_prompt_enabled:
+    default: false
+    client: true
+  patreon_donation_prompt_show_after_topics:
+    default: 20
+    client: true
+    min: 0
