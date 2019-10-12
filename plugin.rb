@@ -206,6 +206,9 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
       SiteSetting.patreon_creator_refresh_token = auth_token[:info][:refresh_token]
     end
 
+    result.failed = true
+    result.failed_reason = 'Authentication failed. You are not a CREATOR.'
+
     result
   end
 
