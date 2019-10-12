@@ -199,6 +199,8 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
   def after_authenticate(auth_token)
     result = super
 
+    Rails.logger.debug("auth_token: #{auth_token}")
+
     user = result.user
     discourse_username = SiteSetting.patreon_creator_discourse_username
     if discourse_username.present? && user && user.username == discourse_username
