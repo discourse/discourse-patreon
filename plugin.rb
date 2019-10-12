@@ -199,8 +199,7 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
   def after_authenticate(auth_token)
     result = super
 
-    Rails.logger.info("auth_token.keys: #{auth_token.keys}")
-    Rails.logger.info("auth_token.keys: #{auth_token[:info].inspect}")
+    Rails.logger.info("auth_token[:extra].keys: #{auth_token[:extra].keys}")
     Rails.logger.info("auth_token.keys: #{auth_token[:extra].inspect}")
 
     user = result.user
