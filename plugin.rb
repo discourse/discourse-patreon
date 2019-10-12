@@ -207,7 +207,7 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
     end
 
     result.failed = true
-    result.failed_reason = 'Authentication failed. You are not a CREATOR.'
+    result.failed_reason = 'Authentication failed. You are not a Creator.'
 
     result
   end
