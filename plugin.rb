@@ -199,7 +199,7 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
   def after_authenticate(auth_token)
     result = super
 
-    Rails.logger.info("auth_token: #{auth_token.inspect}")
+    Rails.logger.info("auth_token.keys: #{auth_token.keys}")
 
     user = result.user
     discourse_username = SiteSetting.patreon_creator_discourse_username
@@ -209,7 +209,7 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
     end
 
     result.failed = true
-    result.failed_reason = "Authentication failed. You are not a Creator. "
+    result.failed_reason = "Authentication failed. You are not a Creator. #{auth_token.keys}"
 
     result
   end
