@@ -140,10 +140,14 @@ after_initialize do
 
     def raw_info
       @raw_info ||= begin
+        campaign_response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user/campaigns", headers: {
+            'Authorization' => "Bearer #{access_token.token}"
+        }, parse: :json)
+
         response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user", headers: {
             'Authorization' => "Bearer #{access_token.token}"
         }, parse: :json)
-        response.parsed
+        response.parsed.merge({ campaign: campaign_response.parsed })
       end
     end
   end
@@ -206,7 +210,7 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
       Rails.logger.info("auth_token[:extra][:raw_info][#{key.to_s}].keys: #{inspect_data[key].keys}")
       Rails.logger.info("auth_token[:extra][:raw_info][#{key.to_s}].inspect: #{inspect_data[key].inspect}")
     end
-    Rails.logger.info("auth_token[:extra][:raw_info][:included].inspect: #{inspect_data[:included].inspect}")
+    Rails.logger.info("auth_token[:extra][:raw_info][:campaign].inspect: #{inspect_data[:campaign].inspect}") if inspect_data[:campaign]
 
     user = result.user
     discourse_username = SiteSetting.patreon_creator_discourse_username
