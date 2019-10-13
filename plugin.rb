@@ -201,8 +201,8 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
 
     inspect_data = auth_token[:extra][:raw_info]
     [:data, :included, :links].each do |key|
-      Rails.logger.info("auth_token[:extra][:raw_info][#{keys.to_s}].keys: #{inspect_data[key].keys}")
-      Rails.logger.info("auth_token[:extra][:raw_info][#{keys.to_s}].inspect: #{inspect_data[key].inspect}")
+      Rails.logger.info("auth_token[:extra][:raw_info][#{key.to_s}].keys: #{inspect_data[key].keys}")
+      Rails.logger.info("auth_token[:extra][:raw_info][#{key.to_s}].inspect: #{inspect_data[key].inspect}")
     end
 
 
