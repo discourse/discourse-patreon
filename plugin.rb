@@ -204,7 +204,7 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
       Rails.logger.info("auth_token[:extra][:raw_info][#{key.to_s}].keys: #{inspect_data[key].keys}")
       Rails.logger.info("auth_token[:extra][:raw_info][#{key.to_s}].inspect: #{inspect_data[key].inspect}")
     end
-    Rails.logger.info("auth_token[:extra][:raw_info][:included].inspect: #{inspect_data[:included].inspect}")
+    # :included,
 
     user = result.user
     discourse_username = SiteSetting.patreon_creator_discourse_username
