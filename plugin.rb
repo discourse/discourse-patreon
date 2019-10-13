@@ -144,7 +144,8 @@ after_initialize do
           client.request(:get, "https://api.patreon.com/oauth2/api/current_user/campaigns", headers: {
               'Authorization' => "Bearer #{access_token.token}"
           }, parse: :json).parsed
-        rescue => exception
+        rescue => e
+          Rails.logger.warn("Error while getting campaign info with error: #{e}.\n\n #{e.backtrace.join("\n")}")
           {}
         end
 
@@ -223,8 +224,10 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
       SiteSetting.patreon_creator_refresh_token = auth_token[:info][:refresh_token]
     end
 
-    result.failed = true
-    result.failed_reason = "Authentication failed. You are not a Creator. #{auth_token.keys}"
+    if auth_token[:extra][:raw_info][:campaign].empty?
+      result.failed = true
+      result.failed_reason = "You need to be a Creator to use this forum."
+    end
 
     result
   end
