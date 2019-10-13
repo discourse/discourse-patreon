@@ -200,8 +200,11 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
     result = super
 
     inspect_data = auth_token[:extra][:raw_info]
-    Rails.logger.info("auth_token[:extra][:raw_info].keys: #{inspect_data.keys}")
-    Rails.logger.info("auth_token[:extra][:raw_info].inspect.to_json: #{inspect_data.inspect.to_json}")
+    [:data, :included, :links].each do |key|
+      Rails.logger.info("auth_token[:extra][:raw_info][#{keys.to_s}].keys: #{inspect_data[key].keys}")
+      Rails.logger.info("auth_token[:extra][:raw_info][#{keys.to_s}].inspect: #{inspect_data[key].inspect}")
+    end
+
 
     user = result.user
     discourse_username = SiteSetting.patreon_creator_discourse_username
