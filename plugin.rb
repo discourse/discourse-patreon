@@ -140,9 +140,13 @@ after_initialize do
 
     def raw_info
       @raw_info ||= begin
-        campaign_response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user/campaigns", headers: {
-            'Authorization' => "Bearer #{access_token.token}"
-        }, parse: :json)
+        campaign_response = begin
+          client.request(:get, "https://api.patreon.com/oauth2/api/current_user/campaigns", headers: {
+              'Authorization' => "Bearer #{access_token.token}"
+          }, parse: :json)
+        rescue => exception
+          {}
+        end
 
         response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user", headers: {
             'Authorization' => "Bearer #{access_token.token}"
