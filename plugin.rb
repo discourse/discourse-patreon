@@ -143,7 +143,7 @@ after_initialize do
         campaign_response = begin
           client.request(:get, "https://api.patreon.com/oauth2/api/current_user/campaigns", headers: {
               'Authorization' => "Bearer #{access_token.token}"
-          }, parse: :json)
+          }, parse: :json).parsed
         rescue => exception
           {}
         end
@@ -151,7 +151,7 @@ after_initialize do
         response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user", headers: {
             'Authorization' => "Bearer #{access_token.token}"
         }, parse: :json)
-        response.parsed.merge({ campaign: campaign_response.parsed })
+        response.parsed.merge({ campaign: campaign_response })
       end
     end
   end
