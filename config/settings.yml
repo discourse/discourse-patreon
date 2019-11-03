@@ -36,3 +36,7 @@ plugins:
     default: 20
     client: true
     min: 0
+  patreon_donation_prompt_campaign_url:
+    default: ""
+    client: true
+    regex: "^https?:\/\/.+[^\/]$"
