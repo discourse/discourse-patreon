@@ -40,5 +40,5 @@ en:
           <p>Thank you for your support!<p>
 
           <p>
-            <a class="btn btn-large btn-danger" href="#">Become a Patron</a>
+            <a class="btn btn-large btn-danger" href="{{campaignUrl}}">Become a Patron</a>
           </p>

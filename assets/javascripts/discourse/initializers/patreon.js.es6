@@ -32,6 +32,7 @@ function initWithApi(api) {
         const showDonationPrompt =
           this.siteSettings.patreon_enabled &&
           this.siteSettings.patreon_donation_prompt_enabled &&
+          this.siteSettings.patreon_donation_prompt_campaign_url !== "" &&
           this.currentUser.show_donation_prompt &&
           $.cookie(cookieName) !== "t" &&
           numTopicsOpened >

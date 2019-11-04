@@ -14,6 +14,7 @@ en:
     patreon_verbose_log: 'enable verbose logging of patreon payload'
     patreon_donation_prompt_enabled: "Enable donation prompt?"
     patreon_donation_prompt_show_after_topics: "Show donation prompt after n topics"
+    patreon_donation_prompt_campaign_url: "Donation prompt campaign URL"
   dashboard:
     patreon:
       access_token_invalid: "Patreon Creator's access and refresh token values are incorrect. You must copy-paste new tokens from <a href='https://www.patreon.com/platform/documentation/clients'>Patreon website</a> to <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>site settings</a>."
