@@ -39,4 +39,4 @@ plugins:
   patreon_donation_prompt_campaign_url:
     default: ""
     client: true
-    regex: "^https?:\/\/.+[^\/]$"
+    regex: "^https?:\\/\\/.+[^\\/]$"
