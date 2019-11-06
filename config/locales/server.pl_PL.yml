@@ -19,6 +19,8 @@ pl_PL:
     max_patreon_api_reqs_per_hr: "Maksymalna liczba zapytań o API Patreona na godzinę"
     max_patreon_api_reqs_per_day: "Maksymalna liczba zapytań o API Patreona na dzień"
     patreon_verbose_log: 'aktywuj pełne logowanie do ładunku Patreona'
+    patreon_donation_prompt_enabled: "Włączyć zachętę do dotacji?"
+    patreon_donation_prompt_show_after_topics: "Pokaż zachętę do dotacji po n tematach."
   dashboard:
     patreon:
       access_token_invalid: "Wartości dostępu kreatora Patreona i klucza odświeżania są nieprawidłowe. Musisz skopiować i wkleić nowe tokeny ze<a href='https://www.patreon.com/platform/documentation/clients'>strony Patreona</a> do <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>ustawień strony</a>."

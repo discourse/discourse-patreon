@@ -8,6 +8,8 @@
 ja:
   js:
     patreon:
+      header:
+        rules: 'フィルター'
       group: 'グループ'
       filter: 'フィルター'
       edit: '編集'
