@@ -30,7 +30,7 @@ export default Discourse.Route.extend({
           ? ` $${rewards[r].amount_cents / 100} - ${rewards[r].title}`
           : ""
       );
-      const group = _.find(groups, g => g.id === parseInt(k));
+      const group = _.find(groups, g => g.id === parseInt(k, 10));
 
       return FilterRule.create({
         group: group.name,
