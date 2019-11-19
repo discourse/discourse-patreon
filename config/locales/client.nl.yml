@@ -32,3 +32,20 @@ nl:
           help_text:
             email_available: "Bekijk de pagina rechts onderaan om de donatiegeschiedenis van Patreon te zien."
             email_not_available: "Selecteer het Patreon-lid en bekijk de pagina rechts onderaan om de donatiegeschiedenis te zien."
+      donation_prompt:
+        body: |
+          <h1>Hallo lezer!</h1>
+
+          <p>Bevalt onze website? Wilt u bijdragen aan een goed doel?</p>
+
+          <p>
+          Als u onze website nuttig vindt en plezier hebt van de gemeenschap die we hebben gevormd, zouden we graag zien dat u aan onze website doneert.
+          Donaties zorgen ervoor dat onze services soepel blijven werken en dat onze gemeenschap nog jarenlang operationeel blijft.
+          Elke dollar telt en wordt voor goed gebruik ingezet.
+          </p>
+
+          <p>Bedankt voor uw steun!<p>
+
+          <p>
+          <a class="btn btn-large btn-danger" href="{{campaignUrl}}">Een Patron worden</a>
+          </p>

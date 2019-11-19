@@ -5,4 +5,26 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-nl: {}
+nl:
+  site_settings:
+    patreon_enabled: 'De discourse-patreon-plug-in inschakelen'
+    patreon_login_enabled: 'Sociale aanmelding voor Patreon inschakelen'
+    patreon_client_id: 'Gegenereerde Patreon-client-ID'
+    patreon_client_secret: 'Gegenereerde Patreon-clientgeheim'
+    patreon_webhook_secret: 'Gegenereerde Patreon-webhookgeheim'
+    patreon_creator_discourse_username: "Gebruikersnaam van de Discourse-account die voor aanmelding via een Patreon-creator-account wordt gebruikt met behulp van 'Sociale aanmelding voor Patreon'"
+    patreon_creator_access_token: "Gegenereerde toegangstoken van Patreon Creator"
+    patreon_creator_refresh_token: "Gegenereerde vernieuwingstoken van Patreon Creator"
+    patreon_declined_pledges_grace_period_days: "Respijtperiode (in dagen) voordat een toezegging volledig wordt ingetrokken."
+    max_patreon_api_reqs_per_hr: "Maximale aantal Patreon-API-aanvragen per uur"
+    max_patreon_api_reqs_per_day: "Maximale aantal Patreon-API-aanvragen per dag"
+    patreon_verbose_log: 'uitgebreide registratie van patreon-nettolading inschakelen'
+    patreon_donation_prompt_enabled: "Donatieprompt inschakelen?"
+    patreon_donation_prompt_show_after_topics: "Na n topics donatieprompt tonen"
+    patreon_donation_prompt_campaign_url: "Campagne-URL van donatieprompt"
+  dashboard:
+    patreon:
+      access_token_invalid: "De waarden van de toegangs- en vernieuwingstokens van Patreon Creator zijn onjuist. U moet nieuwe tokens van de <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-website</a> naar de <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>website-instellingen</a>  kopiëren-plakken."
+  patreon:
+    error:
+      invalid_response: "Ongeldig antwoord van Patreon-API"

@@ -17,18 +17,18 @@ es:
       help_text: 'Puedes sincronizar un grupo de Discourse con uno o varios niveles de recompensa Patreon.'
       last_synced: 'Última sincronización'
       edit: 'Editar'
-      delete: 'Borrar'
+      delete: 'Eliminar'
       save: 'Guardar'
       update_data: 'Actualizar datos de Patreon y sincronizar grupos'
       refresh_page: 'Se han descargado nuevos datos desde la API de Patreon. Por favor, actualiza la página.'
       field:
         id: "ID"
-        email: "Email"
+        email: "Correo electrónico"
         amount_cents: "Cantidad (en céntimos)"
         rewards: "Recompensas"
-        declined_since: "Pledge declinado desde"
+        declined_since: "Compromiso declinado desde"
         more_details:
-          label: "Pagos & Más Detalles"
+          label: "Pagos & más detalles"
           help_text:
             email_available: "Llega a la parte derecha de la página para ver el historial de compromisos de este Patreon."
             email_not_available: "Seleccione el miembro de Patreon y llegue a la parte inferior derecha de la página para ver el historial de compromisos."

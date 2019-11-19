@@ -46,6 +46,15 @@ after_initialize do
       store.set(key, value)
     end
 
+    def self.show_donation_prompt_to_user?(user)
+      return false unless SiteSetting.patreon_donation_prompt_enabled?
+
+      filters = get('filters') || {}
+      filters = filters.keys.map(&:to_i)
+
+      (user.visible_groups.pluck(:id) & filters).size <= 0
+    end
+
     class Reward
 
       def self.all
@@ -188,6 +197,11 @@ after_initialize do
   add_to_serializer(:admin_detailed_user, "include_patreon_email_exists?".to_sym) do
     ::Patreon::Patron.attr("email", object).present?
   end
+
+  add_to_serializer(:current_user, :show_donation_prompt?) {
+    Patreon.show_donation_prompt_to_user?(object)
+  }
+
 end
 
 # Authentication with Patreon

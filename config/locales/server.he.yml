@@ -19,6 +19,9 @@ he:
     max_patreon_api_reqs_per_hr: "מספר הבקשות המרבי ל־API של Patreon בשעה"
     max_patreon_api_reqs_per_day: "מספר הבקשות המרבי ל־API של Patreon ביום"
     patreon_verbose_log: 'הפעלת תיעוד מפורט ביומן של התעבורה מול patreon'
+    patreon_donation_prompt_enabled: "להפעיל הודעת בקשת תרומה?"
+    patreon_donation_prompt_show_after_topics: "הצגת הודעת בקשה תרומה לאחר n נושאים"
+    patreon_donation_prompt_campaign_url: "כתובת בקשב לתרומה במסע פרסום"
   dashboard:
     patreon:
       access_token_invalid: "ערכי אסימוני הגישה והרענון של יוצר ב־Patreon שגויים. עליך להעתיק ולהדביק את האסימון החדשים מה<a href='https://www.patreon.com/platform/documentation/clients'>אתר של Patreon</a> אל <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>הגדרות האתר</a>."

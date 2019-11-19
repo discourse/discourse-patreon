@@ -24,7 +24,7 @@ export default Ember.Controller.extend({
 
       rule.set(
         "group",
-        this.groups.find(x => x.id === parseInt(rule.get("group_id")))
+        this.groups.find(x => x.id === parseInt(rule.get("group_id"), 10))
       );
       rule.set(
         "rewards_ids",

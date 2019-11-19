@@ -20,7 +20,7 @@ ca:
       delete: 'Suprimeix'
       save: 'Desa'
       update_data: 'Actualitza les dades de Patreon i sincronitza els grups'
-      refresh_page: 'S''han descarregat dades noves de l’API de Patreon. Actualitzeu la pàgina.'
+      refresh_page: 'S''han descarregat dades noves de l''API de Patreon. Actualitzeu la pàgina.'
       field:
         id: "Id"
         email: "Correu electrònic"
@@ -30,5 +30,5 @@ ca:
         more_details:
           label: "Pagaments i més detalls"
           help_text:
-            email_available: "Aneu a la part inferior dreta de la pàgina per a veure l’historial de compromís de Patreon."
+            email_available: "Aneu a la part inferior dreta de la pàgina per a veure l'historial de compromís de Patreon."
             email_not_available: "Seleccioneu el membre de Patreon i aneu a la part inferior dreta de la pàgina per a veure l'historial de compromisos."

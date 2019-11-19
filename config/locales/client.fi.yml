@@ -20,10 +20,15 @@ fi:
       delete: 'Poista'
       save: 'Tallenna'
       update_data: 'Päivitä Patreonin data ja synkronoi ryhmät'
+      refresh_page: 'Uutta dataa on ladattu Patreonin rarjapinnasta. Päivitä sivu, kiitos.'
       field:
         id: "Id"
         email: "Sähköposti"
         amount_cents: "Määrä (senteissä)"
         rewards: "Palkinnot"
+        declined_since: "Sitoumus peruttu alkaen"
         more_details:
           label: "Maksut ja muita tietoja"
+          help_text:
+            email_available: "Selaa oikeaan alareunaan nähdäksesi tämän Patreonin sitoumushistoria. "
+            email_not_available: "Valitse Patreon jäsen ja selaa oikeaan alakulmaan nähdäksesi sitoumushistorian. "
