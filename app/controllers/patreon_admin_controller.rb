@@ -75,6 +75,19 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
     render json: success_json
   end
 
+  def email
+    user = fetch_user_from_params(include_inactive: true)
+
+    unless user == current_user
+      guardian.ensure_can_check_emails!(user)
+      StaffActionLogger.new(current_user).log_check_email(user, context: params[:context])
+    end
+
+    render json: {
+      email: ::Patreon::Patron.attr("email", user)
+    }
+  end
+
   def patreon_tokens_present?
     raise Discourse::SiteSettingMissing.new("patreon_creator_access_token") if SiteSetting.patreon_creator_access_token.blank?
     raise Discourse::SiteSettingMissing.new("patreon_creator_refresh_token")  if SiteSetting.patreon_creator_refresh_token.blank?

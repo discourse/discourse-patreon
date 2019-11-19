@@ -23,7 +23,7 @@ after_initialize do
 
   module ::Patreon
     PLUGIN_NAME = 'discourse-patreon'.freeze
-    USER_DETAIL_FIELDS = ["id", "email", "amount_cents", "rewards", "declined_since"].freeze
+    USER_DETAIL_FIELDS = ["id", "amount_cents", "rewards", "declined_since"].freeze
 
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
@@ -99,7 +99,8 @@ after_initialize do
 
   Discourse::Application.routes.append do
     get '/admin/plugins/patreon' => 'admin/plugins#index', constraints: AdminConstraint.new
-    get '/admin/plugins/patreon/list' => 'patreon_admin#list', constraints: AdminConstraint.new
+    get '/admin/plugins/patreon/list' => 'patreon/patreon_admin#list', constraints: AdminConstraint.new
+    get '/u/:username/patreon_email' => 'patreon/patreon_admin#email', constraints: { username: RouteFormat.username }
   end
 
   class ::OmniAuth::Strategies::Patreon
@@ -175,8 +176,17 @@ after_initialize do
     end
 
     add_to_serializer(:admin_detailed_user, "include_patreon_#{attribute}?".to_sym) do
-      ::Patreon::Patron.attr(attribute, object).present?
+      ::Patreon::Patron.attr(attribute, object).present? &&
+      (attribute != "amount_cents" || scope.is_admin?)
     end
+  end
+
+  add_to_serializer(:admin_detailed_user, :patreon_email_exists, false) do
+    ::Patreon::Patron.attr("email", object).present?
+  end
+
+  add_to_serializer(:admin_detailed_user, "include_patreon_email_exists?".to_sym) do
+    ::Patreon::Patron.attr("email", object).present?
   end
 end
 
