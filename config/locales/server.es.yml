@@ -21,6 +21,7 @@ es:
     patreon_verbose_log: 'habilitar el registro detallado de la carga útil de Patreon'
     patreon_donation_prompt_enabled: "¿Habilitar la indicación de donaciones?"
     patreon_donation_prompt_show_after_topics: "Mostrar la indicación de donaciones luego de n temas"
+    patreon_donation_prompt_campaign_url: "URL de la campaña de donación"
   dashboard:
     patreon:
       access_token_invalid: "El acceso de creador de Patreon y los valores del token de actualización son incorrectos. Debes copiar y pegar nuevos tokens desde <a href='https://www.patreon.com/platform/documentation/clients'>el sitio web de Patreon</a> a <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>los ajustes del sitio</a>."

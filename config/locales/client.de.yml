@@ -32,3 +32,20 @@ de:
           help_text:
             email_available: "Gehe nach unten rechts auf der Seite um die Historie der Patreon-Spenden zu sehen."
             email_not_available: "Wähle die Patreon-Mitglieder aus und gehe auf der Seite nach unten rechts, um die Historie der Patreon-Spenden zu sehen."
+      donation_prompt:
+        body: |
+          <h1>Hallo Leser!</h1>
+
+          <p>Magst du unsere Website? Möchtest du zu einer guten Sache beitragen?</p>
+
+          <p>
+          Wenn du unsere Website hilfreich findest und die Community genießt, die wir geschaffen haben, dann würden wir es lieben, wenn du spendest.
+          Spenden sorgen dafür, dass unsere Dienste reibunslos laufen und stellen sicher, dass unsere Community auch in den kommenden Jahren funktioniert.
+          Jeder Cent zählt und wird einem guten Zweck zugeführt.
+          </p>
+
+          <p>Danke für deinen Support!<p>
+
+          <p>
+          <a class="btn btn-large btn-danger" href="{{campaignUrl}}">Werde ein Förderer</a>
+          </p>
