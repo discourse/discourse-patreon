@@ -19,6 +19,9 @@ zh_CN:
     max_patreon_api_reqs_per_hr: " Patreon API每小时最大请求量限制"
     max_patreon_api_reqs_per_day: " Patreon API每天最大请求量限制"
     patreon_verbose_log: '启用patreon负载日志啰嗦模式'
+    patreon_donation_prompt_enabled: "启用捐赠提示？"
+    patreon_donation_prompt_show_after_topics: "在n个主题后显示捐赠提示"
+    patreon_donation_prompt_campaign_url: "捐赠活动URL"
   dashboard:
     patreon:
       access_token_invalid: "Patreon 创建者的访问和刷新令牌值不正确。您必须将新的令牌从<a href='https://www.patreon.com/platform/documentation/clients'>Patreon网站</a>复制粘贴到<a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>网站设置</a> 。"

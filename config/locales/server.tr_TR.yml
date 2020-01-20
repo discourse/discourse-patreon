@@ -5,4 +5,26 @@
 # To work with us on translations, join this project:
 # https://www.transifex.com/projects/p/discourse-org/
 
-tr_TR: {}
+tr_TR:
+  site_settings:
+    patreon_enabled: 'Discourse-patreon eklentisini etkinleştir'
+    patreon_login_enabled: 'Patreon Sosyal Girişini Etkinleştir'
+    patreon_client_id: 'Oluşturulan Patreon İstemci Kimliği'
+    patreon_client_secret: 'Oluşturulan Patreon İstemcisi Gizliliği'
+    patreon_webhook_secret: 'Oluşturulan Patreon Webhook Secret'
+    patreon_creator_discourse_username: "'Patreon Social Login' kullanarak Patreon içerik oluşturucu hesabıyla oturum açmak için kullanılan Discourse hesabının kullanıcı adı"
+    patreon_creator_access_token: "Oluşturulan Patreon İçerik Üreticisinin Erişim Jetonu"
+    patreon_creator_refresh_token: "Oluşturulan Patreon İçerik Üreticisinin Refesh Jetonu"
+    patreon_declined_pledges_grace_period_days: "Bir rehin tamamen reddedilmeden önceki ödemesiz periyot(gün olarak)."
+    max_patreon_api_reqs_per_hr: "Saat başına maksimum Patreon API isteği sayısı"
+    max_patreon_api_reqs_per_day: "Günlük maksimum Patreon API isteği sayısı"
+    patreon_verbose_log: 'patreon yükünün ayrıntılı günlük kaydını etkinleştir'
+    patreon_donation_prompt_enabled: "Bağış istemi etkinleştirilsin mi?"
+    patreon_donation_prompt_show_after_topics: "N konudan sonra bağış istemini göster"
+    patreon_donation_prompt_campaign_url: "Bağış istemi kampanyasının URL'si"
+  dashboard:
+    patreon:
+      access_token_invalid: "Patreon İçerik Üreticisi'nin erişim ve yenileme jetonu değerleri yanlış. Yeni simgeleri <a href='https://www.patreon.com/platform/documentation/clients'>Patreon web sitesinden</a> <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>site ayarlarına</a> kopyalayıp yapıştırmanız gerekir."
+  patreon:
+    error:
+      invalid_response: "Patreon API'ından geçersiz yanıt"
