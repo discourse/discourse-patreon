@@ -20,7 +20,7 @@
     {{/each}}
 
     <tr class="new-filter">
-      <td>{{combo-box value=editing.group_id content=groups}}</td>
+      <td>{{combo-box value=editing.group_id content=groups nameProperty="name" valueProperty="id" none="patreon.select_group"}}</td>
       <td>{{list-setting settingValue=editing.reward_list choices=rewardsNames class="rewards"}}</td>
       <td>
         <div class="pull-right">

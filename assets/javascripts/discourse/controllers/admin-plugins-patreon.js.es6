@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
     );
   },
 
-  editing: FilterRule.create({}),
+  editing: FilterRule.create({ group_id: null }),
 
   actions: {
     save() {

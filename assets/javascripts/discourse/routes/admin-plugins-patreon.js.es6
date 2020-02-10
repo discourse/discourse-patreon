@@ -12,6 +12,10 @@ export default Discourse.Route.extend({
       ajax("/patreon/list.json"),
       Group.findAll({ ignore_automatic: true })
     ]).then(([result, groups]) => {
+      groups = groups.map(g => {
+        return { id: g.id, name: g.name };
+      });
+
       return {
         filters: result.filters,
         rewards: result.rewards,
