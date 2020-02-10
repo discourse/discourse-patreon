@@ -1,0 +1,6 @@
+# Only add no-op commits to this file
+# To prevent these commits to show in git blame
+# git config blame.ignoreRevsFile .git-blame-ignore-revs
+
+# DEV: Apply prettier
+79c07dea8d1db1c0f409f818c5a32c406ceb5895
