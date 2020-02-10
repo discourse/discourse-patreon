@@ -39,7 +39,7 @@ export default Ember.Controller.extend({
       })
         .then(() => {
           var obj = model.find(x => x.get("group_id") === rule.get("group_id"));
-          const rewards = rule.get("reward_list").replace(/\|/g, ", ");
+          const rewards = rule.get("reward_list").filter(Boolean);
           if (obj) {
             obj.set("reward_list", rewards);
             obj.set("rewards", rewards);
@@ -52,7 +52,7 @@ export default Ember.Controller.extend({
               })
             );
           }
-          this.set("editing", FilterRule.create({}));
+          this.set("editing", FilterRule.create({ group_id: null }));
         })
         .catch(popupAjaxError);
     },
