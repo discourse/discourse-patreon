@@ -21,6 +21,7 @@ he:
       save: 'שמירה'
       update_data: 'עדכון הנתונים של Patreon וסנכרון הקבוצות'
       refresh_page: 'התקבלו נתונים חדשים מה־API של Patreon. נא לרענן את העמוד.'
+      select_group: 'בחירת קבוצה'
       field:
         id: "מזהה"
         email: "דוא״ל"

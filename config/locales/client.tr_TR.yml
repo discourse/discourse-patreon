@@ -21,6 +21,7 @@ tr_TR:
       save: 'Kaydet'
       update_data: 'Patreon Verilerini Güncelle ve Grupları Senkronize Et'
       refresh_page: 'Patreon API''den yeni veriler indirildi. Lütfen sayfayı yenileyin.'
+      select_group: 'Bir grup seçin'
       field:
         id: "Kmilik"
         email: "Eposta"

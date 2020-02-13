@@ -19,6 +19,9 @@ de:
     max_patreon_api_reqs_per_hr: "Maximale Anzahl an Patreon-API-Anfragen pro Stunde"
     max_patreon_api_reqs_per_day: "Maximale Anzahl von Patreon-API-Anfragen pro Tag"
     patreon_verbose_log: 'Aktiviert ausführliches Logginf der Patreon Serverlast'
+    patreon_donation_prompt_enabled: "Spendenaufforderung aktivieren?"
+    patreon_donation_prompt_show_after_topics: "Zeige Spendenaufforderung nach n Themen an"
+    patreon_donation_prompt_campaign_url: "URL der Spendenaufforderungs-Kampagne"
   dashboard:
     patreon:
       access_token_invalid: "Die Werte für die Patreon Creator Access- und Refresh-Token sind ungültig. Du musst neue Tokens von der <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-Webseite</a> in die <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>Seiteneinstellungen</a> kopieren."

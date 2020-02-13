@@ -21,6 +21,7 @@ sv:
       save: 'Spara'
       update_data: 'Uppdatera Patreon-data och synkronisera grupper'
       refresh_page: 'Ny data har laddats ner från Patreon-API:n. Uppdatera sidan.'
+      select_group: 'Välj en grupp'
       field:
         id: "ID"
         email: "E-post"
