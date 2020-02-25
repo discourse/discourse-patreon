@@ -21,6 +21,7 @@ es:
       save: 'Guardar'
       update_data: 'Actualizar datos de Patreon y sincronizar grupos'
       refresh_page: 'Se han descargado nuevos datos desde la API de Patreon. Por favor, actualiza la página.'
+      select_group: 'Selecciona un grupo'
       field:
         id: "ID"
         email: "Correo electrónico"

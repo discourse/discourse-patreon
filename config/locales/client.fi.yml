@@ -21,6 +21,7 @@ fi:
       save: 'Tallenna'
       update_data: 'Päivitä Patreonin data ja synkronoi ryhmät'
       refresh_page: 'Uutta dataa on ladattu Patreonin rarjapinnasta. Päivitä sivu, kiitos.'
+      select_group: 'Valitse ryhmä'
       field:
         id: "Id"
         email: "Sähköposti"

@@ -8,7 +8,9 @@
 id:
   js:
     patreon:
+      filter: 'Filter'
       edit: 'Ubah'
       delete: 'Hapus'
+      save: 'Simpan'
       field:
         email: "Email"

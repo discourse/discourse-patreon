@@ -21,6 +21,7 @@ zh_CN:
       save: '保存'
       update_data: '更新Patreon数据并同步组'
       refresh_page: '已从Patreon API下载新数据。请刷新页面。'
+      select_group: '选择一个群组'
       field:
         id: "Id"
         email: "邮箱"
