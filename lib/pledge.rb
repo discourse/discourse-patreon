@@ -13,19 +13,26 @@ module ::Patreon
     end
 
     def self.delete!(pledge_data)
-      rel = pledge_data['data']['relationships']
-      patron_id = rel['patron']['data']['id']
-      reward_id = rel['reward']['data']['id'] unless rel['reward']['data'].blank?
-
-      pledges = all.except(patron_id)
-      declines = Decline.all.except(patron_id)
-      patrons = Patreon::Patron.all.except(patron_id)
+      entry = pledge_data["data"]
+      rel = entry['relationships']
       reward_users = Patreon::RewardUser.all
-      reward_users[reward_id].reject! { |i| i == patron_id } if reward_id.present?
 
-      Patreon.set("pledges", pledges)
-      Decline.set(declines)
-      Patreon.set("users", patrons)
+      if entry["type"] == 'pledge'
+        patron_id = rel['patron']['data']['id']
+        reward_id = rel['reward']['data']['id'] unless rel['reward']['data'].blank?
+
+        reward_users[reward_id].reject! { |i| i == patron_id } if reward_id.present?
+      elsif entry["type"] == 'member'
+        patron_id = rel['user']['data']['id']
+
+        (rel['currently_entitled_tiers']['data'] || []).each do |tier|
+          (reward_users[tier['id']] || []).reject! { |i| i == patron_id }
+        end
+      end
+
+      Patreon.set("pledges", all.except(patron_id))
+      Decline.set(Decline.all.except(patron_id))
+      Patreon.set("users", Patreon::Patron.all.except(patron_id))
       Patreon.set("reward-users", reward_users)
     end
 
@@ -88,6 +95,15 @@ module ::Patreon
             (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << patron_id unless entry['relationships']['reward']['data'].nil?
             pledges[patron_id] = attrs['amount_cents']
             declines[patron_id] = attrs['declined_since'] if attrs['declined_since'].present?
+          elsif entry['type'] == 'member'
+            patron_id = entry['relationships']['user']['data']['id']
+            attrs = entry['attributes']
+
+            (entry['relationships']['currently_entitled_tiers']['data'] || []).each do |tier|
+              (reward_users[tier['id']] ||= []) << patron_id
+            end
+            pledges[patron_id] = attrs['pledge_amount_cents']
+            declines[patron_id] = attrs['last_charge_date'] if attrs['last_charge_status'] == "Declined"
           end
         end
 
