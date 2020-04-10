@@ -20,14 +20,11 @@ class ::Patreon::PatreonWebhookController < ApplicationController
     end
 
     case event
-    when 'pledges:create'
-    when 'members:pledge:create'
+    when 'pledges:create', 'members:pledge:create'
       Patreon::Pledge.create!(pledge_data)
-    when 'pledges:update'
-    when 'members:pledge:update'
+    when 'pledges:update', 'members:pledge:update'
       Patreon::Pledge.update!(pledge_data)
-    when 'pledges:delete'
-    when 'members:pledge:delete'
+    when 'pledges:delete', 'members:pledge:delete'
       Patreon::Pledge.delete!(pledge_data)
     end
 
