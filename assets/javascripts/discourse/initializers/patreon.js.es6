@@ -1,5 +1,4 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-import TopicRoute from "discourse/routes/topic";
 
 let numTopicsOpened = 0;
 const cookieName = "PatreonDonationPromptClosed";
@@ -7,8 +6,10 @@ const cookieName = "PatreonDonationPromptClosed";
 function initWithApi(api) {
   const currentUser = api.getCurrentUser();
 
-  TopicRoute.on("setupTopicController", route => {
-    const isPrivateMessage = route.controller.get("model.isPrivateMessage");
+  api.onAppEvent('page:topic-loaded', topic => {
+    if (!topic) { return; }
+
+    const isPrivateMessage = topic.isPrivateMessage;
 
     if (!currentUser || isPrivateMessage) {
       return;
@@ -16,7 +17,7 @@ function initWithApi(api) {
 
     if (
       numTopicsOpened <=
-      route.siteSettings.patreon_donation_prompt_show_after_topics
+      topic.siteSettings.patreon_donation_prompt_show_after_topics
     ) {
       numTopicsOpened++;
     }
