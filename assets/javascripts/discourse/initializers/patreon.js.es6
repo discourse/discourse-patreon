@@ -6,8 +6,10 @@ const cookieName = "PatreonDonationPromptClosed";
 function initWithApi(api) {
   const currentUser = api.getCurrentUser();
 
-  api.onAppEvent('page:topic-loaded', topic => {
-    if (!topic) { return; }
+  api.onAppEvent("page:topic-loaded", topic => {
+    if (!topic) {
+      return;
+    }
 
     const isPrivateMessage = topic.isPrivateMessage;
 
