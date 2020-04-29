@@ -23,7 +23,6 @@ after_initialize do
 
   module ::Patreon
     PLUGIN_NAME = 'discourse-patreon'.freeze
-    USER_DETAIL_FIELDS = ["id", "amount_cents", "rewards", "declined_since"].freeze
 
     class Engine < ::Rails::Engine
       engine_name PLUGIN_NAME
@@ -46,6 +45,26 @@ after_initialize do
       store.set(key, value)
     end
 
+    def self.campaign
+      campaign = Campaign.first_or_initialize
+
+      if campaign.external_id.blank?
+        data = Api.get("campaigns")["data"]
+        return if data.blank?
+
+        campaign.external_id = data[0]["id"]
+        campaign.save!
+      end
+
+      campaign
+    end
+
+    def self.update(json, campaign_id = nil)
+      campaign_id ||= Patreon.campaign.id
+      Tier.update(json["included"], campaign_id)
+      Member.update(Array.wrap(json["data"]))
+    end
+
     def self.show_donation_prompt_to_user?(user)
       return false unless SiteSetting.patreon_donation_prompt_enabled?
 
@@ -54,25 +73,16 @@ after_initialize do
 
       (user.visible_groups.pluck(:id) & filters).size <= 0
     end
-
-    class Reward
-
-      def self.all
-        Patreon.get("rewards") || {}
-      end
-
-    end
-
-    class RewardUser
-
-      def self.all
-        Patreon.get("reward-users") || {}
-      end
-
-    end
   end
 
   [
+    '../app/models/customer.rb',
+    '../app/models/product.rb',
+    '../app/models/plan.rb',
+    '../app/models/subscription.rb',
+    '../app/models/patreon/campaign.rb',
+    '../app/models/patreon/tier.rb',
+    '../app/models/patreon/member.rb',
     '../app/controllers/patreon_admin_controller.rb',
     '../app/controllers/patreon_webhook_controller.rb',
     '../app/jobs/regular/sync_patron_groups.rb',
@@ -80,10 +90,10 @@ after_initialize do
     '../app/jobs/scheduled/patreon_update_tokens.rb',
     '../app/jobs/onceoff/update_brand_images.rb',
     '../app/jobs/onceoff/migrate_patreon_user_infos.rb',
+    '../app/serializers/plan_serializer.rb',
+    '../app/serializers/subscription_serializer.rb',
     '../lib/api.rb',
     '../lib/seed.rb',
-    '../lib/campaign.rb',
-    '../lib/pledge.rb',
     '../lib/patron.rb',
     '../lib/tokens.rb'
   ].each { |path| load File.expand_path(path, __FILE__) }
@@ -91,7 +101,7 @@ after_initialize do
   AdminDashboardData.problem_messages << ::Patreon::Api::ACCESS_TOKEN_INVALID
 
   Patreon::Engine.routes.draw do
-    get '/rewards' => 'patreon_admin#rewards', constraints: AdminConstraint.new
+    get '/plans' => 'patreon_admin#plans', constraints: AdminConstraint.new
     get '/list' => 'patreon_admin#list', constraints: AdminConstraint.new
     post '/list' => 'patreon_admin#edit', constraints: AdminConstraint.new
     delete '/list' => 'patreon_admin#delete', constraints: AdminConstraint.new
@@ -110,6 +120,11 @@ after_initialize do
     get '/admin/plugins/patreon' => 'admin/plugins#index', constraints: AdminConstraint.new
     get '/admin/plugins/patreon/list' => 'patreon/patreon_admin#list', constraints: AdminConstraint.new
     get '/u/:username/patreon_email' => 'patreon/patreon_admin#email', constraints: { username: RouteFormat.username }
+  end
+
+  class ::User < ActiveRecord::Base
+    has_one :customer, inverse_of: :user
+    has_many :subscriptions, through: :customer
   end
 
   class ::OmniAuth::Strategies::Patreon
@@ -161,41 +176,43 @@ after_initialize do
   DiscourseEvent.on(:user_created) do |user|
     if SiteSetting.patreon_enabled
       filters = PluginStore.get(PLUGIN_NAME, 'filters')
-      patreon_id = Patreon::Patron.all.key(user.email)
 
-      if filters.present? && patreon_id.present?
-        begin
-          reward_id = Patreon::RewardUser.all.except('0').detect { |_k, v| v.include? patreon_id }&.first
+      patreon_id = user.oauth2_user_infos.where(provider: "patreon").pluck(:uid)[0]
+      customer = Patreon::Member.find_by(external_id: patreon_id)&.customer
+      customer = nil if customer&.user_id&.present?
+      customer ||= Customer.find_by(email: user.email, user_id: nil)
 
-          group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
+      if customer.present?
+        customer.update(user_id: user.id)
+        plan_ids = customer.subscriptions.pluck(:plan_id)
 
-          Group.where(id: group_ids).each { |group| group.add user }
-
-          Patreon::Patron.update_local_user(user, patreon_id, true)
-        rescue => e
-          Rails.logger.warn("Patreon group membership callback failed for new user #{self.id} with error: #{e}.\n\n #{e.backtrace.join("\n")}")
+        if filters.present? && plan_ids.present?
+          begin
+            group_ids = filters.select { |_, v| (v & plan_ids).present? }.keys
+            Group.where(id: group_ids).each { |group| group.add user }
+          rescue => e
+            Rails.logger.warn("Patreon group membership callback failed for new user #{self.id} with error: #{e}.\n\n #{e.backtrace.join("\n")}")
+          end
         end
       end
     end
   end
 
-  ::Patreon::USER_DETAIL_FIELDS.each do |attribute|
-    add_to_serializer(:admin_detailed_user, "patreon_#{attribute}".to_sym, false) do
-      ::Patreon::Patron.attr(attribute, object)
-    end
-
-    add_to_serializer(:admin_detailed_user, "include_patreon_#{attribute}?".to_sym) do
-      ::Patreon::Patron.attr(attribute, object).present? &&
-      (attribute != "amount_cents" || scope.is_admin?)
-    end
+  add_to_serializer(:admin_detailed_user, :subscription, false) do
+    subscription = object.customer.subscriptions[0]
+    SubscriptionSerializer.new(subscription, scope: scope, root: false)
   end
 
-  add_to_serializer(:admin_detailed_user, :patreon_email_exists, false) do
-    ::Patreon::Patron.attr("email", object).present?
+  add_to_serializer(:admin_detailed_user, :include_subscription?) do
+    object.customer&.subscriptions&.present?
   end
 
-  add_to_serializer(:admin_detailed_user, "include_patreon_email_exists?".to_sym) do
-    ::Patreon::Patron.attr("email", object).present?
+  add_to_serializer(:admin_detailed_user, :patreon_email_exists) do
+    object.customer&.email&.present?
+  end
+
+  add_to_serializer(:admin_detailed_user, :include_patreon_email_exists?) do
+    true
   end
 
   add_to_serializer(:current_user, :show_donation_prompt?) {

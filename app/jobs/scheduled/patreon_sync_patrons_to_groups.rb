@@ -8,7 +8,7 @@ module ::Jobs
     def execute(args)
       return unless SiteSetting.patreon_enabled && SiteSetting.patreon_creator_access_token && SiteSetting.patreon_creator_refresh_token
 
-      ::Patreon::Patron.update!
+      ::Patreon.campaign.sync!
       ::Patreon.set("last_sync", at: Time.now)
     end
   end

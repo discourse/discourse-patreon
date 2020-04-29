@@ -1,26 +1,30 @@
 en:
   js:
-    patreon:
-      title: 'Patreon'
-      header:
-        rules: 'Filters'
-      group: 'Group'
-      rewards: 'Rewards'
-      filter: 'Filter'
-      help_text: 'You can sync a Discourse group with one or more Patreon reward tiers.'
-      last_synced: 'Last Synced'
-      edit: 'Edit'
-      delete: 'Delete'
-      save: 'Save'
-      update_data: 'Update Patreon Data & Sync Groups'
-      refresh_page: 'New data has been downloaded from Patreon API. Please refresh the page.'
-      select_group: 'Select a group'
+    subscription:
+      group: "Group"
+      plans: "Tiers"
       field:
         id: "Id"
         email: "Email"
-        amount_cents: "Amount (in cents)"
-        rewards: "Rewards"
-        declined_since: "Pledge Declined Since"
+        plan_name: "Tier"
+        amount: "Amount ($)"
+        total_amount: "Total amount ($)"
+        last_payment_at: "Last payment at"
+        last_payment_status: "Last payment status"
+    patreon:
+      title: "Patreon"
+      header:
+        rules: "Filters"
+      filter: "Filter"
+      help_text: "You can sync a Discourse group with one or more Patreon reward tiers."
+      last_synced: "Last Synced"
+      edit: "Edit"
+      delete: "Delete"
+      save: "Save"
+      update_data: "Update Patreon Data & Sync Groups"
+      refresh_page: "New data has been downloaded from Patreon API. Please refresh the page."
+      select_group: "Select a group"
+      field:
         more_details:
           label: "Payments & More Details"
           help_text:

@@ -17,20 +17,18 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
 
   def list
     filters = PluginStore.get(PLUGIN_NAME, 'filters') || {}
-    rewards = ::Patreon::Reward.all
+    plans = Plan.all
     last_sync = ::Patreon.get("last_sync") || {}
 
     groups = ::Group.all.pluck(:id)
 
     valid_filters = filters.select { |k| groups.include?(k.to_i) }
 
-    render json: { filters: valid_filters, rewards: rewards, last_sync_at: last_sync["at"] }
+    render json: { filters: valid_filters, plans: plans, last_sync_at: last_sync["at"] }
   end
 
-  def rewards
-    rewards = ::Patreon::Reward.all
-
-    render json: rewards
+  def plans
+    render json: Plan.select(:id, :type, :name, :amount)
   end
 
   def is_number?(string)
@@ -38,12 +36,10 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
   end
 
   def edit
-    return render json: { message: "Error" }, status: 500 if params[:rewards_ids].nil? || !is_number?(params[:group_id])
+    return render json: { message: "Error" }, status: 500 if params[:plan_ids].nil? || !is_number?(params[:group_id])
 
     filters = PluginStore.get(PLUGIN_NAME, 'filters') || {}
-
-    filters[params[:group_id]] = params[:rewards_ids]
-
+    filters[params[:group_id]] = params[:plan_ids].map(&:to_i)
     PluginStore.set(PLUGIN_NAME, 'filters', filters)
 
     render json: success_json
@@ -63,7 +59,7 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
 
   def sync_groups
     begin
-      Patreon::Patron.sync_groups
+      Subscription.sync_groups
       render json: success_json
     rescue => e
       render json: { message: e.message }, status: 500
@@ -84,7 +80,7 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
     end
 
     render json: {
-      email: ::Patreon::Patron.attr("email", user)
+      email: user&.customer&.email
     }
   end
 

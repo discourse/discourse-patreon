@@ -4,15 +4,12 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export default Ember.Controller.extend({
-  prettyPrintReward: reward => {
-    return `$${reward.amount_cents / 100} - ${reward.title}`;
-  },
-
-  @computed("rewards")
-  rewardsNames() {
-    return _.filter(this.rewards, r => r.id >= 0).map(r =>
-      this.prettyPrintReward(r)
-    );
+  @computed("plans")
+  choices() {
+    return this.plans.map(p => {
+      name = `$${p.amount} - ${p.name}`;
+      return { id: p.id, name };
+    });
   },
 
   editing: FilterRule.create({ group_id: null }),
@@ -26,32 +23,32 @@ export default Ember.Controller.extend({
         "group",
         this.groups.find(x => x.id === parseInt(rule.get("group_id"), 10))
       );
-      rule.set(
-        "rewards_ids",
-        _.filter(this.rewards, v =>
-          rule.get("reward_list").includes(this.prettyPrintReward(v))
-        ).map(r => r.id)
-      );
 
       ajax("/patreon/list.json", {
         method: "POST",
-        data: rule.getProperties("group_id", "rewards_ids")
+        data: rule.getProperties("group_id", "plan_ids")
       })
         .then(() => {
-          var obj = model.find(x => x.get("group_id") === rule.get("group_id"));
-          const rewards = rule.get("reward_list").filter(Boolean);
+          const group = this.groups.find(
+            x => x.id === parseInt(rule.get("group_id"), 10)
+          );
+          const planNames = this.plans
+            .filter(p => rule.plan_ids.includes(p.id))
+            .map(p => `$${p.amount} - ${p.name}`)
+            .join(", ");
+          const obj = model.find(x => x.group === group.name);
+
           if (obj) {
-            obj.set("reward_list", rewards);
-            obj.set("rewards", rewards);
-            obj.set("rewards_ids", rule.rewards_ids);
+            obj.set("plans", planNames);
           } else {
             model.pushObject(
               FilterRule.create({
-                group: rule.get("group.name"),
-                rewards: rewards
+                group: group.name,
+                plans: planNames
               })
             );
           }
+
           this.set("editing", FilterRule.create({ group_id: null }));
         })
         .catch(popupAjaxError);

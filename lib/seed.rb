@@ -33,9 +33,6 @@ module ::Patreon
       )
       badge.save!
 
-      basic_filter = { default_group.id.to_s => ['0'] }
-      ::Patreon.set('filters', basic_filter)
-
     end
   end
 end

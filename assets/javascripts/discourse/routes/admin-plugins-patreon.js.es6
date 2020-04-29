@@ -18,7 +18,7 @@ export default Discourse.Route.extend({
 
       return {
         filters: result.filters,
-        rewards: result.rewards,
+        plans: result.plans,
         last_sync_at: result.last_sync_at,
         groups: groups
       };
@@ -26,28 +26,27 @@ export default Discourse.Route.extend({
   },
 
   setupController: function(controller, model) {
-    const rewards = model.rewards;
+    const plans = model.plans;
     const groups = model.groups;
     const filtersArray = _.map(model.filters, (v, k) => {
-      const rewardsNames = v.map(r =>
-        rewards[r]
-          ? ` $${rewards[r].amount_cents / 100} - ${rewards[r].title}`
-          : ""
-      );
+      const planNames = v.map(r => {
+        const plan = plans.findBy("id", parseInt(r));
+        return plan ? `$${plan.amount} - ${plan.name}` : "";
+      });
       const group = _.find(groups, g => g.id === parseInt(k, 10));
 
       return FilterRule.create({
         group: group.name,
-        rewards: rewardsNames,
+        plans: planNames,
         group_id: k,
-        reward_ids: v
+        plan_ids: v
       });
     });
 
     controller.setProperties({
       model: filtersArray,
       groups: groups,
-      rewards: rewards,
+      plans: plans,
       last_sync_at: model.last_sync_at
     });
   }

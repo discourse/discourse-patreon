@@ -1,12 +1,12 @@
 <section class='details'>
   <h1>{{i18n 'patreon.title'}}</h1>
   <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.id'}}</div>
-    <div class='value'>{{model.patreon_id}}</div>
+    <div class='field'>{{i18n 'subscription.field.id'}}</div>
+    <div class='value'>{{model.subscription.external_id}}</div>
   </div>
   {{#if model.patreon_email_exists}}
   <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.email'}}</div>
+    <div class='field'>{{i18n 'subscription.field.email'}}</div>
     <div class='value'>
       {{#if patreon_email}}
         {{patreon_email}}
@@ -21,29 +21,39 @@
     </div>
   </div>
   {{/if}}
-  {{#if model.patreon_amount_cents}}
   <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.amount_cents'}}</div>
-    <div class='value'>{{model.patreon_amount_cents}}</div>
+    <div class='field'>{{i18n 'subscription.field.plan_name'}}</div>
+    <div class='value'>{{subscription.plan.name}}</div>
+  </div>
+  {{#if model.subscription.amount}}
+  <div class='display-row'>
+    <div class='field'>{{i18n 'subscription.field.amount'}}</div>
+    <div class='value'>{{model.subscription.amount}}</div>
   </div>
   {{/if}}
-  {{#if model.patreon_rewards}}
+  {{#if model.subscription.total_amount}}
   <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.rewards'}}</div>
-    <div class='value'>{{model.patreon_rewards}}</div>
+    <div class='field'>{{i18n 'subscription.field.total_amount'}}</div>
+    <div class='value'>{{model.subscription.total_amount}}</div>
   </div>
   {{/if}}
-  {{#if model.patreon_declined_since}}
+  {{#if model.subscription.last_payment_at}}
   <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.declined_since'}}</div>
-    <div class='value'>{{{format-date model.patreon_declined_since}}}</div>
+    <div class='field'>{{i18n 'subscription.field.last_payment_at'}}</div>
+    <div class='value'>{{{format-date model.subscription.last_payment_at}}}</div>
+  </div>
+  {{/if}}
+  {{#if model.subscription.last_payment_status}}
+  <div class='display-row'>
+    <div class='field'>{{i18n 'subscription.field.last_payment_status'}}</div>
+    <div class='value'>{{{format-date model.subscription.last_payment_status}}}</div>
   </div>
   {{/if}}
   <div class='display-row'>
     <div class='field'>{{i18n 'patreon.field.more_details.label'}}</div>
     <div class='value'><a target="_blank" href="{{patron_url}}">{{d-icon 'external-link-alt'}}</a></div>
     <div class="controls">
-      {{#if model.patreon_email}}
+      {{#if patreon_email}}
         {{i18n 'patreon.field.more_details.help_text.email_available'}}
       {{else}}
         {{i18n 'patreon.field.more_details.help_text.email_not_available'}}

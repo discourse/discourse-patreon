@@ -2,15 +2,15 @@
   <h1>{{i18n "patreon.header.rules"}}</h1>
   <table>
     <tr>
-      <th>{{i18n "patreon.group"}}</th>
-      <th>{{i18n "patreon.rewards"}}</th>
+      <th>{{i18n "subscription.group"}}</th>
+      <th>{{i18n "subscription.plans"}}</th>
       <th></th>
     </tr>
 
     {{#each model as |rule|}}
       <tr class="">
         <td>{{rule.group}}</td>
-        <td>{{rule.rewards}}</td>
+        <td>{{rule.plans}}</td>
         <td>
           <div class="pull-right">
             {{d-button action="delete" actionParam=rule icon="far-trash-alt" class="delete btn-danger" title="patreon.delete"}}
@@ -21,7 +21,7 @@
 
     <tr class="new-filter">
       <td>{{combo-box value=editing.group_id content=groups nameProperty="name" valueProperty="id" none="patreon.select_group"}}</td>
-      <td>{{list-setting value=editing.reward_list choices=rewardsNames class="rewards"}}</td>
+      <td>{{list-setting value=editing.plan_ids choices=choices nameProperty="name" valueProperty="id" class="plans"}}</td>
       <td>
         <div class="pull-right">
           {{d-button action="save" icon="check" class="save btn-primary" title="patreon.save"}}

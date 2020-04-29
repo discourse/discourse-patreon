@@ -3,7 +3,9 @@ import { userPath } from "discourse/lib/url";
 
 export default {
   shouldRender(args, component) {
-    return component.siteSettings.patreon_enabled && args.model.patreon_id;
+    component.args.subscription = args.model.subscription;
+    component.args.patron_url = "https://patreon.com/members";
+    return component.siteSettings.patreon_enabled && args.model.subscription;
   },
 
   actions: {
