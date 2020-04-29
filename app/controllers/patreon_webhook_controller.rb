@@ -7,7 +7,14 @@ class ::Patreon::PatreonWebhookController < ApplicationController
 
   skip_before_action :redirect_to_login_if_required, :preload_json, :check_xhr, :verify_authenticity_token
 
-  TRIGGERS = ['pledges:create', 'pledges:update', 'pledges:delete']
+  TRIGGERS = [
+    'pledges:create',
+    'pledges:update',
+    'pledges:delete',
+    'members:pledge:create',
+    'members:pledge:update',
+    'members:pledge:delete'
+  ]
 
   def index
     raise Discourse::InvalidAccess.new unless is_valid?
