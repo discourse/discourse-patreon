@@ -219,6 +219,10 @@ after_initialize do
     Patreon.show_donation_prompt_to_user?(object)
   }
 
+  on(:merging_users) do |source_user, target_user|
+    Customer.where(user_id: source_user.id).update_all(user_id: target_user.id)
+  end
+
 end
 
 # Authentication with Patreon
