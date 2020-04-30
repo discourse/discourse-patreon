@@ -94,7 +94,6 @@ after_initialize do
     '../app/serializers/subscription_serializer.rb',
     '../lib/api.rb',
     '../lib/seed.rb',
-    '../lib/patron.rb',
     '../lib/tokens.rb'
   ].each { |path| load File.expand_path(path, __FILE__) }
 
