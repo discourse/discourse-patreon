@@ -99,7 +99,8 @@ module ::Patreon
             patron_id = entry['relationships']['user']['data']['id']
             attrs = entry['attributes']
 
-            (entry['relationships']['currently_entitled_tiers']['data'] || []).each do |tier|
+            currently_entitled_tiers = entry['relationships']['currently_entitled_tiers'] || []
+            (currently_entitled_tiers['data'] || []).each do |tier|
               (reward_users[tier['id']] ||= []) << patron_id
             end
             pledges[patron_id] = attrs['pledge_amount_cents']
