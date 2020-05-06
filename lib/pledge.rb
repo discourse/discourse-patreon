@@ -99,7 +99,7 @@ module ::Patreon
             patron_id = entry['relationships']['user']['data']['id']
             attrs = entry['attributes']
 
-            currently_entitled_tiers = entry['relationships']['currently_entitled_tiers'] || []
+            currently_entitled_tiers = entry['relationships']['currently_entitled_tiers'] || {}
             (currently_entitled_tiers['data'] || []).each do |tier|
               (reward_users[tier['id']] ||= []) << patron_id
             end
