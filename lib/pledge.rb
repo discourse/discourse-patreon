@@ -124,7 +124,9 @@ module ::Patreon
     end
 
     def self.get_patreon_id(pledge_data)
-      pledge_data['data']['relationships']['patron']['data']['id']
+      data = pledge_data['data']
+      key = data['type'] == "member" ? "user" : "patron"
+      data['relationships'][key]['data']['id']
     end
 
     class Decline

@@ -57,9 +57,9 @@ RSpec.describe ::Patreon::PatreonWebhookController do
         pledge_data
       end
 
-      def post_request(body, event)
+      def post_request(body, event, type = "pledges")
         post '/patreon/webhook', params: body, headers: {
-          'X-Patreon-Event': "pledges:#{event}",
+          'X-Patreon-Event': "#{type}:#{event}",
           'X-Patreon-Signature': OpenSSL::HMAC.hexdigest(digest, secret, body)
         }
       end
@@ -71,6 +71,21 @@ RSpec.describe ::Patreon::PatreonWebhookController do
 
         expect {
           post_request(body, "create")
+        }.to change { Patreon::Pledge.all.keys.count }.by(1)
+          .and change { Patreon::Patron.all.keys.count }.by(1)
+          .and change { Patreon::RewardUser.all.keys.count }.by(2)
+
+        expect(group.users).to include(user)
+      end
+
+      it "for event members:pledge:create" do
+        body = get_patreon_response('member.json')
+        user = Fabricate(:user, email: "roo@aar.com")
+        group = Fabricate(:group)
+        Patreon.set("filters", group.id.to_s => ["0"])
+
+        expect {
+          post_request(body, "create", "members:pledge")
         }.to change { Patreon::Pledge.all.keys.count }.by(1)
           .and change { Patreon::Patron.all.keys.count }.by(1)
           .and change { Patreon::RewardUser.all.keys.count }.by(2)
