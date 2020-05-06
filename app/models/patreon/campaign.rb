@@ -17,9 +17,13 @@ module ::Patreon
 
       # Sets all patrons to the seed group by default on first run
       filters = Patreon.get('filters')
-      Patreon::Seed.seed_content! if filters.blank?
+      Patreon::Seed.seed_content!
 
       ::MessageBus.publish '/patreon/background_sync', true
+    end
+
+    def self.find_external_id(data)
+      data&.dig("relationships", "campaign", "data", "id")
     end
 
     private

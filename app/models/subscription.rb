@@ -82,16 +82,23 @@ class Subscription < ActiveRecord::Base
         .where("subscriptions.status <= ?
                 OR (subscriptions.status = ? AND subscriptions.last_payment_at > ?)",
                 Subscription.statuses[:new], Subscription.statuses[:pending], grace_period.ago)
-      user_ids = users.pluck(:id)
-      group_user_ids = GroupUser.where(group: group).pluck(:user_id)
 
-      users.where.not(id: group_user_ids).each do |user|
-        group.add user
-      end
-
-      User.where(id: (group_user_ids - user_ids)).each do |user|
-        group.remove user
-      end
+      sync(group, users)
     end
   end
+
+  protected
+  def self.sync(group, users)
+    user_ids = users.pluck(:id)
+    group_user_ids = GroupUser.where(group: group).pluck(:user_id)
+
+    users.where.not(id: group_user_ids).each do |user|
+      group.add user
+    end
+
+    User.where(id: (group_user_ids - user_ids)).each do |user|
+      group.remove user
+    end
+  end
+
 end

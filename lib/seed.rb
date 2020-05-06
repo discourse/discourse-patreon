@@ -4,6 +4,7 @@ module ::Patreon
   class Seed
 
     def self.seed_content!
+      return if GroupCustomField.exists?(name: "default_patreon_group")
 
       default_group = Group.where(name: 'patrons').first_or_initialize(
         visibility_level: Group.visibility_levels[:public],
@@ -13,6 +14,7 @@ module ::Patreon
         bio_raw: 'To get access to this group go to our [Patreon page](https://www.patreon.com/) and add your pledge.',
         full_name: 'Our Patreon supporters'
       )
+      default_group.custom_fields["default_patreon_group"] = true
       default_group.save!
 
       badge = Badge.where(name: 'Patron').first_or_initialize(

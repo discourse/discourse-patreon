@@ -1,0 +1,93 @@
+{
+  "data": {
+    "attributes": {
+      "currently_entitled_amount_cents": 300,
+      "full_name": "Roo Aar",
+      "is_follower": true,
+      "last_charge_date": "2020-05-01T00:00:00.000+00:00",
+      "last_charge_status": "Paid",
+      "lifetime_support_cents": 12345,
+      "note": "",
+      "pledge_amount_cents": 150,
+      "patron_status": "active_patron",
+      "pledge_relationship_start": "2020-04-01T00:00:00.000+00:00"
+    },
+    "id": "d485d5ac-6c82-42c6-9c08-c50cf01b73d7",
+    "relationships": {
+      "address": {
+        "data": null
+      },
+      "campaign": {
+        "data": {
+          "id": "123456",
+          "type": "campaign"
+        }
+      },
+      "currently_entitled_tiers": {
+        "data": [
+          {
+            "id": "54321",
+            "type": "tier"
+          }
+        ]
+      },
+      "user": {
+        "data": {
+          "id": "987654321",
+          "type": "user"
+        }
+      }
+    },
+    "type": "member"
+  },
+  "included": [
+    {
+      "attributes": {
+        "about": "sample text about",
+        "created": "2015-01-15T07:25:51+00:00",
+        "email": "roo@aar.com",
+        "facebook": null,
+        "first_name": "Roo",
+        "full_name": "Roo Aar",
+        "gender": 1,
+        "image_url": "",
+        "is_email_verified": true,
+        "last_name": "Aar",
+        "social_connections": {
+          "deviantart": null,
+          "discord": null,
+          "facebook": null,
+          "spotify": null,
+          "twitch": null,
+          "twitter": null,
+          "youtube": null
+        },
+        "thumb_url": "",
+        "twitch": null,
+        "twitter": "roo",
+        "url": "https://www.patreon.com/foo",
+        "vanity": "roo",
+        "youtube": null
+      },
+      "id": "987654321",
+      "type": "user"
+    },
+    {
+      "attributes": {
+        "amount_cents": 100,
+        "created_at": "2018-04-01T04:15:41.403645+00:00",
+        "description": "A tier",
+        "discord_role_ids": ["1234567890"],
+        "edited_at": "2018-04-01T02:55:36.963334+00:00",
+        "patron_count": 32,
+        "published": true,
+        "published_at": "2018-04-01T02:55:36.938342+00:00",
+        "requires_shipping": false,
+        "title": "Patron",
+        "url": "/bePatron?c=12345&rid=54321"
+      },
+      "id": "54321",
+      "type": "tier"
+    }
+  ]
+}

@@ -14,14 +14,16 @@ class ::Patreon::PatreonWebhookController < ApplicationController
 
     json = JSON.parse(request.body.read)
     patreon_id = Patreon::Member.get_patreon_id(json["data"])
+    campaign_external_id = Patreon::Campaign.find_external_id(json["data"])
+    campaign_id = Patreon::Campaign.where(external_id: campaign_external_id).select(:id).first&.id
 
     if SiteSetting.patreon_verbose_log
-      Rails.logger.warn("Patreon verbose log for Webhook:\n  Id = #{patreon_id}\n  Data = #{pledge_data.inspect}")
+      Rails.logger.warn("Patreon verbose log for Webhook:\n  Id = #{patreon_id}\n  Data = #{json.inspect}")
     end
 
     case event
     when 'members:pledge:create', 'members:pledge:update', 'members:pledge:delete'
-      Patreon.update(json)
+      Patreon.update(json, campaign_id)
     end
 
     Jobs.enqueue(:sync_patron_groups, patreon_id: patreon_id)

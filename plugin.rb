@@ -62,7 +62,7 @@ after_initialize do
     def self.update(json, campaign_id = nil)
       campaign_id ||= Patreon.campaign.id
       Tier.update(json["included"], campaign_id)
-      Member.update(Array.wrap(json["data"]))
+      Member.update(Array.wrap(json["data"]), json["included"])
     end
 
     def self.show_donation_prompt_to_user?(user)
@@ -72,6 +72,11 @@ after_initialize do
       filters = filters.keys.map(&:to_i)
 
       (user.visible_groups.pluck(:id) & filters).size <= 0
+    end
+
+    def self.default_group
+      Seed.seed_content!
+      Group.joins(:_custom_fields).find_by(group_custom_fields: { name: "default_patreon_group" })
     end
   end
 
@@ -260,6 +265,7 @@ end
 
 auth_provider pretty_name: 'Patreon',
               title: 'with Patreon',
+              icon: 'fab-patreon',
               message: 'Authentication with Patreon (make sure pop up blockers are not enabled)',
               frame_width: 840,
               frame_height: 570,

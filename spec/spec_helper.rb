@@ -2,6 +2,9 @@
 
 RSpec.shared_context "spec helper" do
 
+  Fabricator(:patreon_campaign, from: 'Patreon::Campaign') do
+  end
+
   def get(key)
     ::Patreon.get(key)
   end
