@@ -2,6 +2,9 @@
 
 require 'rails_helper'
 
+require_relative '../fabricators/product_fabricator'
+require_relative '../fabricators/plan_fabricator'
+
 describe Patreon::PatreonAdminController do
 
   describe '#list' do
@@ -9,7 +12,8 @@ describe Patreon::PatreonAdminController do
     let(:group2) { Fabricate(:group) }
     let(:admin) { Fabricate(:admin) }
     let(:filters) { { group1.id.to_s => ["0"], group2.id.to_s => ["208"], "777" => ["888"] } }
-    let(:rewards) { { "1": { "sample": "reward" }, "2": { "another": "one" } } }
+    let(:tier1) { Fabricate(:patreon_tier) }
+    let(:tier2) { Fabricate(:patreon_tier) }
 
     before do
       sign_in(admin)
@@ -17,7 +21,8 @@ describe Patreon::PatreonAdminController do
       SiteSetting.patreon_creator_access_token = "TOKEN"
       SiteSetting.patreon_creator_refresh_token = "TOKEN"
       Patreon.set("filters", filters)
-      Patreon.set("rewards", rewards)
+      tier1
+      tier2
     end
 
     it 'should display list of patreon groups' do
@@ -25,21 +30,21 @@ describe Patreon::PatreonAdminController do
 
       result = JSON.parse(response.body)
       expect(result["filters"].count).to eq(2)
-      expect(result["rewards"].count).to eq(2)
+      expect(result["plans"].count).to eq(2)
     end
 
     it 'should display list of rewards' do
-      get '/patreon/rewards.json'
+      get '/patreon/plans.json'
 
-      rewards = JSON.parse(response.body)
-      expect(rewards.count).to eq(2)
+      tiers = JSON.parse(response.body)["patreon_admin"]
+      expect(tiers.count).to eq(2)
     end
 
     it 'should update existing filter' do
-      ids = ["1", "2"]
+      ids = [tier1.id, tier2.id]
 
       post '/patreon/list.json', params: {
-        rewards_ids: ids,
+        plan_ids: ids,
         group_id: group1.id
       }
 
@@ -56,7 +61,7 @@ describe Patreon::PatreonAdminController do
     end
 
     it 'should sync patreon groups' do
-      Patreon::Patron.expects(:sync_groups)
+      Patreon::Member.expects(:sync_groups)
       post '/patreon/sync_groups.json'
     end
 
