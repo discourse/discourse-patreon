@@ -30,10 +30,6 @@ after_initialize do
       isolate_namespace Patreon
     end
 
-    def self.default_image_url
-      "#{Discourse.base_url}/plugins/discourse-patreon/images/patreon-logomark-color-on-white.png"
-    end
-
     def self.store
       @store ||= PluginStore.new(PLUGIN_NAME)
     end
@@ -78,7 +74,6 @@ after_initialize do
     '../app/jobs/regular/sync_patron_groups.rb',
     '../app/jobs/scheduled/patreon_sync_patrons_to_groups.rb',
     '../app/jobs/scheduled/patreon_update_tokens.rb',
-    '../app/jobs/onceoff/update_brand_images.rb',
     '../app/jobs/onceoff/migrate_patreon_user_infos.rb',
     '../lib/api.rb',
     '../lib/seed.rb',

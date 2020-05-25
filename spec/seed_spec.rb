@@ -8,6 +8,7 @@ RSpec.describe ::Patreon::Seed do
     described_class.seed_content!
     group = Group.last
     expect(group.name).to eq("patrons")
+    expect(group.flair_upload).to be_present
     expect(Badge.last.name).to eq("Patron")
     expect(::Patreon.get('filters')).to eq(group.id.to_s => ['0'])
   end
