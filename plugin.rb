@@ -17,6 +17,9 @@ register_asset 'stylesheets/patreon.scss'
 
 register_svg_icon "fab-patreon" if respond_to?(:register_svg_icon)
 
+# Site setting validators must be loaded before initialize
+require_relative 'lib/validators/patreon_login_enabled_validator'
+
 after_initialize do
 
   require_dependency 'admin_constraint'
