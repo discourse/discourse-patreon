@@ -5,6 +5,7 @@ plugins:
   patreon_login_enabled:
     default: false
     client: true
+    validator: 'PatreonLoginEnabledValidator'
   patreon_client_id:
     default: ''
   patreon_client_secret:
