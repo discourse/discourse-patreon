@@ -22,6 +22,8 @@ sv:
     patreon_donation_prompt_enabled: "Aktivera donationsuppmaning?"
     patreon_donation_prompt_show_after_topics: "Visa donationsuppmaning efter n ämnen"
     patreon_donation_prompt_campaign_url: "Donationsuppmaningskampanj-URL"
+    errors:
+      patreon_creator_username_not_set: "Du behöver ange inställningarna för Discourse användarnamnet av Patreon-skaparen innan du aktiverar Patreon-inloggning."
   dashboard:
     patreon:
       access_token_invalid: "Värdena för Patreon Creator-åtkomst- och -uppdateringsbevis är felaktiga. Du måste kopiera och klistra in nya bevis från <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-webbplatsen</a> till <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>webbplatsinställningarna</a>."

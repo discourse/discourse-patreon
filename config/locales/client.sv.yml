@@ -48,5 +48,5 @@ sv:
           <p>Tack för ditt stöd!<p>
 
           <p>
-          <a class="btn btn-large btn-danger" href="{{campaignUrl}}">Bli Patreon</a>
+          <a class="btn btn-large btn-danger" href="%{campaignUrl}">Bli Patreon</a>
           </p>

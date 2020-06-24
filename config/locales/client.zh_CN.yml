@@ -33,20 +33,3 @@ zh_CN:
           help_text:
             email_available: "在页面右下角查看Patreon的pledge历史。"
             email_not_available: "选择Patreon成员并在页面右下角查看pledge历史记录。"
-      donation_prompt:
-        body: |
-          <h1>亲爱的读者，你好！</h1>
-
-          <p>你喜欢我们的网站吗？你愿意为我们提供一些帮助吗？</p>
-
-          <p>
-          如果你喜欢我们的网站，并且它为你提供了一些帮助，我们将非常乐意接受你对此网站的捐赠。
-          捐赠能保证我们的服务平稳运行，并为我们社区此后几年的正常运转提供充足保证。
-          每一元钱对我们而言都非常重要，我们会将它用在最合适的地方。
-          </p>
-
-          <p>感谢你的支持！<p>
-
-          <p>
-          <a class="btn btn-large btn-danger" href="{{campaignUrl}}">成为捐赠者</a>
-          </p>

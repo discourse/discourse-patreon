@@ -22,6 +22,8 @@ nl:
     patreon_donation_prompt_enabled: "Donatieprompt inschakelen?"
     patreon_donation_prompt_show_after_topics: "Na n topics donatieprompt tonen"
     patreon_donation_prompt_campaign_url: "Campagne-URL van donatieprompt"
+    errors:
+      patreon_creator_username_not_set: "U dient de instelling Patreon Creator Discourse Username in te stellen voordat u Patreon-aanmelding inschakelt."
   dashboard:
     patreon:
       access_token_invalid: "De waarden van de toegangs- en vernieuwingstokens van Patreon Creator zijn onjuist. U moet nieuwe tokens van de <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-website</a> naar de <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>website-instellingen</a>  kopiëren-plakken."

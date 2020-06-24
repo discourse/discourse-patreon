@@ -21,6 +21,7 @@ nl:
       save: 'Opslaan'
       update_data: 'Patreon-gegevens bijwerken & Groepen synchroniseren'
       refresh_page: 'Er zijn nieuwe gegevens gedownload vanaf de Patreon-API. Vernieuw de pagina.'
+      select_group: 'Selecteer een groep'
       field:
         id: "ID"
         email: "E-mailadres"
@@ -47,5 +48,5 @@ nl:
           <p>Bedankt voor uw steun!<p>
 
           <p>
-          <a class="btn btn-large btn-danger" href="{{campaignUrl}}">Een Patron worden</a>
+          <a class="btn btn-large btn-danger" href="%{campaignUrl}">Een Patron worden</a>
           </p>

@@ -32,20 +32,3 @@ pl_PL:
           help_text:
             email_available: "Sprawdź prawą dolną część strony, by zobaczyć historię wpłat Patreona."
             email_not_available: "Wybierz użytkownika Patreona i sprawdź prawą dolną część strony, by zobaczyć historię wpłat."
-      donation_prompt:
-        body: |
-          <h1>Cześć, czytelniku!</h1>
-
-          <p>Lubisz naszą stronę? Chciałbyś przysłużyć się dobrej sprawie?</p>
-
-          <p>
-          Jeśli sądzisz, że nasza strona jest pomocna i lubisz społeczność, którą stworzyliśmy, bardzo ucieszylibyśmy się z twojej dotacji.
-          Dotacje sprawiają, że nasz serwis działa płynnie i pozwalają na funkcjonowanie społeczności przez kolejne lata.
-          Każda złotówka zostanie przeznaczona na ten szczytny cel.
-          </p>
-
-          <p>Dziękujemy za twoje wsparcie!<p>
-
-          <p>
-          <a class="btn btn-large btn-danger" href="{{campaignUrl}}">Zostań Patronem</a>
-          </p>

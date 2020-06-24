@@ -48,5 +48,5 @@ he:
           <p>תודה על תמיכתך!<p>
 
           <p>
-          <a class="btn btn-large btn-danger" href="{{campaignUrl}}">הפיכה ל־Patreon</a>
+          <a class="btn btn-large btn-danger" href="%{campaignUrl}">הפיכה ל־Patreon</a>
           </p>

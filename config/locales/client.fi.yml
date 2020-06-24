@@ -33,20 +33,3 @@ fi:
           help_text:
             email_available: "Selaa oikeaan alareunaan nähdäksesi tämän Patreonin sitoumushistoria. "
             email_not_available: "Valitse Patreon jäsen ja selaa oikeaan alakulmaan nähdäksesi sitoumushistorian. "
-      donation_prompt:
-        body: |
-          <h1>Hei lukija!</h1>
-
-          <p>Pidätkö sivustostamme? Haluaisitko tukea hyvää toimintaa?</p>
-
-          <p>
-          Jos pidät sivustoamme tarpeellisena ja nautit tästä yhteisöstä, meistä olisi mukavaa jos lahjottaisit sivustolle.
-          Lahjoitukset mahdollistavat sivuston sujuvan toiminnan ja varmistavat, että pyörät pyörivät kaikkina tulevinakin vuosina.
-          Joka lantti merkitsee ja käytetään hyvin.
-          </p>
-
-          <p>Kiitos tuestasi!<p>
-
-          <p>
-          <a class="btn btn-large btn-danger" href="{{campaignUrl}}">Ryhdy tukijaksi Patreonissa</a>
-          </p>

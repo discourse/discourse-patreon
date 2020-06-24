@@ -8,6 +8,8 @@
 fa_IR:
   js:
     patreon:
+      header:
+        rules: 'فیلترها'
       group: 'گروه'
       filter: 'فیلتر'
       edit: 'ویرایش'
