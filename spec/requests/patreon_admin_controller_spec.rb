@@ -61,8 +61,11 @@ describe Patreon::PatreonAdminController do
     end
 
     it 'should enqueue job to sync patrons and groups' do
-      Jobs.expects(:enqueue).with(:patreon_sync_patrons_to_groups)
-      post '/patreon/update_data.json'
+      expect_enqueued_with(job: :patreon_sync_patrons_to_groups) do
+        post '/patreon/update_data.json'
+      end
+
+      expect(response.status).to eq(200)
     end
   end
 end

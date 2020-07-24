@@ -17,16 +17,22 @@ RSpec.describe ::Patreon::PatreonWebhookController do
     context 'checking headers' do
 
       it 'raises InvalidAccess error without header params' do
-        Jobs.expects(:enqueue).with(:patreon_sync_patrons_to_groups).never
-        post '/patreon/webhook'
+        expect_not_enqueued_with(job: :patreon_sync_patrons_to_groups) do
+          post '/patreon/webhook'
+        end
+
+        expect(response.status).to eq(403)
       end
 
       it 'raises InvalidAccess error with invalid header params' do
-        Jobs.expects(:enqueue).with(:patreon_sync_patrons_to_groups).never
-        post '/patreon/webhook', headers: {
-          'X-Patreon-Event': '',
-          'X-Patreon-Signature': ''
-        }
+        expect_not_enqueued_with(job: :patreon_sync_patrons_to_groups) do
+          post '/patreon/webhook', headers: {
+            'X-Patreon-Event': '',
+            'X-Patreon-Signature': ''
+          }
+        end
+
+        expect(response.status).to eq(403)
       end
 
     end
