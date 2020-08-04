@@ -32,7 +32,7 @@
   clear: both;
   padding: 15px;
   border-radius: 3px;
-  background-color: $tertiary-low;
+  background-color: var(--tertiary-low, $tertiary-low);
   box-sizing: border-box;
   margin: 15px 0;
 
