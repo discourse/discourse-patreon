@@ -1,9 +1,8 @@
-# encoding: utf-8
-#
-# Never edit this file. It will be overwritten when translations are pulled from Transifex.
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
 #
 # To work with us on translations, join this project:
-# https://www.transifex.com/projects/p/discourse-org/
+# https://translate.discourse.org/
 
 ru:
   site_settings:
@@ -13,10 +12,17 @@ ru:
     patreon_client_secret: 'Сгенерированный Patreon Client Secret'
     patreon_webhook_secret: 'Сгенерированный Patreon Webhook Secret'
     patreon_creator_discourse_username: "Имя пользователя учетной записи Discourse, которая используется для входа через учетную запись создателя Patreon с помощью 'Patreon Social Login'"
+    patreon_creator_access_token: "Сгенерированный токен доступа создателя Patreon"
+    patreon_creator_refresh_token: "Сгенерированный жетон Refesh Создателя Патреона"
     patreon_declined_pledges_grace_period_days: "Льготный период (в днях) до полного отказа от залога."
     max_patreon_api_reqs_per_hr: "Максимальное количество запросов API Patreon в час"
     max_patreon_api_reqs_per_day: "Максимальное количество запросов API Patreon в день"
     patreon_verbose_log: 'включить подробное ведение журнала полезной нагрузки patreon'
+    patreon_donation_prompt_enabled: "Включить запрос на пожертвование?"
+    patreon_donation_prompt_show_after_topics: "Показывать приглашение к пожертвованию после n тем"
+    patreon_donation_prompt_campaign_url: "URL рекламной кампании для пожертвований"
+    errors:
+      patreon_creator_username_not_set: "Вам необходимо установить настройку имени пользователя в Patreon Creator Discourse перед включением входа в систему Patreon."
   dashboard:
     patreon:
       access_token_invalid: "Недопустимые значения доступа и обновления токенов в Patreon Creator. Вы должны скопировать и вставить новые токены с <a href='https://www.patreon.com/platform/documentation/clients'>Patreon сайта</a> из <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>настройки сайта</a>."

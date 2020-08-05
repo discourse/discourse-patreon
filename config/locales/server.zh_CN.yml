@@ -1,9 +1,8 @@
-# encoding: utf-8
-#
-# Never edit this file. It will be overwritten when translations are pulled from Transifex.
+# WARNING: Never edit this file.
+# It will be overwritten when translations are pulled from Crowdin.
 #
 # To work with us on translations, join this project:
-# https://www.transifex.com/projects/p/discourse-org/
+# https://translate.discourse.org/
 
 zh_CN:
   site_settings:
@@ -22,6 +21,8 @@ zh_CN:
     patreon_donation_prompt_enabled: "启用捐赠提示？"
     patreon_donation_prompt_show_after_topics: "在n个主题后显示捐赠提示"
     patreon_donation_prompt_campaign_url: "捐赠活动URL"
+    errors:
+      patreon_creator_username_not_set: "启用Patreon登录前你需要设置Patreon Creator Discourse Username"
   dashboard:
     patreon:
       access_token_invalid: "Patreon 创建者的访问和刷新令牌值不正确。您必须将新的令牌从<a href='https://www.patreon.com/platform/documentation/clients'>Patreon网站</a>复制粘贴到<a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>网站设置</a> 。"
