@@ -29,13 +29,13 @@ export default DiscourseRoute.extend({
   setupController: function(controller, model) {
     const rewards = model.rewards;
     const groups = model.groups;
-    const filtersArray = _.map(model.filters, (v, k) => {
+    const filtersArray = model.filters.map((v, k) => {
       const rewardsNames = v.map(r =>
         rewards[r]
           ? ` $${rewards[r].amount_cents / 100} - ${rewards[r].title}`
           : ""
       );
-      const group = _.find(groups, g => g.id === parseInt(k, 10));
+      const group = groups.find(g => g.id === parseInt(k, 10));
 
       return FilterRule.create({
         group: group.name,

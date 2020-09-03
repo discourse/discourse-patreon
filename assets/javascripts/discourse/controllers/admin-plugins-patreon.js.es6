@@ -11,7 +11,7 @@ export default Ember.Controller.extend({
 
   @computed("rewards")
   rewardsNames() {
-    return _.filter(this.rewards, r => r.id >= 0).map(r =>
+    return this.rewards.filter(r => r.id >= 0).map(r =>
       this.prettyPrintReward(r)
     );
   },
@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
       );
       rule.set(
         "rewards_ids",
-        _.filter(this.rewards, v =>
+        this.rewards.filter(v =>
           rule.get("reward_list").includes(this.prettyPrintReward(v))
         ).map(r => r.id)
       );
