@@ -1,3 +1,4 @@
+import I18n from "I18n";
 import { default as computed } from "ember-addons/ember-computed-decorators";
 import getURL from "discourse-common/lib/get-url";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
@@ -5,13 +6,13 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 
 export default Ember.Controller.extend({
-  prettyPrintReward: reward => {
+  prettyPrintReward: (reward) => {
     return `$${reward.amount_cents / 100} - ${reward.title}`;
   },
 
   @computed("rewards")
   rewardsNames() {
-    return _.filter(this.rewards, r => r.id >= 0).map(r =>
+    return _.filter(this.rewards, (r) => r.id >= 0).map((r) =>
       this.prettyPrintReward(r)
     );
   },
@@ -25,21 +26,23 @@ export default Ember.Controller.extend({
 
       rule.set(
         "group",
-        this.groups.find(x => x.id === parseInt(rule.get("group_id"), 10))
+        this.groups.find((x) => x.id === parseInt(rule.get("group_id"), 10))
       );
       rule.set(
         "rewards_ids",
-        _.filter(this.rewards, v =>
+        _.filter(this.rewards, (v) =>
           rule.get("reward_list").includes(this.prettyPrintReward(v))
-        ).map(r => r.id)
+        ).map((r) => r.id)
       );
 
       ajax("/patreon/list.json", {
         method: "POST",
-        data: rule.getProperties("group_id", "rewards_ids")
+        data: rule.getProperties("group_id", "rewards_ids"),
       })
         .then(() => {
-          var obj = model.find(x => x.get("group_id") === rule.get("group_id"));
+          var obj = model.find(
+            (x) => x.get("group_id") === rule.get("group_id")
+          );
           const rewards = rule.get("reward_list").filter(Boolean);
           if (obj) {
             obj.set("reward_list", rewards);
@@ -49,7 +52,7 @@ export default Ember.Controller.extend({
             model.pushObject(
               FilterRule.create({
                 group: rule.get("group.name"),
-                rewards: rewards
+                rewards: rewards,
               })
             );
           }
@@ -63,10 +66,12 @@ export default Ember.Controller.extend({
 
       ajax("/patreon/list.json", {
         method: "DELETE",
-        data: rule.getProperties("group_id")
+        data: rule.getProperties("group_id"),
       })
         .then(() => {
-          var obj = model.find(x => x.get("group_id") === rule.get("group_id"));
+          var obj = model.find(
+            (x) => x.get("group_id") === rule.get("group_id")
+          );
           model.removeObject(obj);
         })
         .catch(popupAjaxError);
@@ -88,6 +93,6 @@ export default Ember.Controller.extend({
           window.location.pathname = getURL("/admin/plugins/patreon");
         });
       });
-    }
-  }
+    },
+  },
 });

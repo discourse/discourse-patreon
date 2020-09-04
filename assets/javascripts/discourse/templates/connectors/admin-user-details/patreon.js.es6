@@ -10,8 +10,8 @@ export default {
   actions: {
     checkPatreonEmail(user) {
       ajax(userPath(`${user.username_lower}/patreon_email.json`), {
-        data: { context: window.location.pathname }
-      }).then(result => {
+        data: { context: window.location.pathname },
+      }).then((result) => {
         if (result) {
           const email = result.email;
           let url = "https://patreon.com/members";
@@ -24,6 +24,6 @@ export default {
           this.set("patron_url", url);
         }
       });
-    }
-  }
+    },
+  },
 };
