@@ -1,3 +1,4 @@
+import I18n from "I18n";
 import { default as computed } from "ember-addons/ember-computed-decorators";
 import getURL from "discourse-common/lib/get-url";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
