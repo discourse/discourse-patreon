@@ -29,7 +29,7 @@ export default DiscourseRoute.extend({
   setupController: function (controller, model) {
     const rewards = model.rewards;
     const groups = model.groups;
-    const filtersArray = model.filters.map((v, k) => {
+    const filtersArray = Object.entries(model.filters).map(([k, v]) => {
       const rewardsNames = v.map((r) =>
         rewards[r]
           ? ` $${rewards[r].amount_cents / 100} - ${rewards[r].title}`

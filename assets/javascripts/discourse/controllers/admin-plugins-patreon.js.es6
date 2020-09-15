@@ -12,9 +12,9 @@ export default Ember.Controller.extend({
 
   @computed("rewards")
   rewardsNames() {
-    return this.rewards
-      .filter((r) => r.id >= 0)
-      .map((r) => this.prettyPrintReward(r));
+    return Object.values(this.rewards)
+      .filter((v) => v.id >= 0)
+      .map((v) => this.prettyPrintReward(v));
   },
 
   editing: FilterRule.create({ group_id: null }),
@@ -28,9 +28,10 @@ export default Ember.Controller.extend({
         "group",
         this.groups.find((x) => x.id === parseInt(rule.get("group_id"), 10))
       );
+
       rule.set(
         "rewards_ids",
-        this.rewards
+        Object.values(this.rewards)
           .filter((v) =>
             rule.get("reward_list").includes(this.prettyPrintReward(v))
           )
