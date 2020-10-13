@@ -42,7 +42,7 @@ export default Ember.Controller.extend({
         data: rule.getProperties("group_id", "rewards_ids"),
       })
         .then(() => {
-          let obj = model.find(
+          var obj = model.find(
             (x) => x.get("group_id") === rule.get("group_id")
           );
           const rewards = rule.get("reward_list").filter(Boolean);
@@ -71,7 +71,7 @@ export default Ember.Controller.extend({
         data: rule.getProperties("group_id"),
       })
         .then(() => {
-          let obj = model.find(
+          var obj = model.find(
             (x) => x.get("group_id") === rule.get("group_id")
           );
           model.removeObject(obj);
