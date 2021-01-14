@@ -34,9 +34,7 @@ You should create [Patreon Webhooks](https://www.patreon.com/platform/documentat
 
 ## Group Sync
 
-If you want to give your patrons a special treatment on your board, you can create rules between Discourse Groups and Patreon reward tiers:
-
-<img src="https://meta-s3-cdn.global.ssl.fastly.net/original/3X/a/7/a7ed547cbba142f050f4c4ccc673cde8876eafd1.png">
+If you want to give your patrons a special treatment on your board, you can create rules between Discourse Groups and Patreon reward tiers.
 
 This can pave the way to grant category access, titles and custom css to please your patrons!
 
