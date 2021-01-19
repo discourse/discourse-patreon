@@ -18,6 +18,11 @@ hy:
     max_patreon_api_reqs_per_hr: "Patreon API հարցումների առավելագույն քանակը մեկ ժամում"
     max_patreon_api_reqs_per_day: "Patreon API հարցումների առավելագույն քանակը մեկ օրում"
     patreon_verbose_log: 'միացնել patreon տվյալների ուղարկման բառային մուտքագրումը'
+    patreon_donation_prompt_enabled: "Enable donation prompt?"
+    patreon_donation_prompt_show_after_topics: "Show donation prompt after n topics"
+    patreon_donation_prompt_campaign_url: "Donation prompt campaign URL"
+    errors:
+      patreon_creator_username_not_set: "You need to set the Patreon Creator Discourse Username setting before enabling Patreon Login."
   dashboard:
     patreon:
       access_token_invalid: "Patreon Creator -ի հասանելիությունը և թարմացման տոկենի արժեքները ճշգրիտ չեն: Դուք պետք է կրկնօրինակեք-տեղադրեք նոր տոկեններ <a href='https://www.patreon.com/platform/documentation/clients'>Patreon կայքից</a> <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>կայքի կարգավորումներում</a>:"

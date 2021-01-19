@@ -20,6 +20,7 @@ hy:
       save: 'Պահպանել'
       update_data: 'Թարմացնել Patreon -ի Տվյալները և Համաժամանակեցնել Խմբերը'
       refresh_page: 'Patreon API -ից ներբեռնվել են նոր տվյալներ: Խնդրում ենք թարմացնել էջը:'
+      select_group: 'Select a group'
       field:
         id: "Id"
         email: "Էլ. հասցե"
@@ -31,3 +32,20 @@ hy:
           help_text:
             email_available: "Իջեք դեպի էջի ներքևի աջ կողմ՝ այս Patreon-ի երաշխիքի պատմությունը դիտելու համար"
             email_not_available: "Ընտրել Patreon անդամի և իջնել դեպի էջի ներքևի աջ կողմ՝ երաշխիքի պատմությունը դիտելու համար:"
+      donation_prompt:
+        body: |
+          <h1>Hello reader!</h1>
+
+          <p>Do you like our website? Would you like to contribute to a good cause?</p>
+
+          <p>
+            If find our website helpful and enjoy the community we've created, we would love if you donated to our website.
+            Donations keep our services running smoothly and ensures that our community will be operational for years to come.
+            Every dollar counts and will be put to good use.
+          </p>
+
+          <p>Thank you for your support!<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Become a Patron</a>
+          </p>

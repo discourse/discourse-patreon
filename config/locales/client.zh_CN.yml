@@ -32,3 +32,20 @@ zh_CN:
           help_text:
             email_available: "在页面右下角查看Patreon的pledge历史。"
             email_not_available: "选择Patreon成员并在页面右下角查看pledge历史记录。"
+      donation_prompt:
+        body: |
+          <h1>Hello reader!</h1>
+
+          <p>Do you like our website? Would you like to contribute to a good cause?</p>
+
+          <p>
+            If find our website helpful and enjoy the community we've created, we would love if you donated to our website.
+            Donations keep our services running smoothly and ensures that our community will be operational for years to come.
+            Every dollar counts and will be put to good use.
+          </p>
+
+          <p>Thank you for your support!<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Become a Patron</a>
+          </p>

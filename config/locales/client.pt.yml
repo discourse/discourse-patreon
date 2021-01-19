@@ -14,12 +14,38 @@ pt:
       rewards: 'Recompensas'
       filter: 'Filtrar'
       help_text: 'Pode sincronizar um grupo do Discourse com uma ou mais camadas de recompensa do Patreon.'
+      last_synced: 'Last Synced'
       edit: 'Editar'
       delete: 'Eliminar'
       save: 'Guardar'
       update_data: 'Atualizar Dados de Patreon e Sincronizar Grupos'
       refresh_page: 'Foram transferidos novos dados da API do Patreon. Por favor, atualize a página.'
+      select_group: 'Select a group'
       field:
+        id: "Id"
         email: "E-mail"
         amount_cents: "Valor (em cent.)"
         rewards: "Recompensas"
+        declined_since: "Pledge Declined Since"
+        more_details:
+          label: "Payments & More Details"
+          help_text:
+            email_available: "Reach bottom right of the page to see this Patreon's pledge history."
+            email_not_available: "Select the Patreon member and reach bottom right of the page to see the pledge history."
+      donation_prompt:
+        body: |
+          <h1>Hello reader!</h1>
+
+          <p>Do you like our website? Would you like to contribute to a good cause?</p>
+
+          <p>
+            If find our website helpful and enjoy the community we've created, we would love if you donated to our website.
+            Donations keep our services running smoothly and ensures that our community will be operational for years to come.
+            Every dollar counts and will be put to good use.
+          </p>
+
+          <p>Thank you for your support!<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Become a Patron</a>
+          </p>

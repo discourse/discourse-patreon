@@ -9,6 +9,23 @@ sw:
     patreon_enabled: 'Ruhusu plugin ya discourse-patreon '
     patreon_login_enabled: 'Ruhusu watu kuingia kupitia Patreon'
     patreon_client_id: 'Utambulisho wa Mteja wa Patreon Uliotengenezwa'
+    patreon_client_secret: 'Generated Patreon Client Secret'
+    patreon_webhook_secret: 'Generated Patreon Webhook Secret'
     patreon_creator_discourse_username: "Jina la mtumiaji kutoka kwenye Akaunti ya Discourse ambalo limetumika kutengeneza akaunti ya Patreon kupitia 'Patreon Social Login'"
+    patreon_creator_access_token: "Generated Patreon Creator's Access Token"
+    patreon_creator_refresh_token: "Generated Patreon Creator's Refesh Token"
     patreon_declined_pledges_grace_period_days: "Mda fulani (siku) kabla ya ombi kukataliwa kabisa."
+    max_patreon_api_reqs_per_hr: "Maximum number of Patreon API requests per hour"
     max_patreon_api_reqs_per_day: "Kiwango cha juu cha maombi kwa Patreon API kwa siku"
+    patreon_verbose_log: 'enable verbose logging of patreon payload'
+    patreon_donation_prompt_enabled: "Enable donation prompt?"
+    patreon_donation_prompt_show_after_topics: "Show donation prompt after n topics"
+    patreon_donation_prompt_campaign_url: "Donation prompt campaign URL"
+    errors:
+      patreon_creator_username_not_set: "You need to set the Patreon Creator Discourse Username setting before enabling Patreon Login."
+  dashboard:
+    patreon:
+      access_token_invalid: "Patreon Creator's access and refresh token values are incorrect. You must copy-paste new tokens from <a href='https://www.patreon.com/platform/documentation/clients'>Patreon website</a> to <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>site settings</a>."
+  patreon:
+    error:
+      invalid_response: "Invalid response from Patreon API"

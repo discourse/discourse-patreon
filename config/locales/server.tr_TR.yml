@@ -21,6 +21,8 @@ tr_TR:
     patreon_donation_prompt_enabled: "Bağış istemi etkinleştirilsin mi?"
     patreon_donation_prompt_show_after_topics: "N konudan sonra bağış istemini göster"
     patreon_donation_prompt_campaign_url: "Bağış istemi kampanyasının URL'si"
+    errors:
+      patreon_creator_username_not_set: "You need to set the Patreon Creator Discourse Username setting before enabling Patreon Login."
   dashboard:
     patreon:
       access_token_invalid: "Patreon İçerik Üreticisi'nin erişim ve yenileme jetonu değerleri yanlış. Yeni simgeleri <a href='https://www.patreon.com/platform/documentation/clients'>Patreon web sitesinden</a> <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>site ayarlarına</a> kopyalayıp yapıştırmanız gerekir."

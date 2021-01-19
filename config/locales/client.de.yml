@@ -20,6 +20,7 @@ de:
       save: 'Speichern'
       update_data: 'Patreon-Daten aktualisieren & Gruppen synchronisieren'
       refresh_page: 'Neue Daten wurden von der Patreon-Schnittstelle heruntergeladen. Bitte lade die Seite neu.'
+      select_group: 'Select a group'
       field:
         id: "Id"
         email: "E-Mail"
@@ -31,3 +32,20 @@ de:
           help_text:
             email_available: "Gehe nach unten rechts auf der Seite um die Historie der Patreon-Spenden zu sehen."
             email_not_available: "Wähle die Patreon-Mitglieder aus und gehe auf der Seite nach unten rechts, um die Historie der Patreon-Spenden zu sehen."
+      donation_prompt:
+        body: |
+          <h1>Hello reader!</h1>
+
+          <p>Do you like our website? Would you like to contribute to a good cause?</p>
+
+          <p>
+            If find our website helpful and enjoy the community we've created, we would love if you donated to our website.
+            Donations keep our services running smoothly and ensures that our community will be operational for years to come.
+            Every dollar counts and will be put to good use.
+          </p>
+
+          <p>Thank you for your support!<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Become a Patron</a>
+          </p>

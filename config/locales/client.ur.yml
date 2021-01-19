@@ -20,6 +20,7 @@ ur:
       save: 'محفوظ کریں'
       update_data: 'پَیٹریئون ڈیٹا اَپ ڈیٹ کریں اور گروپس کو مطابقت پذیر بنائیں'
       refresh_page: 'پَیٹریئون API سے نیا ڈیٹا ڈاؤن لوڈ کیا گیا ہے۔ براہ کرم صفحہ ریفریش کریں۔'
+      select_group: 'Select a group'
       field:
         id: "آئی ڈی"
         email: "اِی میل"
@@ -31,3 +32,20 @@ ur:
           help_text:
             email_available: "اِس پَیٹریئون کی پلَیج ہِسٹری دیکھنے کیلئے صفحے کے نچلے دائیں حصہ تک پہنچیں۔"
             email_not_available: "پلَیج ہِسٹری دیکھنے کیلئے پَیٹریئون رکن کو منتخب کریں اور صفحے کے نچلے دائیں حصہ تک پہنچیں۔"
+      donation_prompt:
+        body: |
+          <h1>Hello reader!</h1>
+
+          <p>Do you like our website? Would you like to contribute to a good cause?</p>
+
+          <p>
+            If find our website helpful and enjoy the community we've created, we would love if you donated to our website.
+            Donations keep our services running smoothly and ensures that our community will be operational for years to come.
+            Every dollar counts and will be put to good use.
+          </p>
+
+          <p>Thank you for your support!<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Become a Patron</a>
+          </p>

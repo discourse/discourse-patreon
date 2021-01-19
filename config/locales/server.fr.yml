@@ -21,6 +21,8 @@ fr:
     patreon_donation_prompt_enabled: "Activer le panneau de donation ?"
     patreon_donation_prompt_show_after_topics: "Afficher le panneau de donation après n sujets"
     patreon_donation_prompt_campaign_url: "URL de la campagne du panneau de donation"
+    errors:
+      patreon_creator_username_not_set: "You need to set the Patreon Creator Discourse Username setting before enabling Patreon Login."
   dashboard:
     patreon:
       access_token_invalid: "L'accès et l'actualisation des valeurs des jetons de Patreon Creator sont incorrects. Il faut copier-coller de nouveaux jetons depuis le <a href='https://www.patreon.com/platform/documentation/clients'>site web de Patreon</a> vers les <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>paramètres du site</a>."

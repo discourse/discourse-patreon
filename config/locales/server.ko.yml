@@ -21,6 +21,8 @@ ko:
     patreon_donation_prompt_enabled: "기부 프롬프트를 사용 하시겠습니까?"
     patreon_donation_prompt_show_after_topics: "n 개의 주제 다음에 기부 프롬프트 표시"
     patreon_donation_prompt_campaign_url: "기부 프롬프트 캠페인 URL"
+    errors:
+      patreon_creator_username_not_set: "You need to set the Patreon Creator Discourse Username setting before enabling Patreon Login."
   dashboard:
     patreon:
       access_token_invalid: "Patreon Creator의 액세스 및 새로 고침 토큰 값이 올바르지 않습니다. <a href='https://www.patreon.com/platform/documentation/clients'>Patreon 웹 사이트</a> 에서 <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>사이트 설정으로</a> 새 토큰을 복사하여 붙여 넣어야합니다."

@@ -20,6 +20,9 @@ ca:
     patreon_verbose_log: 'habilita el registre detallat de la càrrega útil del Patreon'
     patreon_donation_prompt_enabled: "Voleu activar la sol·licitud de donació?"
     patreon_donation_prompt_show_after_topics: "Mostra el missatge de donació després de n temes"
+    patreon_donation_prompt_campaign_url: "Donation prompt campaign URL"
+    errors:
+      patreon_creator_username_not_set: "You need to set the Patreon Creator Discourse Username setting before enabling Patreon Login."
   dashboard:
     patreon:
       access_token_invalid: "Els valors de testimoni d'accés i actualització de creador Patreon són incorrectes. Cal copiar i enganxar els nous testimonis del <a href='https://www.patreon.com/platform/documentation/clients'>lloc web de Patreon</a> en la <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>configuració del lloc web</a>."

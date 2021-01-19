@@ -18,6 +18,11 @@ ur:
     max_patreon_api_reqs_per_hr: "فی گھنٹہ پَیٹریئون API درخواستوں کی زیادہ سے زیادہ تعداد"
     max_patreon_api_reqs_per_day: "فی دن پَیٹریئون API درخواستوں کی زیادہ سے زیادہ تعداد"
     patreon_verbose_log: 'پَیٹریئون پَیلوڈ کیلئے تفصیلی لاگِنگ فعال کریں'
+    patreon_donation_prompt_enabled: "Enable donation prompt?"
+    patreon_donation_prompt_show_after_topics: "Show donation prompt after n topics"
+    patreon_donation_prompt_campaign_url: "Donation prompt campaign URL"
+    errors:
+      patreon_creator_username_not_set: "You need to set the Patreon Creator Discourse Username setting before enabling Patreon Login."
   dashboard:
     patreon:
       access_token_invalid: "پَیٹریئون کرِییٹر اِکسس اور ریفریش ٹوکن کی وَیلیوز غلط ہیں۔ آپ کو <a href='https://www.patreon.com/platform/documentation/clients'>پَیٹریئون ویب سائٹ</a> سے نئے ٹوکن <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>سائٹ ترتیبات</a> میں کاپی کرنے کی ضرورت ہے۔"

@@ -32,3 +32,20 @@ tr_TR:
           help_text:
             email_available: "Patreon'un rehin tarihini görmek için sayfanın sağ alt kısmına ulaşın."
             email_not_available: "Patreon üyesini seç ve rehin tarihlerini görmek için sayfanın sağ alt kısmına ulaşın."
+      donation_prompt:
+        body: |
+          <h1>Hello reader!</h1>
+
+          <p>Do you like our website? Would you like to contribute to a good cause?</p>
+
+          <p>
+            If find our website helpful and enjoy the community we've created, we would love if you donated to our website.
+            Donations keep our services running smoothly and ensures that our community will be operational for years to come.
+            Every dollar counts and will be put to good use.
+          </p>
+
+          <p>Thank you for your support!<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Become a Patron</a>
+          </p>
