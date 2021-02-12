@@ -112,7 +112,9 @@ module ::Patreon
         pledge_data['included'].each do |entry|
           case entry['type']
           when 'user'
-            users[entry['id']] = entry['attributes']['email'].downcase
+            if entry['attributes']['email'].present?
+              users[entry['id']] = entry['attributes']['email'].downcase
+            end
           end
         end
       end
