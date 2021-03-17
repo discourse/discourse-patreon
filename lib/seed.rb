@@ -30,7 +30,7 @@ module ::Patreon
         trigger: 0,
         show_posts: false,
         system: false,
-        image: flair_upload.url,
+        image_upload_id: flair_upload.id,
         long_description: 'To get access to this badge go to our <a href="https://www.patreon.com/">Patreon page</a> and add your pledge.'
       )
       badge.save!
