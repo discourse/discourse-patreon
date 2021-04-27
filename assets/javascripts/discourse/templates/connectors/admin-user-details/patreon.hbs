@@ -1,52 +1,56 @@
-<section class='details'>
-  <h1>{{i18n 'patreon.title'}}</h1>
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.id'}}</div>
-    <div class='value'>{{model.patreon_id}}</div>
+<section class="details">
+  <h1>{{i18n "patreon.title"}}</h1>
+  <div class="display-row">
+    <div class="field">{{i18n "patreon.field.id"}}</div>
+    <div class="value">{{model.patreon_id}}</div>
   </div>
   {{#if model.patreon_email_exists}}
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.email'}}</div>
-    <div class='value'>
-      {{#if patreon_email}}
-        {{patreon_email}}
-      {{else}}
-        {{d-button
-          class="btn-default"
-          action="checkPatreonEmail"
-          actionParam=model icon="far-envelope"
-          label="admin.users.check_email.text"
-          title="admin.users.check_email.title"}}
-      {{/if}}
+    <div class="display-row">
+      <div class="field">{{i18n "patreon.field.email"}}</div>
+      <div class="value">
+        {{#if patreon_email}}
+          {{patreon_email}}
+        {{else}}
+          {{d-button
+            class="btn-default"
+            action="checkPatreonEmail"
+            actionParam=model icon="far-envelope"
+            label="admin.users.check_email.text"
+            title="admin.users.check_email.title"}}
+        {{/if}}
+      </div>
     </div>
-  </div>
   {{/if}}
   {{#if model.patreon_amount_cents}}
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.amount_cents'}}</div>
-    <div class='value'>{{model.patreon_amount_cents}}</div>
-  </div>
+    <div class="display-row">
+      <div class="field">{{i18n "patreon.field.amount_cents"}}</div>
+      <div class="value">{{model.patreon_amount_cents}}</div>
+    </div>
   {{/if}}
   {{#if model.patreon_rewards}}
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.rewards'}}</div>
-    <div class='value'>{{model.patreon_rewards}}</div>
-  </div>
+    <div class="display-row">
+      <div class="field">{{i18n "patreon.field.rewards"}}</div>
+      <div class="value">{{model.patreon_rewards}}</div>
+    </div>
   {{/if}}
   {{#if model.patreon_declined_since}}
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.declined_since'}}</div>
-    <div class='value'>{{{format-date model.patreon_declined_since}}}</div>
-  </div>
+    <div class="display-row">
+      <div class="field">{{i18n "patreon.field.declined_since"}}</div>
+      <div class="value">{{html-safe format-date model.patreon_declined_since}}</div>
+    </div>
   {{/if}}
-  <div class='display-row'>
-    <div class='field'>{{i18n 'patreon.field.more_details.label'}}</div>
-    <div class='value'><a target="_blank" href="{{patron_url}}">{{d-icon 'external-link-alt'}}</a></div>
+  <div class="display-row">
+    <div class="field">{{i18n "patreon.field.more_details.label"}}</div>
+    <div class="value">
+      <a rel="noopener noreferrer" target="_blank" href={{patron_url}}>
+        {{d-icon "external-link-alt"}}
+      </a>
+    </div>
     <div class="controls">
       {{#if model.patreon_email}}
-        {{i18n 'patreon.field.more_details.help_text.email_available'}}
+        {{i18n "patreon.field.more_details.help_text.email_available"}}
       {{else}}
-        {{i18n 'patreon.field.more_details.help_text.email_not_available'}}
+        {{i18n "patreon.field.more_details.help_text.email_not_available"}}
       {{/if}}
     </div>
   </div>
