@@ -1,10 +1,9 @@
 {{#if showDonationPrompt}}
   <div class="patreon-donation-prompt">
-    <span class="close" {{action "close"}}>
+    <span role="button" class="close" {{action "close"}}>
       {{d-icon "times"}}
     </span>
 
-    {{{i18n "patreon.donation_prompt.body"
-      campaignUrl=siteSettings.patreon_donation_prompt_campaign_url}}}
+    {{html-safe (i18n "patreon.donation_prompt.body" campaignUrl=siteSettings.patreon_donation_prompt_campaign_url)}}
   </div>
 {{/if}}
