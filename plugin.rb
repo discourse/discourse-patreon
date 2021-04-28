@@ -11,11 +11,11 @@ require 'omniauth-oauth2'
 
 enabled_site_setting :patreon_enabled
 
-PLUGIN_NAME = 'discourse-patreon'.freeze
+PLUGIN_NAME = 'discourse-patreon'
 
 register_asset 'stylesheets/patreon.scss'
 
-register_svg_icon "fab-patreon" if respond_to?(:register_svg_icon)
+register_svg_icon "fab-patreon"
 
 # Site setting validators must be loaded before initialize
 require_relative 'lib/validators/patreon_login_enabled_validator'
@@ -240,9 +240,4 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
   end
 end
 
-auth_provider pretty_name: 'Patreon',
-              title: 'with Patreon',
-              message: 'Authentication with Patreon (make sure pop up blockers are not enabled)',
-              frame_width: 840,
-              frame_height: 570,
-              authenticator: Auth::PatreonAuthenticator.new('patreon', trusted: true)
+auth_provider authenticator: Auth::PatreonAuthenticator.new('patreon', trusted: true)
