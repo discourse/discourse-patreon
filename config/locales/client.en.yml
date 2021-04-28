@@ -1,5 +1,9 @@
 en:
   js:
+    login:
+      patreon:
+        name: Patreon
+        title: with Patreon
     patreon:
       title: 'Patreon'
       header:
