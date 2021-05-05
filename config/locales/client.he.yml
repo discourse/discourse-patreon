@@ -6,6 +6,10 @@
 
 he:
   js:
+    login:
+      patreon:
+        name: Patreon
+        title: עם Patreon
     patreon:
       title: 'Patreon'
       header:

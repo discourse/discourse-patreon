@@ -6,6 +6,10 @@
 
 sv:
   js:
+    login:
+      patreon:
+        name: Patreon
+        title: med Patreon
     patreon:
       title: 'Patreon'
       header:

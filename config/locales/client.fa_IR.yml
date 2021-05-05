@@ -6,6 +6,10 @@
 
 fa_IR:
   js:
+    login:
+      patreon:
+        name: پاترئون
+        title: با پاترئون
     patreon:
       title: 'پاترون'
       header:
