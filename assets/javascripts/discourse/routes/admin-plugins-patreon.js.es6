@@ -13,18 +13,20 @@ export default DiscourseRoute.extend({
     return Ember.RSVP.Promise.all([
       ajax("/patreon/list.json"),
       Group.findAll({ ignore_automatic: true }),
-    ]).then(([result, groups]) => {
-      groups = groups.map((g) => {
-        return { id: g.id, name: g.name };
-      });
+    ])
+      .then(([result, groups]) => {
+        groups = groups.map((g) => {
+          return { id: g.id, name: g.name };
+        });
 
-      return {
-        filters: result.filters,
-        rewards: result.rewards,
-        last_sync_at: result.last_sync_at,
-        groups: groups,
-      };
-    }).catch(popupAjaxError);
+        return {
+          filters: result.filters,
+          rewards: result.rewards,
+          last_sync_at: result.last_sync_at,
+          groups: groups,
+        };
+      })
+      .catch(popupAjaxError);
   },
 
   setupController: function (controller, model) {
