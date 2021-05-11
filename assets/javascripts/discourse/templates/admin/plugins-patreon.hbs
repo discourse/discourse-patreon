@@ -48,6 +48,6 @@
   }}
 
   {{#if last_sync_at}}
-    <span class="last_synced">{{i18n "patreon.last_synced"}}: {{html-safe format-date last_sync_at leaveAgo="true"}}</span>
+    <span class="last_synced">{{i18n "patreon.last_synced"}}: {{html-safe (format-date last_sync_at leaveAgo="true")}}</span>
   {{/if}}
 </section>
