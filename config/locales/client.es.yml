@@ -6,6 +6,10 @@
 
 es:
   js:
+    login:
+      patreon:
+        name: Patreon
+        title: con Patreon
     patreon:
       title: 'Patreon'
       header:
@@ -32,3 +36,20 @@ es:
           help_text:
             email_available: "Llega a la parte derecha de la página para ver el historial de compromisos de este Patreon."
             email_not_available: "Seleccione el miembro de Patreon y llegue a la parte inferior derecha de la página para ver el historial de compromisos."
+      donation_prompt:
+        body: |
+          <h1>¡Hola lector!</h1>
+
+          <p>¿Le gusta nuestro sitio web? ¿Le gustaría contribuir a una buena causa?</p>
+
+          <p>
+            Si encuentra útil nuestro sitio web y disfruta de la comunidad que hemos creado, nos encantaría que hiciera una donación a nuestro sitio web.
+            Las donaciones mantienen nuestros servicios funcionando sin problemas y aseguran que nuestra comunidad estará operativa en los próximos años.
+            Cada dólar cuenta y se le dará un buen uso.
+          </p>
+
+          <p>Gracias por su apoyo!<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Conviértase en patrocinador</a>
+          </p>
