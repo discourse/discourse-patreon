@@ -18,6 +18,11 @@ pt_BR:
     max_patreon_api_reqs_per_hr: "Número máximo de solicitações da API do Patreon por hora"
     max_patreon_api_reqs_per_day: "Número máximo de solicitações da API do Patreon por dia"
     patreon_verbose_log: 'habilitar registro verboso do payload do patreon'
+    patreon_donation_prompt_enabled: "Ativar solicitação de doação?"
+    patreon_donation_prompt_show_after_topics: "Mostrar solicitação de doação após n tópicos"
+    patreon_donation_prompt_campaign_url: "URL da campanha de solicitação de doação"
+    errors:
+      patreon_creator_username_not_set: "Você precisa definir a configuração do nome de usuário do Discourse do Criador do Patreon antes de habilitar o login do Patreon."
   dashboard:
     patreon:
       access_token_invalid: "Token de acesso e atualização do Criador Patreon estão incorretos. Você precisa copiar-colar novos tokens do <a href='https://www.patreon.com/platform/documentation/clients'>site do Patreon</a> para <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>as configurações do site</a>."
