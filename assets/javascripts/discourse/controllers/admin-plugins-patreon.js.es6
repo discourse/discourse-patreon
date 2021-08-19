@@ -1,5 +1,5 @@
 import I18n from "I18n";
-import { default as computed } from "ember-addons/ember-computed-decorators";
+import discourseComputed from "discourse-common/utils/decorators";
 import getURL from "discourse-common/lib/get-url";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 import { ajax } from "discourse/lib/ajax";
@@ -10,7 +10,7 @@ export default Ember.Controller.extend({
     return `$${reward.amount_cents / 100} - ${reward.title}`;
   },
 
-  @computed("rewards")
+  @discourseComputed("rewards")
   rewardsNames() {
     return Object.values(this.rewards)
       .filter((r) => r.id >= 0)
