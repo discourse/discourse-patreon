@@ -23,7 +23,7 @@ export default DiscourseRoute.extend({
           filters: result.filters,
           rewards: result.rewards,
           last_sync_at: result.last_sync_at,
-          groups: groups,
+          groups,
         };
       })
       .catch(popupAjaxError);
@@ -50,8 +50,8 @@ export default DiscourseRoute.extend({
 
     controller.setProperties({
       model: filtersArray,
-      groups: groups,
-      rewards: rewards,
+      groups,
+      rewards,
       last_sync_at: model.last_sync_at,
     });
   },
