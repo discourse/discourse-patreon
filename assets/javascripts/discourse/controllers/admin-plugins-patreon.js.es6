@@ -54,7 +54,7 @@ export default Ember.Controller.extend({
             model.pushObject(
               FilterRule.create({
                 group: rule.get("group.name"),
-                rewards: rewards,
+                rewards,
               })
             );
           }
