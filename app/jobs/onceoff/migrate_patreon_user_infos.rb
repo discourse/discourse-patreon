@@ -11,7 +11,7 @@ module Jobs
 
           begin
             Oauth2UserInfo.create(
-              uid: eval(row.value)[:patreon_id],
+              uid: JSON.parse(row.value)["patreon_id"],
               provider: "patreon",
               user_id: user_id
             )
