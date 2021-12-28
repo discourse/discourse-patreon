@@ -6,13 +6,50 @@
 
 ja:
   js:
+    login:
+      patreon:
+        name: Patreon
+        title: Patreon
     patreon:
+      title: 'Patreon'
       header:
-        rules: 'フィルター'
+        rules: 'フィルタ'
       group: 'グループ'
-      filter: 'フィルター'
+      rewards: '報酬'
+      filter: 'フィルタ'
+      help_text: 'Discourse グループを 1 つ以上の Patreon 報酬ランクと同期できます。'
+      last_synced: '最終同期'
       edit: '編集'
-      delete: '削除する'
+      delete: '削除'
       save: '保存'
+      update_data: 'Patreon データと同期グループを更新'
+      refresh_page: 'Patreon API から新しいデータがダウンロードされました。ページを更新してください。'
+      select_group: 'グループを選択'
       field:
-        email: "Eメール"
+        id: "ID"
+        email: "メールアドレス"
+        amount_cents: "金額（セント単位）"
+        rewards: "報酬"
+        declined_since: "誓約拒否"
+        more_details:
+          label: "支払いとその他の詳細"
+          help_text:
+            email_available: "ページの右下に移動し、この Patreon の誓約履歴を確認してください。"
+            email_not_available: "Patreon メンバーを選択し、ページの右下に移動して、誓約履歴を確認します。"
+      donation_prompt:
+        body: |
+          <h1>皆さん、こんにちは！</h1>
+
+          <p>私たちのウェブサイトをお好きですか？慈善活動に貢献したいと思いませんか？</p>
+
+          <p>
+            私たちのウェブサイトが有用であり、コミュニティーをお楽しみいただいているのであれば、このウェブサイトに寄付していただければ、と願っています。
+            今後数年に渡り、私たちのサービスとコミュニティーの円滑な運営を維持するには、皆さんからの寄付が必要です。
+            皆さんからの 1 円 1 円を大切に使用させていただきます。
+          </p>
+
+          <p>皆さんのご支援をお待ちしております！<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">パトロンになる</a>
+          </p>

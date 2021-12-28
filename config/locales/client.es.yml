@@ -23,33 +23,33 @@ es:
       delete: 'Eliminar'
       save: 'Guardar'
       update_data: 'Actualizar datos de Patreon y sincronizar grupos'
-      refresh_page: 'Se han descargado nuevos datos desde la API de Patreon. Por favor, actualiza la página.'
+      refresh_page: 'Se han descargado nuevos datos desde la API de Patreon. Actualiza la página.'
       select_group: 'Selecciona un grupo'
       field:
         id: "ID"
         email: "Correo electrónico"
         amount_cents: "Cantidad (en céntimos)"
         rewards: "Recompensas"
-        declined_since: "Compromiso declinado desde"
+        declined_since: "Promesa rechazada desde"
         more_details:
-          label: "Pagos & más detalles"
+          label: "Pagos y más detalles"
           help_text:
-            email_available: "Llega a la parte derecha de la página para ver el historial de compromisos de este Patreon."
-            email_not_available: "Seleccione el miembro de Patreon y llegue a la parte inferior derecha de la página para ver el historial de compromisos."
+            email_available: "Ve a la parte inferior derecha de la página para ver el historial de promesas de Patreon."
+            email_not_available: "Selecciona el miembro de Patreon y ve a la parte inferior derecha de la página para ver el historial de promesas."
       donation_prompt:
         body: |
           <h1>¡Hola lector!</h1>
 
-          <p>¿Le gusta nuestro sitio web? ¿Le gustaría contribuir a una buena causa?</p>
+          <p>¿Te gusta nuestro sitio web? ¿Quieres contribuir a una buena causa?</p>
 
           <p>
-            Si encuentra útil nuestro sitio web y disfruta de la comunidad que hemos creado, nos encantaría que hiciera una donación a nuestro sitio web.
-            Las donaciones mantienen nuestros servicios funcionando sin problemas y aseguran que nuestra comunidad estará operativa en los próximos años.
+            Si nuestro sitio web te resulta útil y disfrutas de la comunidad que hemos creado, nos encantaría que hicieras una donación a nuestro sitio web.
+            Las donaciones mantienen nuestros servicios en funcionamiento y garantizan que nuestra comunidad esté operativa durante años.
             Cada dólar cuenta y se le dará un buen uso.
           </p>
 
-          <p>Gracias por su apoyo!<p>
+          <p>¡Gracias por tu apoyo!<p>
 
           <p>
-            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Conviértase en patrocinador</a>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Hazte mecenas</a>
           </p>

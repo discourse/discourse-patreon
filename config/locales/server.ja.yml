@@ -5,3 +5,11 @@
 # https://translate.discourse.org/
 
 ja:
+  site_settings:
+    patreon_enabled: 'discourse-patreon プラグインを有効にする'
+    patreon_login_enabled: 'Patreon ソーシャルログインを有効にする'
+    patreon_client_id: '生成された Patreon クライアント ID'
+    patreon_client_secret: '生成された Patreon クライアントシークレット'
+    patreon_webhook_secret: '生成された Patreon Webhook シークレット'
+    patreon_creator_discourse_username: "「Patreon ソーシャルログイン」でPatreon クリエーターアカウントを通じてログインするために使用する Discourse アカウントのユーザー名"
+    patreon_creator_access_token: "生成された Patreon クリエーターのアクセストークン"
