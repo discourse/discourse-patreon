@@ -6,6 +6,10 @@
 
 fr:
   js:
+    login:
+      patreon:
+        name: Patreon
+        title: avec Patreon
     patreon:
       title: 'Patreon'
       header:
@@ -13,25 +17,25 @@ fr:
       group: 'Groupe'
       rewards: 'Récompenses'
       filter: 'Filtre'
-      help_text: 'Vous pouvez synchroniser un groupe Discourse avec un ou plusieurs niveau de récompense Patreon.'
+      help_text: 'Vous pouvez synchroniser un groupe Discourse avec un ou plusieurs niveaux de récompense Patreon.'
       last_synced: 'Dernière synchronisation'
       edit: 'Modifier'
       delete: 'Supprimer'
-      save: 'Sauvegarder'
+      save: 'Enregistrer'
       update_data: 'Mettre à jour les données Patreon et synchroniser les groupes'
       refresh_page: 'Des nouvelles données ont été téléchargées depuis l''API Patreon. Veuillez actualiser la page.'
       select_group: 'Sélectionner un groupe'
       field:
         id: "ID"
-        email: "Courriel"
+        email: "E-mail"
         amount_cents: "Montant (en cents)"
         rewards: "Récompenses"
         declined_since: "Promesse de don refusée depuis"
         more_details:
           label: "Paiements et autres détails"
           help_text:
-            email_available: "Aller en bas à droite de cette page pour consulter l'historique des promesses de don de ce Patreon."
-            email_not_available: "Sélectionnez le Patreon et accédez en bas à droite de la page pour voir l'historique des promesses de dons."
+            email_available: "Vous trouverez l'historique des promesses de don de ce Patreon en bas à droite de cette page."
+            email_not_available: "Sélectionnez le membre Patreon et accédez à l'historique des promesses de dons en bas à droite de la page."
       donation_prompt:
         body: |
           <h1>Bonjour lecteur !</h1>
@@ -39,13 +43,13 @@ fr:
           <p>Appréciez-vous notre site ? Souhaitez-vous soutenir une bonne cause ?</p>
 
           <p>
-          Si vous trouvez ce site utile et appréciez la communauté que nous avons formées, nous serions ravi de recevoir une donation pour notre site.
-          Les donations permettent le bon fonctionnement de notre service et garantissent que notre communauté existe pour des années à venir.
-          Chaque montant est important et sera bien utilisé.
+          Si vous trouvez ce site utile et appréciez la communauté que nous avons formée, nous serions ravis de recevoir vos dons.
+          Les donations permettent le bon fonctionnement de notre service et garantissent que notre communauté reste active pour les années à venir.
+          Chaque montant est important et sera utilisé à bon escient.
           </p>
 
-          <p>Merci pour votre support !<p>
+          <p>Merci pour votre soutien !<p>
 
           <p>
-          <a class="btn btn-large btn-danger" href="%{campaignUrl}">Devenir un Patreon</a>
+          <a class="btn btn-large btn-danger" href="%{campaignUrl}">Devenir mécène</a>
           </p>
