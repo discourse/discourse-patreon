@@ -4,8 +4,8 @@ require 'rails_helper'
 
 RSpec.describe ::Patreon::Patron do
 
-  Fabricator(:oauth2_user_info) do
-    provider "patreon"
+  Fabricator(:patreon_user_info, class_name: :user_associated_account) do
+    provider_name "patreon"
     user
   end
 
@@ -24,7 +24,7 @@ RSpec.describe ::Patreon::Patron do
 
   it "should find local users matching Patreon user info" do
     Fabricate(:user, email: "foo@bar.com")
-    Fabricate(:oauth2_user_info, uid: "111112")
+    Fabricate(:patreon_user_info, provider_uid: "111112")
 
     local_users = described_class.get_local_users
     expect(local_users.count).to eq(2)
@@ -47,7 +47,7 @@ RSpec.describe ::Patreon::Patron do
   end
 
   describe "sync groups" do
-    let(:ouser) { Fabricate(:oauth2_user_info, uid: "111112") }
+    let(:ouser) { Fabricate(:patreon_user_info, provider_uid: "111112") }
     let(:group1) { Fabricate(:group) }
     let(:group2) { Fabricate(:group) }
 
@@ -64,7 +64,7 @@ RSpec.describe ::Patreon::Patron do
     end
 
     it "should sync by Patreon id" do
-      described_class.sync_groups_by(patreon_id: ouser.uid)
+      described_class.sync_groups_by(patreon_id: ouser.provider_uid)
       expect(group1.users.to_a).to eq([ouser.user])
       expect(group2.users.to_a).to eq([ouser.user])
     end

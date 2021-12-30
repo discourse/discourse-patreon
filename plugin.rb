@@ -6,7 +6,6 @@
 # author: Rafael dos Santos Silva <xfalcox@gmail.com>
 # url: https://github.com/discourse/discourse-patreon
 
-require 'auth/oauth2_authenticator'
 require 'omniauth-oauth2'
 
 enabled_site_setting :patreon_enabled
@@ -178,9 +177,7 @@ class ::OmniAuth::Strategies::Patreon < ::OmniAuth::Strategies::OAuth2
   info do
     {
       email: raw_info['data']['attributes']['email'],
-      name: raw_info['data']['attributes']['full_name'],
-      access_token: access_token.token,
-      refresh_token: access_token.refresh_token
+      name: raw_info['data']['attributes']['full_name']
     }
   end
 
@@ -204,7 +201,7 @@ class ::OmniAuth::Strategies::Patreon < ::OmniAuth::Strategies::OAuth2
   end
 end
 
-class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
+class Auth::PatreonAuthenticator < Auth::ManagedAuthenticator
   def register_middleware(omniauth)
     omniauth.provider :patreon,
                       setup: lambda { |env|
@@ -216,14 +213,14 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
                       }
   end
 
-  def after_authenticate(auth_token)
+  def after_authenticate(auth_token, existing_account: nil)
     result = super
 
     user = result.user
     discourse_username = SiteSetting.patreon_creator_discourse_username
     if discourse_username.present? && user && user.username == discourse_username
-      SiteSetting.patreon_creator_access_token = auth_token[:info][:access_token]
-      SiteSetting.patreon_creator_refresh_token = auth_token[:info][:refresh_token]
+      SiteSetting.patreon_creator_access_token = auth_token.credentials["access_token"]
+      SiteSetting.patreon_creator_refresh_token = auth_token.credentials["refresh_token"]
     end
 
     result
@@ -234,4 +231,4 @@ class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
   end
 end
 
-auth_provider authenticator: Auth::PatreonAuthenticator.new('patreon', trusted: true)
+auth_provider authenticator: Auth::PatreonAuthenticator.new
