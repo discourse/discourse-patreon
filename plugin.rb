@@ -77,7 +77,6 @@ after_initialize do
     '../app/jobs/regular/sync_patron_groups.rb',
     '../app/jobs/scheduled/patreon_sync_patrons_to_groups.rb',
     '../app/jobs/scheduled/patreon_update_tokens.rb',
-    '../app/jobs/onceoff/migrate_patreon_user_infos.rb',
     '../lib/api.rb',
     '../lib/seed.rb',
     '../lib/campaign.rb',
