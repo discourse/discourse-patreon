@@ -110,56 +110,6 @@ after_initialize do
     get '/u/:username/patreon_email' => 'patreon/patreon_admin#email', constraints: { username: RouteFormat.username }
   end
 
-  class ::OmniAuth::Strategies::Patreon
-    option :name, 'patreon'
-
-    option :client_options,
-      site: 'https://www.patreon.com',
-      authorize_url: 'https://www.patreon.com/oauth2/authorize',
-      token_url: 'https://api.patreon.com/oauth2/token'
-
-    option :authorize_params, response_type: 'code'
-
-    def custom_build_access_token
-      verifier = request.params['code']
-      client.auth_code.get_token(verifier, redirect_uri: options.redirect_uri)
-    end
-
-    alias_method :build_access_token, :custom_build_access_token
-
-    uid {
-      raw_info['data']['id'].to_s
-    }
-
-    info do
-      {
-        email: raw_info['data']['attributes']['email'],
-        name: raw_info['data']['attributes']['full_name'],
-        access_token: access_token.token,
-        refresh_token: access_token.refresh_token
-      }
-    end
-
-    extra do
-      {
-        raw_info: raw_info
-      }
-    end
-
-    def raw_info
-      @raw_info ||= begin
-        response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user", headers: {
-            'Authorization' => "Bearer #{access_token.token}"
-        }, parse: :json)
-        response.parsed
-      end
-    end
-
-    def callback_url
-      full_host + script_name + callback_path
-    end
-  end
-
   on(:user_created) do |user|
     filters = PluginStore.get(PLUGIN_NAME, 'filters')
     patreon_id = Patreon::Patron.all.key(user.email)
@@ -205,7 +155,54 @@ after_initialize do
 end
 
 # Authentication with Patreon
-class OmniAuth::Strategies::Patreon < OmniAuth::Strategies::OAuth2
+class ::OmniAuth::Strategies::Patreon < ::OmniAuth::Strategies::OAuth2
+  option :name, 'patreon'
+
+  option :client_options,
+    site: 'https://www.patreon.com',
+    authorize_url: 'https://www.patreon.com/oauth2/authorize',
+    token_url: 'https://api.patreon.com/oauth2/token'
+
+  option :authorize_params, response_type: 'code'
+
+  def custom_build_access_token
+    verifier = request.params['code']
+    client.auth_code.get_token(verifier, redirect_uri: options.redirect_uri)
+  end
+
+  alias_method :build_access_token, :custom_build_access_token
+
+  uid {
+    raw_info['data']['id'].to_s
+  }
+
+  info do
+    {
+      email: raw_info['data']['attributes']['email'],
+      name: raw_info['data']['attributes']['full_name'],
+      access_token: access_token.token,
+      refresh_token: access_token.refresh_token
+    }
+  end
+
+  extra do
+    {
+      raw_info: raw_info
+    }
+  end
+
+  def raw_info
+    @raw_info ||= begin
+      response = client.request(:get, "https://api.patreon.com/oauth2/api/current_user", headers: {
+          'Authorization' => "Bearer #{access_token.token}"
+      }, parse: :json)
+      response.parsed
+    end
+  end
+
+  def callback_url
+    full_host + script_name + callback_path
+  end
 end
 
 class Auth::PatreonAuthenticator < Auth::OAuth2Authenticator
