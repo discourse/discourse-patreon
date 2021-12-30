@@ -160,23 +160,21 @@ after_initialize do
     end
   end
 
-  DiscourseEvent.on(:user_created) do |user|
-    if SiteSetting.patreon_enabled
-      filters = PluginStore.get(PLUGIN_NAME, 'filters')
-      patreon_id = Patreon::Patron.all.key(user.email)
+  on(:user_created) do |user|
+    filters = PluginStore.get(PLUGIN_NAME, 'filters')
+    patreon_id = Patreon::Patron.all.key(user.email)
 
-      if filters.present? && patreon_id.present?
-        begin
-          reward_id = Patreon::RewardUser.all.except('0').detect { |_k, v| v.include? patreon_id }&.first
+    if filters.present? && patreon_id.present?
+      begin
+        reward_id = Patreon::RewardUser.all.except('0').detect { |_k, v| v.include? patreon_id }&.first
 
-          group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
+        group_ids = filters.select { |_k, v| v.include?(reward_id) || v.include?('0') }.keys
 
-          Group.where(id: group_ids).each { |group| group.add user }
+        Group.where(id: group_ids).each { |group| group.add user }
 
-          Patreon::Patron.update_local_user(user, patreon_id, true)
-        rescue => e
-          Rails.logger.warn("Patreon group membership callback failed for new user #{self.id} with error: #{e}.\n\n #{e.backtrace.join("\n")}")
-        end
+        Patreon::Patron.update_local_user(user, patreon_id, true)
+      rescue => e
+        Rails.logger.warn("Patreon group membership callback failed for new user #{self.id} with error: #{e}.\n\n #{e.backtrace.join("\n")}")
       end
     end
   end
