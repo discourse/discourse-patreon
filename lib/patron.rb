@@ -129,13 +129,13 @@ module ::Patreon
       users = User.joins("INNER JOIN user_custom_fields cf ON cf.user_id = users.id AND cf.name = 'patreon_id'").pluck("users.id, cf.value")
       patrons = all.slice!(*users.pluck(1))
 
-      oauth_users = Oauth2UserInfo.includes(:user).where(provider: "patreon")
-      oauth_users = oauth_users.where("uid IN (?)", patrons.keys) if patrons.present?
+      oauth_users = UserAssociatedAccount.includes(:user).where(provider_name: "patreon")
+      oauth_users = oauth_users.where("provider_uid IN (?)", patrons.keys) if patrons.present?
 
       users += oauth_users.map do |o|
-        patrons = patrons.slice!(o.uid)
-        update_local_user(o.user, o.uid)
-        [o.user_id, o.uid]
+        patrons = patrons.slice!(o.provider_uid)
+        update_local_user(o.user, o.provider_uid)
+        [o.user_id, o.provider_uid]
       end
 
       emails = patrons.values.map { |e| e.downcase }
@@ -152,7 +152,7 @@ module ::Patreon
       user = User.joins(:_custom_fields).find_by(user_custom_fields: { name: 'patreon_id', value: patreon_id })
       return user if user.present?
 
-      user = User.joins(:oauth2_user_infos).find_by(oauth2_user_infos: { provider: "patreon", uid: patreon_id })
+      user = User.joins(:user_associated_accounts).find_by(user_associated_accounts: { provider_name: "patreon", provider_uid: patreon_id })
       user ||= User.joins(:user_emails).find_by(user_emails: { email: all[patreon_id] })
       return if user.blank?
 
