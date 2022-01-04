@@ -6,26 +6,26 @@
 
 pt_BR:
   site_settings:
-    patreon_enabled: 'Habilitar o plugin discourse-patreon'
-    patreon_login_enabled: 'Habilitar Login Social do Patreon'
-    patreon_client_id: 'ID do Cliente Patreon Gerado'
-    patreon_client_secret: 'Segredo do Cliente Patreon Gerado'
-    patreon_webhook_secret: 'Segredo do Webhook do Patreon Gerado'
-    patreon_creator_discourse_username: "Nome de usuário da conta do Discourse que é usada para fazer login através da conta do criador do Patreon usando o 'Login Social do Patreon'"
-    patreon_creator_access_token: "Token de Acesso do Criador Patreon Gerado"
-    patreon_creator_refresh_token: "Token de Atualização do Criador Patreon Gerado"
+    patreon_enabled: 'Ativar o plugin discourse-patreon'
+    patreon_login_enabled: 'Ativar Login Social do Patreon'
+    patreon_client_id: 'ID do cliente Patreon gerado'
+    patreon_client_secret: 'Segredo do cliente Patreon gerado'
+    patreon_webhook_secret: 'Segredo do Webhook do Patreon gerado'
+    patreon_creator_discourse_username: "Nome do(a) usuário(a) da conta do Discourse que é usado para entrar pela conta do(a) criador(a) do Patreon com o \"Login Social do Patreon\""
+    patreon_creator_access_token: "Token de acesso do criador do Patreon gerado"
+    patreon_creator_refresh_token: "Token de atualização do(a) criador(a) do Patreon gerado"
     patreon_declined_pledges_grace_period_days: "Período de carência (em dias) antes que um compromisso seja recusado completamente."
     max_patreon_api_reqs_per_hr: "Número máximo de solicitações da API do Patreon por hora"
     max_patreon_api_reqs_per_day: "Número máximo de solicitações da API do Patreon por dia"
-    patreon_verbose_log: 'habilitar registro verboso do payload do patreon'
+    patreon_verbose_log: 'ativar registro prolixo do conteúdo do Patreon'
     patreon_donation_prompt_enabled: "Ativar solicitação de doação?"
     patreon_donation_prompt_show_after_topics: "Mostrar solicitação de doação após n tópicos"
     patreon_donation_prompt_campaign_url: "URL da campanha de solicitação de doação"
     errors:
-      patreon_creator_username_not_set: "Você precisa definir a configuração do nome de usuário do Discourse do Criador do Patreon antes de habilitar o login do Patreon."
+      patreon_creator_username_not_set: "Você precisa definir a configuração do nome do(a) usuário(a) do Discourse do(a) criador(a) do Patreon antes de ativar o login do Patreon."
   dashboard:
     patreon:
-      access_token_invalid: "Token de acesso e atualização do Criador Patreon estão incorretos. Você precisa copiar-colar novos tokens do <a href='https://www.patreon.com/platform/documentation/clients'>site do Patreon</a> para <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>as configurações do site</a>."
+      access_token_invalid: "Os valores do token de atualização e de acesso do(a) criador(a) do Patreon estão incorretos. Você precisa copiar e colar novos tokens do <a href='https://www.patreon.com/platform/documentation/clients'>site do Patreon</a> para <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>as configurações do site</a>."
   patreon:
     error:
       invalid_response: "Resposta inválida da API do Patreon"

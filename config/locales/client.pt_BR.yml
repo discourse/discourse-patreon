@@ -22,28 +22,28 @@ pt_BR:
       edit: 'Editar'
       delete: 'Excluir'
       save: 'Salvar'
-      update_data: 'Atualizar Dados do Patreon & Sincronizar Grupos'
-      refresh_page: 'Novos dados foram baixados da API do Patreon. Por favor, atualize a página.'
+      update_data: 'Atualizar dados do Patreon e sincronizar grupos'
+      refresh_page: 'Novos dados foram baixados da API do Patreon. Atualize a página.'
       select_group: 'Selecione um grupo'
       field:
         id: "Id"
         email: "E-mail"
-        amount_cents: "Quantidade (em centavos)"
+        amount_cents: "Valor (em centavos)"
         rewards: "Recompensas"
         declined_since: "Compromisso Recusado Desde"
         more_details:
-          label: "Pagamentos & Mais Detalhes"
+          label: "Pagamentos e mais detalhes"
           help_text:
-            email_available: "Vá para o canto inferior direito da página para ver este histórico de compromisso do Patreon."
-            email_not_available: "Selecione o membro Patreon e vá para o canto inferior direito da página para ver o histórico de compromisso."
+            email_available: "Vá para o canto inferior direito da página para ver este histórico de compromissos do Patreon."
+            email_not_available: "Selecione o membro Patreon e vá para o canto inferior direito da página para ver o histórico de compromissos."
       donation_prompt:
         body: |
-          <h1>Olá leitor!</h1>
+          <h1>Olá, leitor!</h1>
 
-          <p>Você gosta do nosso site? Você gostaria de contribuir para uma boa causa?</p>
+          <p>Você gosta do nosso site? Gostaria de contribuir para uma boa causa?</p>
 
           <p>
-            Se achar nosso site útil e gosta da comunidade que criamos, nós adoraríamos se você fizesse uma doação para nosso site.
+            Se achar nosso site útil e gosta da comunidade que criamos, nós adoraríamos que fizesse uma doação para nosso site.
             Doações mantêm nossos serviços funcionando sem problemas e garantem que nossa comunidade estará operacional por muitos anos.
             Cada dólar conta e será bem utilizado.
           </p>
@@ -51,5 +51,5 @@ pt_BR:
           <p>Obrigado pelo seu apoio!<p>
 
           <p>
-            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Torne-se um Patrono</a>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Torne-se um(a) Patrono(a)</a>
           </p>
