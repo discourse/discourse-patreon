@@ -202,6 +202,10 @@ class ::OmniAuth::Strategies::Patreon < ::OmniAuth::Strategies::OAuth2
 end
 
 class Auth::PatreonAuthenticator < Auth::ManagedAuthenticator
+  def name
+    "patreon"
+  end
+
   def register_middleware(omniauth)
     omniauth.provider :patreon,
                       setup: lambda { |env|
