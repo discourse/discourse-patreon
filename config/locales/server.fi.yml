@@ -6,24 +6,26 @@
 
 fi:
   site_settings:
-    patreon_enabled: 'Ota discourse-patreon -lisäosa käyttöön'
-    patreon_login_enabled: 'Ota käyttöön sosiaalinen kirjautuminen Patreonilla'
-    patreon_client_id: 'Muodostettu Patreon asiakas-ID (engl. client ID)'
-    patreon_client_secret: 'Muodostettu Patreon asiakassalausavain (engl. Client secret)'
-    patreon_webhook_secret: 'Muodostettu Patreon webhook-salausavain (engl. Webhook Secret)'
-    patreon_creator_discourse_username: "Sen Discourse-käyttäjätilin käyttäjänimi jota käytetään, kun kirjaudutaan Patreon-tuottajatilille (engl. creator account) Patreonin sosiaalisen kirjautumisen kautta"
-    patreon_creator_access_token: "Muodostettu Patreonin tuottajan tunnistusväline (engl. creator's access token)"
-    patreon_creator_refresh_token: "Muodostettu Patreonin tuottajan päivitysväline (engl. creator's refresh token)"
-    patreon_declined_pledges_grace_period_days: "Varoaika (päivinä) kunnes sitoumus hylätään lopullisesti."
-    max_patreon_api_reqs_per_hr: "Patreon rjapintapyyntöjen tunneittainen enimmäismäärä"
-    max_patreon_api_reqs_per_day: "Patreon rjapintapyyntöjen päivittäinen enimmäismäärä"
-    patreon_verbose_log: 'salli patreon tietosisällön monikirjaus'
-    patreon_donation_prompt_enabled: "Ota lahjoituskehotus käyttöön?"
+    patreon_enabled: 'Ota discourse-patreon-lisäosa käyttöön'
+    patreon_login_enabled: 'Ota käyttöön yhteisökirjautuminen Patreonilla'
+    patreon_client_id: 'Luotu Patreonin asiakastunnus (client ID)'
+    patreon_client_secret: 'Luotu Patreonin asiakkaan salatunnus (client secret)'
+    patreon_webhook_secret: 'Luotu Patreonin webhook-salausavain (webhook secret)'
+    patreon_creator_discourse_username: "Sen Discourse-tilin käyttäjätunnus, jota käytetään kirjauduttaessa Patreon-tuottajatilin (engl. creator account) kautta Patreonin yhteisökirjautumisen kautta"
+    patreon_creator_access_token: "Luotu Patreonin tuottajan tunnistusväline (creator's access token)"
+    patreon_creator_refresh_token: "Luotu Patreonin tuottajan päivitysväline (creator's refresh token)"
+    patreon_declined_pledges_grace_period_days: "Varoaika (päivinä), kunnes lahjoituslupaus hylätään lopullisesti."
+    max_patreon_api_reqs_per_hr: "Patreon API-pyyntöjen enimmäismäärä per tunti"
+    max_patreon_api_reqs_per_day: "Patreon API-pyyntöjen päivittäinen enimmäismäärä"
+    patreon_verbose_log: 'salli patreon-tietosisällön monikirjaus'
+    patreon_donation_prompt_enabled: "Otetaanko lahjoituskehotus käyttöön?"
     patreon_donation_prompt_show_after_topics: "Näytä lahjoituskehotus n ketjun jälkeen"
     patreon_donation_prompt_campaign_url: "Lahjoituskehotuskampanjan URL"
+    errors:
+      patreon_creator_username_not_set: "Sinun täytyy määrittää Patreon Creator Discourse -käyttäjätunnusasetus ennen kuin otat Patreon-kirjautumisen käyttöön."
   dashboard:
     patreon:
-      access_token_invalid: "Patreon luojan käyttöoikeus ja uudelleen lataus valtuutusarvot ovat väärät. Sinun täytyy kopioida ja liittää uudet arvot <a href='https://www.patreon.com/platform/documentation/clients'>Patreon sivuilta</a><a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>sivun asetuksiin</a>. "
+      access_token_invalid: "Patreonin tuottajan tunnistusvälineen ja päivitysvälineen arvot ovat virheelliset. Sinun täytyy kopioida ja liittää uudet arvot <a href='https://www.patreon.com/platform/documentation/clients'>Patreonin verkkosivustolta</a><a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>sivuston asetuksiin</a>."
   patreon:
     error:
-      invalid_response: "Epäkelpo vastaus Patreon APIsta"
+      invalid_response: "Virheellinen vastaus Patreonin APIsta"
