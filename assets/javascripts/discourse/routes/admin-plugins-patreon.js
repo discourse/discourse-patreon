@@ -3,6 +3,7 @@ import Group from "discourse/models/group";
 import { ajax } from "discourse/lib/ajax";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 import DiscourseRoute from "discourse/routes/discourse";
+import { Promise } from "rsvp";
 
 /* We use three main model to get this page working:
  *  Discourse Groups (excluding the automatic ones), Patreon rewards and
@@ -10,7 +11,7 @@ import DiscourseRoute from "discourse/routes/discourse";
  */
 export default DiscourseRoute.extend({
   model() {
-    return Ember.RSVP.Promise.all([
+    return Promise.all([
       ajax("/patreon/list.json"),
       Group.findAll({ ignore_automatic: true }),
     ])
