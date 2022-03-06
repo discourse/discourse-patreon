@@ -1,11 +1,13 @@
+import Controller from "@ember/controller";
 import I18n from "I18n";
 import discourseComputed from "discourse-common/utils/decorators";
 import getURL from "discourse-common/lib/get-url";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
+import bootbox from "bootbox";
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   prettyPrintReward: (reward) => {
     return `$${reward.amount_cents / 100} - ${reward.title}`;
   },
