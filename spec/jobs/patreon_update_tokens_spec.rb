@@ -4,8 +4,6 @@ require 'rails_helper'
 require_relative '../spec_helper'
 
 RSpec.describe Jobs::PatreonUpdateTokens do
-  include_context "spec helper"
-
   before do
     SiteSetting.patreon_enabled = true
 
@@ -25,5 +23,4 @@ RSpec.describe Jobs::PatreonUpdateTokens do
     expect(SiteSetting.patreon_creator_access_token).to eq("ACCESS TOKEN")
     expect(SiteSetting.patreon_creator_refresh_token).to eq("REFRESH TOKEN")
   end
-
 end

@@ -1,21 +1,17 @@
 # frozen_string_literal: true
 
-require "rails_helper"
+require 'rails_helper'
 require 'openssl'
 require 'json'
 require_relative '../spec_helper'
 
 RSpec.describe ::Patreon::PatreonWebhookController do
-  include_context "spec helper"
-
   before do
     SiteSetting.queue_jobs = false
   end
 
   context "index" do
-
     context 'checking headers' do
-
       it 'raises InvalidAccess error without header params' do
         expect_not_enqueued_with(job: :patreon_sync_patrons_to_groups) do
           post '/patreon/webhook'
@@ -34,11 +30,9 @@ RSpec.describe ::Patreon::PatreonWebhookController do
 
         expect(response.status).to eq(403)
       end
-
     end
 
     context 'enqueue job' do
-
       let(:body) { get_patreon_response('pledge.json') }
       let(:digest) { OpenSSL::Digest::MD5.new }
       let(:secret) { SiteSetting.patreon_webhook_secret = "WEBHOOK SECRET" }
@@ -122,9 +116,6 @@ RSpec.describe ::Patreon::PatreonWebhookController do
           .and change { Patreon::Patron.all.keys.count }.by(-1)
           .and change { Patreon::RewardUser.all[reward_id].count }.by(-1)
       end
-
     end
-
   end
-
 end
