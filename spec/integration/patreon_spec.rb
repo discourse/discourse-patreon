@@ -14,7 +14,7 @@ RSpec.describe ::Patreon do
     group.add(user1)
   end
 
-  context "donation prompt enabled" do
+  context "with donation prompt enabled" do
     before do
       SiteSetting.patreon_donation_prompt_enabled = true
     end
@@ -28,7 +28,7 @@ RSpec.describe ::Patreon do
     end
   end
 
-  context "donation prompt disabled" do
+  context "with donation prompt disabled" do
     before do
       SiteSetting.patreon_donation_prompt_enabled = false
     end

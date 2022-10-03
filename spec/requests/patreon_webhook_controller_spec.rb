@@ -10,8 +10,8 @@ RSpec.describe ::Patreon::PatreonWebhookController do
     SiteSetting.queue_jobs = false
   end
 
-  context "index" do
-    context 'checking headers' do
+  describe "index" do
+    describe 'header checking' do
       it 'raises InvalidAccess error without header params' do
         expect_not_enqueued_with(job: :patreon_sync_patrons_to_groups) do
           post '/patreon/webhook'
@@ -32,7 +32,7 @@ RSpec.describe ::Patreon::PatreonWebhookController do
       end
     end
 
-    context 'enqueue job' do
+    describe 'enqueue job' do
       let(:body) { get_patreon_response('pledge.json') }
       let(:digest) { OpenSSL::Digest::MD5.new }
       let(:secret) { SiteSetting.patreon_webhook_secret = "WEBHOOK SECRET" }
