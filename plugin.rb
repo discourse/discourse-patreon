@@ -178,6 +178,7 @@ class ::OmniAuth::Strategies::Patreon < ::OmniAuth::Strategies::OAuth2
   info do
     {
       email: raw_info['data']['attributes']['email'],
+      email_verified: raw_info['data']['attributes']['is_email_verified'],
       name: raw_info['data']['attributes']['full_name']
     }
   end
@@ -233,6 +234,10 @@ class Auth::PatreonAuthenticator < Auth::ManagedAuthenticator
 
   def enabled?
     SiteSetting.patreon_login_enabled
+  end
+
+  def primary_email_verified?(auth_token)
+    auth_token[:info][:email_verified]
   end
 end
 
