@@ -94,13 +94,11 @@ export default Controller.extend({
 
         this.set("updatingData", false);
 
+        const refreshUrl = getURL("/admin/plugins/patreon");
         this.dialog.alert({
           message: I18n.t("patreon.refresh_page"),
-          didConfirm: () => {
-            return (window.location.pathname = getURL(
-              "/admin/plugins/patreon"
-            ));
-          },
+          didConfirm: () => (window.location.pathname = refreshUrl),
+          didCancel: () => (window.location.pathname = refreshUrl),
         });
       });
     },
