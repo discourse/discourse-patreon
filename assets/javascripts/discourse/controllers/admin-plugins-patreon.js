@@ -97,7 +97,9 @@ export default Controller.extend({
         this.dialog.alert({
           message: I18n.t("patreon.refresh_page"),
           didConfirm: () => {
-            return window.location.pathname = getURL("/admin/plugins/patreon");
+            return (window.location.pathname = getURL(
+              "/admin/plugins/patreon"
+            ));
           },
         });
       });
