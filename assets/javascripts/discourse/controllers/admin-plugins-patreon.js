@@ -5,9 +5,10 @@ import getURL from "discourse-common/lib/get-url";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import bootbox from "bootbox";
+import { inject as service } from "@ember/service";
 
 export default Controller.extend({
+  dialog: service(),
   prettyPrintReward: (reward) => {
     return `$${reward.amount_cents / 100} - ${reward.title}`;
   },
@@ -93,8 +94,11 @@ export default Controller.extend({
 
         this.set("updatingData", false);
 
-        bootbox.alert(I18n.t("patreon.refresh_page"), () => {
-          window.location.pathname = getURL("/admin/plugins/patreon");
+        this.dialog.alert({
+          message: I18n.t("patreon.refresh_page"),
+          didConfirm: () => {
+            return window.location.pathname = getURL("/admin/plugins/patreon");
+          },
         });
       });
     },
