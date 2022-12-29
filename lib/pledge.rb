@@ -2,7 +2,6 @@
 
 module ::Patreon
   class Pledge
-
     def self.create!(pledge_data)
       save!([pledge_data], true)
     end
@@ -14,19 +13,19 @@ module ::Patreon
 
     def self.delete!(pledge_data)
       entry = pledge_data["data"]
-      rel = entry['relationships']
+      rel = entry["relationships"]
       reward_users = Patreon::RewardUser.all
 
-      if entry["type"] == 'pledge'
-        patron_id = rel['patron']['data']['id']
-        reward_id = rel['reward']['data']['id'] unless rel['reward']['data'].blank?
+      if entry["type"] == "pledge"
+        patron_id = rel["patron"]["data"]["id"]
+        reward_id = rel["reward"]["data"]["id"] unless rel["reward"]["data"].blank?
 
         reward_users[reward_id].reject! { |i| i == patron_id } if reward_id.present?
-      elsif entry["type"] == 'member'
-        patron_id = rel['user']['data']['id']
+      elsif entry["type"] == "member"
+        patron_id = rel["user"]["data"]["id"]
 
-        (rel['currently_entitled_tiers']['data'] || []).each do |tier|
-          (reward_users[tier['id']] || []).reject! { |i| i == patron_id }
+        (rel["currently_entitled_tiers"]["data"] || []).each do |tier|
+          (reward_users[tier["id"]] || []).reject! { |i| i == patron_id }
         end
       end
 
@@ -43,8 +42,8 @@ module ::Patreon
         pledge_data = ::Patreon::Api.get(uri)
 
         # get next page if necessary and add to the current loop
-        if pledge_data['links'] && pledge_data['links']['next']
-          next_page_uri = pledge_data['links']['next']
+        if pledge_data["links"] && pledge_data["links"]["next"]
+          next_page_uri = pledge_data["links"]["next"]
           uris << next_page_uri if next_page_uri.present?
         end
 
@@ -72,48 +71,51 @@ module ::Patreon
         end
       end
 
-      reward_users['0'] = pledges.keys
+      reward_users["0"] = pledges.keys
 
-      Patreon.set('pledges', pledges)
+      Patreon.set("pledges", pledges)
       Decline.set(declines)
-      Patreon.set('reward-users', reward_users)
-      Patreon.set('users', users)
+      Patreon.set("reward-users", reward_users)
+      Patreon.set("users", users)
     end
 
     def self.extract(pledge_data)
       pledges, declines, reward_users, users = {}, {}, {}, {}
 
       if pledge_data && pledge_data["data"].present?
-        pledge_data['data'] = [pledge_data['data']] unless pledge_data['data'].kind_of?(Array)
+        pledge_data["data"] = [pledge_data["data"]] unless pledge_data["data"].kind_of?(Array)
 
         # get pledges info
-        pledge_data['data'].each do |entry|
-          if entry['type'] == 'pledge'
-            patron_id = entry['relationships']['patron']['data']['id']
-            attrs = entry['attributes']
+        pledge_data["data"].each do |entry|
+          if entry["type"] == "pledge"
+            patron_id = entry["relationships"]["patron"]["data"]["id"]
+            attrs = entry["attributes"]
 
-            (reward_users[entry['relationships']['reward']['data']['id']] ||= []) << patron_id unless entry['relationships']['reward']['data'].nil?
-            pledges[patron_id] = attrs['amount_cents']
-            declines[patron_id] = attrs['declined_since'] if attrs['declined_since'].present?
-          elsif entry['type'] == 'member'
-            patron_id = entry['relationships']['user']['data']['id']
-            attrs = entry['attributes']
+            (
+              reward_users[entry["relationships"]["reward"]["data"]["id"]] ||= []
+            ) << patron_id unless entry["relationships"]["reward"]["data"].nil?
+            pledges[patron_id] = attrs["amount_cents"]
+            declines[patron_id] = attrs["declined_since"] if attrs["declined_since"].present?
+          elsif entry["type"] == "member"
+            patron_id = entry["relationships"]["user"]["data"]["id"]
+            attrs = entry["attributes"]
 
-            currently_entitled_tiers = entry['relationships']['currently_entitled_tiers'] || {}
-            (currently_entitled_tiers['data'] || []).each do |tier|
-              (reward_users[tier['id']] ||= []) << patron_id
+            currently_entitled_tiers = entry["relationships"]["currently_entitled_tiers"] || {}
+            (currently_entitled_tiers["data"] || []).each do |tier|
+              (reward_users[tier["id"]] ||= []) << patron_id
             end
-            pledges[patron_id] = attrs['pledge_amount_cents']
-            declines[patron_id] = attrs['last_charge_date'] if attrs['last_charge_status'] == "Declined"
+            pledges[patron_id] = attrs["pledge_amount_cents"]
+            declines[patron_id] = attrs["last_charge_date"] if attrs["last_charge_status"] ==
+              "Declined"
           end
         end
 
         # get user list too
-        pledge_data['included'].each do |entry|
-          case entry['type']
-          when 'user'
-            if entry['attributes']['email'].present?
-              users[entry['id']] = entry['attributes']['email'].downcase
+        pledge_data["included"].each do |entry|
+          case entry["type"]
+          when "user"
+            if entry["attributes"]["email"].present?
+              users[entry["id"]] = entry["attributes"]["email"].downcase
             end
           end
         end
@@ -123,17 +125,16 @@ module ::Patreon
     end
 
     def self.all
-      Patreon.get('pledges') || {}
+      Patreon.get("pledges") || {}
     end
 
     def self.get_patreon_id(pledge_data)
-      data = pledge_data['data']
-      key = data['type'] == "member" ? "user" : "patron"
-      data['relationships'][key]['data']['id']
+      data = pledge_data["data"]
+      key = data["type"] == "member" ? "user" : "patron"
+      data["relationships"][key]["data"]["id"]
     end
 
     class Decline
-
       KEY = "pledge-declines".freeze
 
       def self.all
@@ -143,7 +144,6 @@ module ::Patreon
       def self.set(value)
         Patreon.set(KEY, value)
       end
-
     end
   end
 end

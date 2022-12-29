@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ::Patreon do
-
   let(:user1) { Fabricate(:user) }
   let(:user2) { Fabricate(:user) }
   let(:group) { Fabricate(:group) }
@@ -15,9 +14,7 @@ RSpec.describe ::Patreon do
   end
 
   context "with donation prompt enabled" do
-    before do
-      SiteSetting.patreon_donation_prompt_enabled = true
-    end
+    before { SiteSetting.patreon_donation_prompt_enabled = true }
 
     it "should not show donation prompt to patrons" do
       expect(described_class.show_donation_prompt_to_user?(user1)).to eq(false)
@@ -29,13 +26,10 @@ RSpec.describe ::Patreon do
   end
 
   context "with donation prompt disabled" do
-    before do
-      SiteSetting.patreon_donation_prompt_enabled = false
-    end
+    before { SiteSetting.patreon_donation_prompt_enabled = false }
 
     it "should show donation prompt to non-patrons" do
       expect(described_class.show_donation_prompt_to_user?(user2)).to eq(false)
     end
   end
-
 end

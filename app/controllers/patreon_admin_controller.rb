@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
-require_dependency 'application_controller'
+require_dependency "application_controller"
 
 class ::Patreon::PatreonAdminController < Admin::AdminController
-
-  PLUGIN_NAME = 'discourse-patreon'.freeze
+  PLUGIN_NAME = "discourse-patreon".freeze
 
   requires_plugin PLUGIN_NAME
 
@@ -16,7 +15,7 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
   end
 
   def list
-    filters = PluginStore.get(PLUGIN_NAME, 'filters') || {}
+    filters = PluginStore.get(PLUGIN_NAME, "filters") || {}
     rewards = ::Patreon::Reward.all
     last_sync = ::Patreon.get("last_sync") || {}
 
@@ -34,17 +33,23 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
   end
 
   def is_number?(string)
-    true if Float(string) rescue false
+    begin
+      true if Float(string)
+    rescue StandardError
+      false
+    end
   end
 
   def edit
-    return render json: { message: "Error" }, status: 500 if params[:rewards_ids].nil? || !is_number?(params[:group_id])
+    if params[:rewards_ids].nil? || !is_number?(params[:group_id])
+      return render json: { message: "Error" }, status: 500
+    end
 
-    filters = PluginStore.get(PLUGIN_NAME, 'filters') || {}
+    filters = PluginStore.get(PLUGIN_NAME, "filters") || {}
 
     filters[params[:group_id]] = params[:rewards_ids]
 
-    PluginStore.set(PLUGIN_NAME, 'filters', filters)
+    PluginStore.set(PLUGIN_NAME, "filters", filters)
 
     render json: success_json
   end
@@ -52,11 +57,11 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
   def delete
     return render json: { message: "Error" }, status: 500 unless is_number?(params[:group_id])
 
-    filters = PluginStore.get(PLUGIN_NAME, 'filters')
+    filters = PluginStore.get(PLUGIN_NAME, "filters")
 
     filters.delete(params[:group_id])
 
-    PluginStore.set(PLUGIN_NAME, 'filters', filters)
+    PluginStore.set(PLUGIN_NAME, "filters", filters)
 
     render json: success_json
   end
@@ -83,13 +88,15 @@ class ::Patreon::PatreonAdminController < Admin::AdminController
       StaffActionLogger.new(current_user).log_check_email(user, context: params[:context])
     end
 
-    render json: {
-      email: ::Patreon::Patron.attr("email", user)
-    }
+    render json: { email: ::Patreon::Patron.attr("email", user) }
   end
 
   def patreon_tokens_present?
-    raise Discourse::SiteSettingMissing.new("patreon_creator_access_token") if SiteSetting.patreon_creator_access_token.blank?
-    raise Discourse::SiteSettingMissing.new("patreon_creator_refresh_token")  if SiteSetting.patreon_creator_refresh_token.blank?
+    if SiteSetting.patreon_creator_access_token.blank?
+      raise Discourse::SiteSettingMissing.new("patreon_creator_access_token")
+    end
+    if SiteSetting.patreon_creator_refresh_token.blank?
+      raise Discourse::SiteSettingMissing.new("patreon_creator_refresh_token")
+    end
   end
 end
