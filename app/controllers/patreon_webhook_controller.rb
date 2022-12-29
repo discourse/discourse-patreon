@@ -1,19 +1,21 @@
 # frozen_string_literal: true
 
-require 'openssl'
-require 'json'
+require "openssl"
+require "json"
 
 class ::Patreon::PatreonWebhookController < ApplicationController
+  skip_before_action :redirect_to_login_if_required,
+                     :preload_json,
+                     :check_xhr,
+                     :verify_authenticity_token
 
-  skip_before_action :redirect_to_login_if_required, :preload_json, :check_xhr, :verify_authenticity_token
-
-  TRIGGERS = [
-    'pledges:create',
-    'pledges:update',
-    'pledges:delete',
-    'members:pledge:create',
-    'members:pledge:update',
-    'members:pledge:delete'
+  TRIGGERS = %w[
+    pledges:create
+    pledges:update
+    pledges:delete
+    members:pledge:create
+    members:pledge:update
+    members:pledge:delete
   ]
 
   def index
@@ -23,15 +25,17 @@ class ::Patreon::PatreonWebhookController < ApplicationController
     patreon_id = Patreon::Pledge.get_patreon_id(pledge_data)
 
     if SiteSetting.patreon_verbose_log
-      Rails.logger.warn("Patreon verbose log for Webhook:\n  Id = #{patreon_id}\n  Data = #{pledge_data.inspect}")
+      Rails.logger.warn(
+        "Patreon verbose log for Webhook:\n  Id = #{patreon_id}\n  Data = #{pledge_data.inspect}",
+      )
     end
 
     case event
-    when 'pledges:create', 'members:pledge:create'
+    when "pledges:create", "members:pledge:create"
       Patreon::Pledge.create!(pledge_data)
-    when 'pledges:update', 'members:pledge:update'
+    when "pledges:update", "members:pledge:update"
       Patreon::Pledge.update!(pledge_data)
-    when 'pledges:delete', 'members:pledge:delete'
+    when "pledges:delete", "members:pledge:delete"
       Patreon::Pledge.delete!(pledge_data)
     end
 
@@ -41,7 +45,7 @@ class ::Patreon::PatreonWebhookController < ApplicationController
   end
 
   def event
-    request.headers['X-Patreon-Event']
+    request.headers["X-Patreon-Event"]
   end
 
   def is_valid?
@@ -51,9 +55,10 @@ class ::Patreon::PatreonWebhookController < ApplicationController
   private
 
   def is_valid_signature?
-    signature = request.headers['X-Patreon-Signature']
+    signature = request.headers["X-Patreon-Signature"]
     digest = OpenSSL::Digest::MD5.new
 
-    signature == OpenSSL::HMAC.hexdigest(digest, SiteSetting.patreon_webhook_secret, request.raw_post)
+    signature ==
+      OpenSSL::HMAC.hexdigest(digest, SiteSetting.patreon_webhook_secret, request.raw_post)
   end
 end

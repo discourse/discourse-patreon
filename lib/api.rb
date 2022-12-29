@@ -1,37 +1,41 @@
 # frozen_string_literal: true
 
-require 'json'
+require "json"
 
 module ::Patreon
-
-  class InvalidApiResponse < ::StandardError; end
+  class InvalidApiResponse < ::StandardError
+  end
 
   class Api
-
     ACCESS_TOKEN_INVALID = "dashboard.patreon.access_token_invalid".freeze
     INVALID_RESPONSE = "patreon.error.invalid_response".freeze
 
     def self.campaign_data
-      get('/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page[count]=100')
+      get(
+        "/oauth2/api/current_user/campaigns?include=rewards,creator,goals,pledges&page[count]=100",
+      )
     end
 
     def self.get(uri)
-      limiter_hr = RateLimiter.new(nil, "patreon_api_hr", SiteSetting.max_patreon_api_reqs_per_hr, 1.hour)
-      limiter_day = RateLimiter.new(nil, "patreon_api_day", SiteSetting.max_patreon_api_reqs_per_day, 1.day)
-      AdminDashboardData.clear_problem_message(ACCESS_TOKEN_INVALID) if AdminDashboardData.problem_message_check(ACCESS_TOKEN_INVALID)
-
-      unless limiter_hr.can_perform?
-        limiter_hr.performed!
+      limiter_hr =
+        RateLimiter.new(nil, "patreon_api_hr", SiteSetting.max_patreon_api_reqs_per_hr, 1.hour)
+      limiter_day =
+        RateLimiter.new(nil, "patreon_api_day", SiteSetting.max_patreon_api_reqs_per_day, 1.day)
+      if AdminDashboardData.problem_message_check(ACCESS_TOKEN_INVALID)
+        AdminDashboardData.clear_problem_message(ACCESS_TOKEN_INVALID)
       end
 
-      unless limiter_day.can_perform?
-        limiter_day.performed!
-      end
+      limiter_hr.performed! unless limiter_hr.can_perform?
 
-      response = Faraday.new(
-        url: 'https://api.patreon.com',
-        headers: { 'Authorization' => "Bearer #{SiteSetting.patreon_creator_access_token}" }
-      ).get(uri)
+      limiter_day.performed! unless limiter_day.can_perform?
+
+      response =
+        Faraday.new(
+          url: "https://api.patreon.com",
+          headers: {
+            "Authorization" => "Bearer #{SiteSetting.patreon_creator_access_token}",
+          },
+        ).get(uri)
 
       limiter_hr.performed!
       limiter_day.performed!
@@ -42,13 +46,12 @@ module ::Patreon
       when 401
         AdminDashboardData.add_problem_message(ACCESS_TOKEN_INVALID, 7.hours)
       else
-        e = ::Patreon::InvalidApiResponse.new(response.body.presence || '')
+        e = ::Patreon::InvalidApiResponse.new(response.body.presence || "")
         e.set_backtrace(caller)
         Discourse.warn_exception(e, message: I18n.t(INVALID_RESPONSE), env: { api_uri: uri })
       end
 
       { error: I18n.t(INVALID_RESPONSE) }
     end
-
   end
 end

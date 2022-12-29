@@ -6,12 +6,12 @@ class PatreonLoginEnabledValidator
   end
 
   def valid_value?(val)
-    return true if val == 'f'
+    return true if val == "f"
     return false if SiteSetting.patreon_creator_discourse_username.blank?
     true
   end
 
   def error_message
-    I18n.t('site_settings.errors.patreon_creator_username_not_set')
+    I18n.t("site_settings.errors.patreon_creator_username_not_set")
   end
 end

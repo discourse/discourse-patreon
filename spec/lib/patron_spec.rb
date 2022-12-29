@@ -1,18 +1,30 @@
 # frozen_string_literal: true
 
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe ::Patreon::Patron do
-
   Fabricator(:patreon_user_info, class_name: :user_associated_account) do
     provider_name "patreon"
     user
   end
 
-  let(:patrons) { { "111111" => "foo@bar.com", "111112" => "boo@far.com",  "111113" => "roo@aar.com" } }
+  let(:patrons) do
+    { "111111" => "foo@bar.com", "111112" => "boo@far.com", "111113" => "roo@aar.com" }
+  end
   let(:pledges) { { "111111" => "100", "111112" => "500" } }
-  let(:rewards) { { "0" => { title: "All Patrons", amount_cents: "0" }, "4589" => { title: "Sponsers", amount_cents: "1000" } } }
-  let(:reward_users) { { "0" => ["111111", "111112"], "4589" => ["111112"] } }
+  let(:rewards) do
+    {
+      "0" => {
+        title: "All Patrons",
+        amount_cents: "0",
+      },
+      "4589" => {
+        title: "Sponsers",
+        amount_cents: "1000",
+      },
+    }
+  end
+  let(:reward_users) { { "0" => %w[111111 111112], "4589" => ["111112"] } }
   let(:titles) { { "111111" => "All Patrons", "111112" => "All Patrons, Sponsers" } }
 
   before do
@@ -69,5 +81,4 @@ RSpec.describe ::Patreon::Patron do
       expect(group2.users.to_a).to eq([ouser.user])
     end
   end
-
 end
