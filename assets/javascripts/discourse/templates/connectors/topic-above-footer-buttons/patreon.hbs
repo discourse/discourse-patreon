@@ -4,6 +4,11 @@
       {{d-icon "times"}}
     </span>
 
-    {{html-safe (i18n "patreon.donation_prompt.body" campaignUrl=siteSettings.patreon_donation_prompt_campaign_url)}}
+    {{html-safe
+      (i18n
+        "patreon.donation_prompt.body"
+        campaignUrl=siteSettings.patreon_donation_prompt_campaign_url
+      )
+    }}
   </div>
 {{/if}}

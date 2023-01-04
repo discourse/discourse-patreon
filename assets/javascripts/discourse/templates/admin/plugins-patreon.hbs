@@ -16,7 +16,13 @@
           <td>{{rule.rewards}}</td>
           <td>
             <div class="pull-right">
-              {{d-button action="delete" actionParam=rule icon="far-trash-alt" class="delete btn-danger" title="patreon.delete"}}
+              {{d-button
+                action="delete"
+                actionParam=rule
+                icon="far-trash-alt"
+                class="delete btn-danger"
+                title="patreon.delete"
+              }}
             </div>
           </td>
         </tr>
@@ -25,11 +31,26 @@
 
     <tfoot>
       <tr class="new-filter">
-        <td>{{combo-box value=editing.group_id content=groups nameProperty="name" valueProperty="id" none="patreon.select_group"}}</td>
-        <td>{{list-setting value=editing.reward_list choices=rewardsNames class="rewards"}}</td>
+        <td>{{combo-box
+            value=editing.group_id
+            content=groups
+            nameProperty="name"
+            valueProperty="id"
+            none="patreon.select_group"
+          }}</td>
+        <td>{{list-setting
+            value=editing.reward_list
+            choices=rewardsNames
+            class="rewards"
+          }}</td>
         <td>
           <div class="pull-right">
-            {{d-button action="save" icon="check" class="save btn-primary" title="patreon.save"}}
+            {{d-button
+              action="save"
+              icon="check"
+              class="save btn-primary"
+              title="patreon.save"
+            }}
           </div>
         </td>
       </tr>
@@ -48,6 +69,7 @@
   }}
 
   {{#if last_sync_at}}
-    <span class="last_synced">{{i18n "patreon.last_synced"}}: {{html-safe (format-date last_sync_at leaveAgo="true")}}</span>
+    <span class="last_synced">{{i18n "patreon.last_synced"}}:
+      {{html-safe (format-date last_sync_at leaveAgo="true")}}</span>
   {{/if}}
 </section>

@@ -14,9 +14,11 @@
           {{d-button
             class="btn-default"
             action="checkPatreonEmail"
-            actionParam=model icon="far-envelope"
+            actionParam=model
+            icon="far-envelope"
             label="admin.users.check_email.text"
-            title="admin.users.check_email.title"}}
+            title="admin.users.check_email.title"
+          }}
         {{/if}}
       </div>
     </div>
@@ -36,7 +38,10 @@
   {{#if model.patreon_declined_since}}
     <div class="display-row">
       <div class="field">{{i18n "patreon.field.declined_since"}}</div>
-      <div class="value">{{html-safe format-date model.patreon_declined_since}}</div>
+      <div class="value">{{html-safe
+          format-date
+          model.patreon_declined_since
+        }}</div>
     </div>
   {{/if}}
   <div class="display-row">
