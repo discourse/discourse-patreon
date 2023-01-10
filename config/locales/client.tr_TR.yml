@@ -6,6 +6,10 @@
 
 tr_TR:
   js:
+    login:
+      patreon:
+        name: Patreon
+        title: Patreon ile
     patreon:
       title: 'Patreon'
       header:
@@ -32,3 +36,20 @@ tr_TR:
           help_text:
             email_available: "Patreon'un rehin tarihini görmek için sayfanın sağ alt kısmına ulaşın."
             email_not_available: "Patreon üyesini seç ve rehin tarihlerini görmek için sayfanın sağ alt kısmına ulaşın."
+      donation_prompt:
+        body: |
+          <h1>Merhaba okuyucu!</h1>
+
+          <p>Web sitemizi beğendiniz mi? İyi bir amaca katkıda bulunmak ister misiniz?</p>
+
+          <p>
+            Web sitemizi yararlı buluyor ve oluşturduğumuz topluluktan hoşlanıyorsanız web sitemize bağışta bulunursanız çok seviniriz.
+            Bağışlar, hizmetlerimizin sorunsuz bir şekilde devam etmesini ve topluluğumuzun yıllarca faaliyette kalmasını sağlar.
+            Her miktar önemli ve iyi bir şekilde kullanılacak.
+          </p>
+
+          <p>Desteğiniz için teşekkür ederiz!<p>
+
+          <p>
+            <a class="btn btn-large btn-danger" href="%{campaignUrl}">Hami Olun</a>
+          </p>
