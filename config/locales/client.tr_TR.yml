@@ -24,18 +24,18 @@ tr_TR:
       save: 'Kaydet'
       update_data: 'Patreon Verilerini Güncelle ve Grupları Senkronize Et'
       refresh_page: 'Patreon API''den yeni veriler indirildi. Lütfen sayfayı yenileyin.'
-      select_group: 'Bir grup seçin'
+      select_group: 'Grup seçin'
       field:
-        id: "Kmilik"
-        email: "Eposta"
-        amount_cents: "Miktar (sent)"
+        id: "Kimlik"
+        email: "E-posta"
+        amount_cents: "Miktar (sent cinsinden)"
         rewards: "Ödüller"
-        declined_since: "Rehin tarihten itibaren rededildi"
+        declined_since: "O Zamandan Bu Yana Bağış Azaldı"
         more_details:
-          label: "Ödemeler & Daha Fazla Detay"
+          label: "Ödemeler ve Daha Fazla Ayrıntı"
           help_text:
-            email_available: "Patreon'un rehin tarihini görmek için sayfanın sağ alt kısmına ulaşın."
-            email_not_available: "Patreon üyesini seç ve rehin tarihlerini görmek için sayfanın sağ alt kısmına ulaşın."
+            email_available: "Bu Patreon'un bağış geçmişini görmek için sayfanın sağ alt kısmına ulaşın."
+            email_not_available: "Bağış geçmişini görmek için Patreon üyesini seçin ve sayfanın sağ alt kısmına ulaşın."
       donation_prompt:
         body: |
           <h1>Merhaba okuyucu!</h1>
