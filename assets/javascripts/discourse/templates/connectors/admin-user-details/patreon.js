@@ -2,9 +2,12 @@ import { ajax } from "discourse/lib/ajax";
 import { userPath } from "discourse/lib/url";
 
 export default {
-  shouldRender(args, component) {
-    component.args.patron_url = "https://patreon.com/members";
-    return component.siteSettings.patreon_enabled && args.model.patreon_id;
+  shouldRender(args, context) {
+    return context.siteSettings.patreon_enabled && args.model.patreon_id;
+  },
+
+  setupComponent(args, component) {
+    component.set("patron_url", "https://patreon.com/members");
   },
 
   actions: {
