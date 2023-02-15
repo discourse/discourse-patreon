@@ -14,7 +14,7 @@ ru:
     patreon_creator_discourse_username: "Имя пользователя Discourse, которое используется для входа через учётную запись Patreon с помощью 'Patreon Social Login'"
     patreon_creator_access_token: "Сгенерированный access-токен от Patreon"
     patreon_creator_refresh_token: "Сгенерированный refesh-токен от Patreon"
-    patreon_declined_pledges_grace_period_days: "Льготный период (в днях) до полного отказа от залога."
+    patreon_declined_pledges_grace_period_days: "Период ожидания (в днях) до полного отказа от подписки."
     max_patreon_api_reqs_per_hr: "Максимальное количество запросов Patreon API в час"
     max_patreon_api_reqs_per_day: "Максимальное количество запросов Patreon API в день"
     patreon_verbose_log: 'Добавлять в журнал подробную информацию при работе с Patreon'
@@ -22,7 +22,7 @@ ru:
     patreon_donation_prompt_show_after_topics: "Показывать приглашение к пожертвованию после указанного здесь количества тем"
     patreon_donation_prompt_campaign_url: "URL рекламной кампании для пожертвований"
     errors:
-      patreon_creator_username_not_set: "Вам необходимо установить настройку имени пользователя в Patreon Creator Discourse перед включением входа в систему Patreon."
+      patreon_creator_username_not_set: "Перед включением входа через Patreon необходимо установить настройку имени пользователя в Patreon Creator Discourse."
   dashboard:
     patreon:
       access_token_invalid: "Недопустимые значения access- и refresh-токенов. Вы должны скопировать и вставить новые токены с сайта <a href='https://www.patreon.com/platform/documentation/clients'>Patreon</a> в <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>настройки вашего сайта</a>."

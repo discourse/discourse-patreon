@@ -30,7 +30,7 @@ fr:
         email: "E-mail"
         amount_cents: "Montant (en cents)"
         rewards: "Récompenses"
-        declined_since: "Promesse de don refusée depuis"
+        declined_since: "Promesse de don refusée depuis le"
         more_details:
           label: "Paiements et autres détails"
           help_text:
