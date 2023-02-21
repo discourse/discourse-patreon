@@ -6,6 +6,9 @@
 
 lt:
   js:
+    login:
+      patreon:
+        name: Patreon
     patreon:
       title: 'Patreon'
       header:
