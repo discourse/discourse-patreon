@@ -6,6 +6,9 @@
 
 ur:
   js:
+    login:
+      patreon:
+        name: پَیٹریئون
     patreon:
       title: 'پَیٹریئون'
       header:

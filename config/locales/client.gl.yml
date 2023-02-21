@@ -6,6 +6,9 @@
 
 gl:
   js:
+    login:
+      patreon:
+        name: Patreón
     patreon:
       title: 'Patreón'
       header:

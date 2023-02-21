@@ -6,6 +6,9 @@
 
 ko:
   js:
+    login:
+      patreon:
+        name: 파트 레온
     patreon:
       title: '파트 레온'
       header:
