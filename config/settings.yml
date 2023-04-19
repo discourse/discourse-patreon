@@ -10,15 +10,19 @@ plugins:
     default: ''
   patreon_client_secret:
     default: ''
+    secret: true
   patreon_webhook_secret:
     default: ''
+    secret: true
   patreon_creator_discourse_username:
     default: ''
     type: username
   patreon_creator_access_token:
     default: ''
+    secret: true
   patreon_creator_refresh_token:
     default: ''
+    secret: true
   patreon_declined_pledges_grace_period_days:
     default: 7
   max_patreon_api_reqs_per_hr:
