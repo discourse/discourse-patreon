@@ -129,23 +129,21 @@ after_initialize do
   end
 
   ::Patreon::USER_DETAIL_FIELDS.each do |attribute|
-    add_to_serializer(:admin_detailed_user, "patreon_#{attribute}".to_sym, false) do
-      ::Patreon::Patron.attr(attribute, object)
-    end
-
-    add_to_serializer(:admin_detailed_user, "include_patreon_#{attribute}?".to_sym) do
-      ::Patreon::Patron.attr(attribute, object).present? &&
-        (attribute != "amount_cents" || scope.is_admin?)
-    end
+    add_to_serializer(
+      :admin_detailed_user,
+      "patreon_#{attribute}".to_sym,
+      include_condition: -> do
+        ::Patreon::Patron.attr(attribute, object).present? &&
+          (attribute != "amount_cents" || scope.is_admin?)
+      end,
+    ) { ::Patreon::Patron.attr(attribute, object) }
   end
 
-  add_to_serializer(:admin_detailed_user, :patreon_email_exists, false) do
-    ::Patreon::Patron.attr("email", object).present?
-  end
-
-  add_to_serializer(:admin_detailed_user, "include_patreon_email_exists?".to_sym) do
-    ::Patreon::Patron.attr("email", object).present?
-  end
+  add_to_serializer(
+    :admin_detailed_user,
+    :patreon_email_exists,
+    include_condition: -> { ::Patreon::Patron.attr("email", object).present? },
+  ) { true }
 
   add_to_serializer(:current_user, :show_donation_prompt?) do
     Patreon.show_donation_prompt_to_user?(object)
