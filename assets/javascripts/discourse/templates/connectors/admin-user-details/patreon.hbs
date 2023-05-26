@@ -11,14 +11,13 @@
         {{#if patreon_email}}
           {{patreon_email}}
         {{else}}
-          {{d-button
+          <DButton
             class="btn-default"
-            action="checkPatreonEmail"
-            actionParam=model
-            icon="far-envelope"
-            label="admin.users.check_email.text"
-            title="admin.users.check_email.title"
-          }}
+            @action={{action "checkPatreonEmail" model}}
+            @icon="far-envelope"
+            @label="admin.users.check_email.text"
+            @title="admin.users.check_email.title"
+          />
         {{/if}}
       </div>
     </div>
