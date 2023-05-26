@@ -12,9 +12,8 @@
           {{patreon_email}}
         {{else}}
           <DButton
-            @class="btn-default"
-            @action="checkPatreonEmail"
-            @actionParam={{model}}
+            class="btn-default"
+            @action={{action "checkPatreonEmail" model}}
             @icon="far-envelope"
             @label="admin.users.check_email.text"
             @title="admin.users.check_email.title"

@@ -17,10 +17,10 @@
           <td>
             <div class="pull-right">
               <DButton
-                @action="delete"
+                @action={{action "delete"}}
                 @actionParam={{rule}}
                 @icon="far-trash-alt"
-                @class="delete btn-danger"
+                class="delete btn-danger"
                 @title="patreon.delete"
               />
             </div>
@@ -46,9 +46,9 @@
         <td>
           <div class="pull-right">
             <DButton
-              @action="save"
+              @action={{action "save"}}
               @icon="check"
-              @class="save btn-primary"
+              class="save btn-primary"
               @title="patreon.save"
             />
           </div>
@@ -60,9 +60,8 @@
   <p>{{i18n "patreon.help_text"}}</p>
 
   <DButton
-    @action="updateData"
+    @action={{action "updateData"}}
     @icon="refresh"
-    @class="test"
     @disabled={{updatingData}}
     @title="patreon.update_data"
     @label="patreon.update_data"
