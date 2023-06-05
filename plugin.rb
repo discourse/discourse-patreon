@@ -244,4 +244,4 @@ class Auth::PatreonAuthenticator < Auth::ManagedAuthenticator
   end
 end
 
-auth_provider authenticator: Auth::PatreonAuthenticator.new
+auth_provider authenticator: Auth::PatreonAuthenticator.new, icon: "fab-patreon"
