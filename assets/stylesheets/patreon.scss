@@ -20,8 +20,8 @@
   }
 }
 
-.btn-social.patreon {
-  background-color: #052d49;
+.btn-social .d-icon-fab-patreon, .btn-social.btn:hover .d-icon-fab-patreon {
+  color: #ff424d;
 }
 
 .badge-card.patreon .badge-contents .badge-icon img {
