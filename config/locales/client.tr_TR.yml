@@ -9,7 +9,6 @@ tr_TR:
     login:
       patreon:
         name: Patreon
-        title: Patreon ile
     patreon:
       title: 'Patreon'
       header:

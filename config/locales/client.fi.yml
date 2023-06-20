@@ -9,7 +9,6 @@ fi:
     login:
       patreon:
         name: Patreon
-        title: Patreonilla
     patreon:
       title: 'Patreon'
       header:
