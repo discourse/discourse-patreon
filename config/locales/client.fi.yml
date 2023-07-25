@@ -9,6 +9,7 @@ fi:
     login:
       patreon:
         name: Patreon
+        title: Kirjaudu Patreonilla
     patreon:
       title: 'Patreon'
       header:
