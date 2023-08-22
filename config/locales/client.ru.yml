@@ -9,6 +9,7 @@ ru:
     login:
       patreon:
         name: Patreon
+        title: Войти через Patreon
     patreon:
       title: 'Patreon'
       header:

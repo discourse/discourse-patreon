@@ -9,6 +9,7 @@ ar:
     login:
       patreon:
         name: Patreon
+        title: تسجيل الدخول باستخدام Patreon
     patreon:
       title: 'Patreon'
       header:
