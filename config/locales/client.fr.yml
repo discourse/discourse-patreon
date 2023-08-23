@@ -9,6 +9,7 @@ fr:
     login:
       patreon:
         name: Patreon
+        title: Se connecter avec Patreon
     patreon:
       title: 'Patreon'
       header:

@@ -9,6 +9,7 @@ nl:
     login:
       patreon:
         name: Patreon
+        title: Inloggen met Patreon
     patreon:
       title: 'Patreon'
       header:

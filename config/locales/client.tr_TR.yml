@@ -9,6 +9,7 @@ tr_TR:
     login:
       patreon:
         name: Patreon
+        title: Patreon ile giriş yapın
     patreon:
       title: 'Patreon'
       header:

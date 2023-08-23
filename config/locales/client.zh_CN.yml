@@ -9,6 +9,7 @@ zh_CN:
     login:
       patreon:
         name: Patreon
+        title: 使用 Patreon 登录
     patreon:
       title: 'Patreon'
       header:
