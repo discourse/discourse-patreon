@@ -51,7 +51,7 @@ function initWithApi(api) {
         const expires = moment().add(30, "d").toDate();
         $.cookie(cookieName, "t", { expires });
 
-        this.$().fadeOut(700);
+        $(this.element).fadeOut(700);
       },
     },
   });
