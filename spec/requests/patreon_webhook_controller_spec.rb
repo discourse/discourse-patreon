@@ -6,7 +6,7 @@ require "json"
 require_relative "../spec_helper"
 
 RSpec.describe ::Patreon::PatreonWebhookController do
-  before { SiteSetting.queue_jobs = false }
+  before { Jobs.run_immediately! }
 
   describe "index" do
     describe "header checking" do
