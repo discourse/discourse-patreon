@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
 # name: discourse-patreon
-# about: Integration features between Patreon and Discourse
+# about: Enables Patreon Social Login, and synchronization between Discourse Groups and Patreon rewards.
+# meta_topic_id: 44366
 # version: 2.0
 # author: Rafael dos Santos Silva <xfalcox@gmail.com>
 # url: https://github.com/discourse/discourse-patreon
