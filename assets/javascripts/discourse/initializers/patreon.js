@@ -1,7 +1,5 @@
 import { withPluginApi } from "discourse/lib/plugin-api";
-
-let numTopicsOpened = 0;
-const cookieName = "PatreonDonationPromptClosed";
+import { incrementTopicsOpened } from "../connectors/topic-above-footer-buttons/patreon";
 
 function initWithApi(api) {
   const currentUser = api.getCurrentUser();
@@ -17,12 +15,7 @@ function initWithApi(api) {
       return;
     }
 
-    if (
-      numTopicsOpened <=
-      topic.siteSettings.patreon_donation_prompt_show_after_topics
-    ) {
-      numTopicsOpened++;
-    }
+    incrementTopicsOpened();
   });
 }
 

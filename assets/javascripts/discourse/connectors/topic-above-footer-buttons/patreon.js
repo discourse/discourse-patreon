@@ -1,3 +1,10 @@
+let numTopicsOpened = 0;
+const cookieName = "PatreonDonationPromptClosed";
+
+export function incrementTopicsOpened() {
+  numTopicsOpened++;
+}
+
 export default {
   shouldRender(_args, component) {
     return component.currentUser;
