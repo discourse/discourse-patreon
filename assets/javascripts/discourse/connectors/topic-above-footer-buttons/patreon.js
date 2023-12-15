@@ -1,3 +1,5 @@
+import cookie from "discourse/lib/cookie";
+
 let numTopicsOpened = 0;
 const cookieName = "PatreonDonationPromptClosed";
 
@@ -17,7 +19,7 @@ export default {
         this.siteSettings.patreon_donation_prompt_enabled &&
         this.siteSettings.patreon_donation_prompt_campaign_url !== "" &&
         this.currentUser.show_donation_prompt &&
-        $.cookie(cookieName) !== "t" &&
+        cookie(cookieName) !== "t" &&
         numTopicsOpened >
           this.siteSettings.patreon_donation_prompt_show_after_topics;
 
@@ -29,7 +31,7 @@ export default {
     close() {
       // hide the donation prompt for 30 days
       const expires = moment().add(30, "d").toDate();
-      $.cookie(cookieName, "t", { expires });
+      cookie(cookieName, "t", { expires });
 
       $(this.element).fadeOut(700);
     },
