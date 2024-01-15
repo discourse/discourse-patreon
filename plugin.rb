@@ -6,7 +6,6 @@
 # version: 2.0
 # author: Rafael dos Santos Silva <xfalcox@gmail.com>
 # url: https://github.com/discourse/discourse-patreon
-# transpile_js: true
 
 require "omniauth-oauth2"
 

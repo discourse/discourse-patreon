@@ -1,9 +1,9 @@
+import { Promise } from "rsvp";
+import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import Group from "discourse/models/group";
-import { ajax } from "discourse/lib/ajax";
-import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 import DiscourseRoute from "discourse/routes/discourse";
-import { Promise } from "rsvp";
+import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 
 /* We use three main model to get this page working:
  *  Discourse Groups (excluding the automatic ones), Patreon rewards and

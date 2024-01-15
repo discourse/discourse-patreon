@@ -1,3 +1,4 @@
+import $ from "jquery";
 import cookie from "discourse/lib/cookie";
 
 let numTopicsOpened = 0;

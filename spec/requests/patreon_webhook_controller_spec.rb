@@ -27,7 +27,7 @@ RSpec.describe ::Patreon::PatreonWebhookController do
 
     describe "enqueue job" do
       let(:body) { get_patreon_response("pledge.json") }
-      let(:digest) { OpenSSL::Digest::MD5.new }
+      let(:digest) { OpenSSL::Digest.new("MD5") }
       let(:secret) { SiteSetting.patreon_webhook_secret = "WEBHOOK SECRET" }
 
       before do

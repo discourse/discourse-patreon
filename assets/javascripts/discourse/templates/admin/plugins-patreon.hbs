@@ -20,8 +20,8 @@
                 @action={{action "delete"}}
                 @actionParam={{rule}}
                 @icon="far-trash-alt"
-                class="delete btn-danger"
                 @title="patreon.delete"
+                class="delete btn-danger"
               />
             </div>
           </td>
@@ -41,15 +41,15 @@
         <td><ListSetting
             @value={{editing.reward_list}}
             @choices={{rewardsNames}}
-            @class="rewards"
+            class="rewards"
           /></td>
         <td>
           <div class="pull-right">
             <DButton
               @action={{action "save"}}
               @icon="check"
-              class="save btn-primary"
               @title="patreon.save"
+              class="save btn-primary"
             />
           </div>
         </td>
@@ -68,7 +68,9 @@
   />
 
   {{#if last_sync_at}}
-    <span class="last_synced">{{i18n "patreon.last_synced"}}:
-      {{html-safe (format-date last_sync_at leaveAgo="true")}}</span>
+    <span class="last_synced">
+      {{i18n "patreon.last_synced"}}:
+      {{html-safe (format-date last_sync_at leaveAgo="true")}}
+    </span>
   {{/if}}
 </section>

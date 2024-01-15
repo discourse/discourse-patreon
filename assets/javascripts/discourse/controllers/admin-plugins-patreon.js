@@ -1,11 +1,11 @@
 import Controller from "@ember/controller";
-import I18n from "I18n";
-import discourseComputed from "discourse-common/utils/decorators";
-import getURL from "discourse-common/lib/get-url";
-import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
+import { inject as service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import { inject as service } from "@ember/service";
+import getURL from "discourse-common/lib/get-url";
+import discourseComputed from "discourse-common/utils/decorators";
+import I18n from "I18n";
+import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 
 export default Controller.extend({
   dialog: service(),
