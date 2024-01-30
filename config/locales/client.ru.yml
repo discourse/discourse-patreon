@@ -9,7 +9,7 @@ ru:
     admin:
       site_settings:
         categories:
-          discourse_patreon: "Discourse для Patreon"
+          discourse_patreon: "Patreon для Discourse"
   js:
     login:
       patreon:

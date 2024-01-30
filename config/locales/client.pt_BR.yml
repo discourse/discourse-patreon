@@ -5,6 +5,11 @@
 # https://translate.discourse.org/
 
 pt_BR:
+  admin_js:
+    admin:
+      site_settings:
+        categories:
+          discourse_patreon: "Patreon no Discourse"
   js:
     login:
       patreon:
