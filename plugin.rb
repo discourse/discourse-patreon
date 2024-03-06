@@ -11,8 +11,6 @@ require "omniauth-oauth2"
 
 enabled_site_setting :patreon_enabled
 
-PLUGIN_NAME = "discourse-patreon"
-
 register_asset "stylesheets/patreon.scss"
 
 register_svg_icon "fab-patreon"
@@ -66,19 +64,17 @@ after_initialize do
     end
   end
 
-  %w[
-    ../app/controllers/patreon_admin_controller.rb
-    ../app/controllers/patreon_webhook_controller.rb
-    ../app/jobs/regular/sync_patron_groups.rb
-    ../app/jobs/scheduled/patreon_sync_patrons_to_groups.rb
-    ../app/jobs/scheduled/patreon_update_tokens.rb
-    ../lib/api.rb
-    ../lib/seed.rb
-    ../lib/campaign.rb
-    ../lib/pledge.rb
-    ../lib/patron.rb
-    ../lib/tokens.rb
-  ].each { |path| load File.expand_path(path, __FILE__) }
+  require_relative "app/controllers/patreon_admin_controller"
+  require_relative "app/controllers/patreon_webhook_controller"
+  require_relative "app/jobs/regular/sync_patron_groups"
+  require_relative "app/jobs/scheduled/patreon_sync_patrons_to_groups"
+  require_relative "app/jobs/scheduled/patreon_update_tokens"
+  require_relative "lib/api"
+  require_relative "lib/seed"
+  require_relative "lib/campaign"
+  require_relative "lib/pledge"
+  require_relative "lib/patron"
+  require_relative "lib/tokens"
 
   AdminDashboardData.problem_messages << ::Patreon::Api::ACCESS_TOKEN_INVALID
 
@@ -107,7 +103,7 @@ after_initialize do
   end
 
   on(:user_created) do |user|
-    filters = PluginStore.get(PLUGIN_NAME, "filters")
+    filters = PluginStore.get(::Patreon::PLUGIN_NAME, "filters")
     patreon_id = Patreon::Patron.all.key(user.email)
 
     if filters.present? && patreon_id.present?
