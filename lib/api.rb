@@ -21,9 +21,6 @@ module ::Patreon
         RateLimiter.new(nil, "patreon_api_hr", SiteSetting.max_patreon_api_reqs_per_hr, 1.hour)
       limiter_day =
         RateLimiter.new(nil, "patreon_api_day", SiteSetting.max_patreon_api_reqs_per_day, 1.day)
-      if AdminDashboardData.problem_message_check(ACCESS_TOKEN_INVALID)
-        AdminDashboardData.clear_problem_message(ACCESS_TOKEN_INVALID)
-      end
 
       limiter_hr.performed! unless limiter_hr.can_perform?
 
@@ -44,7 +41,7 @@ module ::Patreon
       when 200
         return JSON.parse response.body
       when 401
-        AdminDashboardData.add_problem_message(ACCESS_TOKEN_INVALID, 7.hours)
+        ProblemCheckTracker[:access_token_invalid].problem!
       else
         e = ::Patreon::InvalidApiResponse.new(response.body.presence || "")
         e.set_backtrace(caller)
