@@ -78,7 +78,7 @@ module ::Patreon
           patron_ids = rewards.map { |id| reward_users[id] }.compact.flatten.uniq
           next if patron_ids.blank?
 
-          is_member = false unless patron_ids.include?(patreon_id)
+          is_member = false if patron_ids.exclude?(patreon_id)
         end
 
         is_existing_member = GroupUser.exists?(group: group, user: user)

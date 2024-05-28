@@ -18,7 +18,7 @@ module ::Patreon
 
       if entry["type"] == "pledge"
         patron_id = rel["patron"]["data"]["id"]
-        reward_id = rel["reward"]["data"]["id"] unless rel["reward"]["data"].blank?
+        reward_id = rel["reward"]["data"]["id"] if rel["reward"]["data"].present?
 
         reward_users[reward_id].reject! { |i| i == patron_id } if reward_id.present?
       elsif entry["type"] == "member"
