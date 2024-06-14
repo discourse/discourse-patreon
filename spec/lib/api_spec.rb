@@ -13,23 +13,23 @@ RSpec.describe ::Patreon::Api do
     stub_request(:get, url).to_return(content)
   end
 
+  before { SiteSetting.stubs(patreon_enabled: true) }
+
   it "should add admin warning message for invalid api response" do
     stub(401)
 
-    expect(described_class.get(url)).to eq(error: I18n.t(described_class::INVALID_RESPONSE))
-    expect(
-      AdminDashboardData.problem_message_check(described_class::ACCESS_TOKEN_INVALID).sub(
-        "%{base_path}",
-        "",
-      ),
-    ).to eq(I18n.t(described_class::ACCESS_TOKEN_INVALID, base_path: ""))
+    described_class.get(url)
 
+    expect(ProblemCheckTracker[:access_token_invalid].blips).to eq(1)
+    expect(AdminNotice.find_by(identifier: :access_token_invalid).message).to eq(
+      I18n.t("dashboard.problem.access_token_invalid", base_path: Discourse.base_path),
+    )
+  end
+
+  it "should not add admin warning message for valid api response" do
     stub(200)
 
-    expect(described_class.get(url)).to eq({})
-    expect(AdminDashboardData.problem_message_check(described_class::ACCESS_TOKEN_INVALID)).to eq(
-      nil,
-    )
+    expect(ProblemCheckTracker[:access_token_invalid].blips).to eq(0)
   end
 
   it "should add warning log" do
