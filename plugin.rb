@@ -13,7 +13,7 @@ enabled_site_setting :patreon_enabled
 
 register_asset "stylesheets/patreon.scss"
 
-register_svg_icon "fab-patreon"
+register_svg_icon "patreon-new"
 
 # Site setting validators must be loaded before initialize
 require_relative "lib/validators/patreon_login_enabled_validator"
@@ -240,4 +240,4 @@ class Auth::PatreonAuthenticator < Auth::ManagedAuthenticator
   end
 end
 
-auth_provider authenticator: Auth::PatreonAuthenticator.new, icon: "fab-patreon"
+auth_provider authenticator: Auth::PatreonAuthenticator.new, icon: "patreon-new"
