@@ -69,14 +69,13 @@ after_initialize do
   require_relative "app/jobs/regular/sync_patron_groups"
   require_relative "app/jobs/scheduled/patreon_sync_patrons_to_groups"
   require_relative "app/jobs/scheduled/patreon_update_tokens"
+  require_relative "app/services/problem_check/access_token_invalid"
   require_relative "lib/api"
   require_relative "lib/seed"
   require_relative "lib/campaign"
   require_relative "lib/pledge"
   require_relative "lib/patron"
   require_relative "lib/tokens"
-
-  AdminDashboardData.problem_messages << ::Patreon::Api::ACCESS_TOKEN_INVALID
 
   Patreon::Engine.routes.draw do
     get "/rewards" => "patreon_admin#rewards", :constraints => AdminConstraint.new
@@ -144,6 +143,8 @@ after_initialize do
   add_to_serializer(:current_user, :show_donation_prompt?) do
     Patreon.show_donation_prompt_to_user?(object)
   end
+
+  register_problem_check ProblemCheck::AccessTokenInvalid
 end
 
 # Authentication with Patreon
