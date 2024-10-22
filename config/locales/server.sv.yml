@@ -23,9 +23,6 @@ sv:
     patreon_donation_prompt_campaign_url: "Donationsuppmaningskampanj-URL"
     errors:
       patreon_creator_username_not_set: "Du måste ange inställningen för Patreon-skaparens Discourse-användarnamn innan du aktiverar Patreon-inloggning."
-  dashboard:
-    patreon:
-      access_token_invalid: "Värdena för Patreon Creator-åtkomst- och -uppdateringsbevis är felaktiga. Du måste kopiera och klistra in nya bevis från <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-webbplatsen</a> till <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>webbplatsinställningarna</a>."
   patreon:
     error:
       invalid_response: "Ogiltigt svar från Patreon-API"

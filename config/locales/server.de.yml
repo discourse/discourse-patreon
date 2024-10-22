@@ -23,9 +23,6 @@ de:
     patreon_donation_prompt_campaign_url: "URL der Spendenaufforderungskampagne"
     errors:
       patreon_creator_username_not_set: "Bevor du das Patreon-Log-in aktivieren kannst, musst du den Patreon-Ersteller-Discourse-Benutzernamen einstellen."
-  dashboard:
-    patreon:
-      access_token_invalid: "Die Werte für das Patreon-Ersteller-Zugriffstoken und -Aktualisierungstoken sind falsch. Du musst neue Token von der <a href='https://www.patreon.com/platform/documentation/clients'>Patreon-Website</a> kopieren und unter <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>Website-Einstellungen</a> einfügen."
   patreon:
     error:
       invalid_response: "Ungültige Antwort der Patreon-API"
