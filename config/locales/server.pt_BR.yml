@@ -23,9 +23,6 @@ pt_BR:
     patreon_donation_prompt_campaign_url: "URL da campanha de solicitação de doação"
     errors:
       patreon_creator_username_not_set: "Você precisa definir a configuração do nome do(a) usuário(a) do Discourse do(a) criador(a) do Patreon antes de ativar o login do Patreon."
-  dashboard:
-    patreon:
-      access_token_invalid: "Os valores do token de atualização e de acesso do(a) criador(a) do Patreon estão incorretos. Você precisa copiar e colar novos tokens do <a href='https://www.patreon.com/platform/documentation/clients'>site do Patreon</a> para <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>as configurações do site</a>."
   patreon:
     error:
       invalid_response: "Resposta inválida da API do Patreon"

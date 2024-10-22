@@ -32,7 +32,7 @@ ro:
       select_group: 'Selectează un grup'
       field:
         id: "ID"
-        email: "E-mail"
+        email: "Email"
         amount_cents: "Sumă (în cenți)"
         rewards: "Recompense"
         declined_since: "Angajament refuzat din"

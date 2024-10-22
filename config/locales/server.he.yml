@@ -23,9 +23,6 @@ he:
     patreon_donation_prompt_campaign_url: "כתובת בקשב לתרומה במסע פרסום"
     errors:
       patreon_creator_username_not_set: "עליך להגדיר את שם המשתמש ב־Discourse ליוצר Patreon בטרם הפעלת כניסה עם Patreon."
-  dashboard:
-    patreon:
-      access_token_invalid: "ערכי אסימוני הגישה והרענון של יוצר ב־Patreon שגויים. עליך להעתיק ולהדביק את האסימון החדשים מה<a href='https://www.patreon.com/platform/documentation/clients'>אתר של Patreon</a> אל <a href='%{base_path}/admin/site_settings/category/all_results?filter=patreon'>הגדרות האתר</a>."
   patreon:
     error:
       invalid_response: "תגובה שגויה מה־API של Patreon"
