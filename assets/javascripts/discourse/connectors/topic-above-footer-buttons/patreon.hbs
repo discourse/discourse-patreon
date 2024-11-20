@@ -1,4 +1,4 @@
-{{#if showDonationPrompt}}
+{{#if this.showDonationPrompt}}
   <div class="patreon-donation-prompt">
     <span role="button" class="close" {{action "close"}}>
       {{d-icon "times"}}
@@ -7,7 +7,7 @@
     {{html-safe
       (i18n
         "patreon.donation_prompt.body"
-        campaignUrl=siteSettings.patreon_donation_prompt_campaign_url
+        campaignUrl=this.siteSettings.patreon_donation_prompt_campaign_url
       )
     }}
   </div>
