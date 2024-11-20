@@ -10,7 +10,7 @@
     </thead>
 
     <tbody>
-      {{#each model as |rule|}}
+      {{#each this.model as |rule|}}
         <tr class="">
           <td>{{rule.group}}</td>
           <td>{{rule.rewards}}</td>
@@ -32,15 +32,15 @@
     <tfoot>
       <tr class="new-filter">
         <td><ComboBox
-            @value={{editing.group_id}}
-            @content={{groups}}
+            @value={{this.editing.group_id}}
+            @content={{this.groups}}
             @nameProperty="name"
             @valueProperty="id"
             @none="patreon.select_group"
           /></td>
         <td><ListSetting
-            @value={{editing.reward_list}}
-            @choices={{rewardsNames}}
+            @value={{this.editing.reward_list}}
+            @choices={{this.rewardsNames}}
             class="rewards"
           /></td>
         <td>
@@ -62,15 +62,15 @@
   <DButton
     @action={{action "updateData"}}
     @icon="refresh"
-    @disabled={{updatingData}}
+    @disabled={{this.updatingData}}
     @title="patreon.update_data"
     @label="patreon.update_data"
   />
 
-  {{#if last_sync_at}}
+  {{#if this.last_sync_at}}
     <span class="last_synced">
       {{i18n "patreon.last_synced"}}:
-      {{html-safe (format-date last_sync_at leaveAgo="true")}}
+      {{html-safe (format-date this.last_sync_at leaveAgo="true")}}
     </span>
   {{/if}}
 </section>
