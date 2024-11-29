@@ -1,4 +1,5 @@
 import Controller from "@ember/controller";
+import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
@@ -7,100 +8,98 @@ import discourseComputed from "discourse-common/utils/decorators";
 import I18n from "I18n";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 
-export default Controller.extend({
-  dialog: service(),
-  prettyPrintReward: (reward) => {
+export default class AdminPluginsPatreonController extends Controller {
+  @service dialog;
+
+  editing = FilterRule.create({ group_id: null });
+
+  prettyPrintReward(reward) {
     return `$${reward.amount_cents / 100} - ${reward.title}`;
-  },
+  }
 
   @discourseComputed("rewards")
   rewardsNames() {
     return Object.values(this.rewards)
       .filter((r) => r.id >= 0)
       .map((r) => this.prettyPrintReward(r));
-  },
+  }
 
-  editing: FilterRule.create({ group_id: null }),
+  @action
+  save() {
+    const rule = this.get("editing");
+    const model = this.get("model");
 
-  actions: {
-    save() {
-      const rule = this.get("editing");
-      const model = this.get("model");
+    rule.set(
+      "group",
+      this.groups.find((x) => x.id === parseInt(rule.get("group_id"), 10))
+    );
+    rule.set(
+      "rewards_ids",
+      Object.values(this.rewards)
+        .filter((v) =>
+          rule.get("reward_list").includes(this.prettyPrintReward(v))
+        )
+        .map((r) => r.id)
+    );
 
-      rule.set(
-        "group",
-        this.groups.find((x) => x.id === parseInt(rule.get("group_id"), 10))
-      );
-      rule.set(
-        "rewards_ids",
-        Object.values(this.rewards)
-          .filter((v) =>
-            rule.get("reward_list").includes(this.prettyPrintReward(v))
-          )
-          .map((r) => r.id)
-      );
-
-      ajax("/patreon/list.json", {
-        method: "POST",
-        data: rule.getProperties("group_id", "rewards_ids"),
-      })
-        .then(() => {
-          let obj = model.find(
-            (x) => x.get("group_id") === rule.get("group_id")
+    ajax("/patreon/list.json", {
+      method: "POST",
+      data: rule.getProperties("group_id", "rewards_ids"),
+    })
+      .then(() => {
+        let obj = model.find((x) => x.get("group_id") === rule.get("group_id"));
+        const rewards = rule.get("reward_list").filter(Boolean);
+        if (obj) {
+          obj.set("reward_list", rewards);
+          obj.set("rewards", rewards);
+          obj.set("rewards_ids", rule.rewards_ids);
+        } else {
+          model.pushObject(
+            FilterRule.create({
+              group: rule.get("group.name"),
+              rewards,
+            })
           );
-          const rewards = rule.get("reward_list").filter(Boolean);
-          if (obj) {
-            obj.set("reward_list", rewards);
-            obj.set("rewards", rewards);
-            obj.set("rewards_ids", rule.rewards_ids);
-          } else {
-            model.pushObject(
-              FilterRule.create({
-                group: rule.get("group.name"),
-                rewards,
-              })
-            );
-          }
-          this.set("editing", FilterRule.create({ group_id: null }));
-        })
-        .catch(popupAjaxError);
-    },
-
-    delete(rule) {
-      const model = this.get("model");
-
-      ajax("/patreon/list.json", {
-        method: "DELETE",
-        data: rule.getProperties("group_id"),
+        }
+        this.set("editing", FilterRule.create({ group_id: null }));
       })
-        .then(() => {
-          let obj = model.find(
-            (x) => x.get("group_id") === rule.get("group_id")
-          );
-          model.removeObject(obj);
-        })
-        .catch(popupAjaxError);
-    },
+      .catch(popupAjaxError);
+  }
 
-    updateData() {
-      this.set("updatingData", true);
+  @action
+  delete(rule) {
+    const model = this.get("model");
 
-      ajax("/patreon/update_data.json", { method: "POST" })
-        .catch(popupAjaxError)
-        .finally(() => this.set("updatingData", false));
+    ajax("/patreon/list.json", {
+      method: "DELETE",
+      data: rule.getProperties("group_id"),
+    })
+      .then(() => {
+        let obj = model.find((x) => x.get("group_id") === rule.get("group_id"));
+        model.removeObject(obj);
+      })
+      .catch(popupAjaxError);
+  }
 
-      this.messageBus.subscribe("/patreon/background_sync", () => {
-        this.messageBus.unsubscribe("/patreon/background_sync");
+  @action
+  updateData() {
+    this.set("updatingData", true);
 
-        this.set("updatingData", false);
+    ajax("/patreon/update_data.json", { method: "POST" })
+      .catch(popupAjaxError)
+      .finally(() => this.set("updatingData", false));
 
-        const refreshUrl = getURL("/admin/plugins/patreon");
-        this.dialog.alert({
-          message: I18n.t("patreon.refresh_page"),
-          didConfirm: () => (window.location.pathname = refreshUrl),
-          didCancel: () => (window.location.pathname = refreshUrl),
-        });
+    this.messageBus.subscribe("/patreon/background_sync", () => {
+      this.messageBus.unsubscribe("/patreon/background_sync");
+
+      this.set("updatingData", false);
+
+      const refreshUrl = getURL("/admin/plugins/patreon");
+      this.dialog.alert({
+        message: I18n.t("patreon.refresh_page"),
+        didConfirm: () => (window.location.pathname = refreshUrl),
+        didCancel: () => (window.location.pathname = refreshUrl),
       });
-    },
-  },
-});
+    });
+  }
+}

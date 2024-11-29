@@ -9,7 +9,7 @@ import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/fil
  *  Discourse Groups (excluding the automatic ones), Patreon rewards and
  *  and current filters (one filter is a tuple between 1 Discourse group and N Patreon rewards)
  */
-export default DiscourseRoute.extend({
+export default class AdminPluginsPatreon extends DiscourseRoute {
   model() {
     return Promise.all([
       ajax("/patreon/list.json"),
@@ -28,9 +28,9 @@ export default DiscourseRoute.extend({
         };
       })
       .catch(popupAjaxError);
-  },
+  }
 
-  setupController: function (controller, model) {
+  setupController(controller, model) {
     const rewards = model.rewards;
     const groups = model.groups;
     const filtersArray = Object.entries(model.filters).map(([k, v]) => {
@@ -55,5 +55,5 @@ export default DiscourseRoute.extend({
       rewards,
       last_sync_at: model.last_sync_at,
     });
-  },
-});
+  }
+}
