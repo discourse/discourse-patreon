@@ -3,9 +3,9 @@ import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
-import getURL from "discourse-common/lib/get-url";
-import discourseComputed from "discourse-common/utils/decorators";
-import I18n from "I18n";
+import discourseComputed from "discourse/lib/decorators";
+import getURL from "discourse/lib/get-url";
+import { i18n } from "discourse-i18n";
 import FilterRule from "discourse/plugins/discourse-patreon/discourse/models/filter-rule";
 
 export default class AdminPluginsPatreonController extends Controller {
@@ -96,7 +96,7 @@ export default class AdminPluginsPatreonController extends Controller {
 
       const refreshUrl = getURL("/admin/plugins/patreon");
       this.dialog.alert({
-        message: I18n.t("patreon.refresh_page"),
+        message: i18n("patreon.refresh_page"),
         didConfirm: () => (window.location.pathname = refreshUrl),
         didCancel: () => (window.location.pathname = refreshUrl),
       });
