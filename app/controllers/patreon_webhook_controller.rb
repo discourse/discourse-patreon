@@ -28,7 +28,7 @@ class ::Patreon::PatreonWebhookController < ApplicationController
 
     if SiteSetting.patreon_verbose_log
       Rails.logger.warn(
-        "Patreon verbose log for Webhook:\n  Id = #{patreon_id}\n  Data = #{pledge_data.inspect}",
+        "Patreon verbose log for Webhook:\n  Event = #{event}\n Id = #{patreon_id}\n  Data = #{pledge_data.inspect}",
       )
     end
 
