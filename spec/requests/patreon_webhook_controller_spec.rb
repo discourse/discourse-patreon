@@ -8,23 +8,43 @@ require_relative "../spec_helper"
 RSpec.describe ::Patreon::PatreonWebhookController do
   before do
     SiteSetting.patreon_enabled = true
+    SiteSetting.login_required = true
     Jobs.run_immediately!
   end
 
   describe "index" do
     describe "header checking" do
-      it "raises InvalidAccess error without header params" do
+      it "returns a 403 error without header params" do
         expect_not_enqueued_with(job: :patreon_sync_patrons_to_groups) { post "/patreon/webhook" }
 
         expect(response.status).to eq(403)
+        expect(response.parsed_body["errors"]).to contain_exactly("Missing event header")
       end
 
-      it "raises InvalidAccess error with invalid header params" do
+      it "returns a 403 error with unknown event" do
         expect_not_enqueued_with(job: :patreon_sync_patrons_to_groups) do
-          post "/patreon/webhook", headers: { "X-Patreon-Event": "", "X-Patreon-Signature": "" }
+          post "/patreon/webhook",
+               headers: {
+                 "X-Patreon-Event": "foo:bar",
+                 "X-Patreon-Signature": "foo",
+               }
         end
 
         expect(response.status).to eq(403)
+        expect(response.parsed_body["errors"]).to contain_exactly("Unknown event: foo:bar")
+      end
+
+      it "returns a 403 error with invalid signature" do
+        expect_not_enqueued_with(job: :patreon_sync_patrons_to_groups) do
+          post "/patreon/webhook",
+               headers: {
+                 "X-Patreon-Event": "pledges:create",
+                 "X-Patreon-Signature": "foo",
+               }
+        end
+
+        expect(response.status).to eq(403)
+        expect(response.parsed_body["errors"]).to contain_exactly("Invalid signature")
       end
     end
 

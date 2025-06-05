@@ -21,7 +21,20 @@ class ::Patreon::PatreonWebhookController < ApplicationController
   ]
 
   def index
-    raise Discourse::InvalidAccess.new unless is_valid?
+    if unknown_trigger?
+      message = event.blank? ? "Missing event header" : "Unknown event: #{event}"
+      Rails.logger.warn("Patreon Webhook failed: #{message}") if SiteSetting.patreon_verbose_log
+      render_json_error(message, status: 403)
+      return
+    end
+
+    if !valid_signature?
+      if SiteSetting.patreon_verbose_log
+        Rails.logger.warn("Patreon Webhook failed: Invalid signature")
+      end
+      render_json_error("Invalid signature", status: 403)
+      return
+    end
 
     pledge_data = JSON.parse(request.body.read)
     patreon_id = Patreon::Pledge.get_patreon_id(pledge_data)
@@ -50,13 +63,13 @@ class ::Patreon::PatreonWebhookController < ApplicationController
     request.headers["X-Patreon-Event"]
   end
 
-  def is_valid?
-    TRIGGERS.include?(event) && is_valid_signature?
+  def unknown_trigger?
+    TRIGGERS.exclude?(event)
   end
 
   private
 
-  def is_valid_signature?
+  def valid_signature?
     signature = request.headers["X-Patreon-Signature"]
     digest = OpenSSL::Digest.new("MD5")
 
