@@ -1,5 +1,8 @@
 # Discourse Patreon
 
+> [!IMPORTANT]
+> This plugin has now been bundled into Discourse core. See: https://meta.discourse.org/t/bundling-more-popular-plugins-with-discourse-core/373574
+
 Enable syncronization between Discourse Groups and Patreon rewards, and enable Patreon Social Login,
 
 <img src="public/images/patreon-wordmark-navy.png?raw=true" width="292" height="104">
